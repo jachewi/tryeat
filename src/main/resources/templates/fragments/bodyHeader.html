@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <!-- ======= Header ======= -->
+<header th:fragment="bodyHeader" id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+
+        <div class="logo me-auto">
+            <h1><a href="index.html"> < TryIT > </TryIT></a></h1>
+        </div>
+    
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+            <li><a class="nav-link scrollto active" href="/index.html">Home</a></li>
+            <li><a class="nav-link scrollto" href="/register.html">Join</a></li>
+            <li><a class="nav-link scrollto" href="/login.html">Login</a></li>
+            <li><a class="nav-link scrollto" href="/inner-page.html">shop</a></li>
+            <li class="dropdown"><a href="#"><span>board</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                <li><a class="nav-link scrollto" href="/notice.html">Notice</a></li>
+                <li><a class="nav-link scrollto" href="#">QnA</a></li>
+                </ul>
+            </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+    
+        <div class="header-social-links d-flex align-items-center">
+            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+        </div>
+    
+        </div>
+</header>
+<!-- End Header -->
+
