@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header th:replace="fragments/bodyHeader :: bodyHeader" id="header" class="fixed-top d-flex align-items-center"></header>
+
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="container">
+        <div class="hero-img" data-aos="fade-left">
+          <img src="img/tryit-main-img.png" class="img-fluid" alt="">
+        </div>
+      <!-- </div> -->
+    </div>
+  </section> <!-- End Hero -->
+  
+
+  <main id="main"></main>
+
+  <!-- ======= Footer ======= -->
+  <footer th:replace="fragments/footer :: footer" id="footer"></footer>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="vendor/aos/aos.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
