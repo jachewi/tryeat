@@ -1,23 +1,21 @@
 package shop.tryit.domain.member;
 
 import static javax.persistence.EnumType.STRING;
-import static lombok.AccessLevel.*;
+import static lombok.AccessLevel.PROTECTED;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import shop.tryit.domain.common.Address;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import shop.tryit.domain.common.Address;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor(access = PROTECTED)
 public class Member {
 
