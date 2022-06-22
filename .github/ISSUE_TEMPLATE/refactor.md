@@ -1,7 +1,7 @@
 ---
 name: 리팩토링
 about: refactor
-title: "[refector]"
+title: "[refactor]"
 labels: "\U0001F6E0리팩토링"
 assignees: ''
 
