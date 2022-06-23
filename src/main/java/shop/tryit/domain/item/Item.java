@@ -32,17 +32,17 @@ public class Item extends BaseTimeEntity {
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "category_id")
-    private List<Category> categories; // 상품 카테고리 [DOG, CAT]
+    private Category category; // 상품 카테고리 [DOG, CAT]
 
     private ItemImage mainImage; // 상품 메인이미지
     private List<ItemImage> detailImage; // 상품 상세이미지
 
     @Builder
-    private Item(String name, int price, int stockQuantity, List<Category> categories, ItemImage mainImage, List<ItemImage> detailImage) {
+    private Item(String name, int price, int stockQuantity, Category category, ItemImage mainImage, List<ItemImage> detailImage) {
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;
-        this.categories = categories;
+        this.category = category;
         this.mainImage = mainImage;
         this.detailImage = detailImage;
     }
