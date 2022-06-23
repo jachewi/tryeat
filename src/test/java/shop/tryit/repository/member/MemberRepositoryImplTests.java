@@ -1,4 +1,4 @@
-package shop.tryit.Repository.member;
+package shop.tryit.repository.member;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
