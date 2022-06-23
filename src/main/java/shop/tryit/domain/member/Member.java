@@ -1,6 +1,7 @@
 package shop.tryit.domain.member;
 
 import static javax.persistence.EnumType.STRING;
+import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import shop.tryit.domain.common.Address;
 
 @Entity
@@ -20,7 +22,7 @@ import shop.tryit.domain.common.Address;
 public class Member {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "member_id")
     private Long id;
 
@@ -51,6 +53,18 @@ public class Member {
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.role = role;
+    }
+
+    public static Member createMember(MemberFormDto memberFormDto,
+                                      PasswordEncoder passwordEncoder) {
+        Member member = Member.builder()
+                .name(memberFormDto.getName())
+                .email(memberFormDto.getEmail())
+                .address(memberFormDto.getAddress())
+                .phoneNumber(memberFormDto.getPhone())
+                .password(passwordEncoder.encode(memberFormDto.getPassword()))
+                .build();
+        return member;
     }
 
 }
