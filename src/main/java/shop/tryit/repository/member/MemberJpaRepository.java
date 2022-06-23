@@ -1,4 +1,4 @@
-package shop.tryit.Repository.member;
+package shop.tryit.repository.member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import shop.tryit.domain.member.Member;

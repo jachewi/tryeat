@@ -1,4 +1,4 @@
-package shop.tryit.Repository.member;
+package shop.tryit.repository.member;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
