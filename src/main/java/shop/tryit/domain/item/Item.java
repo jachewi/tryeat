@@ -1,5 +1,7 @@
 package shop.tryit.domain.item;
 
+import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.REMOVE;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
@@ -36,10 +38,10 @@ public class Item extends BaseTimeEntity {
     @JoinColumn(name = "category_id")
     private Category category; // 상품 카테고리 [DOG, CAT]
 
-    @OneToOne(mappedBy = "item", fetch = LAZY)
+    @OneToOne(mappedBy = "item", fetch = LAZY, cascade = {PERSIST, REMOVE})
     private ItemImage mainImage; // 상품 메인이미지
 
-    @OneToMany(mappedBy = "item", fetch = LAZY)
+    @OneToMany(mappedBy = "item", fetch = LAZY, cascade = {PERSIST, REMOVE})
     private List<ItemImage> detailImage; // 상품 상세이미지
 
     @Builder
