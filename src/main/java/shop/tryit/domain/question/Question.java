@@ -2,6 +2,7 @@ package shop.tryit.domain.question;
 
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
+import static lombok.AccessLevel.PROTECTED;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import shop.tryit.domain.common.BaseTimeEntity;
 import shop.tryit.domain.member.Member;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = PROTECTED)
 public class Question extends BaseTimeEntity {
 
     @Id
