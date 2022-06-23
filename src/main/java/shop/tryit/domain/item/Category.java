@@ -1,5 +1,6 @@
 package shop.tryit.domain.item;
 
+import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class Category {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "category_id")
     private Long id; // 카테고리 식별자
 

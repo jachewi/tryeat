@@ -1,8 +1,10 @@
 package shop.tryit.domain.item;
 
 import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +15,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import shop.tryit.domain.common.BaseTimeEntity;
-import java.util.List;
 
 @Entity
 @Getter
@@ -21,7 +22,7 @@ import java.util.List;
 public class Item extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "item_id")
     private Long id; // 상품 식별자
 
@@ -37,7 +38,7 @@ public class Item extends BaseTimeEntity {
     private List<ItemImage> detailImage; // 상품 상세이미지
 
     @Builder
-    public Item(String name, int price, int stockQuantity, List<Category> categories, ItemImage mainImage, List<ItemImage> detailImage) {
+    private Item(String name, int price, int stockQuantity, List<Category> categories, ItemImage mainImage, List<ItemImage> detailImage) {
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;
