@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +36,10 @@ public class Item extends BaseTimeEntity {
     @JoinColumn(name = "category_id")
     private Category category; // 상품 카테고리 [DOG, CAT]
 
+    @OneToOne(mappedBy = "item", fetch = LAZY)
     private ItemImage mainImage; // 상품 메인이미지
+
+    @OneToMany(mappedBy = "item", fetch = LAZY)
     private List<ItemImage> detailImage; // 상품 상세이미지
 
     @Builder
