@@ -13,7 +13,7 @@ import java.util.List;
 class ItemRepositoryTests {
 
     @Autowired
-    ItemRepository itemRepository;
+    ItemRepository sut;
 
     @Test
     void 상품_저장() throws Exception {
@@ -21,7 +21,7 @@ class ItemRepositoryTests {
         Item item = Item.builder().build();
 
         // when
-        Long savedId = itemRepository.save(item);
+        Long savedId = sut.save(item);
 
         // then
         assertThat(savedId).isEqualTo(item.getId());
@@ -35,8 +35,8 @@ class ItemRepositoryTests {
                         .build();
 
         // when
-        itemRepository.save(item);
-        Item savedItem = itemRepository.findById(item.getId()).get();
+        sut.save(item);
+        Item savedItem = sut.findById(item.getId()).get();
 
         // then
         assertThat(savedItem.getName()).isEqualTo("테스트");
@@ -53,11 +53,11 @@ class ItemRepositoryTests {
                          .name("B")
                          .build();
 
-        itemRepository.save(itemA);
-        itemRepository.save(itemB);
+        sut.save(itemA);
+        sut.save(itemB);
 
         // when
-        List<Item> result = itemRepository.findAll();
+        List<Item> result = sut.findAll();
 
         // then
         assertThat(result.size()).isEqualTo(2);
