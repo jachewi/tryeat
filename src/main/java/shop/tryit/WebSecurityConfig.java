@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import shop.tryit.domain.member.MemberService;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -20,8 +19,6 @@ import shop.tryit.domain.member.MemberService;
 @ConditionalOnDefaultWebSecurity
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class WebSecurityConfig{
-
-    private final MemberService memberService; //회원정보를 가져올 클래스
 
     @Bean
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
