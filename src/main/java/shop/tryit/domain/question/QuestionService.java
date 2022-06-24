@@ -16,4 +16,9 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
+    public Question findOne(Long id) {
+        return questionRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("해당 질문을 찾을 수 없습니다."));
+    }
+
 }
