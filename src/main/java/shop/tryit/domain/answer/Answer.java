@@ -39,7 +39,7 @@ public class Answer extends BaseTimeEntity {
         this.member = member;
     }
 
-    public Answer of(String content, Question question, Member member) {
+    public static Answer of(String content, Question question, Member member) {
         return new Answer(content, question, member);
     }
 
