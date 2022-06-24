@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 class ItemServiceTests {
 
     @Autowired ItemRepository itemRepository;
-    @Autowired ItemService itemService;
+    @Autowired ItemService sut;
 
     @Test
     public void 상품_등록() throws Exception {
@@ -20,7 +20,7 @@ class ItemServiceTests {
         Item item = Item.builder().build();
 
         // when
-        Long savedId = itemService.register(item);
+        Long savedId = sut.register(item);
 
         // then
         assertTrue(itemRepository.findById(savedId).isPresent());
