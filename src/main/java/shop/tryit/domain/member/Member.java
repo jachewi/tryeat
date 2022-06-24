@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import shop.tryit.domain.common.Address;
 
 @Entity
@@ -53,18 +52,6 @@ public class Member {
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.role = role;
-    }
-
-    public static Member createMember(MemberFormDto memberFormDto,
-                                      PasswordEncoder passwordEncoder) {
-        Member member = Member.builder()
-                .name(memberFormDto.getName())
-                .email(memberFormDto.getEmail())
-                .address(memberFormDto.getAddress())
-                .phoneNumber(memberFormDto.getPhone())
-                .password(passwordEncoder.encode(memberFormDto.getPassword()))
-                .build();
-        return member;
     }
 
 }
