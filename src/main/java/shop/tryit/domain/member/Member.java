@@ -1,6 +1,7 @@
 package shop.tryit.domain.member;
 
 import static javax.persistence.EnumType.STRING;
+import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 import javax.persistence.Column;
@@ -20,7 +21,7 @@ import shop.tryit.domain.common.Address;
 public class Member {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "member_id")
     private Long id;
 
