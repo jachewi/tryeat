@@ -40,13 +40,13 @@ public class Item extends BaseTimeEntity {
     private Category category; // 상품 카테고리 [DOG, CAT]
 
     @OneToOne(mappedBy = "item", fetch = LAZY, cascade = {PERSIST, REMOVE})
-    private ItemImage mainImage; // 상품 메인이미지
+    private ItemFile mainImage; // 상품 메인이미지
 
     @OneToMany(mappedBy = "item", fetch = LAZY, cascade = {PERSIST, REMOVE})
-    private List<ItemImage> detailImage = new ArrayList<>(); // 상품 상세이미지
+    private List<ItemFile> detailImage = new ArrayList<>(); // 상품 상세이미지
 
     @Builder
-    private Item(String name, int price, int stockQuantity, Category category, ItemImage mainImage, List<ItemImage> detailImage) {
+    private Item(String name, int price, int stockQuantity, Category category, ItemFile mainImage, List<ItemFile> detailImage) {
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;
