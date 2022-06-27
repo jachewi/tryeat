@@ -3,6 +3,7 @@ package shop.tryit.domain.question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.domain.answer.AnswerRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
 
     @Transactional
     public Long register(Question question) {
@@ -26,6 +28,14 @@ public class QuestionService {
         Question findQuestion = findOne(id);
         findQuestion.update(newQuestion.getTitle(), newQuestion.getContent());
         return findQuestion.getId();
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Question question = findOne(id);
+        questionRepository.delete(question);
+        answerRepository.findByQuestion(question)
+                .forEach(answerRepository::delete);
     }
 
 }
