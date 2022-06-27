@@ -22,4 +22,9 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         return jpaRepository.findById(id);
     }
 
+    @Override
+    public void delete(Question question) {
+        jpaRepository.delete(question);
+    }
+
 }

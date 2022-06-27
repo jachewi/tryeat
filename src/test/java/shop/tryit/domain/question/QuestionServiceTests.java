@@ -1,5 +1,6 @@
 package shop.tryit.domain.question;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -48,6 +49,19 @@ class QuestionServiceTests {
 
         // then
         assertNotNull(questionJpaRepository.findById(updatedId));
+    }
+
+    @Test
+    void 삭제_기능_테스트() {
+        // given
+        Member member = Member.builder().build();
+        Question question = Question.of("title", "content", member);
+        Long savedId = questionJpaRepository.save(question).getId();
+
+        // when, then
+        assertThatCode(() ->
+                sut.delete(savedId))
+                .doesNotThrowAnyException();
     }
 
 }
