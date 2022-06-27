@@ -1,5 +1,6 @@
 package shop.tryit.repository.answer;
 
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import shop.tryit.domain.answer.Answer;
@@ -14,6 +15,11 @@ public class AnswerRepositoryImpl implements AnswerRepository {
     @Override
     public Long save(Answer answer) {
         return jpaRepository.save(answer).getId();
+    }
+
+    @Override
+    public Optional<Answer> findById(Long id) {
+        return jpaRepository.findById(id);
     }
 
 }
