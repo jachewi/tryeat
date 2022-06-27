@@ -21,6 +21,7 @@ public class QuestionService {
                 .orElseThrow(() -> new IllegalStateException("해당 질문을 찾을 수 없습니다."));
     }
 
+    @Transactional
     public Long update(Long id, Question newQuestion) {
         Question findQuestion = findOne(id);
         findQuestion.update(newQuestion.getTitle(), newQuestion.getContent());
