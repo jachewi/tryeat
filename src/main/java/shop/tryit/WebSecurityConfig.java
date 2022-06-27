@@ -26,8 +26,10 @@ public class WebSecurityConfig{
         http
                 .csrf().disable()
                 .authorizeRequests() //요청에 의한 보안 검사 시작
-                .antMatchers("/", "/css/**", "/img/**",
-                        "/js/**", "/vendor/**").permitAll()
+                .antMatchers("/**", "/css/**", "/img/**",
+                        "/js/**", "/vendor/**",
+                        "/members/**", "/items/**",
+                        "/questions/**", "/answers/**").permitAll()
 //                .antMatchers("/ items/v1/register",
 //                        "/ items/v1/{id}", "/items/v1/delete")
 //                .hasRole(MemberRole.USER.name())
