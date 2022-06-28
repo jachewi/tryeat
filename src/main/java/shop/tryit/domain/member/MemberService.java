@@ -16,7 +16,7 @@ public class MemberService {
     public Long saveMember(Member member) {
         validateDuplicateMember(member);
         String encodedPassword = passwordEncoder.encode(member.getPassword());
-        member.builder().password(encodedPassword).build();
+        member.Password(encodedPassword);
         return repository.save(member);
     }
 
