@@ -14,10 +14,10 @@ import shop.tryit.repository.member.MemberJpaRepository;
 class MemberServiceTest {
 
     @Autowired
-    MemberService memberService;
+    private MemberService sut;
 
     @Autowired
-    MemberJpaRepository memberJpaRepository;
+    private MemberJpaRepository memberJpaRepository;
 
     @Test
     void 회원가입_테스트() {
@@ -27,7 +27,7 @@ class MemberServiceTest {
                 .password("11111")
                 .build();
 
-        Long savedMember = memberService.saveMember(member);
+        Long savedMember = sut.saveMember(member);
 
         assertThat(memberJpaRepository.findById(savedMember).isPresent()).isTrue();
     }
@@ -46,9 +46,9 @@ class MemberServiceTest {
                 .password("11111")
                 .build();
 
-        memberService.saveMember(member1);
+        sut.saveMember(member1);
 
-        assertThatThrownBy(() -> memberService.saveMember(member2))
+        assertThatThrownBy(() -> sut.saveMember(member2))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining("이미 가입된 회원입니다.");
     }
