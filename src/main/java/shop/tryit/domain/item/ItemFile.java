@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = PROTECTED)
-public class ItemImage {
+public class ItemFile {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -30,13 +30,13 @@ public class ItemImage {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    private ItemImage(String originFileName, String storeFileName) {
+    private ItemFile(String originFileName, String storeFileName) {
         this.originFileName = originFileName;
         this.storeFileName = storeFileName;
     }
 
-    public ItemImage of(String originFileName, String storeFileName) {
-        return new ItemImage(originFileName, storeFileName);
+    public static ItemFile of(String originFileName, String storeFileName) {
+        return new ItemFile(originFileName, storeFileName);
     }
 
 }
