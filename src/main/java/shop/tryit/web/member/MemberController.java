@@ -1,6 +1,5 @@
 package shop.tryit.web.member;
 
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -12,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import shop.tryit.domain.common.Address;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberService;
+
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -29,26 +30,14 @@ public class MemberController {
 
     @PostMapping("/new")
     public String newMember(@Valid @ModelAttribute("memberForm") MemberFormDto memberForm, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            log.info("member controller post");
-            return "/members/register";
-        }
-
-        if (memberForm.getEmail().isBlank()) {
-            bindingResult.rejectValue("email", "emailInNull",
-                    "이메일은 필수 입력 값입니다.");
-            return "/members/register";
-        }
-
-        if (memberForm.getName().isBlank()) {
-            bindingResult.rejectValue("name", "nameInNull",
-                    "이름은 필수 입력 값입니다.");
-            return "/members/register";
-        }
 
         if (!memberForm.getPassword1().equals(memberForm.getPassword2())) {
             bindingResult.rejectValue("password2", "passwordInCorrect",
                     "비밀번호가 일치하지 않습니다.");
+        }
+
+        if (bindingResult.hasErrors()) {
+            log.info("member controller post");
             return "/members/register";
         }
 
