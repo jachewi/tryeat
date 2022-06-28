@@ -22,7 +22,7 @@ public class MemberController {
     private final MemberService service;
 
     @GetMapping("/new")
-    public String newMemberForm(@Valid @ModelAttribute("memberForm") MemberFormDto memberForm) {
+    public String newMemberForm(@ModelAttribute("memberForm") MemberFormDto memberForm) {
         log.info("member controller");
         return "/members/register";
     }
@@ -31,6 +31,18 @@ public class MemberController {
     public String newMember(@Valid @ModelAttribute("memberForm") MemberFormDto memberForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.info("member controller post");
+            return "/members/register";
+        }
+
+        if (memberForm.getEmail().isBlank()) {
+            bindingResult.rejectValue("email", "emailInNull",
+                    "이메일은 필수 입력 값입니다.");
+            return "/members/register";
+        }
+
+        if (memberForm.getName().isBlank()) {
+            bindingResult.rejectValue("name", "nameInNull",
+                    "이름은 필수 입력 값입니다.");
             return "/members/register";
         }
 
@@ -53,7 +65,5 @@ public class MemberController {
 
         return "redirect:/";
     }
-
-
 
 }
