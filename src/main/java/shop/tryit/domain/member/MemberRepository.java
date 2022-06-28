@@ -4,6 +4,6 @@ public interface MemberRepository {
 
     Long save(Member member);
 
-    boolean ExistsByEmail(String email);
+    boolean existsByEmail(String email);
 
 }
