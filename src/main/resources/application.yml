@@ -16,3 +16,7 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
+
+custom:
+  path:
+#    upload-images: C:/Users/anneu/Desktop/study/team-project/tryit/src/main/resources/static/img/item/
