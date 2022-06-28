@@ -1,19 +1,23 @@
 package shop.tryit.domain.member;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.repository.member.MemberJpaRepository;
 
 @Transactional
 @SpringBootTest
 class MemberServiceTest {
 
     @Autowired
-    MemberService memberService;
+    private MemberService sut;
+
+    @Autowired
+    private MemberJpaRepository memberJpaRepository;
 
     @Test
     void 회원가입_테스트() {
@@ -22,12 +26,10 @@ class MemberServiceTest {
                 .name("test")
                 .password("11111")
                 .build();
-        Member savedMember = memberService.saveMember(member);
 
-        assertEquals(member.getEmail(), savedMember.getEmail());
-        assertEquals(member.getName(), savedMember.getName());
-        assertEquals(member.getPassword(), savedMember.getPassword());
-        assertEquals(member.getRole(), savedMember.getRole());
+        Long savedMember = sut.saveMember(member);
+
+        assertThat(memberJpaRepository.findById(savedMember).isPresent()).isTrue();
     }
 
     @Test
@@ -44,9 +46,9 @@ class MemberServiceTest {
                 .password("11111")
                 .build();
 
-        memberService.saveMember(member1);
+        sut.saveMember(member1);
 
-        assertThatThrownBy(() -> memberService.saveMember(member2))
+        assertThatThrownBy(() -> sut.saveMember(member2))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining("이미 가입된 회원입니다.");
     }

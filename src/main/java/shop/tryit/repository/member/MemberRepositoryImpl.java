@@ -21,7 +21,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 
 
     @Override
-    public boolean ExistsByEmail(String email) {
+    public boolean existsByEmail(String email) {
         return jpaRepository.existsByEmail(email);
     }
 

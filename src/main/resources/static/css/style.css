@@ -442,7 +442,7 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     margin: 40px 0 30px;
 }
-.register .btn_wrap a {
+.register .btn_wrap button {
     color: #fff;
     background-color: #4380ce;
     font-weight: bold;
@@ -454,7 +454,7 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     margin: 0 auto;
 }
-.register .btn_wrap a.wide {
+.register .btn_wrap button.wide {
     width: 587px;
     margin: 0 0 0 20px;
 }

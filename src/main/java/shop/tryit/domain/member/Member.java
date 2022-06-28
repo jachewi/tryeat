@@ -54,4 +54,8 @@ public class Member {
         this.role = role;
     }
 
+    public void Password(String password) {
+        this.password = password;
+    }
+
 }
