@@ -73,7 +73,7 @@
 
         <!-- ======= Hero Section ======= -->
         <section id="hero">
-            <div class="wrap wd668">
+            <div class="wrap wd668"  >
                 <div class="container">
                     <div class="form_txtInput">
                         <h2 class="sub_tit_txt">회원가입</h2>
@@ -91,22 +91,35 @@
                                     <tr>
                                         <th>
                                             <span>아이디</span></th>
-                                        <td><input type="email" th:field="*{email}" placeholder="ex) abcdef1234@gmail.com"></td>
+                                        <td>
+                                            <input type="email" th:field="*{email}" placeholder="ex) abcdef1234@gmail.com">
+                                            <div th:errors="*{email}"></div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>
                                             <span>이름</span></th>
-                                        <td><input type="text" th:field="*{name}" placeholder=""></td>
+                                        <td>
+                                            <input type="text" th:field="*{name}" placeholder="">
+                                            <div th:errors="*{name}"></div>
+                                        </td>
+                                        
                                     </tr>
                                     <tr>
                                         <th>
                                             <span>비밀번호</span></th>
-                                        <td><input type="password" th:field="*{password1}" placeholder="비밀번호를 입력해주세요."></td>
+                                        <td>
+                                            <input type="password" th:field="*{password1}" placeholder="비밀번호를 입력해주세요.">
+                                            <div th:errors="*{password1}"></div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>
                                             <span>비밀번호 확인</span></th>
-                                        <td><input type="password" th:field="*{password2}" placeholder="비밀번호를 확인하세요"></td>
+                                        <td>
+                                            <input type="password" th:field="*{password2}" placeholder="비밀번호를 확인하세요">
+                                            <div th:errors="*{password2}"></div>
+                                        </td>
                                     </tr>
 
                                     <tr>
@@ -114,23 +127,28 @@
                                             <span>주소</span></th>
                                         <td>
                                             <input type="text" th:field="*{zipcode}" id="zipcode" placeholder="우편번호">
+                                            <div th:errors="*{zipcode}"></div>
                                             <input type="button" onclick='execDaumPostcode()' value="우편번호 찾기"><br>
                                             <input
                                                 type="text"
                                                 th:field="*{street_address}"
                                                 id="street_address"
                                                 placeholder="도로명주소">
+                                            <div th:errors="*{street_address}"></div>
                                             <input
                                                 type="text"
                                                 th:field="*{jibeon_address}"
                                                 id="jibeon_address"
                                                 placeholder="지번주소">
+                                            <div th:errors="*{jibeon_address}"></div>
                                             <span id="guide" style="color:#999;display:none"></span>
                                             <input
                                                 type="text"
                                                 th:field="*{detail_address}"
                                                 id="detail_address"
                                                 placeholder="상세주소">
+                                            
+
                                         </td>
                                     </tr>
 
