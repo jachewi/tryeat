@@ -2,6 +2,7 @@ package shop.tryit.domain.item;
 
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.CascadeType.REMOVE;
+import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
@@ -10,10 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import lombok.Builder;
@@ -35,8 +35,7 @@ public class Item extends BaseTimeEntity {
     private int price; // 상품 가격
     private int stockQuantity; // 상품 재고
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "category_id")
+    @Enumerated(STRING)
     private Category category; // 상품 카테고리 [DOG, CAT]
 
     @OneToOne(mappedBy = "item", fetch = LAZY, cascade = {PERSIST, REMOVE})
