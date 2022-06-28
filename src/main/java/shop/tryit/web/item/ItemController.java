@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import shop.tryit.domain.item.Category;
 import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemFile;
 import shop.tryit.domain.item.ItemFileStore;
@@ -26,7 +27,11 @@ public class ItemController {
 
     @GetMapping("/new")
     public String newItemForm(Model model) {
+        Category[] categories = Category.values();
+
         model.addAttribute("item", ItemFormDto.builder().build());
+        model.addAttribute("categories", categories);
+
         return "/items/register";
     }
 
