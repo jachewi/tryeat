@@ -3,6 +3,7 @@ package shop.tryit.domain.item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +28,13 @@ public class ItemService {
         Item findItem = findOne(itemId);
         findItem.update(newItem.getName(), newItem.getPrice(), newItem.getStockQuantity(), newItem.getCategory());
         return findItem.getId();
+    }
+  
+    /**
+     * 상품 목록
+     */
+    public List<Item> findItems() {
+        return itemRepository.findAll();
     }
 
     private Item findOne(Long itemId) {

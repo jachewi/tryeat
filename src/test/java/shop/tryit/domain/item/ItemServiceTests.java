@@ -1,9 +1,11 @@
 package shop.tryit.domain.item;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +29,7 @@ class ItemServiceTests {
         // then
         assertTrue(itemRepository.findById(savedId).isPresent());
     }
-
+  
     @Test
     public void 상품_수정() throws Exception {
         // given
@@ -46,6 +48,22 @@ class ItemServiceTests {
 
         // then
         assertNotNull(itemRepository.findById(updatedId));
+    }
+  
+    @Test
+    public void 상품_목록_조회() throws Exception {
+        // given
+        Item item1 = Item.builder().build();
+        Item item2 = Item.builder().build();
+
+        itemRepository.save(item1);
+        itemRepository.save(item2);
+
+        // when
+        List<Item> items = sut.findItems();
+
+        // then
+        assertThat(items.size()).isEqualTo(2);
     }
 
 }
