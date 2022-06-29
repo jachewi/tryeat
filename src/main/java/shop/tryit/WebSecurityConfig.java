@@ -7,11 +7,15 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import shop.tryit.domain.member.MemberSecurityService;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -19,6 +23,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @ConditionalOnDefaultWebSecurity
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class WebSecurityConfig{
+
+    private final MemberSecurityService memberSecurityService;
 
     @Bean
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
@@ -35,8 +41,14 @@ public class WebSecurityConfig{
 //                .hasRole(MemberRole.USER.name())
                 .anyRequest().authenticated() //어떤 요청에도 보안 검사를 실생
                 .and()
+                .formLogin()
+                .loginPage("/members/login")
+                .defaultSuccessUrl("/")
+                .and()
                 .logout()
-                .logoutSuccessUrl("/");
+                .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true);
 
         return http.build();
     }
@@ -45,4 +57,10 @@ public class WebSecurityConfig{
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
 }
