@@ -37,8 +37,7 @@ public class ItemController {
 
     @PostMapping("/new")
     public String newItem(@ModelAttribute("item") ItemFormDto form) throws IOException {
-        log.info("item name = {}", form.getName());
-        log.info("item price = {}", form.getPrice());
+        log.info("saved item name = {}", form.getName());
 
         ItemFile mainImage = itemFileStore.storeMainImage(form.getMainImage());
         List<ItemFile> detailImages = itemFileStore.storeDetailImages(form.getDetailImage());
