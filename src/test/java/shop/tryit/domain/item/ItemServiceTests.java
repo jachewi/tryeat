@@ -1,5 +1,7 @@
 package shop.tryit.domain.item;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +26,26 @@ class ItemServiceTests {
 
         // then
         assertTrue(itemRepository.findById(savedId).isPresent());
+    }
+
+    @Test
+    public void 상품_수정() throws Exception {
+        // given
+        Item item = Item.builder()
+                .name("이름1")
+                .build();
+
+        Long savedId = itemRepository.save(item);
+
+        Item newItem = Item.builder()
+                .name("이름2")
+                .build();
+
+        // when
+        Long updatedId = assertDoesNotThrow(() -> sut.update(savedId, newItem));
+
+        // then
+        assertNotNull(itemRepository.findById(updatedId));
     }
 
 }
