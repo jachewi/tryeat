@@ -1,10 +1,12 @@
 package shop.tryit.domain.item;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -12,11 +14,22 @@ import java.util.UUID;
 @Component
 public class ItemFileStore {
 
-    @Value("${custom.path.upload-images}")
-    private String filePath;
+    // TODO : 리팩토링 고려
+    // @Value("${custom.path.upload-images}")
+    // private String filePath;
 
-    public String getFullPath(String fileName) {
-        return filePath + fileName;
+    public String getFilePath() throws IOException {
+        Path filePath = Paths.get(System.getProperty("user.home"), "item");
+
+        if (Files.notExists(filePath)) {
+            Files.createDirectories(filePath);
+        }
+
+        return filePath + "/";
+    }
+
+    public String getFullPath(String fileName) throws IOException {
+        return getFilePath() + fileName;
     }
 
     public ItemFile storeMainImage(MultipartFile multipartFile) throws IOException {
