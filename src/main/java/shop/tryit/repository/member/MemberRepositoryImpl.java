@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
+import java.util.Optional;
 
 @Slf4j
 @Repository
@@ -23,6 +24,11 @@ public class MemberRepositoryImpl implements MemberRepository {
     @Override
     public boolean existsByEmail(String email) {
         return jpaRepository.existsByEmail(email);
+    }
+
+    @Override
+    public Optional<Member> findByEmail(String email) {
+        return jpaRepository.findByEmail(email);
     }
 
 }
