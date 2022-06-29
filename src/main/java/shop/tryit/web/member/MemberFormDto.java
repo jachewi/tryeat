@@ -29,6 +29,8 @@ public class MemberFormDto {
 
     private String phone;
 
+    private boolean admin = false;
+
     @Builder
     public MemberFormDto(String name, String email,
                          String password1, String password2,
