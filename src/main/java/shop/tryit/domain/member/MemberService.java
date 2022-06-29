@@ -20,6 +20,11 @@ public class MemberService {
         return repository.save(member);
     }
 
+    public Member findMember(String email) {
+        return repository.findByEmail(email)
+                .orElseThrow(() -> new IllegalStateException("해당 회원을 찾을 수 없습니다."));
+    }
+
     private void validateDuplicateMember(Member member) {
         if (repository.existsByEmail(member.getEmail())) {
             throw new IllegalStateException("이미 가입된 회원입니다.");
