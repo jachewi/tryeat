@@ -51,8 +51,7 @@ public class ItemController {
 
         itemService.register(item);
 
-        // TODO: items.html 생성
-        return "redirect:/";
+        return "redirect:/items";
     }
 
     @GetMapping
