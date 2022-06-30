@@ -30,23 +30,28 @@ public class QuestionCustomImpl implements QuestionCustom {
 
     private final JPAQueryFactory queryFactory;
 
+    private static Map<Long, QuestionSearchDto> map;
+
     @Override
     public Page<QuestionSearchDto> searchQuestion(QuestionSearchCondition condition, Pageable pageable) {
         List<QuestionSearchDto> content = searchContent(condition, pageable);
-        JPAQuery<Long> totalCount = getTotalCount(condition);
 
-        Map<Long, QuestionSearchDto> map = content.stream()
+        map = content.stream()
                 .collect(toMap(QuestionSearchDto::getQuestionId, Function.identity()));
 
         answerCount(map.keySet())
-                .forEach(tuple -> {
-                    Long questionId = tuple.get(question.id);
-                    QuestionSearchDto questionSearchDto = map.get(questionId);
-                    Long numberOfAnswers = Optional.ofNullable(tuple.get(answer.count())).orElse(0L);
-                    questionSearchDto.designateNumberOfAnswer(numberOfAnswers);
-                });
+                .forEach(this::registerNumberOfAnswer);
+
+        JPAQuery<Long> totalCount = getTotalCount(condition);
 
         return PageableExecutionUtils.getPage(content, pageable, totalCount::fetchOne);
+    }
+
+    private void registerNumberOfAnswer(Tuple tuple) {
+        Long questionId = tuple.get(question.id);
+        QuestionSearchDto questionSearchDto = map.get(questionId);
+        Long numberOfAnswers = Optional.ofNullable(tuple.get(answer.count())).orElse(0L);
+        questionSearchDto.designateNumberOfAnswer(numberOfAnswers);
     }
 
     private JPAQuery<Long> getTotalCount(QuestionSearchCondition condition) {
