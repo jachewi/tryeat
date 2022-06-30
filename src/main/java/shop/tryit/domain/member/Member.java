@@ -58,4 +58,28 @@ public class Member {
         this.password = password;
     }
 
+    public void update(String name, Address address,
+                       String phoneNumber, String password) {
+        changeName(name);
+        changeAddress(address);
+        changePhone(phoneNumber);
+        changePassword(password);
+    }
+
+    private void changePassword(String password) {
+        this.password = password;
+    }
+
+    private void changePhone(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    private void changeAddress(Address address) {
+        this.address = address;
+    }
+
+    private void changeName(String name) {
+        this.name = name;
+    }
+
 }
