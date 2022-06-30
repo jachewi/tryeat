@@ -23,7 +23,7 @@ public class ItemFileStore {
             Files.createDirectories(filePath);
         }
 
-        return filePath + "/";
+        return filePath + "\\";
     }
 
     public String getFullPath(String fileName) throws IOException {
