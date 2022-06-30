@@ -61,12 +61,7 @@ public class MemberController {
             return "/members/register";
         }
 
-        Address address = Address.builder()
-                .zipcode(memberForm.getZipcode())
-                .street_address(memberForm.getStreet_address())
-                .jibeon_address(memberForm.getJibeon_address())
-                .detail_address(memberForm.getDetail_address())
-                .build();
+        Address address = AddressAdapter.toAddress(memberForm);
 
         Member member = MemberAdapter.toEntity(memberForm, address, role);
         service.saveMember(member);
@@ -111,12 +106,7 @@ public class MemberController {
             return "/members/edit";
         }
 
-        Address address = Address.builder()
-                .zipcode(memberForm.getZipcode())
-                .street_address(memberForm.getStreet_address())
-                .jibeon_address(memberForm.getJibeon_address())
-                .detail_address(memberForm.getDetail_address())
-                .build();
+        Address address = AddressAdapter.toAddress(memberForm);
 
         Member member = MemberAdapter.toEntity(memberForm, address);
         service.update(member.getEmail(), member);
