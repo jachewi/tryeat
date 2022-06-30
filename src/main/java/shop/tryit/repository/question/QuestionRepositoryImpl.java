@@ -2,9 +2,13 @@ package shop.tryit.repository.question;
 
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import shop.tryit.domain.question.Question;
 import shop.tryit.domain.question.QuestionRepository;
+import shop.tryit.domain.question.QuestionSearchCondition;
+import shop.tryit.domain.question.QuestionSearchDto;
 
 @Repository
 @RequiredArgsConstructor
@@ -25,6 +29,11 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     @Override
     public void delete(Question question) {
         jpaRepository.delete(question);
+    }
+
+    @Override
+    public Page<QuestionSearchDto> searchQuestion(QuestionSearchCondition condition, Pageable pageable) {
+        return jpaRepository.searchQuestion(condition, pageable);
     }
 
 }
