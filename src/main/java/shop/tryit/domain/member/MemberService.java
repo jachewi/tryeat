@@ -6,13 +6,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
 
     private final MemberRepository repository;
     private final PasswordEncoder passwordEncoder;
 
+    @Transactional
     public Long saveMember(Member member) {
         validateDuplicateMember(member);
         String encodedPassword = passwordEncoder.encode(member.getPassword());
@@ -29,6 +30,14 @@ public class MemberService {
         if (repository.existsByEmail(member.getEmail())) {
             throw new IllegalStateException("이미 가입된 회원입니다.");
         }
+    }
+
+    @Transactional
+    public String update(String email, Member newMember) {
+        Member findMember = findMember(email);
+        findMember.update(newMember.getName(), newMember.getAddress(),
+                newMember.getPhoneNumber(), newMember.getPassword());
+        return findMember.getEmail();
     }
 
 }
