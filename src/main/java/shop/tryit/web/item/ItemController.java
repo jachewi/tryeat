@@ -1,7 +1,9 @@
 package shop.tryit.web.item;
 
+import static shop.tryit.domain.item.ItemFileType.DETAIL;
+import static shop.tryit.domain.item.ItemFileType.MAIN;
+
 import java.io.IOException;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -39,18 +41,10 @@ public class ItemController {
     public String newItem(@ModelAttribute("item") ItemFormDto form) throws IOException {
         log.info("saved item name = {}", form.getName());
 
-        ItemFile mainImage = itemFileStore.storeMainImage(form.getMainImage());
-        List<ItemFile> detailImages = itemFileStore.storeDetailImages(form.getDetailImage());
+        ItemFile mainImage = itemFileStore.storeItemFile(form.getMainImage(), MAIN);
+        ItemFile detailImage = itemFileStore.storeItemFile(form.getDetailImage(), DETAIL);
 
-        // DB에 저장
-        Item item = Item.builder()
-                .name(form.getName())
-                .category(form.getCategory())
-                .stockQuantity(form.getStockQuantity())
-                .price(form.getPrice())
-                .mainImage(mainImage)
-                .detailImage((detailImages))
-                .build();
+        Item item = ItemAdapter.toEntity(form, mainImage, detailImage);
 
         itemService.register(item);
 
