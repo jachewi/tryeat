@@ -23,6 +23,11 @@ public class AnswerService {
         return findAnswer.getId();
     }
 
+    @Transactional
+    public void delete(Answer answer) {
+        answerRepository.delete(answer);
+    }
+
     private Answer findOne(Long id) {
         return answerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 답변을 찾을 수 없습니다."));

@@ -3,13 +3,16 @@ package shop.tryit.domain.answer;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.member.Member;
+import shop.tryit.domain.member.MemberRepository;
 import shop.tryit.domain.question.Question;
+import shop.tryit.domain.question.QuestionRepository;
 import shop.tryit.repository.answer.AnswerJpaRepository;
 
 @Transactional
@@ -21,6 +24,12 @@ class AnswerServiceTests {
 
     @Autowired
     private AnswerJpaRepository answerJpaRepository;
+
+    @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
+    private QuestionRepository questionRepository;
 
     @Test
     void 저장_기능_테스트() {
@@ -51,6 +60,25 @@ class AnswerServiceTests {
 
         // then
         assertNotNull(answerJpaRepository.findById(updatedId).orElse(null));
+    }
+
+    @Test
+    void 삭제_기능_테스트() {
+        // given
+        Member member = Member.builder().build();
+        memberRepository.save(member);
+
+        Question question = Question.of("title", "content", member);
+        questionRepository.save(question);
+
+        Answer answer = Answer.of("content", question, member);
+        Long savedId = answerJpaRepository.save(answer).getId();
+
+        // when
+        sut.delete(answer);
+
+        // then
+        assertNull(answerJpaRepository.findById(savedId).orElse(null));
     }
 
 }
