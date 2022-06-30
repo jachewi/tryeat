@@ -2,7 +2,6 @@ package shop.tryit.web.item;
 
 import static lombok.AccessLevel.PROTECTED;
 
-import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,10 +22,10 @@ public class ItemFormDto {
 
     private MultipartFile mainImage;
 
-    private List<MultipartFile> detailImage;
+    private MultipartFile detailImage;
 
     @Builder
-    private ItemFormDto(String name, Integer price, Integer stockQuantity, Category category, MultipartFile mainImage, List<MultipartFile> detailImage) {
+    private ItemFormDto(String name, Integer price, Integer stockQuantity, Category category, MultipartFile mainImage, MultipartFile detailImage) {
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;

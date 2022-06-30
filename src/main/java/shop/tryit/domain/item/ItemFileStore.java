@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -32,7 +30,7 @@ public class ItemFileStore {
         return getFilePath() + fileName;
     }
 
-    public ItemFile storeMainImage(MultipartFile multipartFile) throws IOException {
+    public ItemFile storeItemFile(MultipartFile multipartFile, ItemFileType type) throws IOException {
         if (multipartFile.isEmpty()) {
             return null;
         }
@@ -40,17 +38,7 @@ public class ItemFileStore {
         String originFileName = multipartFile.getOriginalFilename();
         String storeFileName = createStoreFileName(originFileName);
         multipartFile.transferTo(new File(getFullPath(storeFileName)));
-        return ItemFile.of(originFileName, storeFileName);
-    }
-
-    public List<ItemFile> storeDetailImages(List<MultipartFile> multipartFiles) throws IOException {
-        List<ItemFile> storeDetailImagesResult = new ArrayList<>();
-        for (MultipartFile multipartFile : multipartFiles) {
-            if (!multipartFile.isEmpty()) {
-                storeDetailImagesResult.add(storeMainImage(multipartFile));
-            }
-        }
-        return storeDetailImagesResult;
+        return ItemFile.of(originFileName, storeFileName, type);
     }
 
     /**

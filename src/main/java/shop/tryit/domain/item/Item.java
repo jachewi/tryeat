@@ -7,7 +7,6 @@ import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +14,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,20 +36,16 @@ public class Item extends BaseTimeEntity {
     @Enumerated(STRING)
     private Category category; // 상품 카테고리 [DOG, CAT]
 
-    @OneToOne(mappedBy = "item", fetch = LAZY, cascade = {PERSIST, REMOVE})
-    private ItemFile mainImage; // 상품 메인이미지
-
     @OneToMany(mappedBy = "item", fetch = LAZY, cascade = {PERSIST, REMOVE})
-    private List<ItemFile> detailImage = new ArrayList<>(); // 상품 상세이미지
+    private List<ItemFile> images; // 상품 이미지
 
     @Builder
-    private Item(String name, int price, int stockQuantity, Category category, ItemFile mainImage, List<ItemFile> detailImage) {
+    private Item(String name, int price, int stockQuantity, Category category, List<ItemFile> images) {
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.category = category;
-        this.mainImage = mainImage;
-        this.detailImage = detailImage;
+        this.images = images;
     }
 
     public void update(String name, int price, int stockQuantity, Category category) {
@@ -75,6 +69,11 @@ public class Item extends BaseTimeEntity {
 
     private void changeCategory(Category category) {
         this.category = category;
+    }
+
+    public void addImage(ItemFile itemFile) {
+        itemFile.setItem(this);
+        images.add(itemFile);
     }
 
 }
