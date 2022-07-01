@@ -3,7 +3,11 @@ package shop.tryit.web.question;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberService;
 import shop.tryit.domain.question.Question;
+import shop.tryit.domain.question.QuestionSearchCondition;
+import shop.tryit.domain.question.QuestionSearchDto;
 import shop.tryit.domain.question.QuestionService;
 
 @Slf4j
@@ -45,6 +51,29 @@ public class QuestionController {
         Question question = QuestionAdapter.toEntity(questionSaveFormDto, member);
         questionService.register(question);
         return "redirect:/";
+    }
+
+    @GetMapping
+    public String searchQuestion(Model model,
+                                 @ModelAttribute QuestionSearchCondition questionSearchCondition,
+                                 Pageable pageable
+    ) {
+
+        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 2);
+        Page<QuestionSearchDto> questions = questionService.searchList(questionSearchCondition, pageRequest);
+
+        int startPage = Math.max(1, questions.getPageable().getPageNumber() - 4);
+        int endPage = Math.min(questions.getTotalPages(), questions.getPageable().getPageNumber() + 4);
+
+        model.addAttribute("questions", questions);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
+        log.info("questionSearchCondition = '{}'", questionSearchCondition);
+        log.info("questions = '{}'", questions);
+        log.info("questions.size = '{}'", questions.getContent().size());
+
+        return "questions/list";
     }
 
 }
