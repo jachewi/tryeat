@@ -37,7 +37,10 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
-    private Item findOne(Long itemId) {
+    /**
+     * 특정 상품 조회
+     */
+    public Item findOne(Long itemId) {
         return itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalStateException("해당 상품을 찾을 수 없습니다."));
     }
