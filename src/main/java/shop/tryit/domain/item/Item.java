@@ -7,6 +7,7 @@ import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,15 +38,14 @@ public class Item extends BaseTimeEntity {
     private Category category; // 상품 카테고리 [DOG, CAT]
 
     @OneToMany(mappedBy = "item", fetch = LAZY, cascade = {PERSIST, REMOVE})
-    private List<ItemFile> images; // 상품 이미지
+    private List<Image> images = new ArrayList<>(); // 상품 이미지
 
     @Builder
-    private Item(String name, int price, int stockQuantity, Category category, List<ItemFile> images) {
+    private Item(String name, int price, int stockQuantity, Category category) {
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.category = category;
-        this.images = images;
     }
 
     public void update(String name, int price, int stockQuantity, Category category) {
@@ -71,9 +71,9 @@ public class Item extends BaseTimeEntity {
         this.category = category;
     }
 
-    public void addImage(ItemFile itemFile) {
-        itemFile.setItem(this);
-        images.add(itemFile);
+    public void addImage(Image image) {
+        image.setItem(this);
+        images.add(image);
     }
 
 }

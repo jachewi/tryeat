@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 @Component
-public class ItemFileStore {
+public class ImageStore {
 
     // TODO : 리팩토링 고려
     // @Value("${custom.path.upload-images}")
@@ -30,7 +30,7 @@ public class ItemFileStore {
         return getFilePath() + fileName;
     }
 
-    public ItemFile storeItemFile(MultipartFile multipartFile, ItemFileType type) throws IOException {
+    public Image storeItemFile(MultipartFile multipartFile, ImageType type) throws IOException {
         if (multipartFile.isEmpty()) {
             return null;
         }
@@ -38,7 +38,7 @@ public class ItemFileStore {
         String originFileName = multipartFile.getOriginalFilename();
         String storeFileName = createStoreFileName(originFileName);
         multipartFile.transferTo(new File(getFullPath(storeFileName)));
-        return ItemFile.of(originFileName, storeFileName, type);
+        return Image.of(originFileName, storeFileName, type);
     }
 
     /**
