@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,7 +38,9 @@ public class QuestionController {
 
     @PostMapping("/new")
     public String newQuestion(@Valid @ModelAttribute QuestionSaveFormDto questionSaveFormDto,
-                              BindingResult bindingResult) {
+                              BindingResult bindingResult,
+                              @AuthenticationPrincipal User user
+    ) {
 
         log.info("bindingResult={}", bindingResult);
 
@@ -44,13 +48,14 @@ public class QuestionController {
             return "questions/register";
         }
 
-        // TODO : 나중에 security 이용하여 회원 이름 조회하기
-        Member member = Member.builder().password("123").build();
-        memberService.saveMember(member);
+        String userEmail = user.getUsername();
+        Member member = memberService.findMember(userEmail);
+        log.info("user = '{}'", user);
+        log.info("userEmail = '{}'", userEmail);
 
         Question question = QuestionAdapter.toEntity(questionSaveFormDto, member);
         questionService.register(question);
-        return "redirect:/";
+        return "redirect:/questions";
     }
 
     @GetMapping
