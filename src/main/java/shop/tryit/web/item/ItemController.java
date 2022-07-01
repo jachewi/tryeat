@@ -4,6 +4,7 @@ import static shop.tryit.domain.item.ItemFileType.DETAIL;
 import static shop.tryit.domain.item.ItemFileType.MAIN;
 
 import java.io.IOException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import shop.tryit.domain.item.Category;
 import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemFile;
+import shop.tryit.domain.item.ItemFileService;
 import shop.tryit.domain.item.ItemFileStore;
 import shop.tryit.domain.item.ItemService;
 
@@ -25,6 +27,7 @@ import shop.tryit.domain.item.ItemService;
 public class ItemController {
 
     private final ItemService itemService;
+    private final ItemFileService itemFileService;
     private final ItemFileStore itemFileStore;
 
     @GetMapping("/new")
@@ -48,8 +51,21 @@ public class ItemController {
 
         itemService.register(item);
 
-        // TODO: items.html 생성
-        return "redirect:/";
+        return "redirect:/items";
     }
+
+    @GetMapping
+    public String list(Model model) throws IOException {
+        List<Item> items = itemService.findItems();
+
+        List<ItemFile> mainImages = itemFileService.findMainImages();
+
+        List<ItemListDto> itemListDto = ItemAdapter.toListDto(items, mainImages);
+
+        model.addAttribute("items", itemListDto);
+
+        return "/items/list";
+    }
+
 
 }

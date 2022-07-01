@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header"/>
+
+<body>
+  <!-- ======= Header ======= -->
+  <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"/>
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="container">
+      <div>
+        <a th:href="@{/items/new}" class="btn btn-dark" role="button">상품 등록</a>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>이미지</th>
+              <th>상품명</th>
+              <th>가격</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr th:each="item : ${items}">
+              <img th:src="|/files/${item.mainImage.getStoreFileName()}|" width="200" height="200"/>
+              <td th:text="${item.name}"></td>
+              <td th:text="${item.price}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> <!-- /container -->
+  </section> <!-- End Hero -->
+
+  <!-- ======= Footer ======= -->
+  <div th:replace="fragments/footer :: footer"/>
+</body>
+
+</html>
