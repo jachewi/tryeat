@@ -9,14 +9,11 @@ import shop.tryit.domain.item.Image;
 public class ItemAdapter {
 
     public static Item toEntity(ItemFormDto form, Image mainImage, Image detailImage) throws IOException {
-        List<Image> itemImages = new ArrayList<>();
-
         Item item = Item.builder()
                 .name(form.getName())
                 .price(form.getPrice())
                 .category(form.getCategory())
                 .stockQuantity(form.getStockQuantity())
-                .images(itemImages)
                 .build();
 
         item.addImage(mainImage);
