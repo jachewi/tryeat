@@ -2,8 +2,10 @@ package shop.tryit.domain.question;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class QuestionSearchCondition {
 
     private String title;
