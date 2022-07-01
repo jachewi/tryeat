@@ -32,7 +32,7 @@ public class ImageService {
      * 상세 이미지 업로드
      */
     public Image uploadDetailImage(ItemFormDto form) throws IOException {
-        return imageStore.storeItemFile(form.getMainImage(), DETAIL);
+        return imageStore.storeItemFile(form.getDetailImage(), DETAIL);
     }
 
     /**
