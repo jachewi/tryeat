@@ -1,8 +1,5 @@
 package shop.tryit.web.item;
 
-import static shop.tryit.domain.item.ImageType.DETAIL;
-import static shop.tryit.domain.item.ImageType.MAIN;
-
 import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +14,6 @@ import shop.tryit.domain.item.Category;
 import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.Image;
 import shop.tryit.domain.item.ImageService;
-import shop.tryit.domain.item.ImageStore;
 import shop.tryit.domain.item.ItemService;
 
 @Slf4j
@@ -28,7 +24,6 @@ public class ItemController {
 
     private final ItemService itemService;
     private final ImageService imageService;
-    private final ImageStore imageStore;
 
     @GetMapping("/new")
     public String newItemForm(Model model) {
@@ -44,11 +39,7 @@ public class ItemController {
     public String newItem(@ModelAttribute("item") ItemFormDto form) throws IOException {
         log.info("saved item name = {}", form.getName());
 
-        Image mainImage = imageStore.storeItemFile(form.getMainImage(), MAIN);
-        Image detailImage = imageStore.storeItemFile(form.getDetailImage(), DETAIL);
-
-        Item item = ItemAdapter.toEntity(form, mainImage, detailImage);
-
+        Item item = ItemAdapter.toEntity(form, imageService.uploadMainImage(form), imageService.uploadDetailImage(form));
         itemService.register(item);
 
         return "redirect:/items";
