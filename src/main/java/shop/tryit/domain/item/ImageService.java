@@ -1,6 +1,6 @@
 package shop.tryit.domain.item;
 
-import static shop.tryit.domain.item.ItemFileType.MAIN;
+import static shop.tryit.domain.item.ImageType.MAIN;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,24 +13,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class ItemFileService {
+public class ImageService {
 
     private final ItemService itemService;
 
     /**
      * 메인 이미지 목록 조회
      */
-    public List<ItemFile> findMainImages() {
+    public List<Image> findMainImages() {
         List<Item> items = itemService.findItems(); // 같은 트랜잭션 안에서 진행하기 위함
 
-        List<ItemFile> mainImages = new ArrayList<>(); // 메인 이미지 파일만 담는 리스트
+        List<Image> mainImages = new ArrayList<>(); // 메인 이미지 파일만 담는 리스트
 
         for (Item item : items) {
-            List<ItemFile> itemImages = item.getImages();
+            List<Image> images = item.getImages();
 
-            for (ItemFile itemImage : itemImages) {
-                if (itemImage.getType()==MAIN) {
-                    mainImages.add(itemImage);
+            for (Image image : images) {
+                if (image.getType()==MAIN) {
+                    mainImages.add(image);
                 }
             }
         }

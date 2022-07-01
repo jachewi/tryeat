@@ -37,10 +37,10 @@ public class Item extends BaseTimeEntity {
     private Category category; // 상품 카테고리 [DOG, CAT]
 
     @OneToMany(mappedBy = "item", fetch = LAZY, cascade = {PERSIST, REMOVE})
-    private List<ItemFile> images; // 상품 이미지
+    private List<Image> images; // 상품 이미지
 
     @Builder
-    private Item(String name, int price, int stockQuantity, Category category, List<ItemFile> images) {
+    private Item(String name, int price, int stockQuantity, Category category, List<Image> images) {
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;
@@ -71,9 +71,9 @@ public class Item extends BaseTimeEntity {
         this.category = category;
     }
 
-    public void addImage(ItemFile itemFile) {
-        itemFile.setItem(this);
-        images.add(itemFile);
+    public void addImage(Image image) {
+        image.setItem(this);
+        images.add(image);
     }
 
 }

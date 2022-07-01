@@ -1,6 +1,6 @@
 package shop.tryit.domain.item;
 
-public enum ItemFileType {
+public enum ImageType {
 
     MAIN, DETAIL
 

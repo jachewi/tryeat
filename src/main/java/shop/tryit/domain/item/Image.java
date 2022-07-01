@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = PROTECTED)
-public class ItemFile {
+public class Image {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -29,22 +29,23 @@ public class ItemFile {
     private String storeFileName;  // 서버에 저장되는 파일명
 
     @Enumerated(STRING)
-    private ItemFileType type;
+    private ImageType type;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 
-    private ItemFile(String originFileName, String storeFileName, ItemFileType type) {
+    private Image(String originFileName, String storeFileName, ImageType type) {
         this.originFileName = originFileName;
         this.storeFileName = storeFileName;
         this.type = type;
     }
 
-    public static ItemFile of(String originFileName, String storeFileName, ItemFileType type) {
-        return new ItemFile(originFileName, storeFileName, type);
+    public static Image of(String originFileName, String storeFileName, ImageType type) {
+        return new Image(originFileName, storeFileName, type);
     }
 
+    // Item 정보 저장
     public void setItem(Item item) {
         this.item = item;
     }

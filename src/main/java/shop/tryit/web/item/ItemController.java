@@ -1,7 +1,7 @@
 package shop.tryit.web.item;
 
-import static shop.tryit.domain.item.ItemFileType.DETAIL;
-import static shop.tryit.domain.item.ItemFileType.MAIN;
+import static shop.tryit.domain.item.ImageType.DETAIL;
+import static shop.tryit.domain.item.ImageType.MAIN;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import shop.tryit.domain.item.Category;
 import shop.tryit.domain.item.Item;
-import shop.tryit.domain.item.ItemFile;
-import shop.tryit.domain.item.ItemFileService;
-import shop.tryit.domain.item.ItemFileStore;
+import shop.tryit.domain.item.Image;
+import shop.tryit.domain.item.ImageService;
+import shop.tryit.domain.item.ImageStore;
 import shop.tryit.domain.item.ItemService;
 
 @Slf4j
@@ -27,8 +27,8 @@ import shop.tryit.domain.item.ItemService;
 public class ItemController {
 
     private final ItemService itemService;
-    private final ItemFileService itemFileService;
-    private final ItemFileStore itemFileStore;
+    private final ImageService imageService;
+    private final ImageStore imageStore;
 
     @GetMapping("/new")
     public String newItemForm(Model model) {
@@ -44,8 +44,8 @@ public class ItemController {
     public String newItem(@ModelAttribute("item") ItemFormDto form) throws IOException {
         log.info("saved item name = {}", form.getName());
 
-        ItemFile mainImage = itemFileStore.storeItemFile(form.getMainImage(), MAIN);
-        ItemFile detailImage = itemFileStore.storeItemFile(form.getDetailImage(), DETAIL);
+        Image mainImage = imageStore.storeItemFile(form.getMainImage(), MAIN);
+        Image detailImage = imageStore.storeItemFile(form.getDetailImage(), DETAIL);
 
         Item item = ItemAdapter.toEntity(form, mainImage, detailImage);
 
@@ -58,7 +58,7 @@ public class ItemController {
     public String list(Model model) throws IOException {
         List<Item> items = itemService.findItems();
 
-        List<ItemFile> mainImages = itemFileService.findMainImages();
+        List<Image> mainImages = imageService.findMainImages();
 
         List<ItemListDto> itemListDto = ItemAdapter.toListDto(items, mainImages);
 
