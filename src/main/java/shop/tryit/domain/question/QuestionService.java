@@ -1,6 +1,8 @@
 package shop.tryit.domain.question;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.answer.AnswerRepository;
@@ -36,6 +38,10 @@ public class QuestionService {
         questionRepository.delete(question);
         answerRepository.findByQuestion(question)
                 .forEach(answerRepository::delete);
+    }
+
+    public Page<QuestionSearchDto> searchList(QuestionSearchCondition condition, Pageable pageable) {
+        return questionRepository.searchQuestion(condition, pageable);
     }
 
 }
