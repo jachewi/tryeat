@@ -1,9 +1,7 @@
 package shop.tryit.web.member;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +14,7 @@ public class MemberFormDto {
     private String name;
 
     @NotBlank(message = "이메일은 필수 입력 값입니다.")
-    @Email(message = "이메일 형식으로 입력해주세요.")
+//    @Email(message = "이메일 형식으로 입력해주세요.")
     private String email;
 
     @NotEmpty(message = "비밀번호는 필수 입력 값입니다.")
@@ -25,13 +23,13 @@ public class MemberFormDto {
     @NotEmpty(message = "비밀번호 확인은 필수 입력 값입니다.")
     private String password2;
 
-    @NotNull(message = "우편번호는 필수 입력 값입니다.")
+//    @NotNull(message = "우편번호는 필수 입력 값입니다.")
     private Long zipcode; //우편번호
 
-    @NotEmpty(message = "도로명 주소는 필수 입력 값입니다.")
+//    @NotEmpty(message = "도로명 주소는 필수 입력 값입니다.")
     private String street_address; //도로명 주소
 
-    @NotEmpty(message = "지번 주소는 필수 입력 값입니다.")
+//    @NotEmpty(message = "지번 주소는 필수 입력 값입니다.")
     private String jibeon_address; //지번 주소
 
     private String detail_address; //상세 주소
