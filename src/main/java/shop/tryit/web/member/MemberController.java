@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import shop.tryit.domain.common.Address;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRole;
@@ -79,7 +80,21 @@ public class MemberController {
     }
 
     /**
-     * 회원 프로필
+     * OAuth2.0
+     * 카카오 로그인
+     */
+    @GetMapping("/login/kakao/callback")
+    public @ResponseBody
+    String kakaoCallback(String code) { //Data 를 리턴해주는 컨트롤러 함수
+        log.info("kakao login controller");
+
+        service.kakaoLogin(code);
+
+        return "redirect:/";
+    }
+
+    /**
+     * 회원 수정
      */
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/edit")
@@ -94,7 +109,7 @@ public class MemberController {
 
     @PostMapping("/edit")
     public String editMember(@Valid @ModelAttribute("memberForm") MemberFormDto memberForm,
-                             BindingResult bindingResult){
+                             BindingResult bindingResult) {
         log.info("회원 수정으로 이동");
         if (!memberForm.getPassword1().equals(memberForm.getPassword2())) {
             bindingResult.rejectValue("password2", "passwordInCorrect",
@@ -113,6 +128,5 @@ public class MemberController {
 
         return "/members/edit";
     }
-
 
 }
