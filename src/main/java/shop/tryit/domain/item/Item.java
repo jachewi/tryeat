@@ -7,6 +7,7 @@ import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +38,7 @@ public class Item extends BaseTimeEntity {
     private Category category; // 상품 카테고리 [DOG, CAT]
 
     @OneToMany(mappedBy = "item", fetch = LAZY, cascade = {PERSIST, REMOVE})
-    private List<Image> images; // 상품 이미지
+    private List<Image> images = new ArrayList<>(); // 상품 이미지
 
     @Builder
     private Item(String name, int price, int stockQuantity, Category category, List<Image> images) {
