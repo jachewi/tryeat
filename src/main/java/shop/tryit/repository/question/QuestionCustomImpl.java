@@ -31,20 +31,21 @@ public class QuestionCustomImpl implements QuestionCustom {
     private final JPAQueryFactory queryFactory;
 
     private static Map<Long, QuestionSearchDto> map;
-
+    
     @Override
     public Page<QuestionSearchDto> searchQuestion(QuestionSearchCondition condition, Pageable pageable) {
         List<QuestionSearchDto> content = searchContent(condition, pageable);
+        designateNumberOfAnswer(content);
+        JPAQuery<Long> totalCount = getTotalCount(condition);
+        return PageableExecutionUtils.getPage(content, pageable, totalCount::fetchOne);
+    }
 
+    private void designateNumberOfAnswer(List<QuestionSearchDto> content) {
         map = content.stream()
                 .collect(toMap(QuestionSearchDto::getQuestionId, Function.identity()));
 
         answerCount(map.keySet())
                 .forEach(this::registerNumberOfAnswer);
-
-        JPAQuery<Long> totalCount = getTotalCount(condition);
-
-        return PageableExecutionUtils.getPage(content, pageable, totalCount::fetchOne);
     }
 
     private void registerNumberOfAnswer(Tuple tuple) {
@@ -69,13 +70,15 @@ public class QuestionCustomImpl implements QuestionCustom {
                 .select(new QQuestionSearchDto(
                         question.id,
                         question.title,
-                        member.email))
+                        member.email,
+                        question.createDate))
                 .from(question)
                 .innerJoin(question.member, member)
                 .where(
                         questionTitleEq(condition.getTitle()),
                         memberEmailEq(condition.getEmail())
                 )
+                .orderBy(question.createDate.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
