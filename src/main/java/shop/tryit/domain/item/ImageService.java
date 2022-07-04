@@ -36,6 +36,36 @@ public class ImageService {
     }
 
     /**
+     * 메인 이미지 조회
+     */
+    public Image getMainImage(Long id) {
+        Item item = itemService.findOne(id); // 같은 트랜잭션 안에서 진행하기 위함
+
+        Image mainImage = null;
+
+        for (Image image : item.getImages())
+            if (image.getType()==MAIN)
+                mainImage = image;
+
+        return mainImage;
+    }
+
+    /**
+     * 상세 이미지 조회
+     */
+    public Image getDetailImage(Long id) {
+        Item item = itemService.findOne(id); // 같은 트랜잭션 안에서 진행하기 위함
+
+        Image detailImage = null;
+
+        for (Image image : item.getImages())
+            if (image.getType()==DETAIL)
+                detailImage = image;
+
+        return detailImage;
+    }
+
+    /**
      * 메인 이미지 목록 조회
      */
     public List<Image> findMainImages() {
