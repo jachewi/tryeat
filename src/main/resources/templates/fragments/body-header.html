@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-    <!-- ======= Header ======= -->
+<!-- ======= Header ======= -->
 <header th:fragment="body-header" id="header" class="fixed-top d-flex align-items-center">
-    <div class="container d-flex align-items-center">
-
-        <div class="logo me-auto">
-            <h1><a href="/" th:href="@{redirect:/}"> < TryIT > </TryIT></a></h1>
-        </div>
-    
-        <nav id="navbar" class="navbar order-last order-lg-0">
-            <ul>
-            <li><a class="nav-link scrollto active" href="/" th:href="@{redirect:/}">Home</a></li>
-            <li><a class="nav-link scrollto" href="/members/new" th:href="@{/members/new}">Join</a></li>
-            <li><a class="nav-link scrollto" href="/members/login"
-                   sec:authorize="isAnonymous()" th:href="@{/members/login}">Login</a></li>
-            <li><a class="nav-link scrollto" href="/members/login"
-                   sec:authorize="isAuthenticated()" th:href="@{/members/logout}">Logout</a></li>
-            <li><a class="nav-link scrollto" href="/inner-page">shop</a></li>
-            <li class="dropdown"><a href="#"><span>board</span> <i class="bi bi-chevron-down"></i></a>
-                <ul>
-                <li><a class="nav-link scrollto" href="/notice">Notice</a></li>
-                <li><a class="nav-link scrollto" href="#">QnA</a></li>
-                </ul>
-            </li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-    
-        <div class="header-social-links d-flex align-items-center">
-            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-        </div>
-    
-        </div>
+  <div class="container d-flex align-items-center">
+    <div class="logo me-auto">
+      <h1><a href="/" th:href="@{/}"> < TryIT > </TryIT></a></h1>
+    </div>
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li><a class="nav-link scrollto active" href="/" th:href="@{/}">Home</a></li>
+        <li><a class="nav-link scrollto" href="/members/new"
+               sec:authorize="isAnonymous()" th:href="@{/members/new}">Join</a></li>
+        <li><a class="nav-link scrollto" href="/members/login"
+               sec:authorize="isAnonymous()" th:href="@{/members/login}">Login</a></li>
+        <li><a class="nav-link scrollto" href="/members/logout"
+               sec:authorize="isAuthenticated()" th:href="@{/members/logout}">Logout</a></li>
+        <li class="dropdown"><a href="#" sec:authorize="isAuthenticated()"><span>MyPage</span><i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a class="nav-link scrollto" href="/members/edit"
+                   sec:authorize="isAuthenticated()" th:href="@{/members/edit}">Modify</a></li>
+            <li><a class="nav-link scrollto" href="/members/edit"
+                   sec:authorize="isAuthenticated()" th:href="@{/members/cart}">Cart</a></li>
+          </ul>
+        </li>
+        <li><a class="nav-link scrollto" href="/items" th:href="@{/items}">shop</a></li>
+        <li class="dropdown"><a href="#"><span>board</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a class="nav-link scrollto" href="/notice" th:href="@{/notice}">Notice</a></li>
+            <li><a class="nav-link scrollto" href="/questions" th:href="@{/questions}">QnA</a></li>
+          </ul>
+        </li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+  </div>
 </header>
 <!-- End Header -->
 
