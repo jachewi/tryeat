@@ -42,6 +42,15 @@ public class ImageStore {
     }
 
     /**
+     * 이미지 파일 삭제
+     */
+    public void deleteImageFile(String storeFileName) throws IOException {
+        // TODO : 서버에 삭제할 이미지가 없는 경우 예외 처리 필요
+        File file = new File(getFullPath(storeFileName));
+        file.delete();
+    }
+
+    /**
      * storeFileName 생성
      * ex) image.png -> uuid.png
      */

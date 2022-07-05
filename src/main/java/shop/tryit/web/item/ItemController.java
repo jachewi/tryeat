@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import shop.tryit.domain.item.Category;
@@ -58,5 +59,31 @@ public class ItemController {
         return "/items/list";
     }
 
+    @GetMapping("/{id}/update")
+    public String updateForm(@PathVariable long id, Model model) {
+        Category[] categories = Category.values();
+        model.addAttribute("categories", categories);
+
+        Item item = itemService.findOne(id);
+        ItemUpdateDto itemUpdateDto = ItemAdapter.toDto(item, imageService.getMainImage(id), imageService.getDetailImage(id));
+        model.addAttribute("item", itemUpdateDto);
+
+        return "/items/update";
+    }
+
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable long id, @ModelAttribute("item") ItemFormDto form) throws IOException {
+        log.info("======== 상품 수정 컨트롤러 실행 ========");
+
+        Item newItem = ItemAdapter.toEntity(form);
+
+        itemService.update(id, newItem);
+        imageService.updateMainImage(id, form);
+        imageService.updateDetailImage(id, form);
+
+        log.info("======== 상품 수정 컨트롤러 종료 ========");
+
+        return "redirect:/items";
+    }
 
 }

@@ -50,4 +50,10 @@ public class Image {
         this.item = item;
     }
 
+    public void update(Image newImage) {
+        this.originFileName = newImage.getOriginFileName();
+        this.storeFileName = newImage.getStoreFileName();
+        this.type = newImage.getType();
+    }
+
 }

@@ -22,6 +22,30 @@ public class ItemAdapter {
         return item;
     }
 
+    public static Item toEntity(ItemFormDto form) {
+        Item item = Item.builder()
+                .name(form.getName())
+                .price(form.getPrice())
+                .category(form.getCategory())
+                .stockQuantity(form.getStockQuantity())
+                .build();
+
+        return item;
+    }
+
+    public static ItemUpdateDto toDto(Item item, Image mainImage, Image detailImage) {
+        ItemUpdateDto updateDto = ItemUpdateDto.builder()
+                .name(item.getName())
+                .price(item.getPrice())
+                .stockQuantity(item.getStockQuantity())
+                .category(item.getCategory())
+                .mainImage(mainImage)
+                .detailImage(detailImage)
+                .build();
+
+        return updateDto;
+    }
+
     public static List<ItemListDto> toListDto(List<Item> items, List<Image> mainImages) {
         List<ItemListDto> toListDtoResult = new ArrayList<>();
 
