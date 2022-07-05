@@ -4,6 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,8 @@ public class MemberFormDto {
     private String email;
 
     @NotEmpty(message = "비밀번호는 필수 입력 값입니다.")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,20}$",
+            message = "비밀번호는 8~20자/영문 대소문자, 숫자, 특수문자($,@,!,%,*,#,?,&)를 1개 이상 포함해야 합니다.")
     private String password1;
 
     @NotEmpty(message = "비밀번호 확인은 필수 입력 값입니다.")
@@ -36,6 +39,8 @@ public class MemberFormDto {
 
     private String detail_address; //상세 주소
 
+    @Pattern(regexp = "^01([0|1|6|7|8|9]?)([0-9]{3,4})([0-9]{4})$",
+            message = "전화번호는 - 없이 입력해야합니다.")
     private String phone;
 
     private boolean admin = false;
