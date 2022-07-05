@@ -71,4 +71,19 @@ public class ItemController {
         return "/items/update";
     }
 
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable long id, @ModelAttribute("item") ItemFormDto form) throws IOException {
+        log.info("======== 상품 수정 컨트롤러 실행 ========");
+
+        Item newItem = ItemAdapter.toEntity(form);
+
+        itemService.update(id, newItem);
+        imageService.updateMainImage(id, form);
+        imageService.updateDetailImage(id, form);
+
+        log.info("======== 상품 수정 컨트롤러 종료 ========");
+
+        return "redirect:/items";
+    }
+
 }
