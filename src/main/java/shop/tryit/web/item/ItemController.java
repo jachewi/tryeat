@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import shop.tryit.domain.item.Category;
-import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.Image;
 import shop.tryit.domain.item.ImageService;
+import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemService;
 
 @Slf4j
@@ -87,6 +87,16 @@ public class ItemController {
         log.info("======== 상품 수정 컨트롤러 종료 ========");
 
         return "redirect:/items";
+    }
+
+    @GetMapping("/{id}")
+    public String detail(@PathVariable long id, Model model) {
+        Item item = itemService.findOne(id);
+
+        ItemDto itemDto = ItemAdapter.toDto(item, imageService.getMainImage(id), imageService.getDetailImage(id));
+        model.addAttribute("item", itemDto);
+
+        return "/items/detail";
     }
 
 }
