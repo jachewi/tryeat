@@ -55,7 +55,7 @@ public class ItemController {
 
         List<Image> mainImages = imageService.findMainImages();
 
-        List<ItemListDto> itemListDto = ItemAdapter.toListDto(items, mainImages);
+        List<ItemListDto> itemListDto = ItemAdapter.toDto(items, mainImages);
 
         model.addAttribute("items", itemListDto);
 
