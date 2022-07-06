@@ -35,6 +35,8 @@ public class MemberService {
     @Transactional
     public String update(String email, Member newMember) {
         Member findMember = findMember(email);
+        String newEncodedPassword = passwordEncoder.encode(newMember.getPassword());
+        newMember.Password(newEncodedPassword);
         findMember.update(newMember.getName(), newMember.getAddress(),
                 newMember.getPhoneNumber(), newMember.getPassword());
         return findMember.getEmail();
