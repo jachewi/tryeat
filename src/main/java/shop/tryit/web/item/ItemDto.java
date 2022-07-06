@@ -11,6 +11,7 @@ import shop.tryit.domain.item.Image;
 @Data
 @NoArgsConstructor(access = PROTECTED)
 public class ItemDto {
+    private Long id;
 
     private String name;
 
@@ -25,7 +26,8 @@ public class ItemDto {
     private Image detailImage;
 
     @Builder
-    private ItemDto(String name, Integer price, Integer stockQuantity, Category category, Image mainImage, Image detailImage) {
+    private ItemDto(Long id, String name, Integer price, Integer stockQuantity, Category category, Image mainImage, Image detailImage) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;

@@ -20,6 +20,7 @@ public class ItemAdapter {
 
     public static ItemDto toDto(Item item, Image mainImage, Image detailImage) {
         ItemDto itemDto = ItemDto.builder()
+                .id(item.getId())
                 .name(item.getName())
                 .price(item.getPrice())
                 .stockQuantity(item.getStockQuantity())
