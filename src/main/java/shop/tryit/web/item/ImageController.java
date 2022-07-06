@@ -21,7 +21,8 @@ public class ImageController {
     @ResponseBody
     @GetMapping("/files/{filename}")
     public Resource viewMainImage(@PathVariable String filename) throws IOException {
-        log.info("mainImage.getStoreFileName = {}", filename);
+        log.info("이미지 경로 = {}", imageStore.getFullPath(filename));
+
         return new UrlResource("file:" + imageStore.getFullPath(filename));
     }
 

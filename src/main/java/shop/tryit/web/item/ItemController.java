@@ -38,13 +38,16 @@ public class ItemController {
 
     @PostMapping("/new")
     public String newItem(@ModelAttribute("item") ItemFormDto form) throws IOException {
-        log.info("saved item name = {}", form.getName());
+        log.info("======== 상품 등록 컨트롤러 실행 ========");
+        log.info("상품 이름 = {}", form.getName());
 
         Item item = ItemAdapter.toEntity(form);
         item.addImage(imageService.uploadMainImage(form)); // 메인 이미지 추가
         item.addImage(imageService.uploadDetailImage(form)); // 상세 이미지 추가
 
         itemService.register(item);
+
+        log.info("======== 상품 등록 컨트롤러 종료 ========");
 
         return "redirect:/items";
     }
