@@ -18,8 +18,8 @@ public class ItemAdapter {
         return item;
     }
 
-    public static ItemUpdateDto toDto(Item item, Image mainImage, Image detailImage) {
-        ItemUpdateDto updateDto = ItemUpdateDto.builder()
+    public static ItemDto toDto(Item item, Image mainImage, Image detailImage) {
+        ItemDto itemDto = ItemDto.builder()
                 .name(item.getName())
                 .price(item.getPrice())
                 .stockQuantity(item.getStockQuantity())
@@ -28,7 +28,7 @@ public class ItemAdapter {
                 .detailImage(detailImage)
                 .build();
 
-        return updateDto;
+        return itemDto;
     }
 
     public static List<ItemListDto> toListDto(List<Item> items, List<Image> mainImages) {

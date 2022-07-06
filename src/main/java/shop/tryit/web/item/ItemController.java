@@ -68,8 +68,8 @@ public class ItemController {
         model.addAttribute("categories", categories);
 
         Item item = itemService.findOne(id);
-        ItemUpdateDto itemUpdateDto = ItemAdapter.toDto(item, imageService.getMainImage(id), imageService.getDetailImage(id));
-        model.addAttribute("item", itemUpdateDto);
+        ItemDto itemDto = ItemAdapter.toDto(item, imageService.getMainImage(id), imageService.getDetailImage(id));
+        model.addAttribute("item", itemDto);
 
         return "/items/update";
     }
