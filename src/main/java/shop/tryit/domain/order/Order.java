@@ -21,7 +21,6 @@ import javax.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import shop.tryit.domain.common.OrderStatus;
 import shop.tryit.domain.member.Member;
 
 @Entity

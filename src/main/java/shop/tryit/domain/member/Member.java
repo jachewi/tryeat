@@ -1,7 +1,5 @@
 package shop.tryit.domain.member;
 
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REMOVE;
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -46,7 +44,7 @@ public class Member {
     @Enumerated(STRING)
     private MemberRole role;
 
-    @OneToMany(mappedBy = "member", fetch = LAZY, cascade = {PERSIST, REMOVE})
+    @OneToMany(mappedBy = "member", fetch = LAZY)
     private List<Order> orders = new ArrayList<>();
 
     @Builder
