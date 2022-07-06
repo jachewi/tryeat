@@ -30,7 +30,7 @@ public class ImageStore {
         return getFilePath() + fileName;
     }
 
-    public Image storeItemFile(MultipartFile multipartFile, ImageType type) throws IOException {
+    public Image storeImageFile(MultipartFile multipartFile, ImageType type) throws IOException {
         if (multipartFile.isEmpty()) {
             return null;
         }
