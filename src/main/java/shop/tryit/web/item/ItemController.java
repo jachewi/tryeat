@@ -40,7 +40,10 @@ public class ItemController {
     public String newItem(@ModelAttribute("item") ItemFormDto form) throws IOException {
         log.info("saved item name = {}", form.getName());
 
-        Item item = ItemAdapter.toEntity(form, imageService.uploadMainImage(form), imageService.uploadDetailImage(form));
+        Item item = ItemAdapter.toEntity(form);
+        item.addImage(imageService.uploadMainImage(form)); // 메인 이미지 추가
+        item.addImage(imageService.uploadDetailImage(form)); // 상세 이미지 추가
+
         itemService.register(item);
 
         return "redirect:/items";

@@ -1,26 +1,11 @@
 package shop.tryit.web.item;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.Image;
 
 public class ItemAdapter {
-
-    public static Item toEntity(ItemFormDto form, Image mainImage, Image detailImage) throws IOException {
-        Item item = Item.builder()
-                .name(form.getName())
-                .price(form.getPrice())
-                .category(form.getCategory())
-                .stockQuantity(form.getStockQuantity())
-                .build();
-
-        item.addImage(mainImage);
-        item.addImage(detailImage);
-
-        return item;
-    }
 
     public static Item toEntity(ItemFormDto form) {
         Item item = Item.builder()
