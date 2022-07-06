@@ -14,7 +14,7 @@ import shop.tryit.domain.item.ImageStore;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-public class ItemFileController {
+public class ImageController {
 
     private final ImageStore imageStore;
 
