@@ -47,13 +47,13 @@ public class MemberController {
         }
 
         //Todo 실 DB table 구축 후 admin 토큰 주입 예정
-        MemberRole role = MemberRole.USER;
+        MemberRole role = MemberRole.ROLE_USER;
         if (memberForm.isAdmin()) {
             if (!memberForm.getPassword1().equals(ADMIN_TOKEN)) {
                 bindingResult.rejectValue("password1", "ADMIN_TOKENInCorrect",
                         "관리자 암호가 틀려 등록이 불가합니다.");
             }
-            role = MemberRole.ADMIN;
+            role = MemberRole.ROLE_ADMIN;
         }
 
         if (bindingResult.hasErrors()) {
