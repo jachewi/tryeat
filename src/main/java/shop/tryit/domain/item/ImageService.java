@@ -25,14 +25,14 @@ public class ImageService {
      * 메인 이미지 업로드
      */
     public Image uploadMainImage(ItemFormDto form) throws IOException {
-        return imageStore.storeItemFile(form.getMainImage(), MAIN);
+        return imageStore.storeImageFile(form.getMainImage(), MAIN);
     }
 
     /**
      * 상세 이미지 업로드
      */
     public Image uploadDetailImage(ItemFormDto form) throws IOException {
-        return imageStore.storeItemFile(form.getDetailImage(), DETAIL);
+        return imageStore.storeImageFile(form.getDetailImage(), DETAIL);
     }
 
     /**
@@ -84,6 +84,20 @@ public class ImageService {
         }
 
         return mainImages;
+    }
+
+    /**
+     * 이미지 정보 추가
+     */
+    @Transactional
+    public Item addImage(Item item, ItemFormDto form) throws IOException {
+        Image mainImage = uploadMainImage(form);
+        Image detailImage = uploadDetailImage(form);
+
+        item.addImage(mainImage);
+        item.addImage(detailImage);
+
+        return item;
     }
 
     /**
