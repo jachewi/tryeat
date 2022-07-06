@@ -37,6 +37,7 @@ public class ItemAdapter {
         // 조회된 모든 Item -> ItemListDto 변환해서 리스트에 담음
         for (int i = 0; i < items.size(); i++) {
             ItemListDto listDto = ItemListDto.builder()
+                    .id(items.get(i).getId())
                     .name(items.get(i).getName())
                     .price(items.get(i).getPrice())
                     .mainImage(mainImages.get(i))
