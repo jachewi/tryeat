@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+<!-- ======= Header ======= -->
+<div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></div>
+
+<!-- ======= Item detail Section ======= -->
+<section class="item_detail">
+  <div class="container">
+    <div class="d-flex flex-row-reverse mb-3">
+      <!-- 관리자에게만 보이는 버튼 -->
+      <a th:href="@{/items/{id}/update (id=${item.id})}" class="btn btn-outline-dark" role="button">상품 수정</a>
+    </div>
+
+    <div class="row gy-4">
+      <div class="item_img col-lg-8">
+        <img th:src="|/files/${item.mainImage.getStoreFileName()}|" class="main_img" width="400" height="400">
+      </div>
+      <div class="item_info col-lg-4">
+        <h2 th:text="${item.name}">상품 이름</h2>
+        <hr/>
+        <h3>
+          <sapn th:text="${item.price}">1000</sapn>
+          원
+        </h3>
+
+        <form action="" method="post">
+          <div class="order_info">
+            <div class="quantity">
+              <h4>Quantity</h4>
+              <span class="plus">+</span>
+              <input type="number" readonly value="1">
+              <span class="minus">-</span>
+            </div>
+            <hr/>
+            <div class="total_price">
+              <h4>total price : </h4>
+              <span class="price"> 1000원</span>
+            </div>
+            <div class="order_click d-flex justify-content-end">
+              <a href="" class="add_cart">
+                <img src="/img/icon/add-to-cart-black.png">
+              </a>
+              <button type="submit">Buy Now</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div> <!-- /container -->
+</section> <!-- End Item Detail -->
+
+<!-- ======= Footer ======= -->
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+
+</html>

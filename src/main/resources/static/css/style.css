@@ -1010,6 +1010,59 @@ section {
 }
 
 /*--------------------------------------------------------------
+# Item Detail
+--------------------------------------------------------------*/
+.item_detail {
+  margin-top: 70px;
+  padding: 70px 0;
+}
+.item_detail hr {
+  border: 1px solid #eee;
+  margin-bottom: 20px;
+}
+.item_detail .item_img {
+  text-align: center;
+}
+.item_detail .item_img img {
+  /* width: 100%; */
+}
+.item_detail .item_info {
+  padding-top: 30px;
+  /* box-shadow: 0px 0 30px rgba(54, 65, 70, 0.08); */
+}
+.item_detail h2{
+    font-size: 40px;
+    font-weight: 700;
+    /* margin-bottom: 20px; */
+    /* padding-bottom: 20px; */
+    /* border-bottom: 1px solid #eee; */
+}
+.item_detail h3{
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.item_detail h4{
+    font-size: 16px;
+}
+.item_detail .order_info h4 {
+  display: inline-block;
+  margin-right: 15px;
+  text-align: center;
+}
+.item_detail .order_info input {
+  border: none;
+  width: 40px;
+  color: mediumslateblue;
+  font-weight: 600;
+  text-align: center;
+  font-size: 18px;
+}
+.item_detail .order_info .order_click button {
+  width: 100%;
+  margin-left: 15px;
+}
+
+/*--------------------------------------------------------------
 # Frequently Asked Questions
 --------------------------------------------------------------*/
 .faq {

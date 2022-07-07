@@ -24,11 +24,15 @@
           </thead>
 
           <tbody>
-            <tr th:each="item : ${items}">
-              <img th:src="|/files/${item.mainImage.getStoreFileName()}|" width="200" height="200"/>
-              <td th:text="${item.name}"></td>
-              <td th:text="${item.price}"></td>
-            </tr>
+          <tr th:each="item : ${items}">
+            <td>
+              <a th:href="@{/items/{id}(id=${item.id})}">
+                <img th:src="|/files/${item.mainImage.getStoreFileName()}|" width="200" height="200"/>
+              </a>
+            </td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.price}"></td>
+            </a></tr>
           </tbody>
         </table>
       </div>
