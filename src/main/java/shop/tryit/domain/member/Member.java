@@ -1,19 +1,24 @@
 package shop.tryit.domain.member;
 
 import static javax.persistence.EnumType.STRING;
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import shop.tryit.domain.common.Address;
+import shop.tryit.domain.order.Order;
 
 @Entity
 @Getter
@@ -38,6 +43,9 @@ public class Member {
 
     @Enumerated(STRING)
     private MemberRole role;
+
+    @OneToMany(mappedBy = "member", fetch = LAZY)
+    private List<Order> orders = new ArrayList<>();
 
     @Builder
     private Member(String email,
