@@ -1,63 +1,62 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-<head th:replace="fragments/header :: header"/>
+<head th:replace="fragments/header :: header"></head>
 
 <body>
-  <!-- ======= Header ======= -->
-  <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"/>
+<!-- ======= Header ======= -->
+<div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></div>
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero">
-    <div class="container">
-      <form th:action th:object="${item}" method="post" enctype="multipart/form-data">
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+  <div class="container">
+    <form th:action th:object="${item}" method="post" enctype="multipart/form-data">
 
-        <div class="form-group">
-          <label th:for="category">카테고리</label>
-            <select class="form-select" th:field="*{category}">
-              <option value="">== 카테고리 선택 ==</option>
-              <option th:each="category : ${categories}"
-                      th:value="${category}"
-                      th:text="${category}">CAT</option>
-            </select>
-        </div>
+      <div class="form-group">
+        <label th:for="category">카테고리</label>
+        <select class="form-select" th:field="*{category}">
+          <option value="">== 카테고리 선택 ==</option>
+          <option th:each="category : ${categories}"
+                  th:value="${category}"
+                  th:text="${category}">CAT
+          </option>
+        </select>
+      </div>
 
-        <div class="form-group">
-          <label th:for="name">상품명</label>
-          <input type="text" th:field="*{name}" class="form-control" placeholder="이름을 입력하세요">
-        </div>
+      <div class="form-group">
+        <label th:for="name">상품명</label>
+        <input type="text" th:field="*{name}" class="form-control" placeholder="이름을 입력하세요">
+      </div>
 
-        <div>
-          <label th:for="price">가격</label>
-          <input type="text" th:field="*{price}" class="form-control" placeholder="가격을 입력하세요">
-        </div>
+      <div>
+        <label th:for="price">가격</label>
+        <input type="text" th:field="*{price}" class="form-control" placeholder="가격을 입력하세요">
+      </div>
 
-        <div class="form-group">
-          <label th:for="stockQuantity">재고</label>
-          <input type="text" th:field="*{stockQuantity}" class="form-control" placeholder="재고를 입력하세요">
-        </div>
+      <div class="form-group">
+        <label th:for="stockQuantity">재고</label>
+        <input type="text" th:field="*{stockQuantity}" class="form-control" placeholder="재고를 입력하세요">
+      </div>
 
-        <div class="form-group">
-          <label th:for="mainImage">메인 이미지</label>
-          <input type="file" th:field="*{mainImage}" class="form-control">
-        </div>
+      <div class="form-group">
+        <label th:for="mainImage">메인 이미지</label>
+        <input type="file" th:field="*{mainImage}" class="form-control">
+      </div>
 
-        <div class="form-group">
-          <label th:for="mainImage">상세 이미지</label>
-          <input type="file" th:field="*{detailImage}" class="form-control">
-        </div>
+      <div class="form-group">
+        <label th:for="mainImage">상세 이미지</label>
+        <input type="file" th:field="*{detailImage}" class="form-control">
+      </div>
 
-        <button type="submit" class="btn btn-primary">등록</button>
+      <button type="submit" class="btn btn-primary">등록</button>
 
-      </form>
-      <br/>
-    </div> <!-- /container -->
-  </section> <!-- End Hero -->
+    </form>
+    <br/>
+  </div> <!-- /container -->
+</section> <!-- End Hero -->
 
-  <!-- ======= Footer ======= -->
-  <div th:replace="fragments/footer :: footer"/>
+<!-- ======= Footer ======= -->
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 
 </html>
