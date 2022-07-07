@@ -47,6 +47,12 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'MSStudent', cursive;
 }
 
+.field-error {
+  border-color: #dc3545;
+  color: #dc3545;
+  font-size: 14px
+}
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
