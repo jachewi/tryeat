@@ -2,10 +2,12 @@ package shop.tryit.web.item;
 
 import java.io.IOException;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,13 +39,20 @@ public class ItemController {
     }
 
     @PostMapping("/new")
-    public String newItem(@ModelAttribute("item") ItemFormDto form) throws IOException {
+    public String newItem(@Valid @ModelAttribute("item") ItemFormDto form, BindingResult bindingResult, Model model) throws IOException {
         log.info("======== 상품 등록 컨트롤러 실행 ========");
-        log.info("상품 이름 = {}", form.getName());
+
+        // 검증 실패시 다시 입력 폼으로
+        if (bindingResult.hasErrors()) {
+            Category[] categories = Category.values();
+            model.addAttribute("categories", categories);
+            return "/items/register";
+        }
 
         Item item = imageService.addImage(ItemAdapter.toEntity(form), form);
         itemService.register(item);
 
+        log.info("상품 등록 : {}, {}원", item.getName(), item.getPrice());
         log.info("======== 상품 등록 컨트롤러 종료 ========");
 
         return "redirect:/items";
