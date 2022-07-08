@@ -3,6 +3,8 @@ package shop.tryit.repository.answer;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import shop.tryit.domain.answer.Answer;
 import shop.tryit.domain.answer.AnswerRepository;
@@ -32,6 +34,11 @@ public class AnswerRepositoryImpl implements AnswerRepository {
     @Override
     public void delete(Answer answer) {
         jpaRepository.delete(answer);
+    }
+
+    @Override
+    public Page<Answer> findSearchByQuestion(Question question, Pageable pageable) {
+        return jpaRepository.findSearchByQuestion(question, pageable);
     }
 
 }
