@@ -2,23 +2,33 @@ package shop.tryit.web.item;
 
 import static lombok.AccessLevel.PROTECTED;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import shop.tryit.domain.item.Category;
 import shop.tryit.domain.item.Image;
 
 @Data
 @NoArgsConstructor(access = PROTECTED)
 public class ItemDto {
+
+    @NotNull
     private Long id;
 
+    @NotBlank(message = "이름은 필수 입력 값입니다.")
+    @Length(min = 0, max = 10, message = "이름은 최대 10글자입니다.")
     private String name;
 
+    @NotNull(message = "가격은 필수 입력 값입니다.")
     private Integer price;
 
+    @NotNull(message = "재고는 필수 입력 값입니다.")
     private Integer stockQuantity;
 
+    @NotNull(message = "카테고리를 선택해주세요.")
     private Category category;
 
     private Image mainImage;

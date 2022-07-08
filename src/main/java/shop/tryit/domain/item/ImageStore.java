@@ -1,13 +1,13 @@
 package shop.tryit.domain.item;
 
-import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class ImageStore {
@@ -32,7 +32,7 @@ public class ImageStore {
 
     public Image storeImageFile(MultipartFile multipartFile, ImageType type) throws IOException {
         if (multipartFile.isEmpty()) {
-            return null;
+            throw new IllegalStateException("파일이 없습니다.");
         }
 
         String originFileName = multipartFile.getOriginalFilename();
