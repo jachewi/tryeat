@@ -10,4 +10,8 @@ public class AnswerAdapter {
         return Answer.of(answerFormDto.getContent(), question, member);
     }
 
+    public static AnswerFormDto toForm(Answer answer) {
+        return new AnswerFormDto(answer.getId(), answer.getContent(), answer.getCreateDate());
+    }
+
 }
