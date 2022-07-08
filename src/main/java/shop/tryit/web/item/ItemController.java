@@ -84,8 +84,18 @@ public class ItemController {
     }
 
     @PostMapping("/{id}/update")
-    public String update(@PathVariable long id, @ModelAttribute("item") ItemFormDto form) throws IOException {
+    public String update(@PathVariable long id,
+                         @Valid @ModelAttribute("item") ItemFormDto form,
+                         BindingResult bindingResult,
+                         Model model) throws IOException {
         log.info("======== 상품 수정 컨트롤러 실행 ========");
+
+        // 검증 실패시 다시 입력 폼으로
+        if (bindingResult.hasErrors()) {
+            Category[] categories = Category.values();
+            model.addAttribute("categories", categories);
+            return "/items/update";
+        }
 
         Item newItem = ItemAdapter.toEntity(form);
 
