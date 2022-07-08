@@ -44,6 +44,7 @@ public class ItemController {
 
         // 검증 실패시 다시 입력 폼으로
         if (bindingResult.hasErrors()) {
+            log.info("bindingResult = {}", bindingResult);
             Category[] categories = Category.values();
             model.addAttribute("categories", categories);
             return "/items/register";
@@ -92,6 +93,7 @@ public class ItemController {
 
         // 검증 실패시 다시 입력 폼으로
         if (bindingResult.hasErrors()) {
+            log.info("bindingResult = {}", bindingResult);
             Category[] categories = Category.values();
             model.addAttribute("categories", categories);
             return "/items/update";
