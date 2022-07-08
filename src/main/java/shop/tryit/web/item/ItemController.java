@@ -42,6 +42,12 @@ public class ItemController {
     public String newItem(@Valid @ModelAttribute("item") ItemFormDto form, BindingResult bindingResult, Model model) throws IOException {
         log.info("======== 상품 등록 컨트롤러 실행 ========");
 
+        // 이미지 검증 실패시
+        if (form.getMainImage().isEmpty() || form.getDetailImage().isEmpty()) {
+            bindingResult.rejectValue("mainImage", "ImageError", "메인이미지와 상세이미지는 필수값입니다.");
+            bindingResult.rejectValue("detailImage", "ImageError", "메인이미지와 상세이미지는 필수값입니다.");
+        }
+
         // 검증 실패시 다시 입력 폼으로
         if (bindingResult.hasErrors()) {
             log.info("bindingResult = {}", bindingResult);

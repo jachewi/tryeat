@@ -51,6 +51,7 @@
         <label th:for="detailImage">상세 이미지</label>
         <input type="file" th:field="*{detailImage}" class="form-control">
       </div>
+      <div class="field-error" th:errors="*{mainImage}">이미지 오류</div>
 
       <button type="submit" class="btn btn-primary">등록</button>
 
