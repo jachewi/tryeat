@@ -39,14 +39,6 @@ a:hover {
   text-decoration: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Comic Neue', cursive;
-}
-
-.font-MSS {
-  font-family: 'MSStudent', cursive;
-}
-
 .field-error {
   border-color: #dc3545;
   color: #dc3545;
@@ -110,7 +102,6 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 0;
   font-weight: 600;
   letter-spacing: 1px;
-  font-family: 'Comic Neue', cursive;
 }
 #header .logo h1 a, #header .logo h1 a:hover {
   color: #576971;
@@ -169,7 +160,6 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: space-between;
   padding: 10px 0 10px 30px;
   font-size: 15px;
-  font-family: 'Comic Neue', cursive;
   color: #7b909a;
   white-space: nowrap;
   transition: 0.3s;
@@ -350,7 +340,6 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 24px;
 }
 #hero .btn-get-started {
-  font-family: 'Comic Neue', cursive;
   font-weight: 600;
   font-size: 13px;
   text-transform: uppercase;
@@ -843,7 +832,6 @@ section {
   font-weight: 400;
   margin-bottom: 20px;
   padding-bottom: 0;
-  font-family: 'Comic Neue', cursive;
   color: #627680;
 }
 .section-title p {
@@ -874,7 +862,6 @@ section {
   color: #444444;
   margin-bottom: 5px;
   transition: all 0.3s ease-in-out;
-  font-family: 'Comic Neue', cursive;
 }
 .portfolio #portfolio-flters li:hover, .portfolio #portfolio-flters li.filter-active {
   color: #009cea;
@@ -1086,7 +1073,6 @@ section {
 .faq .faq-list .question {
   display: block;
   position: relative;
-  font-family: #009cea;
   font-size: 18px;
   line-height: 24px;
   font-weight: 400;
@@ -1152,7 +1138,6 @@ section {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  font-family: 'Comic Neue', cursive;
   color: #576971;
 }
 #footer .footer-top .social-links a {
