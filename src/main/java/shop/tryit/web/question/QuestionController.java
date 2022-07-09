@@ -13,14 +13,19 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import shop.tryit.domain.answer.AnswerService;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberService;
 import shop.tryit.domain.question.Question;
 import shop.tryit.domain.question.QuestionSearchCondition;
 import shop.tryit.domain.question.QuestionSearchDto;
 import shop.tryit.domain.question.QuestionService;
+import shop.tryit.web.answer.AnswerAdapter;
+import shop.tryit.web.answer.AnswerFormDto;
 
 @Slf4j
 @Controller
@@ -29,6 +34,7 @@ import shop.tryit.domain.question.QuestionService;
 public class QuestionController {
 
     private final QuestionService questionService;
+    private final AnswerService answerService;
     private final MemberService memberService;
 
     @GetMapping("/new")
@@ -63,7 +69,6 @@ public class QuestionController {
                                  @ModelAttribute QuestionSearchCondition questionSearchCondition,
                                  Pageable pageable
     ) {
-
         PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 2);
         Page<QuestionSearchDto> questions = questionService.searchList(questionSearchCondition, pageRequest);
 
@@ -79,6 +84,35 @@ public class QuestionController {
         log.info("questions.size = '{}'", questions.getContent().size());
 
         return "questions/list";
+    }
+
+    @GetMapping("/{questionId}")
+    public String findOne(@PathVariable Long questionId,
+                          Model model,
+                          @RequestParam(defaultValue = "0") int page,
+                          @ModelAttribute AnswerFormDto answerFormDto) {
+        Question question = questionService.findOne(questionId);
+        QuestionFormDto questionFormDto = QuestionAdapter.toDto(question);
+
+        Page<AnswerFormDto> answers = answerService.findAnswersByQuestionId(questionId, page)
+                .map(AnswerAdapter::toForm);
+
+        int startPage = Math.max(1, answers.getPageable().getPageNumber() - 4);
+        int endPage = Math.min(answers.getTotalPages(), answers.getPageable().getPageNumber() + 4);
+        endPage = Math.max(endPage, 1);
+
+        log.info("questionFormDto='{}'", questionFormDto);
+        log.info("answers='{}'", answers);
+
+        log.info("startPage='{}'", startPage);
+        log.info("endPage='{}'", endPage);
+
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("questionFormDto", questionFormDto);
+        model.addAttribute("answers", answers);
+
+        return "questions/detail-view";
     }
 
 }
