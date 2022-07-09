@@ -2,7 +2,6 @@ package shop.tryit.domain.order;
 
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
-import static javax.persistence.GenerationType.AUTO;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
@@ -13,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import shop.tryit.domain.common.BaseTimeEntity;
@@ -20,6 +20,7 @@ import shop.tryit.domain.member.Member;
 
 @Entity
 @Getter
+@Table(name = "orders")
 @NoArgsConstructor(access = PROTECTED)
 public class Order extends BaseTimeEntity {
 
@@ -33,19 +34,19 @@ public class Order extends BaseTimeEntity {
     private Member member;
 
     @Column(unique = true)
-    @GeneratedValue(strategy = AUTO)
-    private int number;
+    private String number;
 
     @Enumerated(STRING) //enum 이름을 db에 저장
     private OrderStatus status;  //주문 상태[ORDER, CANCEL]
 
-    private Order(Member member, OrderStatus status) {
+    private Order(Member member, String number, OrderStatus status) {
         this.member = member;
+        this.number = number;
         this.status = status;
     }
 
-    public static Order of(Member member, OrderStatus status) {
-        return new Order(member, status);
+    public static Order of(Member member, String number, OrderStatus status) {
+        return new Order(member, number, status);
     }
 
 }
