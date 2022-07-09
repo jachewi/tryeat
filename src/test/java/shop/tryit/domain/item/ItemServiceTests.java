@@ -1,6 +1,7 @@
 package shop.tryit.domain.item;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -64,6 +65,19 @@ class ItemServiceTests {
 
         // then
         assertThat(items.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void 상품_삭제() throws Exception {
+        // given
+        Item item = Item.builder().build();
+
+        Long savedId = itemRepository.save(item);
+
+        // when, then
+        assertThatCode(() ->
+                sut.delete(savedId))
+                .doesNotThrowAnyException();
     }
 
 }

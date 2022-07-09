@@ -31,4 +31,9 @@ public class ItemRepositoryImpl implements ItemRepository {
         return itemJpaRepository.findAll();
     }
 
+    @Override
+    public void delete(Item item) {
+        itemJpaRepository.delete(item);
+    }
+
 }
