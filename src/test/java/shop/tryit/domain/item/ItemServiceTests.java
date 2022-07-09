@@ -16,8 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 class ItemServiceTests {
 
-    @Autowired ItemRepository itemRepository;
-    @Autowired ItemService sut;
+    @Autowired
+    ItemRepository itemRepository;
+    @Autowired
+    ItemService sut;
 
     @Test
     public void 상품_등록() throws Exception {
@@ -30,7 +32,7 @@ class ItemServiceTests {
         // then
         assertTrue(itemRepository.findById(savedId).isPresent());
     }
-  
+
     @Test
     public void 상품_수정() throws Exception {
         // given
@@ -50,7 +52,7 @@ class ItemServiceTests {
         // then
         assertNotNull(itemRepository.findById(updatedId));
     }
-  
+
     @Test
     public void 상품_목록_조회() throws Exception {
         // given
