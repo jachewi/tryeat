@@ -72,13 +72,10 @@ public class QuestionController {
     ) {
         PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 2);
         Page<QuestionSearchDto> questions = questionService.searchList(questionSearchCondition, pageRequest);
-
-        int startPage = Math.max(1, questions.getPageable().getPageNumber() - 4);
-        int endPage = Math.min(questions.getTotalPages(), questions.getPageable().getPageNumber() + 4);
+        Pages<QuestionSearchDto> pages = Pages.of(questions, 4);
 
         model.addAttribute("questions", questions);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
+        model.addAttribute("pages", pages.getPages());
 
         log.info("questionSearchCondition = '{}'", questionSearchCondition);
         log.info("questions = '{}'", questions);
