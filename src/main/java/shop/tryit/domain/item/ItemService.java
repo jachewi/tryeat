@@ -48,8 +48,9 @@ public class ItemService {
     /**
      * 상품 삭제
      */
-    public void delete(Long id) {
-        Item item = itemRepository.findById(id).orElseThrow(() -> new IllegalStateException("해당 상품을 찾을 수 없습니다."));
+    @Transactional
+    public void delete(Long itemId) {
+        Item item = findOne(itemId);
         itemRepository.delete(item);
     }
 
