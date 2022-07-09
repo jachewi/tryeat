@@ -10,9 +10,12 @@
 <!-- ======= Item detail Section ======= -->
 <section class="item_detail">
   <div class="container">
-    <div class="d-flex flex-row-reverse mb-3">
+    <div class="admin-btn">
       <!-- 관리자에게만 보이는 버튼 -->
       <a th:href="@{/items/{id}/update (id=${item.id})}" class="btn btn-outline-dark" role="button">상품 수정</a>
+      <form th:action="@{/items/{id}/delete (id=${item.id})}" method="post">
+        <button type="submit" class="btn btn-outline-danger">상품 삭제</button>
+      </form>
     </div>
 
     <div class="row gy-4">
