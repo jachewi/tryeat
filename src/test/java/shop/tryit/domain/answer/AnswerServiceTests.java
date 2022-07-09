@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
@@ -79,6 +80,29 @@ class AnswerServiceTests {
 
         // then
         assertNull(answerJpaRepository.findById(savedId).orElse(null));
+    }
+
+    @Test
+    void 특정_질문에_대한_답변_검색_테스트() {
+        // given
+        Member member = Member.builder().build();
+        memberRepository.save(member);
+
+        Question question = Question.of("title", "content", member);
+        questionRepository.save(question);
+
+        int totalElements = 10;
+        for (int i = 0; i < totalElements; i++) {
+            Answer answer = Answer.of("content", question, member);
+            Long savedId = answerJpaRepository.save(answer).getId();
+        }
+
+        // when
+        int pageNumber = 3;
+        Page<Answer> answersByQuestionId = sut.findAnswersByQuestionId(question.getId(), pageNumber);
+
+        // then
+        assertThat(answersByQuestionId.getTotalElements()).isEqualTo(totalElements);
     }
 
 }

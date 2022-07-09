@@ -1,5 +1,7 @@
 package shop.tryit.web.answer;
 
+
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -30,12 +32,15 @@ public class AnswerController {
     @PostMapping("/new/{questionId}")
     public String register(@PathVariable Long questionId,
                            @AuthenticationPrincipal User user,
-                           @ModelAttribute AnswerFormDto answerFormDto,
+                           @Valid @ModelAttribute AnswerFormDto answerFormDto,
                            BindingResult bindingResult
     ) {
+        log.info("answerFormDto='{}'", answerFormDto);
+
         if (bindingResult.hasErrors()) {
             log.info("bindingResult={}", bindingResult);
-            return "questions/register";
+            return String.format("redirect:/questions/%s", questionId);
+
         }
 
         Member member = memberService.findMember(user.getUsername());

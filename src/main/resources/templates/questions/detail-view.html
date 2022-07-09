@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header" />
+
+<body>
+  <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center" />
+
+  <section id="hero">
+    <div class="container">
+      <form th:action th:object="${questionFormDto}">
+
+        <div class="form-group">
+          <label th:for="title">제목</label>
+          <input type="text" th:field="*{title}" class="form-control" readonly>
+        </div>
+
+        <div class="form-group">
+          <label th:for="content">내용</label>
+          <textarea th:field="*{content}" cols="150" rows="10" readonly></textarea>
+          <div th:errors="*{content}"></div>
+        </div>
+
+      </form>
+
+      <br>
+
+      <!-- 댓글 달기 -->
+      <form th:action="@{|/answers/new/${questionFormDto.questionId}|}" method="post" class="my-3"
+        th:object="${answerFormDto}">
+        <textarea th:field="*{content}" cols="150" rows="10"></textarea>
+        <button type="submit">댓글 등록하기</button>
+      </form>
+      <!--댓글 달기 끝-->
+
+      <br>
+
+      <!-- 답변 반복 시작-->
+      <div th:each="answer : ${answers}" clss="answer">
+        <div th:text="${answer.content}"></div>
+        <div th:text="${#temporals.format(answer.createdDateTime, 'yyyy-MM-dd HH:mm')}"></div>
+      </div>
+      <!--답변 반복 끝-->
+
+      <!-- 답변 페이징 처리 -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" th:classappend="${1 == answers.pageable.pageNumber + 1} ? 'disabled'">
+            <a class="page-link" href="#"
+              th:href="@{/questions/{questionId}(page=${answers.pageable.pageNumber - 1}, questionId=${questionFormDto.questionId})}"
+              tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+
+          <li class="page-item" th:classappend="${i == answers.pageable.pageNumber + 1} ? 'disabled'"
+            th:each="i : ${#numbers.sequence(startPage, endPage)}">
+            <a class="page-link" href="#"
+              th:href="@{/questions/{questionId}(page=${i}, questionId=${questionFormDto.questionId})}"
+              th:text="${i}"></a>
+          </li>
+
+          <li class="page-item" th:classappend="${answers.totalPages == answers.pageable.pageNumber + 1} ? 'disabled'">
+            <a class="page-link" href="#"
+              th:href="@{/questions/{questionId}(page=${answers.pageable.pageNumber + 1}, questionId=${questionFormDto.questionId})}">Next</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- 답변 페이징 처리 끝 -->
+
+
+    </div> <!-- /container -->
+  </section> <!-- End Hero -->
+  <div th:replace="fragments/footer :: footer" />
+
+</body>
+
+</html>
