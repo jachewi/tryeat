@@ -158,4 +158,15 @@ public class ImageService {
         }
     }
 
+    /**
+     * 이미지 삭제
+     */
+    public void deleteImage(Long id) throws IOException {
+        Item item = itemService.findOne(id);
+
+        for (Image image : item.getImages()) {
+            imageStore.deleteImageFile(image.getStoreFileName());
+        }
+    }
+
 }

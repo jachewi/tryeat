@@ -1169,6 +1169,16 @@ section {
   margin-bottom: 20px;
 }
 
+.item_detail .admin-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
+
+.item_detail .admin-btn .btn {
+  margin-left: 5px;
+}
+
 .item_detail .item_img {
   text-align: center;
 }

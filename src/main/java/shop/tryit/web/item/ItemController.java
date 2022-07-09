@@ -126,4 +126,16 @@ public class ItemController {
         return "/items/detail";
     }
 
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable long id) throws IOException {
+        log.info("======== 상품 삭제 컨트롤러 실행 ========");
+
+        imageService.deleteImage(id); // 상품 이미지 서버에서 삭제
+        itemService.delete(id);
+
+        log.info("======== 상품 삭제 컨트롤러 종료 ========");
+
+        return "redirect:/items";
+    }
+
 }

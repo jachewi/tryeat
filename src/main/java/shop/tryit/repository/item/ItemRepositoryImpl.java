@@ -1,12 +1,12 @@
 package shop.tryit.repository.item;
 
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemRepository;
-import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Repository
@@ -29,6 +29,11 @@ public class ItemRepositoryImpl implements ItemRepository {
     @Override
     public List<Item> findAll() {
         return itemJpaRepository.findAll();
+    }
+
+    @Override
+    public void delete(Item item) {
+        itemJpaRepository.delete(item);
     }
 
 }

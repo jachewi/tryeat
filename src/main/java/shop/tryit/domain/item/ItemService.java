@@ -1,9 +1,9 @@
 package shop.tryit.domain.item;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +29,7 @@ public class ItemService {
         findItem.update(newItem.getName(), newItem.getPrice(), newItem.getStockQuantity(), newItem.getCategory());
         return findItem.getId();
     }
-  
+
     /**
      * 상품 목록
      */
@@ -43,6 +43,15 @@ public class ItemService {
     public Item findOne(Long itemId) {
         return itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalStateException("해당 상품을 찾을 수 없습니다."));
+    }
+
+    /**
+     * 상품 삭제
+     */
+    @Transactional
+    public void delete(Long itemId) {
+        Item item = findOne(itemId);
+        itemRepository.delete(item);
     }
 
 }
