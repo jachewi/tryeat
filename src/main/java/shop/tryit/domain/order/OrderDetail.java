@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import shop.tryit.domain.item.Item;
@@ -33,16 +32,19 @@ public class OrderDetail {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    private int orderPrice; // 주문 가격
+    private int orderTotalPrice; // 주문 가격
 
     private int count; //주문 수량
 
-    @Builder
-    private OrderDetail(Item item, Order order, int orderPrice, int count) {
+    private OrderDetail(Item item, Order order, int orderTotalPrice, int count) {
         this.item = item;
         this.order = order;
-        this.orderPrice = orderPrice;
+        this.orderTotalPrice = orderTotalPrice;
         this.count = count;
+    }
+
+    public static OrderDetail of(Item item, Order order, int orderTotalPrice, int count) {
+        return new OrderDetail(item, order, orderTotalPrice, count);
     }
 
 }

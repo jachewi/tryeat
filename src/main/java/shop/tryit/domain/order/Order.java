@@ -1,15 +1,11 @@
 package shop.tryit.domain.order;
 
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REMOVE;
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -17,16 +13,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import lombok.Builder;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import shop.tryit.domain.common.BaseTimeEntity;
 import shop.tryit.domain.member.Member;
 
 @Entity
 @Getter
+@Table(name = "orders")
 @NoArgsConstructor(access = PROTECTED)
-public class Order {
+public class Order extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -38,21 +35,27 @@ public class Order {
     private Member member;
 
     @Column(unique = true)
-    private int number;
-
-    private LocalDateTime orderDate;  //주문 시간
-
-    @OneToMany(mappedBy = "order", fetch = LAZY, cascade = {PERSIST, REMOVE})
-    private List<OrderDetail> orderDetails = new ArrayList<>();
+    private String number;
 
     @Enumerated(STRING) //enum 이름을 db에 저장
     private OrderStatus status;  //주문 상태[ORDER, CANCEL]
 
-    @Builder
-    private Order(Member member, int number, OrderStatus status) {
+    private Order(Member member, String orderNum, OrderStatus status) {
         this.member = member;
-        this.number = number;
+        this.number = orderNum;
         this.status = status;
+    }
+
+    public static Order of(Member member, OrderStatus status) {
+
+        LocalDateTime dateTime = LocalDateTime.now();
+        String subNum = "";
+        for (int i = 1; i <= 6; i++) {
+            subNum += (int) (Math.random() * 10);
+        } //6자리의 랜덤 번호 생성
+        String orderNum = dateTime.getNano() + "_" + subNum; //주문번호 생성(나노세컨드_랜덤번호) ex) 180343000_789123
+
+        return new Order(member, orderNum, status);
     }
 
 }
