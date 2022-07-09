@@ -5,6 +5,7 @@ import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -39,14 +40,22 @@ public class Order extends BaseTimeEntity {
     @Enumerated(STRING) //enum 이름을 db에 저장
     private OrderStatus status;  //주문 상태[ORDER, CANCEL]
 
-    private Order(Member member, String number, OrderStatus status) {
+    private Order(Member member, String orderNum, OrderStatus status) {
         this.member = member;
-        this.number = number;
+        this.number = orderNum;
         this.status = status;
     }
 
-    public static Order of(Member member, String number, OrderStatus status) {
-        return new Order(member, number, status);
+    public static Order of(Member member, OrderStatus status) {
+
+        LocalDateTime dateTime = LocalDateTime.now();
+        String subNum = "";
+        for (int i = 1; i <= 6; i++) {
+            subNum += (int) (Math.random() * 10);
+        } //6자리의 랜덤 번호 생성
+        String orderNum = dateTime.getNano() + "_" + subNum; //주문번호 생성(나노세컨드_랜덤번호) ex) 180343000_789123
+
+        return new Order(member, orderNum, status);
     }
 
 }
