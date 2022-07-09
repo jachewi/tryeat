@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import shop.tryit.domain.answer.AnswerService;
+import shop.tryit.domain.common.Pages;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberService;
 import shop.tryit.domain.question.Question;
@@ -71,13 +72,10 @@ public class QuestionController {
     ) {
         PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 2);
         Page<QuestionSearchDto> questions = questionService.searchList(questionSearchCondition, pageRequest);
-
-        int startPage = Math.max(1, questions.getPageable().getPageNumber() - 4);
-        int endPage = Math.min(questions.getTotalPages(), questions.getPageable().getPageNumber() + 4);
+        Pages<QuestionSearchDto> pages = Pages.of(questions, 4);
 
         model.addAttribute("questions", questions);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
+        model.addAttribute("pages", pages.getPages());
 
         log.info("questionSearchCondition = '{}'", questionSearchCondition);
         log.info("questions = '{}'", questions);
@@ -97,18 +95,12 @@ public class QuestionController {
         Page<AnswerFormDto> answers = answerService.findAnswersByQuestionId(questionId, page)
                 .map(AnswerAdapter::toForm);
 
-        int startPage = Math.max(1, answers.getPageable().getPageNumber() - 4);
-        int endPage = Math.min(answers.getTotalPages(), answers.getPageable().getPageNumber() + 4);
-        endPage = Math.max(endPage, 1);
+        Pages<AnswerFormDto> pages = Pages.of(answers, 4);
 
         log.info("questionFormDto='{}'", questionFormDto);
         log.info("answers='{}'", answers);
 
-        log.info("startPage='{}'", startPage);
-        log.info("endPage='{}'", endPage);
-
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
+        model.addAttribute("pages", pages.getPages());
         model.addAttribute("questionFormDto", questionFormDto);
         model.addAttribute("answers", answers);
 
