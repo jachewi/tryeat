@@ -21,21 +21,25 @@
                   th:text="${category}">CAT
           </option>
         </select>
+        <div class="field-error" th:errors="*{category}">카테고리 오류</div>
       </div>
 
       <div class="form-group">
         <label th:for="name">상품명</label>
         <input type="text" th:field="*{name}" class="form-control" placeholder="이름을 입력하세요">
+        <div class="field-error" th:errors="*{name}">상품명 오류</div>
       </div>
 
       <div>
         <label th:for="price">가격</label>
         <input type="text" th:field="*{price}" class="form-control" placeholder="가격을 입력하세요">
+        <div class="field-error" th:errors="*{price}">가격 오류</div>
       </div>
 
       <div class="form-group">
         <label th:for="stockQuantity">재고</label>
         <input type="text" th:field="*{stockQuantity}" class="form-control" placeholder="재고를 입력하세요">
+        <div class="field-error" th:errors="*{stockQuantity}">재고 오류</div>
       </div>
 
       <div class="form-group">
@@ -44,9 +48,10 @@
       </div>
 
       <div class="form-group">
-        <label th:for="mainImage">상세 이미지</label>
+        <label th:for="detailImage">상세 이미지</label>
         <input type="file" th:field="*{detailImage}" class="form-control">
       </div>
+      <div class="field-error" th:errors="*{mainImage}">이미지 오류</div>
 
       <button type="submit" class="btn btn-primary">등록</button>
 

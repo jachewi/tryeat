@@ -1,5 +1,6 @@
 package shop.tryit.web.answer;
 
+
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +40,7 @@ public class AnswerController {
         if (bindingResult.hasErrors()) {
             log.info("bindingResult={}", bindingResult);
             return String.format("redirect:/questions/%s", questionId);
+
         }
 
         Member member = memberService.findMember(user.getUsername());
