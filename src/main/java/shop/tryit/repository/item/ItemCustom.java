@@ -3,10 +3,10 @@ package shop.tryit.repository.item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import shop.tryit.domain.item.ItemSearchCondition;
-import shop.tryit.web.item.ItemListDto;
+import shop.tryit.web.item.ItemSearchDto;
 
 public interface ItemCustom {
 
-    Page<ItemListDto> searchItem(ItemSearchCondition condition, Pageable pageable);
+    Page<ItemSearchDto> searchItem(ItemSearchCondition condition, Pageable pageable);
 
 }

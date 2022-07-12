@@ -32,22 +32,22 @@ public class ItemAdapter {
         return itemDto;
     }
 
-    public static List<ItemListDto> toDto(List<Item> items, List<Image> mainImages) {
-        List<ItemListDto> itemListDto = new ArrayList<>();
+    public static List<ItemSearchDto> toDto(List<Item> items, List<Image> mainImages) {
+        List<ItemSearchDto> itemSearchDtoList = new ArrayList<>();
 
-        // 조회된 모든 Item -> ItemListDto 변환해서 리스트에 담음
+        // 조회된 모든 Item -> ItemSearchDto 변환해서 리스트에 담음
         for (int i = 0; i < items.size(); i++) {
-            ItemListDto dto = ItemListDto.builder()
+            ItemSearchDto dto = ItemSearchDto.builder()
                     .id(items.get(i).getId())
                     .name(items.get(i).getName())
                     .price(items.get(i).getPrice())
                     .mainImage(mainImages.get(i))
                     .build();
 
-            itemListDto.add(dto);
+            itemSearchDtoList.add(dto);
         }
 
-        return itemListDto;
+        return itemSearchDtoList;
     }
 
 }
