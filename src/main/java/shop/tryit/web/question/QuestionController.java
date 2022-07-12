@@ -107,4 +107,23 @@ public class QuestionController {
         return "questions/detail-view";
     }
 
+    @GetMapping("/{questionId}/update")
+    public String updateForm(@PathVariable Long questionId,
+                             @ModelAttribute QuestionFormDto questionFormDto) {
+        return "questions/update";
+    }
+
+    @PostMapping("/{questionId}/update")
+    public String update(@PathVariable Long questionId,
+                         @Valid @ModelAttribute QuestionFormDto questionFormDto,
+                         @AuthenticationPrincipal User user
+    ) {
+
+        String userEmail = user.getUsername();
+        Member member = memberService.findMember(userEmail);
+        Question newQuestion = QuestionAdapter.toEntity(questionFormDto, member);
+        questionService.update(questionId, newQuestion);
+        return String.format("redirect:/questions/%s", questionId);
+    }
+
 }
