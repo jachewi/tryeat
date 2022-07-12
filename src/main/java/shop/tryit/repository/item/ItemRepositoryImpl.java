@@ -4,9 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemRepository;
+import shop.tryit.domain.item.ItemSearchCondition;
+import shop.tryit.web.item.ItemSearchDto;
 
 @Slf4j
 @Repository
@@ -34,6 +38,11 @@ public class ItemRepositoryImpl implements ItemRepository {
     @Override
     public void delete(Item item) {
         itemJpaRepository.delete(item);
+    }
+
+    @Override
+    public Page<ItemSearchDto> searchItems(ItemSearchCondition condition, Pageable pageable) {
+        return itemJpaRepository.searchItems(condition, pageable);
     }
 
 }
