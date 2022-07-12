@@ -11,6 +11,10 @@ public class QuestionAdapter {
         return Question.of(form.getTitle(), form.getContent(), member);
     }
 
+    public static Question toEntity(QuestionFormDto form, Member member) {
+        return Question.of(form.getTitle(), form.getContent(), member);
+    }
+
     public static QuestionFormDto toDto(Question question) {
         return new QuestionFormDto(question.getId(), question.getTitle(), question.getContent());
     }
