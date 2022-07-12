@@ -32,7 +32,7 @@ public class ItemCustomImpl implements ItemCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public Page<ItemSearchDto> searchItem(ItemSearchCondition condition, Pageable pageable) {
+    public Page<ItemSearchDto> searchItems(ItemSearchCondition condition, Pageable pageable) {
         List<ItemSearchDto> itemSearchDtoList = searchContent(condition, pageable);
         injectMainImage(itemSearchDtoList);
         return PageableExecutionUtils.getPage(itemSearchDtoList, pageable, totalCount(condition)::fetchOne);

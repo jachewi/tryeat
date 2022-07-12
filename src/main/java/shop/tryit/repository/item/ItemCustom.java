@@ -7,6 +7,6 @@ import shop.tryit.web.item.ItemSearchDto;
 
 public interface ItemCustom {
 
-    Page<ItemSearchDto> searchItem(ItemSearchCondition condition, Pageable pageable);
+    Page<ItemSearchDto> searchItems(ItemSearchCondition condition, Pageable pageable);
 
 }
