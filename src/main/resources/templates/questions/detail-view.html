@@ -23,6 +23,16 @@
 
     </form>
 
+    <div th:object="${questionFormDto}">
+      <button type="submit" th:onclick="|location.href='@{/questions/{questionId}/update (questionId=*{questionId})}'|">
+        게시판 글 수정하기
+      </button>
+    </div>
+
+    <br>
+
+    <hr>
+
     <br>
 
     <!-- 댓글 달기 -->
