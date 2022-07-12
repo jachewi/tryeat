@@ -47,4 +47,15 @@ public class OrderDetail {
         return new OrderDetail(item, order, orderTotalPrice, count);
     }
 
+    /**
+     * 주문 취소
+     */
+    public void cancel() {
+        getItem().addStock(count);
+    }
+
+    public void itemRemoveStock() {
+        getItem().removeStock(count);
+    }
+
 }

@@ -58,4 +58,11 @@ public class Order extends BaseTimeEntity {
         return new Order(member, orderNum, status);
     }
 
+    /**
+     * 주문 취소
+     */
+    public void cancel(OrderStatus status) {
+        this.status = status;
+    }
+
 }
