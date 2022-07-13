@@ -7,11 +7,12 @@
 <!-- ======= Header ======= -->
 <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></div>
 
-<!-- ======= Hero Section ======= -->
-<section id="hero">
+<!-- ======= Item Section ======= -->
+<section class="item">
   <div class="container">
-    <div>
+    <div class="admin-btn">
       <a th:href="@{/items/new}" class="btn btn-dark" role="button">상품 등록</a>
+    </div>
 
     <div class="item-search">
       <div class="item-category-search">
@@ -45,7 +46,6 @@
           <th>이미지</th>
           <th>상품명</th>
           <th>가격</th>
-          <th></th>
         </tr>
         </thead>
 
@@ -74,7 +74,7 @@
       </ul>
     </div>
   </div> <!-- /container -->
-</section> <!-- End Hero -->
+</section> <!-- End Item -->
 
 <!-- ======= Footer ======= -->
 <div th:replace="fragments/footer :: footer"></div>
