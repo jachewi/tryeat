@@ -23,7 +23,7 @@ import shop.tryit.domain.item.Image;
 import shop.tryit.domain.item.ImageType;
 import shop.tryit.domain.item.ItemSearchCondition;
 import shop.tryit.web.item.ItemSearchDto;
-import shop.tryit.web.item.QItemListDto;
+import shop.tryit.web.item.QItemSearchDto;
 
 @Repository
 @RequiredArgsConstructor
@@ -66,7 +66,7 @@ public class ItemCustomImpl implements ItemCustom {
      * 상품 검색 결과 (메인 이미지 제외)
      */
     private List<ItemSearchDto> searchContent(ItemSearchCondition condition, Pageable pageable) {
-        QItemListDto qItemListDto = new QItemListDto(item.id, item.name, item.price);
+        QItemSearchDto qItemListDto = new QItemSearchDto(item.id, item.name, item.price);
         return queryFactory
                 .select(qItemListDto)
                 .from(item)
