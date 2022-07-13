@@ -2,8 +2,11 @@ package shop.tryit.domain.item;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.web.item.ItemSearchDto;
 
 @Service
 @RequiredArgsConstructor
@@ -52,6 +55,13 @@ public class ItemService {
     public void delete(Long itemId) {
         Item item = findOne(itemId);
         itemRepository.delete(item);
+    }
+
+    /**
+     * 상품 검색
+     */
+    public Page<ItemSearchDto> searchItem(ItemSearchCondition condition, Pageable pageable) {
+        return itemRepository.searchItems(condition, pageable);
     }
 
 }

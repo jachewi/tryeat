@@ -7,10 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.web.item.ItemSearchDto;
 
 @Transactional
 @SpringBootTest
@@ -80,6 +84,30 @@ class ItemServiceTests {
         assertThatCode(() ->
                 sut.delete(savedId))
                 .doesNotThrowAnyException();
+    }
+
+    @Test
+    public void 상품_검색() throws Exception {
+        // given
+        for (int i = 0; i < 50; i++) {
+            Item item = Item.builder()
+                    .name("item" + i)
+                    .build();
+            itemRepository.save(item);
+        }
+
+        ItemSearchCondition condition = ItemSearchCondition.builder()
+                .name("it")
+                .build();
+
+        PageRequest pageRequest = PageRequest.of(0, 5);
+
+        // when
+        Page<ItemSearchDto> itemSearchDtoPage = sut.searchItem(condition, pageRequest);
+        List<ItemSearchDto> contents = itemSearchDtoPage.getContent();
+
+        // then
+        Assertions.assertThat(contents.size()).isEqualTo(pageRequest.getPageSize());
     }
 
 }

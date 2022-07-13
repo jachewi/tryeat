@@ -56,4 +56,8 @@ public class Image {
         this.type = newImage.getType();
     }
 
+    public Long getItemId() {
+        return item.getId();
+    }
+
 }
