@@ -76,4 +76,16 @@ public class Item extends BaseTimeEntity {
         images.add(image);
     }
 
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    public void removeStock(int quantity) {
+        int restStock = this.stockQuantity - quantity;
+        if (restStock < 0) {
+            throw new NotEnoughStockException("주문한 수량이 재고수량보다 많습니다.");
+        }
+        this.stockQuantity = restStock;
+    }
+
 }
