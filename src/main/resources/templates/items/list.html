@@ -13,6 +13,32 @@
     <div>
       <a th:href="@{/items/new}" class="btn btn-dark" role="button">상품 등록</a>
 
+    <div class="item-search">
+      <div class="item-category-search">
+        <form th:action method="get" th:object="${itemSearchCondition}">
+          <input type="radio"
+                 th:field="*{category}"
+                 th:each="category : ${categories}"
+                 th:value="${category}"
+                 th:text="${category}">
+          <button type="submit" class="btn btn-light">선택</button>
+          <!--<button type="submit"
+                  class="btn btn-light"
+                  th:each="category : ${categories}"
+                  th:value="${itemSearchCondition.category}"
+                  th:text="${category}">카테고리
+          </button>-->
+        </form>
+      </div>
+
+      <div class="item-name-search">
+        <form th:action method="get" th:object="${itemSearchCondition}">
+          <input type="text" th:field="*{name}" placeholder=" 상품 이름을 입력하세요.">
+        </form>
+      </div>
+    </div>
+
+    <div class="item-list">
       <table class="table table-striped">
         <thead>
         <tr>
@@ -35,6 +61,17 @@
           </a></tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="page">
+      <ul class="pagination">
+        <li th:each="page : ${pages}">
+          <a class="page-link"
+             th:href="@{/items(page=${page - 1}, name=${itemSearchCondition.name}, category=${itemSearchCondition.category})}"
+             th:text="${page}">
+          </a>
+        </li>
+      </ul>
     </div>
   </div> <!-- /container -->
 </section> <!-- End Hero -->
