@@ -88,4 +88,10 @@ public class NoticeController {
         return String.format("redirect:/notices/%s", noticeId);
     }
 
+    @PostMapping("/{noticeId}/delete")
+    public String delete(@PathVariable Long noticeId) {
+        noticeService.delete(noticeId);
+        return "redirect:/notices";
+    }
+
 }
