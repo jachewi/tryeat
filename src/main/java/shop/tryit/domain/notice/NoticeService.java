@@ -11,6 +11,7 @@ public class NoticeService {
 
     private final NoticeRepository noticeRepository;
 
+    @Transactional
     public Long save(Notice notice) {
         return noticeRepository.save(notice);
     }
