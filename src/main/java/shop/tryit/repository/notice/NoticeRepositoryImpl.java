@@ -22,4 +22,9 @@ public class NoticeRepositoryImpl implements NoticeRepository {
         return jpaRepository.findById(id);
     }
 
+    @Override
+    public void delete(Notice notice) {
+        jpaRepository.delete(notice);
+    }
+
 }

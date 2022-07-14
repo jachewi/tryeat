@@ -8,5 +8,7 @@ public interface NoticeRepository {
 
     Optional<Notice> findById(Long id);
 
+    void delete(Notice notice);
+
 
 }
