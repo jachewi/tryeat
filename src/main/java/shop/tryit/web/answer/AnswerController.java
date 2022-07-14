@@ -51,4 +51,14 @@ public class AnswerController {
         return String.format("redirect:/questions/%s", questionId);
     }
 
+    @PostMapping("/delete/{answerId}")
+    public String delete(@PathVariable Long answerId) {
+        Answer answer = answerService.findById(answerId);
+        Long questionId = answer.getQuestionId();
+
+        answerService.delete(answer);
+
+        return String.format("redirect:/questions/%s", questionId);
+    }
+
 }

@@ -49,7 +49,11 @@
     <div th:each="answer : ${answers}" clss="answer">
       <div th:text="${answer.content}"></div>
       <div th:text="${#temporals.format(answer.createdDateTime, 'yyyy-MM-dd HH:mm')}"></div>
+      <form th:action="@{|/answers/delete/${answer.id}|}" method="post">
+        <button type="submit">댓글 삭제하기</button>
+      </form>
     </div>
+
     <!--답변 반복 끝-->
 
     <!-- 답변 페이징 처리 -->

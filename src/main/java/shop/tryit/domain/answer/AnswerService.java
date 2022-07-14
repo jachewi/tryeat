@@ -47,4 +47,9 @@ public class AnswerService {
         return answerRepository.findSearchByQuestion(question, pageRequest);
     }
 
+    public Answer findById(Long answerId) {
+        return answerRepository.findById(answerId)
+                .orElseThrow(() -> new IllegalStateException("해당 답변이 없습니다."));
+    }
+
 }
