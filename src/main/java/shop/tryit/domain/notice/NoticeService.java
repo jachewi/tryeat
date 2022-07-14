@@ -9,4 +9,8 @@ public class NoticeService {
 
     private final NoticeRepository noticeRepository;
 
+    public Long save(Notice notice) {
+        return noticeRepository.save(notice);
+    }
+
 }
