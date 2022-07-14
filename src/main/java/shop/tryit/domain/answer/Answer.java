@@ -47,5 +47,9 @@ public class Answer extends BaseTimeEntity {
         this.content = content;
     }
 
+    public Long getQuestionId() {
+        return question.getId();
+    }
+
 }
 
