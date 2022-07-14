@@ -23,6 +23,10 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
+    public boolean checkPassword(String password, Question question) {
+        return passwordEncoder.matches(password, question.getPassword());
+    }
+
     public Question findOne(Long id) {
         return questionRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("해당 질문을 찾을 수 없습니다."));
