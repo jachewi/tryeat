@@ -1,10 +1,12 @@
 package shop.tryit.web.item;
 
 import java.io.IOException;
-import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,10 +15,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import shop.tryit.domain.common.Pages;
 import shop.tryit.domain.item.Category;
-import shop.tryit.domain.item.Image;
 import shop.tryit.domain.item.ImageService;
 import shop.tryit.domain.item.Item;
+import shop.tryit.domain.item.ItemSearchCondition;
 import shop.tryit.domain.item.ItemService;
 
 @Slf4j
@@ -66,14 +69,25 @@ public class ItemController {
     }
 
     @GetMapping
-    public String list(Model model) throws IOException {
-        List<Item> items = itemService.findItems();
+    public String list(Model model,
+                       @ModelAttribute ItemSearchCondition itemSearchCondition,
+                       Pageable pageable) throws IOException {
+        log.info("======== 상품 목록 컨트롤러 실행 ========");
 
-        List<Image> mainImages = imageService.findMainImages();
+        Category[] categories = Category.values();
 
-        List<ItemSearchDto> itemSearchDtoList = ItemAdapter.toDto(items, mainImages);
+        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 2); // 한 페이지에 2개씩
+        Page<ItemSearchDto> items = itemService.searchItem(itemSearchCondition, pageRequest);
+        Pages<ItemSearchDto> pages = Pages.of(items, 4); // 페이지 버튼 4개씩
 
-        model.addAttribute("items", itemSearchDtoList);
+        model.addAttribute("categories", categories);
+        model.addAttribute("items", items);
+        model.addAttribute("pages", pages.getPages());
+
+        log.info("상품 검색 조건 = 이름:{}, 카테고리:{}", itemSearchCondition.getName(), itemSearchCondition.getCategory());
+        log.info("상품 개수 = {}", items.getContent().size());
+
+        log.info("======== 상품 목록 컨트롤러 종료 ========");
 
         return "/items/list";
     }

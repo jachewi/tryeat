@@ -1157,6 +1157,37 @@ section {
 }
 
 /*--------------------------------------------------------------
+# Item
+--------------------------------------------------------------*/
+.item {
+  margin-top: 70px;
+  padding: 70px 0;
+}
+
+.item .admin-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
+
+/*--------------------------------------------------------------
+# Item Search
+--------------------------------------------------------------*/
+.item-search {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-category-search input {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.item-category-search button {
+  margin-left: 10px;
+}
+
+/*--------------------------------------------------------------
 # Item Detail
 --------------------------------------------------------------*/
 .item_detail {
@@ -1227,6 +1258,13 @@ section {
 .item_detail .order_info .order_click button {
   width: 100%;
   margin-left: 15px;
+}
+
+/*--------------------------------------------------------------
+# Page
+--------------------------------------------------------------*/
+.pagination {
+  justify-content: center;
 }
 
 /*--------------------------------------------------------------
