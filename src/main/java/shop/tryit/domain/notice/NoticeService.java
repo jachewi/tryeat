@@ -27,4 +27,9 @@ public class NoticeService {
         notice.update(newNotice.getTitle(), newNotice.getContent());
     }
 
+    @Transactional
+    public void delete(Long id) {
+        noticeRepository.delete(findById(id));
+    }
+
 }
