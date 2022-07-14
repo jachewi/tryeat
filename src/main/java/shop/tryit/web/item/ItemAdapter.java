@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import shop.tryit.domain.item.Image;
 import shop.tryit.domain.item.Item;
+import shop.tryit.domain.item.ItemSearchDto;
 
 public class ItemAdapter {
 

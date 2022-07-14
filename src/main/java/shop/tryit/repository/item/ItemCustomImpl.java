@@ -22,7 +22,7 @@ import shop.tryit.domain.item.Category;
 import shop.tryit.domain.item.Image;
 import shop.tryit.domain.item.ImageType;
 import shop.tryit.domain.item.ItemSearchCondition;
-import shop.tryit.web.item.ItemSearchDto;
+import shop.tryit.domain.item.ItemSearchDto;
 import shop.tryit.web.item.QItemSearchDto;
 
 @Repository

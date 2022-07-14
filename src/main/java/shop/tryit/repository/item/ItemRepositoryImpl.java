@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemRepository;
 import shop.tryit.domain.item.ItemSearchCondition;
-import shop.tryit.web.item.ItemSearchDto;
+import shop.tryit.domain.item.ItemSearchDto;
 
 @Slf4j
 @Repository
