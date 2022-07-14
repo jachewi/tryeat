@@ -7,8 +7,8 @@
 <!-- ======= Header ======= -->
 <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></div>
 
-<!-- ======= Hero Section ======= -->
-<section id="hero">
+<!-- ======= Item Section ======= -->
+<section class="item">
   <div class="container">
     <form th:action th:object="${item}" method="post" enctype="multipart/form-data">
 
@@ -55,12 +55,14 @@
         <!--        <p th:text="*{detailImage.getOriginFileName()}">상세 이미지 파일명</p>-->
       </div>
 
-      <button type="submit" class="btn btn-secondary">수정하기</button>
-      <a th:href="@{/items}" class="btn btn-dark" role="button">목록으로</a>
+      <div class="item-btn update-btn">
+        <button type="submit" class="btn btn-secondary">수정하기</button>
+        <a th:href="@{/items}" class="btn btn-dark" role="button">목록으로</a>
+      </div>
 
     </form>
   </div> <!-- /container -->
-</section> <!-- End Hero -->
+</section> <!-- End Item -->
 
 <!-- ======= Footer ======= -->
 <div th:replace="fragments/footer :: footer"></div>

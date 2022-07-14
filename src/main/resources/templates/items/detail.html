@@ -7,10 +7,10 @@
 <!-- ======= Header ======= -->
 <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></div>
 
-<!-- ======= Item detail Section ======= -->
-<section class="item_detail">
+<!-- ======= Item Section ======= -->
+<section class="item item-detail">
   <div class="container">
-    <div class="admin-btn">
+    <div class="item-btn admin-btn">
       <!-- 관리자에게만 보이는 버튼 -->
       <a th:href="@{/items/{id}/update (id=${item.id})}" class="btn btn-outline-dark" role="button">상품 수정</a>
       <form th:action="@{/items/{id}/delete (id=${item.id})}" method="post">
@@ -54,7 +54,7 @@
       </div>
     </div>
   </div> <!-- /container -->
-</section> <!-- End Item Detail -->
+</section> <!-- End Item -->
 
 <!-- ======= Footer ======= -->
 <div th:replace="fragments/footer :: footer"></div>
