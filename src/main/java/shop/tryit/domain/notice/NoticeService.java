@@ -21,4 +21,10 @@ public class NoticeService {
                 .orElseThrow(() -> new IllegalStateException("해당하는 공지사항이 없습니다."));
     }
 
+    @Transactional
+    public void update(Long id, Notice newNotice) {
+        Notice notice = findById(id);
+        notice.update(newNotice.getTitle(), newNotice.getContent());
+    }
+
 }
