@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/header :: header"></head>
 
@@ -10,7 +10,7 @@
 <!-- ======= Item Section ======= -->
 <section class="item item-detail">
   <div class="container">
-    <div class="item-btn admin-btn">
+    <div class="item-btn admin-btn" sec:authorize="hasRole('ROLE_ADMIN')">
       <!-- 관리자에게만 보이는 버튼 -->
       <a th:href="@{/items/{id}/update (id=${item.id})}" class="btn btn-outline-dark" role="button">상품 수정</a>
       <form th:action="@{/items/{id}/delete (id=${item.id})}" method="post">
