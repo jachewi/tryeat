@@ -38,6 +38,12 @@
 
     <br>
 
+    <form th:action="@{/notices/${noticeViewFormDto.id}/delete}" method="post">
+      <button type="submit">삭제하기</button>
+    </form>
+
+    <br>
+
     <div>
       <button th:onclick="|location.href='@{/notices}'|">목록으로</button>
     </div>
