@@ -27,6 +27,8 @@ public class Question extends BaseTimeEntity {
 
     private String content;
 
+    private String password;
+
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -44,6 +46,10 @@ public class Question extends BaseTimeEntity {
     public void update(String title, String content) {
         changeTitle(title);
         changeContent(content);
+    }
+
+    public void allocatePassword(String password) {
+        this.password = password;
     }
 
     private void changeTitle(String title) {
