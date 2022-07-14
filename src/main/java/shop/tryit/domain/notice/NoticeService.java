@@ -13,4 +13,9 @@ public class NoticeService {
         return noticeRepository.save(notice);
     }
 
+    public Notice findById(Long id) {
+        return noticeRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("해당하는 공지사항이 없습니다."));
+    }
+
 }
