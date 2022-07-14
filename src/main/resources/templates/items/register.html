@@ -7,8 +7,8 @@
 <!-- ======= Header ======= -->
 <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></div>
 
-<!-- ======= Hero Section ======= -->
-<section id="hero">
+<!-- ======= Item Section ======= -->
+<section class="item">
   <div class="container">
     <form th:action th:object="${item}" method="post" enctype="multipart/form-data">
 
@@ -53,12 +53,13 @@
       </div>
       <div class="field-error" th:errors="*{mainImage}">이미지 오류</div>
 
-      <button type="submit" class="btn btn-primary">등록</button>
+      <div class="item-btn register-btn">
+        <button type="submit" class="btn btn-dark">등록</button>
+      </div>
 
     </form>
-    <br/>
   </div> <!-- /container -->
-</section> <!-- End Hero -->
+</section> <!-- End Item -->
 
 <!-- ======= Footer ======= -->
 <div th:replace="fragments/footer :: footer"></div>

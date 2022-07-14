@@ -20,6 +20,7 @@ import shop.tryit.domain.item.Category;
 import shop.tryit.domain.item.ImageService;
 import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemSearchCondition;
+import shop.tryit.domain.item.ItemSearchDto;
 import shop.tryit.domain.item.ItemService;
 
 @Slf4j
