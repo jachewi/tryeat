@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/header :: header"></head>
 
@@ -10,7 +10,7 @@
 <!-- ======= Item Section ======= -->
 <section class="item">
   <div class="container">
-    <div class="item-btn admin-btn">
+    <div class="item-btn admin-btn" sec:authorize="hasRole('ROLE_ADMIN')">
       <a th:href="@{/items/new}" class="btn btn-dark" role="button">상품 등록</a>
     </div>
 
