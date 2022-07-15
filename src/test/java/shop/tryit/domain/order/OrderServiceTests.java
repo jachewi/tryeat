@@ -1,14 +1,18 @@
 package shop.tryit.domain.order;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.item.Item;
+import shop.tryit.domain.item.ItemRepository;
 import shop.tryit.domain.member.Member;
+import shop.tryit.domain.member.MemberRepository;
 import shop.tryit.repository.order.OrderDetailJpaRepository;
 import shop.tryit.repository.order.OrderJpaRepository;
 
@@ -24,6 +28,12 @@ class OrderServiceTests {
 
     @Autowired
     private OrderDetailJpaRepository orderDetailJpaRepository;
+
+    @Autowired
+    private ItemRepository itemRepository;
+
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Test
     void 주문_저장() {
@@ -83,12 +93,40 @@ class OrderServiceTests {
 
         //when
         Long savedDetailId = orderDetailJpaRepository.save(orderDetail).getId();
-        OrderDetail cancelOrderDetail = sut.DetailFindOne(savedDetailId);
+        OrderDetail cancelOrderDetail = sut.detailFindOne(savedDetailId);
         cancelOrderDetail.cancel();
 
         //then2 : 주문수량 롤백확인
         assertEquals("주문이 취소된 상품은 그만큼 재고가 증가해야 한다.", 10,
                 item.getStockQuantity());
+    }
+
+    @Test
+    void 주문_목록() {
+        //given
+        Item item = Item.builder().stockQuantity(10).build();
+        itemRepository.save(item);
+
+        Member member = Member.builder().build();
+        memberRepository.save(member);
+
+        Order order1 = Order.of(member, OrderStatus.ORDER);
+        Order order2 = Order.of(member, OrderStatus.ORDER);
+
+        orderJpaRepository.save(order1);
+        orderJpaRepository.save(order2);
+
+        OrderDetail orderDetail1 = OrderDetail.of(item, order1, 5000, 2);
+        OrderDetail orderDetail2 = OrderDetail.of(item, order2, 5000, 2);
+
+        sut.detailRegister(orderDetail1);
+        sut.detailRegister(orderDetail2);
+
+        //when
+        List<OrderDetail> orderDetails = sut.findOrder();
+
+        //then
+        assertThat(orderDetails).hasSize(2);
     }
 
 }
