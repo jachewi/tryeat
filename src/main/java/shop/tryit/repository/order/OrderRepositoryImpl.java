@@ -25,9 +25,4 @@ public class OrderRepositoryImpl implements OrderRepository {
         return jpaRepository.findById(id);
     }
 
-//    @Override
-//    public List<Order> findAll(OrderSearch orderSearch) {
-//        log.info("주문 전체 조회: {}", findAll(orderSearch));
-//        return jpaRepository.findAll(orderSearch);
-//    }
 }

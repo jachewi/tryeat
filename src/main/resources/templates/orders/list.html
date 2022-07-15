@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header"/>
+
+<body>
+<!-- ======= Header ======= -->
+<div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"/>
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+  <div class="container">
+    <div>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>주문 번호</th>
+          <th>주문 상품</th>
+          <th>주문 일자</th>
+          <th>주문 상태</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="order : ${orders}">
+          <td>
+            <a th:href="@{/order/{id}(id=${order.detailId})}" th:text="${order.number}"></a>
+          </td>
+          <td th:text="${order.itemName}"></td>
+          <td th:text="${order.date}"></td>
+          <td th:text="${order.status}"></td>
+          </a></tr>
+        </tbody>
+      </table>
+    </div>
+  </div> <!-- /container -->
+</section> <!-- End Hero -->
+
+<!-- ======= Footer ======= -->
+<div th:replace="fragments/footer :: footer"/>
+</body>
+
+</html>

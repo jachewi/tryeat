@@ -1,5 +1,6 @@
 package shop.tryit.domain.order;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,9 +43,16 @@ public class OrderService {
     }
 
     /**
+     * 주문 목록
+     */
+    public List<OrderDetail> findOrder() {
+        return orderDetailRepository.findAll();
+    }
+
+    /**
      * 주문 상세 조회
      */
-    public OrderDetail DetailFindOne(Long id) {
+    public OrderDetail detailFindOne(Long id) {
         return orderDetailRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("해당 주문 상품을 찾을 수 없습니다."));
     }
@@ -58,7 +66,7 @@ public class OrderService {
         cancelOrder.cancel(OrderStatus.CANCEL); //주문 정보의 주문상태를 CANCEL 로 변경
 
         //단일 상품 주문 취소
-        OrderDetail cancelOrderDetail = DetailFindOne(orderId);
+        OrderDetail cancelOrderDetail = detailFindOne(orderId);
         cancelOrderDetail.cancel();
 
         // TODO 장바구니 주문 후 다량주문 취소일 경우 삭제 로직 리팩토링 예정
@@ -68,9 +76,5 @@ public class OrderService {
 //            orderDetail.cancel();
 //        }
     }
-
-    /**
-     * 주문 목록
-     */
 
 }
