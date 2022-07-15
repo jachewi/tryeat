@@ -64,7 +64,7 @@ public class Item extends BaseTimeEntity {
     }
 
     private void changeStockQuantity(int stockQuantity) {
-        this.stockQuantity = price;
+        this.stockQuantity = stockQuantity;
     }
 
     private void changeCategory(Category category) {
