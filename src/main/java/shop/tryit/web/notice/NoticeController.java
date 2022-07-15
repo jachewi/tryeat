@@ -41,13 +41,10 @@ public class NoticeController {
             log.info("bindingResult = '{}'", bindingResult);
             return "notices/register";
         }
-
         String userEmail = user.getUsername();
         Member member = memberService.findMember(userEmail);
-
         Notice notice = NoticeAdapter.toEntity(noticeSaveFormDto, member);
         Long savedId = noticeService.save(notice);
-
         return String.format("redirect:/notices/%s", savedId);
     }
 
@@ -59,6 +56,36 @@ public class NoticeController {
         NoticeViewFormDto noticeViewFormDto = NoticeAdapter.toViewForm(notice);
         model.addAttribute("noticeViewFormDto", noticeViewFormDto);
         return "notices/detail";
+    }
+
+    @GetMapping("/{noticeId}/update")
+    public String updateForm(@PathVariable Long noticeId,
+                             Model model
+    ) {
+        Notice notice = noticeService.findById(noticeId);
+        NoticeUpdateFormDto noticeUpdateFormDto = NoticeAdapter.toUpdateForm(notice);
+        model.addAttribute("noticeUpdateFormDto", noticeUpdateFormDto);
+        return "notices/update";
+    }
+
+    @PostMapping("/{noticeId}/update")
+    public String update(@PathVariable Long noticeId,
+                         @ModelAttribute NoticeUpdateFormDto noticeUpdateFormDto,
+                         BindingResult bindingResult,
+                         @AuthenticationPrincipal User user
+    ) {
+        if (bindingResult.hasErrors()) {
+            log.info("bindingResult = '{}'", bindingResult);
+            return "notices/register";
+        }
+
+        String userEmail = user.getUsername();
+        Member member = memberService.findMember(userEmail);
+
+        Notice newNotice = NoticeAdapter.toEntity(noticeUpdateFormDto, member);
+        noticeService.update(noticeId, newNotice);
+
+        return String.format("redirect:/notices/%s", noticeId);
     }
 
 }
