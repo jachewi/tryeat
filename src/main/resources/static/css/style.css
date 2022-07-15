@@ -1249,19 +1249,35 @@ section {
   font-size: 16px;
 }
 
-.item-detail .order-info h4 {
-  display: inline-block;
-  margin-right: 15px;
+.item-detail tr {
+  width: 100px;
+}
+
+.item-detail tr > th {
+  font-weight: normal;
+  width: 102px;
+}
+
+.item-detail .order-info .quantity {
+  margin-top: 10px;
+}
+
+.item-detail .order-info .quantity label {
+  width: 100px;
+}
+
+.item-detail .order-info .quantity input {
+  /*border: none;*/
+  width: 50px;
   text-align: center;
 }
 
-.item-detail .order-info input {
-  border: none;
-  width: 40px;
-  color: mediumslateblue;
-  font-weight: 600;
-  text-align: center;
-  font-size: 18px;
+.item-detail .order-info .total-price {
+  margin-bottom: 20px;
+}
+
+.item-detail .order-info .total-price span {
+  font-weight: bold;
 }
 
 .item-detail .order-info .order-click {
