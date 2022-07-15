@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/header :: header" />
+<head th:replace="fragments/header :: header"/>
 
 <body>
-  <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center" />
+<div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"/>
 
-  <section id="hero">
-    <div class="container">
-      <form th:action th:object="${questionSaveFormDto}" method="post">
+<section id="hero">
+  <div class="container">
+    <form th:action th:object="${questionSaveFormDto}" method="post">
 
-        <div class="form-group">
-          <label th:for="title">제목</label>
-          <input type="text" th:field="*{title}" class="form-control">
-          <div th:errors="*{title}"></div>
-        </div>
+      <div class="form-group">
+        <label th:for="title">제목</label>
+        <input type="text" th:field="*{title}" class="form-control">
+        <div th:errors="*{title}"></div>
+      </div>
 
-        <div class="form-group">
-          <label th:for="content">내용</label>
-          <textarea th:field="*{content}" cols="150" rows="10"></textarea>
-          <div th:errors="*{content}"></div>
-        </div>
+      <div class="form-group">
+        <label th:for="content">내용</label>
+        <textarea th:field="*{content}" cols="150" rows="10"></textarea>
+        <div th:errors="*{content}"></div>
+      </div>
 
-        <button type="submit" class="btn btn-primary">등록</button>
+      <div class="form-group">
+        <label th:for="password">비밀번호</label>
+        <input type="password" th:field="*{password}" class="form-control">
+        <div th:errors="*{password}"></div>
+      </div>
 
-      </form>
-    </div> <!-- /container -->
-  </section> <!-- End Hero -->
-  <div th:replace="fragments/footer :: footer" />
+      <button type="submit" class="btn btn-primary">등록</button>
+
+    </form>
+  </div> <!-- /container -->
+</section> <!-- End Hero -->
+<div th:replace="fragments/footer :: footer"/>
 </body>
 
 </html>

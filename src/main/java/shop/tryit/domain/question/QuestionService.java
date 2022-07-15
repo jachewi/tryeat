@@ -3,6 +3,7 @@ package shop.tryit.domain.question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.answer.AnswerRepository;
@@ -14,10 +15,16 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public Long register(Question question) {
+    public Long register(Question question, String password) {
+        passwordEncoding(question, password);
         return questionRepository.save(question);
+    }
+
+    public boolean checkPassword(String password, Question question) {
+        return passwordEncoder.matches(password, question.getPassword());
     }
 
     public Question findOne(Long id) {
@@ -42,6 +49,11 @@ public class QuestionService {
 
     public Page<QuestionSearchDto> searchList(QuestionSearchCondition condition, Pageable pageable) {
         return questionRepository.searchQuestion(condition, pageable);
+    }
+
+    private void passwordEncoding(Question question, String password) {
+        String encodePassword = passwordEncoder.encode(password);
+        question.allocatePassword(encodePassword);
     }
 
 }

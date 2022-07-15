@@ -61,7 +61,7 @@ public class QuestionController {
         log.info("userEmail = '{}'", userEmail);
 
         Question question = QuestionAdapter.toEntity(questionSaveFormDto, member);
-        questionService.register(question);
+        questionService.register(question, questionSaveFormDto.getPassword());
         return "redirect:/questions";
     }
 
@@ -84,11 +84,13 @@ public class QuestionController {
         return "questions/list";
     }
 
-    @GetMapping("/{questionId}")
-    public String findOne(@PathVariable Long questionId,
-                          Model model,
-                          @RequestParam(defaultValue = "0") int page,
-                          @ModelAttribute AnswerFormDto answerFormDto) {
+    @PostMapping("/{questionId}/authority")
+    public String findOne1(@PathVariable Long questionId,
+                           Model model,
+                           @RequestParam(defaultValue = "0") int page,
+                           @ModelAttribute AnswerFormDto answerFormDto) {
+
+        log.info("post 방식");
         Question question = questionService.findOne(questionId);
         QuestionFormDto questionFormDto = QuestionAdapter.toDto(question);
 
@@ -124,6 +126,34 @@ public class QuestionController {
         Question newQuestion = QuestionAdapter.toEntity(questionFormDto, member);
         questionService.update(questionId, newQuestion);
         return String.format("redirect:/questions/%s", questionId);
+    }
+
+    @GetMapping("/{questionId}")
+    public String passwordCheckForm(
+            @ModelAttribute QuestionCheckPasswordFormDto questionCheckPasswordFormDto
+    ) {
+        return "questions/check-password";
+    }
+
+    @PostMapping("/{questionId}")
+    public String passwordCheck(
+            @ModelAttribute QuestionCheckPasswordFormDto questionCheckPasswordFormDto,
+            BindingResult bindingResult,
+            @PathVariable Long questionId
+    ) {
+        if (bindingResult.hasErrors()) {
+            log.info("bindingResult={}", bindingResult);
+            return "questions/check-password";
+        }
+
+        Question question = questionService.findOne(questionId);
+        boolean authorized = questionService.checkPassword(questionCheckPasswordFormDto.getPassword(), question);
+
+        if (authorized) {
+            return String.format("forward:/questions/%d/authority", questionId);
+        }
+
+        return "questions/check-password";
     }
 
 }
