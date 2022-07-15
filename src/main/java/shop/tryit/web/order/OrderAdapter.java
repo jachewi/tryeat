@@ -1,8 +1,8 @@
 package shop.tryit.web.order;
 
+import static java.util.stream.Collectors.toList;
 import static lombok.AccessLevel.PRIVATE;
 
-import java.util.ArrayList;
 import java.util.List;
 import lombok.NoArgsConstructor;
 import shop.tryit.domain.item.Item;
@@ -32,20 +32,19 @@ public class OrderAdapter {
      * 주문 정보 목록을 위한 DTO
      */
     public static List<OrderDto> toListDto(List<OrderDetail> orderDetails) {
-        List<OrderDto> orderDtoList = new ArrayList<>();
+        return orderDetails.stream()
+                .map(OrderAdapter::toOrderDto)
+                .collect(toList());
+    }
 
-        for (int i = 0; i < orderDetails.size(); i++) {
-            OrderDto orderDto = OrderDto.builder()
-                    .detailId(orderDetails.get(i).getId())
-                    .number(orderDetails.get(i).getOrder().getNumber())
-                    .itemName(orderDetails.get(i).getItem().getName())
-                    .date(orderDetails.get(i).getOrder().getCreateDate())
-                    .status(orderDetails.get(i).getOrder().getStatus())
-                    .build();
-
-            orderDtoList.add(orderDto);
-        }
-        return orderDtoList;
+    private static OrderDto toOrderDto(OrderDetail orderDetail) {
+        return OrderDto.builder()
+                .detailId(orderDetail.getId())
+                .number(orderDetail.orderNumber())
+                .itemName(orderDetail.itemName())
+                .date(orderDetail.orderCreateDate())
+                .status(orderDetail.orderStatus())
+                .build();
     }
 
 }
