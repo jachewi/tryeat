@@ -8,5 +8,4 @@ public interface OrderRepository {
 
     Optional<Order> findById(Long id);
 
-//    List<Order> findAll(OrderSearch orderSearch);
 }
