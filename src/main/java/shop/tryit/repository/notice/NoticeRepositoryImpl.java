@@ -2,10 +2,11 @@ package shop.tryit.repository.notice;
 
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import shop.tryit.domain.notice.Notice;
 import shop.tryit.domain.notice.NoticeRepository;
-
 
 @Repository
 @RequiredArgsConstructor
@@ -27,6 +28,11 @@ public class NoticeRepositoryImpl implements NoticeRepository {
     @Override
     public void delete(Notice notice) {
         jpaRepository.delete(notice);
+    }
+
+    @Override
+    public Page<Notice> searchNotices(Pageable pageable) {
+        return jpaRepository.findAll(pageable);
     }
 
 }
