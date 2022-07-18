@@ -43,7 +43,7 @@ class QuestionServiceTests {
         Question question = Question.of("title", "content", member);
 
         // when
-        Long savedId = sut.register(question);
+        Long savedId = sut.register(question, " ");
 
         // then
         assertTrue(questionJpaRepository.findById(savedId).isPresent());
