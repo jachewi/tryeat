@@ -33,12 +33,8 @@ public class OrderController {
     private final MemberService memberService;
     private final ItemService itemService;
 
-    /**
-     * 주문 정보 저장
-     * 단품 상세 저장
-     */
     @PostMapping("/new")
-    public String newOrder(@Valid @ModelAttribute("orderForDto") OrderFormDto orderFormDto,
+    public String newOrder(@Valid @ModelAttribute OrderFormDto orderFormDto,
                            BindingResult bindingResult,
                            @AuthenticationPrincipal User user) {
         Member member = memberService.findMember(user.getUsername());
@@ -48,8 +44,10 @@ public class OrderController {
         orderService.register(order);
 
         Item item = itemService.findOne(orderFormDto.getItemId());
+        orderFormDto.setItemName(item.getName());
+        orderFormDto.setItemPrice(item.getPrice());
 
-        //주문 상품이 단 건인 경우
+        //단건 주문인 경우
         int orderTotalPrice = orderFormDto.getItemPrice() * orderFormDto.getOrderQuantity();
         OrderDetail orderDetail = OrderAdapter.toEntity(orderFormDto, item, order, orderTotalPrice);
         orderService.detailRegister(orderDetail);

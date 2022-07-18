@@ -1217,22 +1217,24 @@ section {
   margin-bottom: 20px;
 }
 
-.item-detail .item_img {
+.item-detail .item-img {
   text-align: center;
 }
 
-.item-detail .item_img img {
+.item-detail .item-img .main-img {
+  width: 400px;
+  height: 400px;
   /* width: 100%; */
 }
 
-.item-detail .item_info {
+.item-detail .item-info {
   padding-top: 30px;
   /* box-shadow: 0px 0 30px rgba(54, 65, 70, 0.08); */
 }
 
 .item-detail h2 {
-  font-size: 40px;
-  font-weight: 700;
+  font-size: 25px;
+  font-weight: 600;
   /* margin-bottom: 20px; */
   /* padding-bottom: 20px; */
   /* border-bottom: 1px solid #eee; */
@@ -1247,23 +1249,45 @@ section {
   font-size: 16px;
 }
 
-.item-detail .order_info h4 {
-  display: inline-block;
-  margin-right: 15px;
+.item-detail tr {
+  width: 100px;
+}
+
+.item-detail tr > th {
+  font-weight: normal;
+  width: 102px;
+}
+
+.item-detail .order-info .quantity {
+  margin-top: 10px;
+}
+
+.item-detail .order-info .quantity label {
+  width: 100px;
+}
+
+.item-detail .order-info .quantity input {
+  /*border: none;*/
+  width: 50px;
   text-align: center;
 }
 
-.item-detail .order_info input {
-  border: none;
-  width: 40px;
-  color: mediumslateblue;
-  font-weight: 600;
-  text-align: center;
-  font-size: 18px;
+.item-detail .order-info .total-price {
+  margin-bottom: 20px;
 }
 
-.item-detail .order_info .order_click button {
-  width: 100%;
+.item-detail .order-info .total-price span {
+  font-weight: bold;
+}
+
+.item-detail .order-info .order-click {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.item-detail .order-info .order-click button {
+  width: 100px;
   margin-left: 15px;
 }
 

@@ -19,38 +19,38 @@
     </div>
 
     <div class="row gy-4">
-      <div class="item_img col-lg-8">
-        <img th:src="|/files/${item.mainImage.getStoreFileName()}|" class="main_img" width="400" height="400">
+      <div class="item-img col-lg-7">
+        <img th:src="|/files/${item.mainImage.getStoreFileName()}|" class="main-img">
       </div>
-      <div class="item_info col-lg-4">
+      <div class="item-info col-lg-5">
         <h2 th:text="${item.name}">상품 이름</h2>
         <hr/>
-        <h3>
-          <sapn th:text="${item.price}">1000</sapn>
-          원
-        </h3>
+        <table>
+          <th>price</th>
+          <td>
+            <span th:text="${item.price}">상품 가격</span>원
+          </td>
+        </table>
 
-        <form action="" method="post">
-          <div class="order_info">
+        <div class="order-info">
+          <form th:action="@{/orders/new}" method="post">
+            <input type="hidden" name=itemId th:value="${item.id}">
             <div class="quantity">
-              <h4>Quantity</h4>
-              <span class="plus">+</span>
-              <input type="number" readonly value="1">
-              <span class="minus">-</span>
+              <label for="count">수량</label>
+              <input type="number" id="count" min="1" placeholder="1" th:field="${orderFormDto.orderQuantity}">
             </div>
             <hr/>
-            <div class="total_price">
-              <h4>total price : </h4>
-              <span class="price"> 1000원</span>
-            </div>
-            <div class="order_click d-flex justify-content-end">
-              <a href="" class="add_cart">
+            <!--<div class="total-price">
+              총 상품금액 : <span>1000</span>원
+            </div>-->
+            <div class="order-click">
+              <a href="" class="add-cart">
                 <img src="/img/icon/add-to-cart-black.png">
               </a>
-              <button type="submit">Buy Now</button>
+              <button type="submit" class="btn btn-outline-secondary">Buy Now</button>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div> <!-- /container -->
@@ -58,6 +58,10 @@
 
 <!-- ======= Footer ======= -->
 <div th:replace="fragments/footer :: footer"></div>
+
+<script>
+
+</script>
 </body>
 
 </html>
