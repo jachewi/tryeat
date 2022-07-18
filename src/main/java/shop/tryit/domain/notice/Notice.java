@@ -45,4 +45,8 @@ public class Notice extends BaseTimeEntity {
         return id;
     }
 
+    public String getUserEmail() {
+        return member.getEmail();
+    }
+
 }
