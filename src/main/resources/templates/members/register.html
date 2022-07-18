@@ -69,6 +69,7 @@
                     })
                     .open();
             }
+
 </script>
 
 <!-- ======= Hero Section ======= -->
@@ -125,27 +126,15 @@
               <th>
                 <span>주소</span></th>
               <td>
-                <input type="text" th:field="*{zipcode}" id="zipcode" placeholder="우편번호">
+                <input type="text" th:field="*{zipcode}" id="zipcode" placeholder="우편번호" readonly>
                 <div th:errors="*{zipcode}"></div>
                 <input type="button" onclick='execDaumPostcode()' value="우편번호 찾기"><br>
-                <input
-                    type="text"
-                    th:field="*{street_address}"
-                    id="street_address"
-                    placeholder="도로명주소">
+                <input type="text" th:field="*{street_address}" id="street_address" placeholder="도로명주소" readonly>
                 <div th:errors="*{street_address}"></div>
-                <input
-                    type="text"
-                    th:field="*{jibeon_address}"
-                    id="jibeon_address"
-                    placeholder="지번주소">
+                <input type="text" th:field="*{jibeon_address}" id="jibeon_address" placeholder="지번주소" readonly>
                 <div th:errors="*{jibeon_address}"></div>
                 <span id="guide" style="color:#999;display:none"></span>
-                <input
-                    type="text"
-                    th:field="*{detail_address}"
-                    id="detail_address"
-                    placeholder="상세주소">
+                <input type="text" th:field="*{detail_address}" id="detail_address" placeholder="상세주소">
               </td>
             </tr>
             <tr>
