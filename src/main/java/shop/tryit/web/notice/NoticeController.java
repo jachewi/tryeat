@@ -1,8 +1,10 @@
 package shop.tryit.web.notice;
 
+import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import shop.tryit.domain.common.Pages;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberService;
 import shop.tryit.domain.notice.Notice;
@@ -94,6 +98,20 @@ public class NoticeController {
     public String delete(@PathVariable Long noticeId) {
         noticeService.delete(noticeId);
         return "redirect:/notices";
+    }
+
+    @GetMapping
+    public String search(@RequestParam(defaultValue = "0") int page, Model model) {
+        Page<NoticeSearchFormDto> notices = noticeService.searchNotices(page)
+                .map(notice ->
+                        NoticeAdapter.toSearchForm(notice, noticeService.findMemberEmailById(notice.getId()))
+                );
+
+        List<Integer> pages = Pages.of(notices, 4).getPages();
+        model.addAttribute("notices", notices);
+        model.addAttribute("pages", pages);
+
+        return "notices/list";
     }
 
 }

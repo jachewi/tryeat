@@ -42,4 +42,13 @@ public class NoticeAdapter {
                 .build();
     }
 
+    public static NoticeSearchFormDto toSearchForm(Notice notice, String memberEmail) {
+        return NoticeSearchFormDto.builder()
+                .id(notice.getId())
+                .title(notice.getTitle())
+                .memberEmail(memberEmail)
+                .createDate(notice.getCreateDate())
+                .build();
+    }
+
 }
