@@ -38,7 +38,7 @@
 
     <br>
 
-    <form th:action="@{/notices/${noticeViewFormDto.id}/delete}" method="post">
+    <form th:action="@{/notices/{noticeId}/delete (noticeId=${noticeViewFormDto.id})}" method="post">
       <button type="submit">삭제하기</button>
     </form>
 
