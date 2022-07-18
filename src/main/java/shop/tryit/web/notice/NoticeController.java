@@ -101,8 +101,7 @@ public class NoticeController {
     }
 
     @GetMapping
-    public String search(@RequestParam(defaultValue = "0") int page,
-                         Model model) {
+    public String search(@RequestParam(defaultValue = "0") int page, Model model) {
         Page<NoticeSearchFormDto> notices = noticeService.searchNotices(page)
                 .map(notice ->
                         NoticeAdapter.toSearchForm(notice, noticeService.findMemberEmailById(notice.getId()))
