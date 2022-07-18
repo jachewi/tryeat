@@ -32,24 +32,25 @@
           </td>
         </table>
 
-        <form action="" method="post">
-          <div class="order-info">
+        <div class="order-info">
+          <form th:action="@{/orders/new}" method="post">
+            <input type="hidden" name=itemId th:value="${item.id}">
             <div class="quantity">
               <label for="count">수량</label>
-              <input type="number" id="count" th:value="orderQuantity" placeholder="1">
+              <input type="number" id="count" min="1" placeholder="1" th:field="${orderFormDto.orderQuantity}">
             </div>
             <hr/>
-            <div class="total-price">
+            <!--<div class="total-price">
               총 상품금액 : <span>1000</span>원
-            </div>
+            </div>-->
             <div class="order-click">
               <a href="" class="add-cart">
                 <img src="/img/icon/add-to-cart-black.png">
               </a>
               <button type="submit" class="btn btn-outline-secondary">Buy Now</button>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div> <!-- /container -->
@@ -57,6 +58,10 @@
 
 <!-- ======= Footer ======= -->
 <div th:replace="fragments/footer :: footer"></div>
+
+<script>
+
+</script>
 </body>
 
 </html>
