@@ -33,13 +33,12 @@ public class NoticeAdapter {
                 .build();
     }
 
-    public static NoticeUpdateFormDto toUpdateForm(Notice notice) {
-        Member member = notice.getMember();
+    public static NoticeUpdateFormDto toUpdateForm(Notice notice, String memberEmail) {
         return NoticeUpdateFormDto.builder()
                 .id(notice.getId())
                 .title(notice.getTitle())
                 .content(notice.getContent())
-                .memberEmail(member.getEmail())
+                .memberEmail(memberEmail)
                 .build();
     }
 
