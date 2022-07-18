@@ -24,13 +24,12 @@ public class NoticeAdapter {
                 .build();
     }
 
-    public static NoticeViewFormDto toViewForm(Notice notice) {
-        Member member = notice.getMember();
+    public static NoticeViewFormDto toViewForm(Notice notice, String memberEmail) {
         return NoticeViewFormDto.builder()
                 .id(notice.getId())
                 .title(notice.getTitle())
                 .content(notice.getContent())
-                .memberEmail(member.getEmail())
+                .memberEmail(memberEmail)
                 .build();
     }
 
