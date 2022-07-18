@@ -1,6 +1,10 @@
 package shop.tryit.domain.notice;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +38,12 @@ public class NoticeService {
 
     public String findMemberEmailById(Long noticeId) {
         return findById(noticeId).getUserEmail();
+    }
+
+    public Page<Notice> searchNotices(int page) {
+        Sort sort = Sort.by(Direction.DESC, "createDate");
+        PageRequest pageRequest = PageRequest.of(page, 10, sort);
+        return noticeRepository.searchNotices(pageRequest);
     }
 
 }
