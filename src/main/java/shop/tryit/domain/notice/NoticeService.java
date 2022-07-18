@@ -32,4 +32,8 @@ public class NoticeService {
         noticeRepository.delete(findById(id));
     }
 
+    public String findMemberEmailById(Long noticeId) {
+        return findById(noticeId).getUserEmail();
+    }
+
 }
