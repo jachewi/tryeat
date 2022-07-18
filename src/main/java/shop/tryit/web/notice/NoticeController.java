@@ -53,7 +53,8 @@ public class NoticeController {
                           Model model
     ) {
         Notice notice = noticeService.findById(noticeId);
-        NoticeViewFormDto noticeViewFormDto = NoticeAdapter.toViewForm(notice);
+        String memberEmail = noticeService.findMemberEmailById(noticeId);
+        NoticeViewFormDto noticeViewFormDto = NoticeAdapter.toViewForm(notice, memberEmail);
         model.addAttribute("noticeViewFormDto", noticeViewFormDto);
         return "notices/detail";
     }
@@ -63,7 +64,8 @@ public class NoticeController {
                              Model model
     ) {
         Notice notice = noticeService.findById(noticeId);
-        NoticeUpdateFormDto noticeUpdateFormDto = NoticeAdapter.toUpdateForm(notice);
+        String memberEmail = noticeService.findMemberEmailById(noticeId);
+        NoticeUpdateFormDto noticeUpdateFormDto = NoticeAdapter.toUpdateForm(notice, memberEmail);
         model.addAttribute("noticeUpdateFormDto", noticeUpdateFormDto);
         return "notices/update";
     }

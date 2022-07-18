@@ -33,12 +33,12 @@
     </form>
 
     <div>
-      <button th:onclick="|location.href='@{/notices/${noticeViewFormDto.id}/update}'|">수정하기</button>
+      <button th:onclick="|location.href='@{/notices/{noticeId}/update (noticeId=${noticeViewFormDto.id})}'|">수정하기</button>
     </div>
 
     <br>
 
-    <form th:action="@{/notices/${noticeViewFormDto.id}/delete}" method="post">
+    <form th:action="@{/notices/{noticeId}/delete (noticeId=${noticeViewFormDto.id})}" method="post">
       <button type="submit">삭제하기</button>
     </form>
 
