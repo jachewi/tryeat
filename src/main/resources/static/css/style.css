@@ -548,6 +548,11 @@ a:hover {
   margin: 0 0 20px;
 }
 
+.form_txtInput {
+  padding: 30px;
+  margin: 0px 120px 0px 250px;
+}
+
 .register .form_txtInput .checkbox_wrap {
   position: relative;
   padding: 5px;
@@ -938,6 +943,20 @@ a:hover {
 }
 
 /*--------------------------------------------------------------
+# Login General
+--------------------------------------------------------------*/
+.form-margin {
+  margin: 150px 0 200px 0;
+}
+
+.form-login {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+/*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
 section {
@@ -1183,6 +1202,10 @@ section {
 --------------------------------------------------------------*/
 .register-btn {
   margin-top: 20px;
+}
+
+.register-margin{
+  margin: 20px 200px;
 }
 
 /*--------------------------------------------------------------

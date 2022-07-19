@@ -1,52 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
 <head th:replace="fragments/header :: header"></head>
-
 <body>
 <!-- ======= Header ======= -->
 <header th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></header>
 
-
 <!-- ======= Hero Section ======= -->
 <section id="hero">
   <div layout:fragment="content" class="container my-3">
-    <form th:action="@{/members/login}" method="post">
-      <div th:if="${param.error}">
-        <div class="alert alert-danger">
-          사용자ID 또는 비밀번호를 확인해 주세요.
+    <div class="form-margin">
+      <form class="form-login" th:action="@{/members/login}" method="post">
+        <div th:if="${param.error}">
+          <div class="alert alert-danger">
+            사용자ID 또는 비밀번호를 확인해 주세요.
+          </div>
         </div>
-      </div>
-      <div class="mb-3">
-        <label for="username" class="form-label">사용자ID</label>
-        <input type="text" name="username" id="username" class="form-control">
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">비밀번호</label>
-        <input type="password" name="password" id="password" class="form-control">
-      </div>
-      <button type="submit" class="btn btn-primary">로그인</button>
-    </form>
+        <div class="mb-3">
+          <label for="username" class="form-label">사용자ID</label>
+          <input type="text" name="username" id="username" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">비밀번호</label>
+          <input type="password" name="password" id="password" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">로그인</button>
+      </form>
+    </div>
   </div>
 </section> <!-- End Hero -->
-
 
 <main id="main"></main>
 
 <!-- ======= Footer ======= -->
 <footer th:replace="fragments/footer :: footer" id="footer"></footer>
-
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-<!-- Vendor JS Files -->
-<script src="vendor/aos/aos.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="vendor/glightbox/js/glightbox.min.js"></script>
-<script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="vendor/swiper/swiper-bundle.min.js"></script>
-<script src="vendor/php-email-form/validate.js"></script>
-
-<!-- Template Main JS File -->
-<script src="js/main.js"></script>
 
 </body>
 
