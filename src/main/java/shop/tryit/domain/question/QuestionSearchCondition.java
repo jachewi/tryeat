@@ -8,13 +8,11 @@ import lombok.ToString;
 @ToString
 public class QuestionSearchCondition {
 
-    private String title;
-    private String email;
+    private String condition;
 
     @Builder
-    private QuestionSearchCondition(String title, String email) {
-        this.title = title;
-        this.email = email;
+    private QuestionSearchCondition(String condition, String email) {
+        this.condition = condition;
     }
 
 }

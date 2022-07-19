@@ -59,10 +59,7 @@ public class QuestionCustomImpl implements QuestionCustom {
         return queryFactory
                 .select(question.count())
                 .from(question)
-                .where(
-                        questionTitleEq(condition.getTitle()),
-                        memberEmailEq(condition.getEmail())
-                );
+                .where(containsCondition(condition.getCondition()));
     }
 
     private List<QuestionSearchDto> searchContent(QuestionSearchCondition condition, Pageable pageable) {
@@ -74,9 +71,7 @@ public class QuestionCustomImpl implements QuestionCustom {
                         question.createDate))
                 .from(question)
                 .innerJoin(question.member, member)
-                .where(
-                        questionTitleEq(condition.getTitle()),
-                        memberEmailEq(condition.getEmail())
+                .where(containsCondition(condition.getCondition())
                 )
                 .orderBy(question.createDate.desc())
                 .offset(pageable.getOffset())
@@ -93,12 +88,18 @@ public class QuestionCustomImpl implements QuestionCustom {
                 .fetch();
     }
 
-    private BooleanExpression questionTitleEq(String title) {
-        return StringUtils.hasText(title) ? question.title.contains(title):null;
+    private BooleanExpression containsCondition(String condition) {
+        String nullSafeCondition = StringUtils.hasText(condition) ? condition:"";
+        return questionTitleContains(nullSafeCondition).or(memberEmailContains(nullSafeCondition));
+
     }
 
-    private BooleanExpression memberEmailEq(String email) {
-        return StringUtils.hasText(email) ? question.member.email.contains(email):null;
+    private BooleanExpression questionTitleContains(String condition) {
+        return question.title.contains(condition);
+    }
+
+    private BooleanExpression memberEmailContains(String condition) {
+        return question.member.email.contains(condition);
     }
 
 }

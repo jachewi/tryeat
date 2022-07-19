@@ -15,11 +15,8 @@
 
       <div>
         <form th:action method="get" th:object="${questionSearchCondition}">
-          <label th:for="name">제목으로 검색</label>
-          <input type="text" th:field="*{title}" class="form-control" placeholder="제목을 입력하세요.">
-
-          <label th:for="name">회원 아이디로 검색</label>
-          <input type="text" th:field="*{email}" class="form-control" placeholder="아이디를 입력하세요">
+          <label th:for="name"> 검색</label>
+          <input type="text" th:field="*{condition}" class="form-control">
           <button type="submit" class="btn btn-primary">검색</button>
         </form>
 
@@ -55,7 +52,7 @@
 
           <li th:each="i : ${pages}">
             <a class="page-link" href="#"
-               th:href="@{/questions(page=${i - 1}, title=${questionSearchCondition.title}, email=${questionSearchCondition.email})}"
+               th:href="@{/questions(page=${i - 1}, condition=${questionSearchCondition.condition})}"
                th:text="${i}"></a>
           </li>
 
