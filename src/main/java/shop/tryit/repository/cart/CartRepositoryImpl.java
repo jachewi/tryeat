@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import shop.tryit.domain.cart.entity.Cart;
 import shop.tryit.domain.cart.repository.CartRepository;
+import shop.tryit.domain.member.Member;
 
 @Repository
 @RequiredArgsConstructor
@@ -14,6 +15,11 @@ public class CartRepositoryImpl implements CartRepository {
     @Override
     public Long save(Cart cart) {
         return cartJpaRepository.save(cart).getId();
+    }
+
+    @Override
+    public Cart findByMember(Member member) {
+        return cartJpaRepository.findByMember(member);
     }
 
 }
