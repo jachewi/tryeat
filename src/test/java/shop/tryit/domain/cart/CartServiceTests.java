@@ -1,37 +1,47 @@
 package shop.tryit.domain.cart;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import shop.tryit.domain.cart.entity.Cart;
 import shop.tryit.domain.cart.service.CartService;
 import shop.tryit.domain.member.Member;
+import shop.tryit.domain.member.MemberRepository;
 import shop.tryit.repository.cart.CartJpaRepository;
 
 @Transactional
 @SpringBootTest
-class CartServiceTests {
+public class CartServiceTests {
+
+    @Autowired
+    CartService sut;
 
     @Autowired
     CartJpaRepository cartJpaRepository;
 
     @Autowired
-    CartService sut;
+    MemberRepository memberRepository;
+
+    private Member saveMember() {
+        Member member = Member.builder()
+                .email("test@test.com")
+                .build();
+        memberRepository.save(member);
+        return member;
+    }
 
     @Test
-    void 장바구니_등록() {
+    void 장바구니_생성() {
         // given
-        Member member = Member.builder().build();
-        Cart cart = Cart.from(member);
+        Member member = saveMember();
 
         // when
-        Long savedId = sut.register(cart);
+        Long cartId = sut.createCart(member.getEmail());
 
         // then
-        assertTrue(cartJpaRepository.findById(savedId).isPresent());
+        assertNotNull(cartJpaRepository.findById(cartId));
     }
 
 }
