@@ -1,5 +1,6 @@
 package shop.tryit.repository.cart;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import shop.tryit.domain.cart.entity.Cart;
@@ -21,6 +22,11 @@ public class CartItemRepositoryImpl implements CartItemRepository {
     @Override
     public CartItem findByCartAndItem(Cart cart, Item item) {
         return cartItemJpaRepository.findByCartAndItem(cart, item);
+    }
+
+    @Override
+    public List<CartItem> findByCart(Cart cart) {
+        return cartItemJpaRepository.findByCart(cart);
     }
 
 }
