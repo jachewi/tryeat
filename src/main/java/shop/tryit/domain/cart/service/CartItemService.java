@@ -2,9 +2,11 @@ package shop.tryit.domain.cart.service;
 
 import static java.util.Objects.nonNull;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.domain.cart.entity.Cart;
 import shop.tryit.domain.cart.entity.CartItem;
 import shop.tryit.domain.cart.repository.CartItemRepository;
 import shop.tryit.domain.item.Item;
@@ -45,6 +47,13 @@ public class CartItemService {
         cartItemRepository.save(savedCartItem);
 
         return savedCartItem.getId();
+    }
+
+    /**
+     * 장바구니에 담긴 상품 조회
+     */
+    public List<CartItem> findCartItemList(Cart cart) {
+        return cartItemRepository.findByCart(cart);
     }
 
 }
