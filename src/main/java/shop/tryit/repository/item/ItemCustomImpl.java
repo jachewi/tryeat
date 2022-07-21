@@ -40,7 +40,7 @@ public class ItemCustomImpl implements ItemCustom {
 
     @Override
     @SuppressWarnings("all")
-    public ItemSearchDto searchItemByOrderDetail(Long orderDetailItemId) {
+    public ItemSearchDto findItemSearchDtoByOrderDetailId(Long orderDetailItemId) {
         QItemSearchDto qItemListDto = new QItemSearchDto(item.id, item.name, item.price);
         ItemSearchDto itemSearchDto = queryFactory
                 .select(qItemListDto)
