@@ -45,7 +45,7 @@ public class CartItem {
     /**
      * 비즈니스 로직
      **/
-    // 장바구니에 이미 상품이 있을 경우 개수 증가를 위한 로직
+    // 장바구니에 이미 상품이 있을 경우 수량 증가를 위한 로직
     public void addCount(int count) {
         this.count += count;
     }
