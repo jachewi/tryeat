@@ -1,6 +1,7 @@
 package shop.tryit.repository.cart;
 
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import shop.tryit.domain.cart.entity.Cart;
@@ -17,6 +18,11 @@ public class CartItemRepositoryImpl implements CartItemRepository {
     @Override
     public Long save(CartItem cartItem) {
         return cartItemJpaRepository.save(cartItem).getId();
+    }
+
+    @Override
+    public Optional<CartItem> findById(Long cartItemId) {
+        return cartItemJpaRepository.findById(cartItemId);
     }
 
     @Override
