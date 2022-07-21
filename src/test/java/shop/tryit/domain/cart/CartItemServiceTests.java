@@ -74,10 +74,7 @@ class CartItemServiceTests {
         // given
         Item item = saveItem();
 
-        CartItem cartItem = CartItem.builder()
-                .item(item)
-                .count(2)
-                .build();
+        CartItem cartItem = CartItem.builder().item(item).count(2).build();
         cartItemJpaRepository.save(cartItem);
 
         // when
@@ -106,6 +103,21 @@ class CartItemServiceTests {
 
         // then
         assertThat(cartItemList).hasSize(2);
+    }
+
+    @Test
+    void 장바구니에_담긴_상품_수량_변경() {
+        // given
+        Item item = saveItem();
+
+        CartItem cartItem = CartItem.builder().item(item).count(2).build();
+        cartItemJpaRepository.save(cartItem);
+
+        // when
+        sut.updateCartItemCount(cartItem.getId(), 5);
+
+        // then
+        assertThat(cartItem.getCount()).isEqualTo(5);
     }
 
 }
