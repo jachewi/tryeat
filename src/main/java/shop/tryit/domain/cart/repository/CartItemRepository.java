@@ -16,4 +16,6 @@ public interface CartItemRepository {
 
     List<CartItem> findByCart(Cart cart);
 
+    void delete(CartItem cartItem);
+
 }
