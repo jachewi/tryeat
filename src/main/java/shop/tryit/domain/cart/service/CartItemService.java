@@ -56,4 +56,17 @@ public class CartItemService {
         return cartItemRepository.findByCart(cart);
     }
 
+    /**
+     * 장바구니에 담긴 상품 수량 변경
+     */
+    @Transactional
+    public void updateCartItemCount(Long cartItemId, int count) {
+        // 변경할 장바구니 상품 엔티티 조회
+        CartItem cartItem = cartItemRepository.findById(cartItemId)
+                .orElseThrow(() -> new IllegalStateException("해당 장바구니 상품을 찾을 수 없습니다."));
+
+        // 장바구니 상품의 수량 변경
+        cartItem.updateCount(count);
+    }
+
 }
