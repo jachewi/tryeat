@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -76,6 +77,23 @@ public class OrderDetail {
 
     public OrderStatus orderStatus() {
         return order.getStatus();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this==o) {
+            return true;
+        }
+        if (o==null || getClass()!=o.getClass()) {
+            return false;
+        }
+        OrderDetail that = (OrderDetail) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }
