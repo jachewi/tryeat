@@ -1,5 +1,6 @@
 package shop.tryit.repository.item;
 
+import static java.util.stream.Collectors.toMap;
 import static shop.tryit.domain.item.QImage.image;
 import static shop.tryit.domain.item.QItem.item;
 
@@ -11,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,12 +38,38 @@ public class ItemCustomImpl implements ItemCustom {
         return PageableExecutionUtils.getPage(itemSearchDtoList, pageable, totalCount(condition)::fetchOne);
     }
 
+    @Override
+    @SuppressWarnings("all")
+    public ItemSearchDto findItemSearchDtoByOrderDetailId(Long orderDetailItemId) {
+        QItemSearchDto qItemListDto = new QItemSearchDto(item.id, item.name, item.price);
+        ItemSearchDto itemSearchDto = queryFactory
+                .select(qItemListDto)
+                .from(item)
+                .where(item.id.eq(orderDetailItemId))
+                .fetchOne();
+
+        Image itemMainImage = findMainImageByOrderDetailItemId(orderDetailItemId);
+        itemSearchDto.injectMainImage(itemMainImage);
+
+        return itemSearchDto;
+    }
+
+    private Image findMainImageByOrderDetailItemId(Long orderDetailItemId) {
+        return queryFactory.selectFrom(image)
+                .where(
+                        image.type.eq(ImageType.MAIN),
+                        item.id.in(orderDetailItemId)
+                )
+                .join(image.item, item)
+                .fetchOne();
+    }
+
     /**
      * 메인 이미지 주입
      */
     private void injectMainImage(List<ItemSearchDto> itemSearchDtoList) {
         Map<Long, ItemSearchDto> map = itemSearchDtoList.stream()
-                .collect(Collectors.toMap(ItemSearchDto::getId, Function.identity()));
+                .collect(toMap(ItemSearchDto::getId, Function.identity()));
 
         searchMainImage(map.keySet())
                 .forEach(image -> map.get(image.getItemId()).injectMainImage(image));

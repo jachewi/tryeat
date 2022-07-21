@@ -9,4 +9,6 @@ public interface ItemCustom {
 
     Page<ItemSearchDto> searchItems(ItemSearchCondition condition, Pageable pageable);
 
+    ItemSearchDto findItemSearchDtoByOrderDetailId(Long orderDetailItemId);
+
 }

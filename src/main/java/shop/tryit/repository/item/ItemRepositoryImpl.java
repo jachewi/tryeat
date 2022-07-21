@@ -45,4 +45,9 @@ public class ItemRepositoryImpl implements ItemRepository {
         return itemJpaRepository.searchItems(condition, pageable);
     }
 
+    @Override
+    public ItemSearchDto findItemSearchDtoByOrderDetailId(Long orderDetailItemId) {
+        return itemJpaRepository.findItemSearchDtoByOrderDetailId(orderDetailItemId);
+    }
+
 }
