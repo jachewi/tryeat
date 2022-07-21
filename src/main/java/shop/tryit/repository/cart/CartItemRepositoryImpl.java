@@ -35,4 +35,9 @@ public class CartItemRepositoryImpl implements CartItemRepository {
         return cartItemJpaRepository.findByCart(cart);
     }
 
+    @Override
+    public void delete(CartItem cartItem) {
+        cartItemJpaRepository.delete(cartItem);
+    }
+
 }
