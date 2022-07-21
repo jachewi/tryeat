@@ -120,4 +120,21 @@ class CartItemServiceTests {
         assertThat(cartItem.getCount()).isEqualTo(5);
     }
 
+    @Test
+    void 장바구니에_담긴_상품_삭제() {
+        // given
+        Item item = saveItem();
+
+        Cart cart = saveCart();
+
+        CartItem cartItem = CartItem.builder().item(item).cart(cart).build();
+        cartItemJpaRepository.save(cartItem);
+
+        // when
+        sut.deleteCartItem(cartItem.getId());
+
+        // then
+        assertThat(cartItemJpaRepository.findByCart(cart)).isEmpty();
+    }
+
 }
