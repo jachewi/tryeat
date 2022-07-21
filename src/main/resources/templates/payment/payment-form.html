@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+<body>
+<!-- ======= Header ======= -->
+<header th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></header>
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+  <div class="container">
+    <h2>주문 / 결제</h2>
+    <hr>
+    <form>
+      <table class="table">
+        <thead>
+        <tr align="center">
+          <th colspan="2">상품 정보</th>
+          <th>수량</th>
+          <th>총 가격</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr align="center">
+          <td>
+            <img width="100px" height="100px" src="../img/portfolio-details-1.jpg"/>
+          </td>
+          <td id="name">강아지 사료 샘플</td>
+          <td id="quantity">5</td>
+          <td id="totalPrice">5000</td>
+        </tbody>
+      </table>
+      <br><br><br>
+
+      <h2>배송지 정보</h2>
+      <hr>
+      <table width="100%">
+        <tbody>
+        <tr>
+          <th>받는 사람</th>
+          <td id="memberName">홍길동</td>
+        </tr>
+        <tr>
+          <th>연락처</th>
+          <td id="memberPhone"> 010 1234 1234</td>
+        </tr>
+        <tr>
+          <th>주소</th>
+          <td>
+            <input type="text" id="zipcode" placeholder="우편번호" readonly>
+            <input type="button" onclick='execDaumPostcode()' value="우편번호 찾기"><br>
+            <input type="text" id="street_address" placeholder="도로명주소" readonly>
+            <input type="text" id="jibeon_address" placeholder="지번주소" readonly>
+            <span id="guide" style="color:#999;display:none"></span>
+            <input type="text" id="detail_address" placeholder="상세주소">
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <br><br><br>
+
+      <button id="check_module" type="button" style="float: right">
+        <img src="../img/payment_icon_yellow_small.png"/>
+      </button>
+    </form>
+  </div> <!-- End container -->
+</section> <!-- End Hero -->
+
+<!-- ======= Footer ======= -->
+<footer th:replace="fragments/footer :: footer" id="footer"></footer>
+
+<!-- ======= ImPort API ======= -->
+<script>
+    $("#check_module").click(function () {
+      var IMP = window.IMP; // 생략가능
+      IMP.init('imp56228241');
+
+      IMP.request_pay({ //param
+        pg: 'kakaopay',
+        pay_method: 'card',
+        merchant_uid: new Date().getTime(),               //주문번호 ex) merchant_1658304667454
+        name: '주문명 : 강아지 사료 샘플',                   // name: '주문명 : ${order.name}'
+        amount: 5000,                                     // amount: ${cart.totalPrice}
+        buyer_name: '홍길동',			                        // 구매자 이름, ${member.name}
+        buyer_tel: '010 1234 1234',                       // 구매자 전화번호 ${member.phone}
+        }, function (rsp) { //callback
+          console.log(rsp);
+        if (rsp.success) {
+          var msg = '결제가 완료되었습니다.';
+          msg += '고유ID : ' + rsp.imp_uid;                //ex) imp_560723464190
+          msg += '상점 거래ID : ' + rsp.merchant_uid;
+          msg += '결제 금액 : ' + rsp.paid_amount;
+          msg += '카드 승인번호 : ' + rsp.apply_num;
+          // success.submit();
+          // 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드 사용
+          $.ajax({
+              type: "POST",
+              url: "/payment/kakao", //결제 금액을 보낼 URL 설정
+              data: {
+                  "merchant_uid" : rsp.merchant_uid,
+                  "amount" : 2000
+              },
+          });
+        } else {
+          var msg = '결제에 실패하였습니다.';
+          msg += '에러내용 : ' + rsp.error_msg;
+        }
+        alert(msg);  //알럿창으로 msg에 넘어오는 값 확인 //Todo 마지막에 결제 완료 알럿메시지로 변경하기
+      });
+    });
+
+
+</script>
+</body>
+</html>
+
