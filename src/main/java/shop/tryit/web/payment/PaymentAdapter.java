@@ -6,8 +6,8 @@ public class PaymentAdapter {
     private PaymentAdapter() {
     }
 
-    public static Payment toEntity(String merchant_uid, String amount) {
-        return Payment.of(merchant_uid, amount);
+    public static Payment toEntity(String number, String totalPrice) {
+        return Payment.of(number, totalPrice);
     }
 
     public static PaymentDto toDto(Payment payment) {

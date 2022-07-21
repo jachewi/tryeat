@@ -23,9 +23,9 @@ public class PayController {
     }
 
     @PostMapping("/kakao")
-    public String newKakaopay(String merchant_uid, String amount) {
-        log.info("결제 정보 {}", amount);
-        paymentService.register(PaymentAdapter.toEntity(merchant_uid, amount));
+    public String newKakaopay(String number, String totalPrice) {
+        log.info("결제 정보 {}", totalPrice);
+        paymentService.register(PaymentAdapter.toEntity(number, totalPrice));
         return "redirect:/";
     }
 
