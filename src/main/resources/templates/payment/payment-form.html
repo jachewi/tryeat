@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>아임포트+카카오페이 테스트</title>
+  <meta charset="UTF-8">
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <!-- iamport.Payment.js -->
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+</head>
+<body>
+<button id="check_module" type="button">테스트 결제</button>
+<script>
+	$("#check_module").click(function () {
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp56228241');
+
+		IMP.request_pay({ //param
+			pg: 'kakaopay',
+			pay_method: 'card',
+			merchant_uid: new Date().getTime(),               //주문번호 ex) merchant_1658304667454
+			name: '주문명 : 아메리카노',                        // name: '주문명 : ${order.name}'
+			amount: 2000,                                     // amount: ${cart.totalPrice}
+			buyer_name: '이름',			                          // 구매자 이름, ${member.name}
+			buyer_tel: '010-1234-5678',                       // 구매자 전화번호 ${member.phone}
+      buyer_addr: '인천광역시 부평구',                    // 구매자 주소    ${address.street_address}
+			buyer_postcode: '123-456',                        // 구매자 우편번호 ${address.zipcode}
+			}, function (rsp) { //callback
+				console.log(rsp);
+			if (rsp.success) {
+				var msg = '결제가 완료되었습니다.';
+        msg += '고유ID : ' + rsp.imp_uid;                //ex) imp_560723464190
+        msg += '상점 거래ID : ' + rsp.merchant_uid;
+        msg += '결제 금액 : ' + rsp.paid_amount;
+        msg += '카드 승인번호 : ' + rsp.apply_num;
+				// success.submit();
+				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드 사용
+				$.ajax({
+            type: "POST",
+            url: "/payment/kakao", //결제 금액을 보낼 URL 설정
+            data: {
+                "merchant_uid" : rsp.merchant_uid,
+                "amount" : 2000
+            },
+        });
+			} else {
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+			}
+			alert(msg);  //알럿창으로 msg에 넘어오는 값 확인 //Todo 마지막에 결제 완료 알럿메시지로 변경하기
+		});
+	});
+
+
+</script>
+
+
+</body>
+</html>
