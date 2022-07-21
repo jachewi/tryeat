@@ -50,4 +50,9 @@ public class CartItem {
         this.count += count;
     }
 
+    // 장바구니 상품의 수량 변경을 위한 로직
+    public void updateCount(int count) {
+        this.count = count;
+    }
+
 }
