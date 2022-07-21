@@ -17,4 +17,6 @@ public interface ItemRepository {
 
     Page<ItemSearchDto> searchItems(ItemSearchCondition condition, Pageable pageable);
 
+    ItemSearchDto searchItemByOrderDetail(Long orderDetailItemId);
+
 }
