@@ -48,8 +48,7 @@ public class OrderController {
         orderFormDto.setItemPrice(item.getPrice());
 
         //단건 주문인 경우
-        int orderTotalPrice = orderFormDto.getItemPrice() * orderFormDto.getOrderQuantity();
-        OrderDetail orderDetail = OrderAdapter.toEntity(orderFormDto, item, order, orderTotalPrice);
+        OrderDetail orderDetail = OrderAdapter.toEntity(orderFormDto, item, order);
         orderService.detailRegister(orderDetail);
 
         return "redirect:/orders";
