@@ -13,13 +13,16 @@ import shop.tryit.domain.payment.PaymentService;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/payment")
-public class PayController {
+public class PaymentController {
 
     private final PaymentService paymentService;
 
     @GetMapping
-    public String newKakapay(@ModelAttribute PaymentFormDto paymentFormDto) {
-        log.info("--------------결제하기----------------");
+    public String newPaymentForm(@ModelAttribute PaymentFormDto paymentFormDto) {
+        log.info("======== 결제 폼 컨트롤러 시작 ========");
+        log.info("결제할 상품 아이디 = {}", paymentFormDto.getItemId());
+        log.info("결제할 상품 수량 = {}", paymentFormDto.getQuantity());
+
         return "/payment/payment-form";
     }
 
