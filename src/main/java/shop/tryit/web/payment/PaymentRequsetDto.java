@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class PaymentFormDto {
+public class PaymentRequsetDto {
 
     private Long itemId;
 
