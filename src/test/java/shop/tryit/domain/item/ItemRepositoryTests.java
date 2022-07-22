@@ -101,7 +101,7 @@ class ItemRepositoryTests {
         Order order = Order.of(member, OrderStatus.ORDER);
         orderRepository.save(order);
 
-        OrderDetail orderDetail = OrderDetail.of(item, order, 10, 1);
+        OrderDetail orderDetail = OrderDetail.of(item, order, 1);
         Long savedOrderDetailId = orderDetailRepository.save(orderDetail);
 
         // when

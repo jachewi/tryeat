@@ -54,7 +54,7 @@ class OrderServiceTests {
         Item item = Item.builder().stockQuantity(10).build();
         Member member = Member.builder().build();
         Order order = Order.of(member, OrderStatus.ORDER);
-        OrderDetail orderDetail = OrderDetail.of(item, order, 5000, 2);
+        OrderDetail orderDetail = OrderDetail.of(item, order, 2);
 
         //when
         Long savedId = sut.detailRegister(orderDetail);
@@ -89,7 +89,7 @@ class OrderServiceTests {
         Item item = Item.builder().stockQuantity(8).build();
         Member member = Member.builder().build();
         Order order = Order.of(member, OrderStatus.CANCEL);
-        OrderDetail orderDetail = OrderDetail.of(item, order, 5000, 2);
+        OrderDetail orderDetail = OrderDetail.of(item, order, 2);
 
         //when
         Long savedDetailId = orderDetailJpaRepository.save(orderDetail).getId();
@@ -116,8 +116,8 @@ class OrderServiceTests {
         orderJpaRepository.save(order1);
         orderJpaRepository.save(order2);
 
-        OrderDetail orderDetail1 = OrderDetail.of(item, order1, 5000, 2);
-        OrderDetail orderDetail2 = OrderDetail.of(item, order2, 5000, 2);
+        OrderDetail orderDetail1 = OrderDetail.of(item, order1, 2);
+        OrderDetail orderDetail2 = OrderDetail.of(item, order2, 2);
 
         sut.detailRegister(orderDetail1);
         sut.detailRegister(orderDetail2);

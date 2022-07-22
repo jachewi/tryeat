@@ -12,25 +12,19 @@ import shop.tryit.domain.order.OrderDetail;
 @NoArgsConstructor(access = PRIVATE)
 public class OrderAdapter {
 
-    public static OrderDetail toEntity(OrderFormDto orderFormDto, Item item, Order order, int orderTotalPrice) {
+    public static OrderDetail toEntity(OrderFormDto orderFormDto, Item item, Order order) {
 
-        return OrderDetail
-                .of(item, order, orderTotalPrice, orderFormDto.getOrderQuantity());
+        return OrderDetail.of(item, order, orderFormDto.getOrderQuantity());
     }
 
     public static OrderFormDto toDto(OrderDetail orderDetail) {
-
         return OrderFormDto.builder()
                 .itemId(orderDetail.getItem().getId())
                 .itemName(orderDetail.getItem().getName())
-                .itemPrice(orderDetail.getOrderTotalPrice() / orderDetail.getCount())
-                .orderQuantity(orderDetail.getCount())
+                .orderQuantity(orderDetail.getQuantity())
                 .build();
     }
 
-    /**
-     * 주문 정보 목록을 위한 DTO
-     */
     public static List<OrderDto> toListDto(List<OrderDetail> orderDetails) {
         return orderDetails.stream()
                 .map(OrderAdapter::toOrderDto)
