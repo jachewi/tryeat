@@ -90,4 +90,20 @@ public class Member {
         this.name = name;
     }
 
+    public Long addressZipcode() {
+        return address.getZipcode();
+    }
+
+    public String addressStreet() {
+        return address.getStreet_address();
+    }
+
+    public String addressJibeon() {
+        return address.getJibeon_address();
+    }
+
+    public String addressDetail() {
+        return address.getDetail_address();
+    }
+
 }
