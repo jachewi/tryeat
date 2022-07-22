@@ -10,11 +10,11 @@ public class OrderDetailSearchDto {
     private Long orderDetailId;
 
     private ItemSearchDto itemSearchDto;
-    private int count;
+    private int quantity;
 
     @QueryProjection
-    public OrderDetailSearchDto(int count, Long orderDetailId) {
-        this.count = count;
+    public OrderDetailSearchDto(int quantity, Long orderDetailId) {
+        this.quantity = quantity;
         this.orderDetailId = orderDetailId;
     }
 
