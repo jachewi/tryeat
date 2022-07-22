@@ -24,10 +24,10 @@
           <td>
             <img width="100px" height="100px" src="../img/portfolio-details-1.jpg"/>
           </td>
-          <input type="hidden" name=itemId value="1">
-          <td><input type="hidden" id="name" value="강아지 사료 샘플"/>강아지 사료 샘플</td>
-          <td><input type="hidden" id="quantity" value="5"/>5</td>
-          <td><input type="hidden" id="totalPrice" value="5000"/>5000</td>
+          <input type="hidden" name=itemId th:value="${payment.itemId}">
+          <td><input type="hidden" id="name" th:text="${payment.itemName}" th:value="${payment.itemName}"/></td>
+          <td><input type="hidden" id="quantity" th:text="${payment.quantity}" th:value="${payment.quantity}"/></td>
+          <td><input type="hidden" id="totalPrice" th:text="${payment.totalPrice}" th:value="${payment.totalPrice}"/></td>
         </tbody>
       </table>
       <br><br><br>
@@ -38,21 +38,20 @@
         <tbody>
         <tr>
           <th>받는 사람</th>
-          <td><input type="hidden" id="memberName" value="홍길동"/>홍길동</td>
+          <td><input type="hidden" id="memberName" th:text="${payment.memberName}" th:value="${payment.memberName}"/></td>
         </tr>
         <tr>
           <th>연락처</th>
-          <td><input type="hidden" id="memberPhone" value="01012341234"/>01034936846</td>
+          <td><input type="hidden" id="memberPhone" th:text="${payment.memberPhone}" th:value="${payment.memberPhone}"/></td>
         </tr>
         <tr>
           <th>주소</th>
           <td>
-            <input type="text" id="zipcode" placeholder="우편번호" readonly>
-            <input type="button" onclick='execDaumPostcode()' value="우편번호 찾기"><br>
-            <input type="text" id="street_address" placeholder="도로명주소" readonly>
-            <input type="text" id="jibeon_address" placeholder="지번주소" readonly>
+            <input type="hidden" id="zipcode" th:text="${payment.zipcode}" placeholder="우편번호" readonly>
+            <input type="hidden" id="street_address" th:text="${payment.street_address}" placeholder="도로명주소" readonly>
+            <input type="hidden" id="jibeon_address" th:text="${payment.jibeon_address}" placeholder="지번주소" readonly>
             <span id="guide" style="color:#999;display:none"></span>
-            <input type="text" id="detail_address" placeholder="상세주소">
+            <input type="hidden" id="detail_address" th:text="${payment.detail_address}" placeholder="상세주소">
           </td>
         </tr>
         </tbody>
@@ -122,9 +121,10 @@
                 console.log(data);
               }
           });
-
       });
     });
+
+
 
 </script>
 </body>
