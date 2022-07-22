@@ -24,9 +24,10 @@
           <td>
             <img width="100px" height="100px" src="../img/portfolio-details-1.jpg"/>
           </td>
-          <td id="name">강아지 사료 샘플</td>
-          <td id="quantity">5</td>
-          <td id="totalPrice">5000</td>
+          <input type="hidden" name=itemId value="1">
+          <td><input type="hidden" id="name" value="강아지 사료 샘플"/>강아지 사료 샘플</td>
+          <td><input type="hidden" id="quantity" value="5"/>5</td>
+          <td><input type="hidden" id="totalPrice" value="5000"/>5000</td>
         </tbody>
       </table>
       <br><br><br>
@@ -37,11 +38,11 @@
         <tbody>
         <tr>
           <th>받는 사람</th>
-          <td id="memberName">홍길동</td>
+          <td><input type="hidden" id="memberName" value="홍길동"/>홍길동</td>
         </tr>
         <tr>
           <th>연락처</th>
-          <td id="memberPhone"> 010 1234 1234</td>
+          <td><input type="hidden" id="memberPhone" value="01012341234"/>01034936846</td>
         </tr>
         <tr>
           <th>주소</th>
@@ -78,35 +79,39 @@
         pg: 'kakaopay',
         pay_method: 'card',
         merchant_uid: new Date().getTime(),               //주문번호 ex) merchant_1658304667454
-        name: '주문명 : 강아지 사료 샘플',                   // name: '주문명 : ${order.name}'
-        amount: 5000,                                     // amount: ${cart.totalPrice}
-        buyer_name: '홍길동',			                        // 구매자 이름, ${member.name}
-        buyer_tel: '010 1234 1234',                       // 구매자 전화번호 ${member.phone}
+        name: '주문명 : ' + $("#name").val(),                   // name: '주문명 : ${order.name}'
+        amount: $("#totalPrice").val(),                                     // amount: ${cart.totalPrice}
+        buyer_name: $("#memberName").val(),			                        // 구매자 이름, ${member.name}
+        buyer_tel: $("#memberPhone").val(),                       // 구매자 전화번호 ${member.phone}
         }, function (rsp) { //callback
           console.log(rsp);
         if (rsp.success) {
           var msg = '결제가 완료되었습니다.';
+
+          //Todo: 값 확인용 삭제 예정
           msg += '고유ID : ' + rsp.imp_uid;                //ex) imp_560723464190
           msg += '상점 거래ID : ' + rsp.merchant_uid;
           msg += '결제 금액 : ' + rsp.paid_amount;
           msg += '카드 승인번호 : ' + rsp.apply_num;
-          // success.submit();
-          // 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드 사용
+
           $.ajax({
               type: "POST",
               url: "/payment/kakao", //결제 금액을 보낼 URL 설정
               data: {
                   "merchant_uid" : rsp.merchant_uid,
-                  "amount" : 2000
-              },
+                  "amount" : rsp.paid_amount
+              }
           });
         } else {
           var msg = '결제에 실패하였습니다.';
           msg += '에러내용 : ' + rsp.error_msg;
         }
-        alert(msg);  //알럿창으로 msg에 넘어오는 값 확인 //Todo 마지막에 결제 완료 알럿메시지로 변경하기
+        alert(msg);  // Todo: 알럿창으로 msg에 넘어오는 값 확인 후에 결제 완료 알럿메시지로 변경하기
       });
     });
+
+
+
 
 
 </script>
