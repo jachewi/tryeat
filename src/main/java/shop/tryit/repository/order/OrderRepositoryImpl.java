@@ -3,9 +3,13 @@ package shop.tryit.repository.order;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import shop.tryit.domain.member.Member;
 import shop.tryit.domain.order.Order;
 import shop.tryit.domain.order.OrderRepository;
+import shop.tryit.domain.order.OrderSearchDto;
 
 @Slf4j
 @Repository
@@ -23,6 +27,11 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Override
     public Optional<Order> findById(Long id) {
         return jpaRepository.findById(id);
+    }
+
+    @Override
+    public Page<OrderSearchDto> searchOrders(Member member, Pageable pageable) {
+        return jpaRepository.searchOrders(member, pageable);
     }
 
 }

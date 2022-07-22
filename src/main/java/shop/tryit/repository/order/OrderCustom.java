@@ -1,15 +1,11 @@
-package shop.tryit.domain.order;
+package shop.tryit.repository.order;
 
-import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import shop.tryit.domain.member.Member;
+import shop.tryit.domain.order.OrderSearchDto;
 
-public interface OrderRepository {
-
-    Long save(Order order);
-
-    Optional<Order> findById(Long id);
+public interface OrderCustom {
 
     Page<OrderSearchDto> searchOrders(Member member, Pageable pageable);
 
