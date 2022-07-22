@@ -34,30 +34,27 @@ public class OrderDetail {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    private int orderTotalPrice; // 주문 가격
+    private int quantity;
 
-    private int count; //주문 수량
-
-    private OrderDetail(Item item, Order order, int orderTotalPrice, int count) {
+    private OrderDetail(Item item, Order order, int quantity) {
         this.item = item;
         this.order = order;
-        this.orderTotalPrice = orderTotalPrice;
-        this.count = count;
+        this.quantity = quantity;
     }
 
-    public static OrderDetail of(Item item, Order order, int orderTotalPrice, int count) {
-        return new OrderDetail(item, order, orderTotalPrice, count);
+    public static OrderDetail of(Item item, Order order, int count) {
+        return new OrderDetail(item, order, count);
     }
 
     /**
      * 주문 취소
      */
     public void cancel() {
-        getItem().addStock(count);
+        getItem().addStock(quantity);
     }
 
     public void itemRemoveStock() {
-        getItem().removeStock(count);
+        getItem().removeStock(quantity);
     }
 
     /**

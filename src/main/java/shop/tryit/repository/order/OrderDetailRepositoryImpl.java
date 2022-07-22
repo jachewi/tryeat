@@ -5,8 +5,10 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import shop.tryit.domain.order.Order;
 import shop.tryit.domain.order.OrderDetail;
 import shop.tryit.domain.order.OrderDetailRepository;
+import shop.tryit.domain.order.OrderDetailSearchDto;
 
 @Slf4j
 @Repository
@@ -29,6 +31,11 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository {
     @Override
     public List<OrderDetail> findAll() {
         return detailJpaRepository.findAll();
+    }
+
+    @Override
+    public List<OrderDetailSearchDto> searchOrderDetails(Order order) {
+        return detailJpaRepository.searchOrderDetails(order);
     }
 
 }

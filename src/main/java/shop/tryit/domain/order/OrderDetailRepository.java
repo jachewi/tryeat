@@ -11,4 +11,6 @@ public interface OrderDetailRepository {
 
     List<OrderDetail> findAll();
 
+    List<OrderDetailSearchDto> searchOrderDetails(Order order);
+
 }
