@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.domain.cart.entity.Cart;
 import shop.tryit.domain.cart.service.CartService;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
@@ -13,7 +14,7 @@ import shop.tryit.repository.cart.CartJpaRepository;
 
 @Transactional
 @SpringBootTest
-public class CartServiceTests {
+class CartServiceTests {
 
     @Autowired
     CartService sut;
@@ -38,10 +39,10 @@ public class CartServiceTests {
         Member member = saveMember();
 
         // when
-        Long cartId = sut.createCart(member.getEmail());
+        Cart cart = sut.createCart(member.getEmail());
 
         // then
-        assertNotNull(cartJpaRepository.findById(cartId));
+        assertNotNull(cartJpaRepository.findById(cart.getId()));
     }
 
 }

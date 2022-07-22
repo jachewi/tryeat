@@ -22,7 +22,7 @@ public class CartService {
      * 장바구니 생성
      */
     @Transactional
-    public Long createCart(String email) {
+    public Cart createCart(String email) {
         // 현재 로그인한 회원 엔티티 조회
         Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalStateException("해당 회원을 찾을 수 없습니다."));
@@ -36,7 +36,7 @@ public class CartService {
             cartRepository.save(cart);
         }
 
-        return cart.getId();
+        return cart;
     }
 
 }
