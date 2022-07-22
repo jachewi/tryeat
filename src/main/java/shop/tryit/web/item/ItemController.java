@@ -22,7 +22,6 @@ import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemSearchCondition;
 import shop.tryit.domain.item.ItemSearchDto;
 import shop.tryit.domain.item.ItemService;
-import shop.tryit.web.order.OrderFormDto;
 
 @Slf4j
 @Controller
@@ -138,7 +137,6 @@ public class ItemController {
 
         ItemDto itemDto = ItemAdapter.toDto(item, imageService.getMainImage(id), imageService.getDetailImage(id));
         model.addAttribute("item", itemDto);
-        model.addAttribute("orderFormDto", OrderFormDto.builder().build());
 
         return "/items/detail";
     }
