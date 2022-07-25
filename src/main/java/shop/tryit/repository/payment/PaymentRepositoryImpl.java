@@ -21,7 +21,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
 
     @Override
     public Optional<Payment> findByNum(Long Number) {
-        return jpaRepository.findById(Number);
+        return jpaRepository.findByNumber(Number);
     }
 
 }
