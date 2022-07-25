@@ -22,7 +22,7 @@
         <tbody>
         <tr align="center">
           <td>
-            <img width="100px" height="100px" src="../img/portfolio-details-1.jpg"/>
+            <img width="100px" height="100px" th:src="|/files/${payment.mainImage.getStoreFileName()}|" src="../img/portfolio-details-1.jpg"/>
           </td>
           <input type="hidden" name=itemId th:value="${payment.itemId}">
           <td><input type="hidden" id="name" th:text="${payment.itemName}" th:value="${payment.itemName}"/></td>
@@ -123,6 +123,7 @@
           });
       });
     });
+
 
 
 
