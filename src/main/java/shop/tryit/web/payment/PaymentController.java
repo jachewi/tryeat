@@ -2,6 +2,8 @@ package shop.tryit.web.payment;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -49,9 +51,11 @@ public class PaymentController {
     }
 
     @PostMapping("/kakao")
-    public void newKakaopay(Long merchant_uid, String amount) {
+    public ResponseEntity newPaymentForm(Long merchant_uid, String amount) {
         log.info("결제 정보 {}", amount);
         paymentService.register(PaymentAdapter.toEntity(merchant_uid, amount));
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
