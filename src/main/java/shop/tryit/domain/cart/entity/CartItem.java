@@ -33,26 +33,26 @@ public class CartItem {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    private int count;
+    private int quantity;
 
     @Builder
-    private CartItem(Item item, Cart cart, int count) {
+    private CartItem(Item item, Cart cart, int quantity) {
         this.item = item;
         this.cart = cart;
-        this.count = count;
+        this.quantity = quantity;
     }
 
     /**
      * 비즈니스 로직
      **/
     // 장바구니에 이미 상품이 있을 경우 수량 증가를 위한 로직
-    public void addCount(int count) {
-        this.count += count;
+    public void addCount(int quantity) {
+        this.quantity += quantity;
     }
 
     // 장바구니 상품의 수량 변경을 위한 로직
-    public void updateCount(int count) {
-        this.count = count;
+    public void updateCount(int quantity) {
+        this.quantity = quantity;
     }
 
 }

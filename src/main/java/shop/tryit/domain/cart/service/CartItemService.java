@@ -34,7 +34,7 @@ public class CartItemService {
 
         // 상품이 이미 있을 경우, 개수 증가
         if (nonNull(savedCartItem)) {
-            savedCartItem.addCount(cartItem.getCount());
+            savedCartItem.addCount(cartItem.getQuantity());
             return savedCartItem.getId();
         }
 
@@ -42,7 +42,7 @@ public class CartItemService {
         savedCartItem = CartItem.builder()
                 .cart(cartItem.getCart())
                 .item(cartItem.getItem())
-                .count(cartItem.getCount())
+                .quantity(cartItem.getQuantity())
                 .build();
         cartItemRepository.save(savedCartItem);
 
