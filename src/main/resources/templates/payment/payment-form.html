@@ -24,7 +24,7 @@
           <td>
             <img width="100px" height="100px" th:src="|/files/${payment.mainImage.getStoreFileName()}|" src="../img/portfolio-details-1.jpg"/>
           </td>
-          <input type="hidden" name=itemId th:value="${payment.itemId}">
+          <input type="hidden" id="itemId" th:value="${payment.itemId}">
           <td><input type="hidden" id="name" th:text="${payment.itemName}" th:value="${payment.itemName}"/></td>
           <td><input type="hidden" id="quantity" th:text="${payment.quantity}" th:value="${payment.quantity}"/></td>
           <td><input type="hidden" id="totalPrice" th:text="${payment.totalPrice}" th:value="${payment.totalPrice}"/></td>
@@ -108,24 +108,24 @@
         alert(msg);  // Todo: 알럿창으로 msg에 넘어오는 값 확인 후에 결제 완료 알럿메시지로 변경하기
 
         //주문 컨트롤러로 결제 정보를 보내는 AJAX
-        //Todo: orderController 에서 값을 잘 받는지 확인 필요
         $.ajax({
               type: "POST",
               url: "/orders/new", //결제 금액을 보낼 URL 설정
               dataType : 'json',
               data: {
                   "itemId" : $("#itemId").val(),
-                  "orderQuantity" : $("#quantity").val()
+                  "orderQuantity" : $("#quantity").val(),
+                  "merchant_uid" : rsp.merchant_uid,
               },
-              success: function(data) {
-                console.log(data);
+              //Todo: orderController 이후 200포트를 받았다면 메인화면으로 이동되는지 확인
+              statusCode: {
+                  200: function(args){
+                    location.href='/';
+                  }
               }
           });
       });
     });
-
-
-
 
 </script>
 </body>
