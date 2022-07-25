@@ -1,5 +1,6 @@
 package shop.tryit.repository.payment;
 
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -16,6 +17,11 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     @Override
     public Long save(Payment payment) {
         return jpaRepository.save(payment).getId();
+    }
+
+    @Override
+    public Optional<Payment> findByNum(Long Number) {
+        return jpaRepository.findByNumber(Number);
     }
 
 }
