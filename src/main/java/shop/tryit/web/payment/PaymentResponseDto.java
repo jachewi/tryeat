@@ -1,14 +1,10 @@
 package shop.tryit.web.payment;
 
-import static lombok.AccessLevel.PROTECTED;
-
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import shop.tryit.domain.item.Image;
 
 @Data
-@NoArgsConstructor(access = PROTECTED)
 public class PaymentResponseDto {
 
     //상품 정보
