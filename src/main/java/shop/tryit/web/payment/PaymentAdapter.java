@@ -9,7 +9,7 @@ public class PaymentAdapter {
     private PaymentAdapter() {
     }
 
-    public static Payment toEntity(String number, String totalPrice) {
+    public static Payment toEntity(Long number, String totalPrice) {
         return Payment.of(number, totalPrice);
     }
 

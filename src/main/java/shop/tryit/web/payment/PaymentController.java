@@ -49,7 +49,7 @@ public class PaymentController {
     }
 
     @PostMapping("/kakao")
-    public void newKakaopay(String merchant_uid, String amount) {
+    public void newKakaopay(Long merchant_uid, String amount) {
         log.info("결제 정보 {}", amount);
         paymentService.register(PaymentAdapter.toEntity(merchant_uid, amount));
     }

@@ -21,16 +21,16 @@ public class Payment extends BaseTimeEntity {
     private Long id;
 
     @Column(unique = true)
-    private String number;
+    private Long number;
 
     private String totalPrice;
 
-    private Payment(String number, String totalPrice) {
+    private Payment(Long number, String totalPrice) {
         this.number = number;
         this.totalPrice = totalPrice;
     }
 
-    public static Payment of(String number, String totalPrice) {
+    public static Payment of(Long number, String totalPrice) {
         return new Payment(number, totalPrice);
     }
 
