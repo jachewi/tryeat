@@ -1,5 +1,6 @@
 package shop.tryit.repository.order;
 
+import static shop.tryit.domain.member.QMember.member;
 import static shop.tryit.domain.order.QOrder.order;
 
 import com.querydsl.jpa.impl.JPAQuery;
@@ -27,13 +28,22 @@ public class OrderCustomImpl implements OrderCustom {
         return PageableExecutionUtils.getPage(orderSearchContents(member), pageable, totalCount(member)::fetchOne);
     }
 
-    private List<OrderSearchDto> orderSearchContents(Member member) {
-        QOrderSearchDto qOrderSearchDto = new QOrderSearchDto(order.id, order.number, order.createDate, order.status);
+    private List<OrderSearchDto> orderSearchContents(Member findMember) {
+        QOrderSearchDto qOrderSearchDto =
+                new QOrderSearchDto(order.id,
+                        order.number,
+                        order.createDate,
+                        order.status,
+                        member.address.zipcode,
+                        member.address.street_address,
+                        member.address.jibeon_address,
+                        member.address.detail_address);
 
         List<OrderSearchDto> content = queryFactory
                 .select(qOrderSearchDto)
                 .from(order)
-                .where(order.member.eq(member))
+                .where(order.member.eq(findMember))
+                .join(order.member, member).fetchJoin()
                 .fetch();
 
         content.forEach(this::injectOrderDetails);
