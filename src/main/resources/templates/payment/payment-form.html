@@ -20,16 +20,38 @@
         </tr>
         </thead>
         <tbody>
-        <tr align="center">
+        <tr align="center" name="paymentItem">
           <td>
             <img width="100px" height="100px" th:src="|/files/${payment.mainImage.getStoreFileName()}|" src="../img/portfolio-details-1.jpg"/>
           </td>
-          <input type="hidden" id="itemId" th:value="${payment.itemId}">
+          <input type="hidden" id="itemId" name="itemId" th:value="${payment.itemId}"> <!-- Todo: th:id="'문자열'+${payment.itemId}" 형식으로 활용하기 -->
           <td><input type="hidden" id="name" th:text="${payment.itemName}" th:value="${payment.itemName}"/></td>
-          <td><input type="hidden" id="quantity" th:text="${payment.quantity}" th:value="${payment.quantity}"/></td>
-          <td><input type="hidden" id="totalPrice" th:text="${payment.totalPrice}" th:value="${payment.totalPrice}"/></td>
+          <td><input type="hidden" id="quantity" name="quantity" th:text="${payment.quantity}" th:value="${payment.quantity}"/></td>
+          <td><input type="hidden" id="itemTotalPrice" th:text="${payment.totalPrice}" th:value="${payment.totalPrice}"/></td>
+        </tr>
+
+        <!-------------------------테스트용 데이터 시작---------------------->
+        <tr align="center" name="paymentItem">
+          <td>
+            <img width="100px" height="100px" src="../img/portfolio-details-1.jpg"/>
+          </td>
+          <input type="hidden" id="itemId1" name="itemId" value="2">
+          <td><input type="hidden" id="name1" th:text="고양이사료샘플" value="고양이 사료 샘플"/></td>
+          <td><input type="hidden" id="quantity1" name="quantity" th:text="5" value="5"/></td>
+          <td><input type="hidden" id="itemTotalPrice1" th:text="5000" value="5000"/></td>
+        </tr>
+        <!-------------------------테스트용 데이터 끝---------------------->
+
         </tbody>
       </table>
+
+      <!-------------------------테스트용 데이터 시작---------------------->
+      <div style="float: right">
+        <span>총 수량: <input type="hidden" id="totalQuantity" th:text="${payment.quantity}+5" value="${payment.quantity}+5"/></span>
+        <span>총 가격: <input type="hidden" id="totalPrice" th:text="${payment.totalPrice}+5000" value="${payment.totalPrice}+5000"/></span>
+      </div>
+      <!-------------------------테스트용 데이터 끝---------------------->
+
       <br><br><br>
 
       <h2>배송지 정보</h2>
@@ -126,6 +148,7 @@
           });
       });
     });
+
 
 </script>
 </body>
