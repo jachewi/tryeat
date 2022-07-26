@@ -43,6 +43,7 @@ public class OrderCustomImpl implements OrderCustom {
                 .select(qOrderSearchDto)
                 .from(order)
                 .where(order.member.eq(findMember))
+                .orderBy(order.createDate.desc())
                 .join(order.member, member).fetchJoin()
                 .fetch();
 

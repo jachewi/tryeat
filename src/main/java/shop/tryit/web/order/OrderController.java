@@ -1,9 +1,9 @@
 package shop.tryit.web.order;
 
-import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import shop.tryit.domain.common.Pages;
 import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemService;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberService;
 import shop.tryit.domain.order.Order;
 import shop.tryit.domain.order.OrderDetail;
+import shop.tryit.domain.order.OrderSearchDto;
 import shop.tryit.domain.order.OrderService;
 import shop.tryit.domain.order.OrderStatus;
 
@@ -39,7 +42,7 @@ public class OrderController {
                            @AuthenticationPrincipal User user) {
         Member member = memberService.findMember(user.getUsername());
 
-        //주문 정보 저장
+        // 주문 정보 저장
         Order order = Order.of(member, OrderStatus.ORDER);
         orderService.register(order);
 
@@ -47,23 +50,22 @@ public class OrderController {
         orderFormDto.setItemName(item.getName());
         orderFormDto.setItemPrice(item.getPrice());
 
-        //단건 주문인 경우
+        // 단건 주문인 경우
         OrderDetail orderDetail = OrderAdapter.toEntity(orderFormDto, item, order);
         orderService.detailRegister(orderDetail);
 
         return "redirect:/orders";
     }
 
-    /**
-     * 주문 목록
-     */
     @GetMapping
-    public String list(Model model) {
-        List<OrderDetail> orders = orderService.findOrder();
+    public String list(Model model, @RequestParam(defaultValue = "0") int page, @AuthenticationPrincipal User user) {
+        String email = user.getUsername();
+        Page<OrderSearchDto> orders = orderService.searchOrders(page, email);
 
-        List<OrderDto> orderDto = OrderAdapter.toListDto(orders);
+        Pages<OrderSearchDto> pages = Pages.of(orders, 4);
 
-        model.addAttribute("orders", orderDto);
+        model.addAttribute("orders", orders);
+        model.addAttribute("pages", pages.getPages());
 
         return "/orders/list";
     }

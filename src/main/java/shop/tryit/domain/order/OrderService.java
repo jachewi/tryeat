@@ -2,9 +2,12 @@ package shop.tryit.domain.order;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.item.ItemRepository;
+import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
 
 @Service
@@ -42,6 +45,15 @@ public class OrderService {
                 .orElseThrow(() -> new IllegalStateException("해당 주문을 찾을 수 없습니다."));
     }
 
+    public Page<OrderSearchDto> searchOrders(int page, String memberEmail) {
+        Member member = memberRepository.findByEmail(memberEmail)
+                .orElseThrow();
+
+        PageRequest pageRequest = PageRequest.of(page, 5);
+
+        return orderRepository.searchOrders(member, pageRequest);
+    }
+
     /**
      * 주문 목록
      */
@@ -63,9 +75,9 @@ public class OrderService {
     @Transactional
     public void cancel(Long orderId) {
         Order cancelOrder = findOne(orderId);
-        cancelOrder.cancel(OrderStatus.CANCEL); //주문 정보의 주문상태를 CANCEL 로 변경
+        cancelOrder.cancel(OrderStatus.CANCEL); // 주문 정보의 주문상태를 CANCEL 로 변경
 
-        //단일 상품 주문 취소
+        // 단일 상품 주문 취소
         OrderDetail cancelOrderDetail = detailFindOne(orderId);
         cancelOrderDetail.cancel();
 
