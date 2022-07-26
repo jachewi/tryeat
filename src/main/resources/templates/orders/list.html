@@ -14,25 +14,37 @@
       <table class="table table-striped">
         <thead>
         <tr>
+          <!--TODO : 목록 더 추가 -->
           <th>주문 번호</th>
-          <th>주문 상품</th>
-          <th>주문 일자</th>
-          <th>주문 상태</th>
           <th></th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="order : ${orders}">
+        <tr th:each="order, loop : ${orders}" th:object="order">
           <td>
-            <a th:href="@{/order/{id}(id=${order.detailId})}" th:text="${order.number}"></a>
+            <a th:href="@{/orders/{id} (id=*{orderId})}" th:text="${orders.getTotalElements - (orders.number * orders.size) - loop.index}"></a>
           </td>
-          <td th:text="${order.itemName}"></td>
-          <td th:text="${order.date}"></td>
-          <td th:text="${order.status}"></td>
-          </a></tr>
+        </tr>
         </tbody>
       </table>
+
+
+      <!-- 페이징 처리 -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+          <li th:each="i : ${pages}">
+            <a class="page-link" href="#"
+               th:href="@{/orders(page=${i - 1})}"
+               th:text="${i}"></a>
+          </li>
+
+        </ul>
+      </nav>
+      <!-- 페이징 처리 끝 -->
+
+
     </div>
   </div> <!-- /container -->
 </section> <!-- End Hero -->
