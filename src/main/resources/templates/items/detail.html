@@ -44,9 +44,7 @@
               총 상품금액 : <span>1000</span>원
             </div>-->
             <div class="order-click">
-              <a href="" class="add-cart">
-                <img src="/img/icon/add-to-cart-black.png">
-              </a>
+              <button type="button" id="addCartItem" class="btn btn-secondary" value="장바구니 담기">Add Cart</button>
               <button type="submit" class="btn btn-outline-secondary">Buy Now</button>
             </div>
           </form>
@@ -59,7 +57,26 @@
 <!-- ======= Footer ======= -->
 <div th:replace="fragments/footer :: footer"></div>
 
-<script>
+<script th:inline="javascript">
+  $('#addCartItem').click(function() {
+    var url = "/cart";
+    var data = {
+      itemId : $('#itemId').val(),
+      quantity : $('#quantity').val()
+    };
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: data,
+      success: function(result) {
+        alert("장바구니에 상품을 추가했습니다.🛒");
+      },
+      error: function(jqXHR) {
+        alert(jqXHR.responseText);
+      }
+    })
+  })
 
 </script>
 </body>
