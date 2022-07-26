@@ -91,7 +91,7 @@
 <footer th:replace="fragments/footer :: footer" id="footer"></footer>
 
 <!-- ======= ImPort API ======= -->
-<script>
+<script th:inline="javascript">
     $("#check_module").click(function () {
       var IMP = window.IMP; // 생략가능
       IMP.init('imp56228241');
@@ -121,33 +121,51 @@
               data: {
                   "merchant_uid" : rsp.merchant_uid,
                   "amount" : rsp.paid_amount
-              }
+              },
+              statusCode: {
+                  200: function(args){
+
+                    /** 주문 컨트롤러로 결제 상품정보를 보내는 AJAX **/
+                    var dataList = new Array();
+                    var paramData = new Object();
+
+                    $("div[name=paymentItem]").each(function() {
+                        var orderItemId = $("#itemId").val();
+                        var orderQuantity = $("#quantity").val();
+                        var data = new Object();
+                        data["orderItemId"] = orderItemId;
+                        data["orderQuantity"] = orderQuantity;
+                        dataList.push(data);
+                    });
+
+                    paramData['OrderDtoList'] = dataList;
+                    var param = JSON.stringify(paramData);
+
+                    console.log(param);
+
+                    $.ajax({
+                          type: "POST",
+                          url: "/orders/new", //결제 금액을 보낼 URL 설정
+                          dataType : 'json',
+                          data: param,
+                          //Todo: orderController 이후 200포트를 받았다면 메인화면으로 이동되는지 확인
+                          statusCode: {
+                              200: function(args){
+                                location.href='/';
+                              }
+                          }
+                      });<!--ajax End-->
+                  }<!--200 function End-->
+              }<!--statusCode End-->
           });
         } else {
           var msg = '결제에 실패하였습니다.';
           msg += '에러내용 : ' + rsp.error_msg;
         }
         alert(msg);  // Todo: 알럿창으로 msg에 넘어오는 값 확인 후에 결제 완료 알럿메시지로 변경하기
-
-        //주문 컨트롤러로 결제 정보를 보내는 AJAX
-        $.ajax({
-              type: "POST",
-              url: "/orders/new", //결제 금액을 보낼 URL 설정
-              dataType : 'json',
-              data: {
-                  "itemId" : $("#itemId").val(),
-                  "orderQuantity" : $("#quantity").val(),
-                  "merchant_uid" : rsp.merchant_uid,
-              },
-              //Todo: orderController 이후 200포트를 받았다면 메인화면으로 이동되는지 확인
-              statusCode: {
-                  200: function(args){
-                    location.href='/';
-                  }
-              }
-          });
       });
     });
+
 
 
 </script>
