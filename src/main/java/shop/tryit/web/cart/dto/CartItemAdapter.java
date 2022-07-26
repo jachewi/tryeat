@@ -23,9 +23,9 @@ public class CartItemAdapter {
 
     public static CartListDto toDto(CartItem cartItem, Image mainImage) {
         return CartListDto.builder()
-                .itemId(cartItem.getItem().getId())
-                .itemName(cartItem.getItem().getName())
-                .itemPrice(cartItem.getItem().getPrice())
+                .itemId(cartItem.getItemId())
+                .itemName(cartItem.getItemName())
+                .itemPrice(cartItem.getItemPrice())
                 .quantity(cartItem.getQuantity())
                 .mainImage(mainImage)
                 .build();

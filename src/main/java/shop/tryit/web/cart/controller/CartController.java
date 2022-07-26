@@ -88,7 +88,7 @@ public class CartController {
         List<CartItem> cartItems = cartItemService.findCartItemList(cart);
 
         List<Image> mainImages = cartItems.stream()
-                .map(cartItem -> cartItem.getItem().getId()) // CartItem -> Long
+                .map(cartItem -> cartItem.getItemId()) // CartItem -> Long
                 .map(imageService::getMainImage)// Long -> Image
                 .collect(toList());
 

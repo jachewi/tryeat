@@ -42,6 +42,18 @@ public class CartItem {
         this.quantity = quantity;
     }
 
+    public Long getItemId() {
+        return item.getId();
+    }
+
+    public String getItemName() {
+        return item.getName();
+    }
+
+    public int getItemPrice() {
+        return item.getPrice();
+    }
+
     /**
      * 비즈니스 로직
      **/
