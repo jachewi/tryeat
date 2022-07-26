@@ -74,14 +74,14 @@ class CartItemServiceTests {
         // given
         Item item = saveItem();
 
-        CartItem cartItem = CartItem.builder().item(item).count(2).build();
+        CartItem cartItem = CartItem.builder().item(item).quantity(2).build();
         cartItemJpaRepository.save(cartItem);
 
         // when
         Long savedCartItemId = sut.addCartItem(cartItem);
 
         // then
-        assertThat(cartItemJpaRepository.findById(savedCartItemId).get().getCount()).isEqualTo(4);
+        assertThat(cartItemJpaRepository.findById(savedCartItemId).get().getQuantity()).isEqualTo(4);
     }
 
     @Test
@@ -110,14 +110,14 @@ class CartItemServiceTests {
         // given
         Item item = saveItem();
 
-        CartItem cartItem = CartItem.builder().item(item).count(2).build();
+        CartItem cartItem = CartItem.builder().item(item).quantity(2).build();
         cartItemJpaRepository.save(cartItem);
 
         // when
         sut.updateCartItemCount(cartItem.getId(), 5);
 
         // then
-        assertThat(cartItem.getCount()).isEqualTo(5);
+        assertThat(cartItem.getQuantity()).isEqualTo(5);
     }
 
     @Test
