@@ -94,6 +94,7 @@ public class CartController {
 
         List<CartListDto> cartListDtos = CartItemAdapter.toDto(cartItems, mainImages);
 
+        // TODO: proxy 이슈 해결
         model.addAttribute("cartListDtos", cartListDtos);
 
         return "/cart/list";
