@@ -34,12 +34,12 @@ class CartServiceTests {
     }
 
     @Test
-    void 장바구니_생성() {
+    void 장바구니_조회() {
         // given
         Member member = saveMember();
 
         // when
-        Cart cart = sut.createCart(member.getEmail());
+        Cart cart = sut.findCart(member.getEmail());
 
         // then
         assertNotNull(cartJpaRepository.findById(cart.getId()));
