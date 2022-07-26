@@ -96,13 +96,20 @@
       var IMP = window.IMP; // 생략가능
       IMP.init('imp56228241');
 
+      //총 수량
+      var totalQuantity = parseInt($("#quantity").val()) +  parseInt($("#quantity1").val())
+      //주문명
+      var paymentName = '주문명: ' + $("#name").val() + ' 외 ' + totalQuantity
+      //총 구매가격
+      var totalPrice = parseInt($("#itemTotalPrice").val()) + parseInt($("#itemTotalPrice1").val())
+
       IMP.request_pay({ //param
         pg: 'kakaopay',
         pay_method: 'card',
-        merchant_uid: new Date().getTime(),               //주문번호 ex) merchant_1658304667454
-        name: '주문명 : ' + $("#name").val(),                   // name: '주문명 : ${order.name}'
-        amount: $("#totalPrice").val(),                                     // amount: ${cart.totalPrice}
-        buyer_name: $("#memberName").val(),			                        // 구매자 이름, ${member.name}
+        merchant_uid: new Date().getTime(),                       //주문번호 ex) 1658304667454
+        name: paymentName,                                        // name: '주문명 : ${order.name}'
+        amount: totalPrice,                                       // amount: ${cart.totalPrice}
+        buyer_name: $("#memberName").val(),			                  // 구매자 이름 ${member.name}
         buyer_tel: $("#memberPhone").val(),                       // 구매자 전화번호 ${member.phone}
         }, function (rsp) { //callback
           console.log(rsp);
