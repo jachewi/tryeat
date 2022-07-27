@@ -19,6 +19,7 @@ import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
 import shop.tryit.domain.question.dto.QuestionSearchCondition;
 import shop.tryit.domain.question.dto.QuestionSearchDto;
+import shop.tryit.domain.question.entity.Question;
 import shop.tryit.domain.question.service.QuestionService;
 import shop.tryit.repository.question.QuestionJpaRepository;
 

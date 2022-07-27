@@ -7,10 +7,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.answer.AnswerRepository;
-import shop.tryit.domain.question.Question;
 import shop.tryit.domain.question.QuestionRepository;
 import shop.tryit.domain.question.dto.QuestionSearchCondition;
 import shop.tryit.domain.question.dto.QuestionSearchDto;
+import shop.tryit.domain.question.entity.Question;
 
 @Service
 @RequiredArgsConstructor

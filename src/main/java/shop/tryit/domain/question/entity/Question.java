@@ -1,4 +1,4 @@
-package shop.tryit.domain.question;
+package shop.tryit.domain.question.entity;
 
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;

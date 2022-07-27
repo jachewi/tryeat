@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.answer.service.AnswerService;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
-import shop.tryit.domain.question.Question;
 import shop.tryit.domain.question.QuestionRepository;
+import shop.tryit.domain.question.entity.Question;
 import shop.tryit.repository.answer.AnswerJpaRepository;
 
 @Transactional
