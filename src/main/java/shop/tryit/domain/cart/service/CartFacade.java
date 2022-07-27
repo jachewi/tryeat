@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.cart.dto.CartItemDto;
 import shop.tryit.domain.cart.dto.CartListDto;
 import shop.tryit.domain.cart.entity.Cart;
@@ -28,6 +29,7 @@ public class CartFacade {
     /**
      * 장바구니 상품 추가
      */
+    @Transactional(readOnly = true)
     public Long addCartItem(CartItemDto cartItemDto, User user) {
         Cart cart = cartService.findCart(user.getUsername());
         Item item = itemService.findOne(cartItemDto.getItemId());
@@ -40,6 +42,7 @@ public class CartFacade {
     /**
      * 장바구니 상품 조회
      */
+    @Transactional(readOnly = true)
     public List<CartListDto> findCartItems(User user) {
         Cart cart = cartService.findCart(user.getUsername());
         List<CartItem> cartItems = cartItemService.findCartItemList(cart);
