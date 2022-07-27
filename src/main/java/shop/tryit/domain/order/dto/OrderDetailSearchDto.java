@@ -1,4 +1,4 @@
-package shop.tryit.domain.order;
+package shop.tryit.domain.order.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;

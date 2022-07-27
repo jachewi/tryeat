@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import shop.tryit.domain.order.Order;
 import shop.tryit.domain.order.OrderDetail;
 import shop.tryit.domain.order.OrderDetailRepository;
-import shop.tryit.domain.order.OrderDetailSearchDto;
+import shop.tryit.domain.order.dto.OrderDetailSearchDto;
 
 @Slf4j
 @Repository

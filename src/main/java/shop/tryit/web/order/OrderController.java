@@ -16,15 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import shop.tryit.domain.common.Pages;
-import shop.tryit.domain.item.Item;
-import shop.tryit.domain.item.ItemService;
-import shop.tryit.domain.member.Member;
-import shop.tryit.domain.member.MemberService;
-import shop.tryit.domain.order.Order;
-import shop.tryit.domain.order.OrderDetail;
-import shop.tryit.domain.order.OrderSearchDto;
-import shop.tryit.domain.order.OrderService;
-import shop.tryit.domain.order.OrderStatus;
+import shop.tryit.domain.order.dto.OrderFormDto;
+import shop.tryit.domain.order.dto.OrderSearchDto;
+import shop.tryit.domain.order.service.OrderFacade;
 
 @Slf4j
 @Controller
@@ -32,36 +26,19 @@ import shop.tryit.domain.order.OrderStatus;
 @RequestMapping("/orders")
 public class OrderController {
 
-    private final OrderService orderService;
-    private final MemberService memberService;
-    private final ItemService itemService;
+    private final OrderFacade orderFacade;
 
     @PostMapping("/new")
     public String newOrder(@Valid @ModelAttribute OrderFormDto orderFormDto,
                            BindingResult bindingResult,
                            @AuthenticationPrincipal User user) {
-        Member member = memberService.findMember(user.getUsername());
-
-        // 주문 정보 저장
-        Order order = Order.of(member, OrderStatus.ORDER);
-        orderService.register(order);
-
-        Item item = itemService.findOne(orderFormDto.getItemId());
-        orderFormDto.setItemName(item.getName());
-        orderFormDto.setItemPrice(item.getPrice());
-
-        // 단건 주문인 경우
-        OrderDetail orderDetail = OrderAdapter.toEntity(orderFormDto, item, order);
-        orderService.detailRegister(orderDetail);
-
+        // TODO : 주문 등록 기능 구현
         return "redirect:/orders";
     }
 
     @GetMapping
     public String list(Model model, @RequestParam(defaultValue = "0") int page, @AuthenticationPrincipal User user) {
-        String email = user.getUsername();
-        Page<OrderSearchDto> orders = orderService.searchOrders(page, email);
-
+        Page<OrderSearchDto> orders = orderFacade.searchOrders(page, user);
         Pages<OrderSearchDto> pages = Pages.of(orders, 4);
 
         model.addAttribute("orders", orders);
@@ -70,13 +47,12 @@ public class OrderController {
         return "/orders/list";
     }
 
-    /**
-     * 주문 취소를 위한 컨트롤러
-     */
     @PostMapping("/{orderId}/cancel")
     public String cancelOrder(@PathVariable("orderId") Long orderId) {
-        orderService.cancel(orderId);
+        // TODO : 취소 로직 구현
         return "redirect:/orders/list";
     }
 
 }
+
+

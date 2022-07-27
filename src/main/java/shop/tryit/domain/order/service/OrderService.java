@@ -1,4 +1,4 @@
-package shop.tryit.domain.order;
+package shop.tryit.domain.order.service;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.item.ItemRepository;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
+import shop.tryit.domain.order.Order;
+import shop.tryit.domain.order.OrderDetail;
+import shop.tryit.domain.order.OrderDetailRepository;
+import shop.tryit.domain.order.OrderRepository;
+import shop.tryit.domain.order.OrderStatus;
+import shop.tryit.domain.order.dto.OrderSearchDto;
 
 @Service
 @Transactional(readOnly = true)
