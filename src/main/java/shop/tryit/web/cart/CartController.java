@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import shop.tryit.domain.cart.dto.CartItemDto;
 import shop.tryit.domain.cart.dto.CartListDto;
-import shop.tryit.domain.item.Item;
 import shop.tryit.domain.cart.service.CartFacade;
-import shop.tryit.domain.item.ItemService;
+import shop.tryit.domain.item.entity.Item;
+import shop.tryit.domain.item.service.ItemService;
 
 @Slf4j
 @Controller

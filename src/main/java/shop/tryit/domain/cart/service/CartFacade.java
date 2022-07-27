@@ -11,10 +11,10 @@ import shop.tryit.domain.cart.dto.CartItemDto;
 import shop.tryit.domain.cart.dto.CartListDto;
 import shop.tryit.domain.cart.entity.Cart;
 import shop.tryit.domain.cart.entity.CartItem;
-import shop.tryit.domain.item.Image;
-import shop.tryit.domain.item.ImageService;
-import shop.tryit.domain.item.Item;
-import shop.tryit.domain.item.ItemService;
+import shop.tryit.domain.item.entity.Image;
+import shop.tryit.domain.item.entity.Item;
+import shop.tryit.domain.item.service.ImageService;
+import shop.tryit.domain.item.service.ItemService;
 
 @Component
 @RequiredArgsConstructor

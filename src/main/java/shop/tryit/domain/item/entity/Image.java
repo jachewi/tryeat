@@ -1,4 +1,4 @@
-package shop.tryit.domain.item;
+package shop.tryit.domain.item.entity;
 
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import shop.tryit.domain.item.ImageType;
 
 @Entity
 @Getter

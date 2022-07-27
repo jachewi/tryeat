@@ -1,4 +1,4 @@
-package shop.tryit.domain.item;
+package shop.tryit.domain.item.service;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -6,6 +6,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.domain.item.ItemSearchCondition;
+import shop.tryit.domain.item.dto.ItemSearchDto;
+import shop.tryit.domain.item.entity.Item;
+import shop.tryit.domain.item.repository.ItemRepository;
 
 @Service
 @RequiredArgsConstructor

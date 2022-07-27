@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.cart.entity.Cart;
 import shop.tryit.domain.cart.entity.CartItem;
 import shop.tryit.domain.cart.repository.CartItemRepository;
-import shop.tryit.domain.item.Item;
-import shop.tryit.domain.item.ItemRepository;
+import shop.tryit.domain.item.entity.Item;
+import shop.tryit.domain.item.repository.ItemRepository;
 
 @Service
 @RequiredArgsConstructor

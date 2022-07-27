@@ -5,11 +5,11 @@ import static shop.tryit.domain.order.QOrderDetail.orderDetail;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import shop.tryit.domain.item.ItemRepository;
-import shop.tryit.domain.item.ItemSearchDto;
+import shop.tryit.domain.item.dto.ItemSearchDto;
+import shop.tryit.domain.item.repository.ItemRepository;
 import shop.tryit.domain.order.Order;
-import shop.tryit.domain.order.QOrderDetailSearchDto;
 import shop.tryit.domain.order.dto.OrderDetailSearchDto;
+import shop.tryit.domain.order.dto.QOrderDetailSearchDto;
 
 @RequiredArgsConstructor
 public class OrderDetailCustomImpl implements OrderDetailCustom {

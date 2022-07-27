@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import shop.tryit.domain.item.ItemRepository;
+import shop.tryit.domain.item.repository.ItemRepository;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
 import shop.tryit.domain.order.Order;
