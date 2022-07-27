@@ -1,4 +1,4 @@
-package shop.tryit.web.item;
+package shop.tryit.domain.item.dto;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -8,36 +8,32 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.web.multipart.MultipartFile;
 import shop.tryit.domain.item.Category;
-import shop.tryit.domain.item.Image;
 
 @Data
 @NoArgsConstructor(access = PROTECTED)
-public class ItemDto {
+public class ItemFormDto {
 
-    @NotNull
-    private Long id;
-
-    @NotBlank(message = "이름은 필수 입력 값입니다.")
+    @NotBlank(message = "이름을 입력해주세요.")
     @Length(min = 0, max = 10, message = "이름은 최대 10글자입니다.")
     private String name;
 
-    @NotNull(message = "가격은 필수 입력 값입니다.")
+    @NotNull(message = "가격을 입력해주세요.")
     private Integer price;
 
-    @NotNull(message = "재고는 필수 입력 값입니다.")
+    @NotNull(message = "재고를 입력해주세요.")
     private Integer stockQuantity;
 
     @NotNull(message = "카테고리를 선택해주세요.")
     private Category category;
 
-    private Image mainImage;
+    private MultipartFile mainImage;
 
-    private Image detailImage;
+    private MultipartFile detailImage;
 
     @Builder
-    private ItemDto(Long id, String name, Integer price, Integer stockQuantity, Category category, Image mainImage, Image detailImage) {
-        this.id = id;
+    private ItemFormDto(String name, Integer price, Integer stockQuantity, Category category, MultipartFile mainImage, MultipartFile detailImage) {
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;
