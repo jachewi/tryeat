@@ -39,7 +39,7 @@ public class MemberFacade {
         return memberService.update(member.getEmail(), member);
     }
 
-    public static Member toEntity(MemberFormDto memberFormDto, Address address, MemberRole role) {
+    public Member toEntity(MemberFormDto memberFormDto, Address address, MemberRole role) {
         return Member.builder()
                 .email(memberFormDto.getEmail())
                 .name(memberFormDto.getName())
@@ -50,7 +50,7 @@ public class MemberFacade {
                 .build();
     }
 
-    public static Member toEntity(MemberFormDto memberFormDto, Address address) {
+    public Member toEntity(MemberFormDto memberFormDto, Address address) {
         return Member.builder()
                 .email(memberFormDto.getEmail())
                 .name(memberFormDto.getName())
@@ -60,7 +60,7 @@ public class MemberFacade {
                 .build();
     }
 
-    public static Address toAddress(MemberFormDto memberForm) {
+    public Address toAddress(MemberFormDto memberForm) {
         return Address.builder()
                 .zipcode(memberForm.getZipcode())
                 .street_address(memberForm.getStreet_address())
@@ -69,7 +69,7 @@ public class MemberFacade {
                 .build();
     }
 
-    public static MemberFormDto toDto(Member member) {
+    public MemberFormDto toDto(Member member) {
         return MemberFormDto.builder()
                 .email(member.getEmail())
                 .name(member.getName())
