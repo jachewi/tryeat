@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import shop.tryit.domain.common.Address;
-import shop.tryit.web.member.MemberFormDto;
+import shop.tryit.domain.member.dto.MemberFormDto;
 
 @Service
 @RequiredArgsConstructor
