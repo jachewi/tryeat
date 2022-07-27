@@ -43,8 +43,6 @@ public class ItemController {
 
     @PostMapping("/new")
     public String newItem(@Valid @ModelAttribute("item") ItemFormDto form, BindingResult bindingResult, Model model) throws IOException {
-        log.info("======== 상품 등록 컨트롤러 실행 ========");
-
         // 이미지 검증 실패시
         if (form.getMainImage().isEmpty() || form.getDetailImage().isEmpty()) {
             bindingResult.rejectValue("mainImage", "ImageError", "메인이미지와 상세이미지는 필수값입니다.");
@@ -61,9 +59,6 @@ public class ItemController {
 
         itemPacade.register(form);
 
-        log.info("상품 등록 : {}, {}원", item.getName(), item.getPrice());
-        log.info("======== 상품 등록 컨트롤러 종료 ========");
-
         return "redirect:/items";
     }
 
@@ -71,8 +66,6 @@ public class ItemController {
     public String list(Model model,
                        @ModelAttribute ItemSearchCondition itemSearchCondition,
                        Pageable pageable) throws IOException {
-        log.info("======== 상품 목록 컨트롤러 실행 ========");
-
         Category[] categories = Category.values();
 
         PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 2); // 한 페이지에 2개씩
@@ -85,8 +78,6 @@ public class ItemController {
 
         log.info("상품 검색 조건 = 이름:{}, 카테고리:{}", itemSearchCondition.getName(), itemSearchCondition.getCategory());
         log.info("상품 개수 = {}", items.getContent().size());
-
-        log.info("======== 상품 목록 컨트롤러 종료 ========");
 
         return "/items/list";
     }
@@ -107,8 +98,6 @@ public class ItemController {
                          @Valid @ModelAttribute("item") ItemFormDto form,
                          BindingResult bindingResult,
                          Model model) throws IOException {
-        log.info("======== 상품 수정 컨트롤러 실행 ========");
-
         // 검증 실패시 다시 입력 폼으로
         if (bindingResult.hasErrors()) {
             log.info("bindingResult = {}", bindingResult);
@@ -118,8 +107,6 @@ public class ItemController {
         }
 
         itemPacade.update(id, form);
-
-        log.info("======== 상품 수정 컨트롤러 종료 ========");
 
         return "redirect:/items";
     }
@@ -134,12 +121,7 @@ public class ItemController {
 
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable long id) throws IOException {
-        log.info("======== 상품 삭제 컨트롤러 실행 ========");
-
         itemPacade.delete(id);
-
-        log.info("======== 상품 삭제 컨트롤러 종료 ========");
-
         return "redirect:/items";
     }
 
