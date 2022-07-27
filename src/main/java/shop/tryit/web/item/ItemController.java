@@ -22,6 +22,8 @@ import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemSearchCondition;
 import shop.tryit.domain.item.ItemSearchDto;
 import shop.tryit.domain.item.ItemService;
+import shop.tryit.domain.item.dto.ItemDto;
+import shop.tryit.domain.item.dto.ItemFormDto;
 
 @Slf4j
 @Controller
