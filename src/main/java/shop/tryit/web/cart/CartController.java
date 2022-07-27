@@ -1,8 +1,5 @@
 package shop.tryit.web.cart;
 
-import static java.util.stream.Collectors.toList;
-
-import java.security.Principal;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import shop.tryit.domain.cart.dto.CartItemDto;
 import shop.tryit.domain.cart.dto.CartListDto;
 import shop.tryit.domain.item.Item;
+import shop.tryit.domain.cart.service.CartFacade;
 import shop.tryit.domain.item.ItemService;
 
 @Slf4j
@@ -31,10 +29,8 @@ import shop.tryit.domain.item.ItemService;
 @RequiredArgsConstructor
 public class CartController {
 
-    private final CartItemService cartItemService;
-    private final CartService cartService;
+    private final CartFacade cartFacade;
     private final ItemService itemService;
-    private final ImageService imageService;
 
     /**
      * 장바구니에 상품 담기
@@ -46,7 +42,6 @@ public class CartController {
         log.info("장바구니에 담을 상품의 id = {}", cartItemDto.getItemId());
         log.info("장바구니에 담을 상품의 수량 = {}", cartItemDto.getQuantity());
 
-        Cart cart = cartService.findCart(user.getUsername());
         Item item = itemService.findOne(cartItemDto.getItemId());
 
         // 수량 검증
@@ -65,8 +60,7 @@ public class CartController {
         }
 
         // 검증 성공시 장바구니에 상품 담기
-        CartItem cartItem = CartItemAdapter.toEntity(cartItemDto, item, cart);
-        Long cartItemId = cartItemService.addCartItem(cartItem);
+        Long cartItemId = cartFacade.addCartItem(cartItemDto, user);
 
         return new ResponseEntity<Long>(cartItemId, HttpStatus.OK);
     }
@@ -75,19 +69,9 @@ public class CartController {
      * 장바구니에 담긴 상품 조회
      */
     @GetMapping
-    public String list(Model model, Principal principal) {
-        Cart cart = cartService.findCart(principal.getName());
+    public String list(Model model, @AuthenticationPrincipal User user) {
+        List<CartListDto> cartListDtos = cartFacade.findCartItems(user);
 
-        List<CartItem> cartItems = cartItemService.findCartItemList(cart);
-
-        List<Image> mainImages = cartItems.stream()
-                .map(cartItem -> cartItem.getItemId()) // CartItem -> Long
-                .map(imageService::getMainImage)// Long -> Image
-                .collect(toList());
-
-        List<CartListDto> cartListDtos = CartItemAdapter.toDto(cartItems, mainImages);
-
-        // TODO: proxy 이슈 해결
         model.addAttribute("cartListDtos", cartListDtos);
 
         return "/cart/list";
