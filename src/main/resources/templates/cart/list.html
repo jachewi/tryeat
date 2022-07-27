@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+<!-- ======= Header ======= -->
+<div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></div>
+
+<!-- ======= Item Section ======= -->
+<section class="item">
+  <div class="container">
+    <h3 class="text-center mb-5">
+      CART LIST
+    </h3>
+
+    <div class="cart-list">
+      <table class="table">
+        <colgroup>
+          <col width="5%">
+          <col width="10%">
+          <col width="25%">
+          <col width="15%">
+          <col width="15%">
+          <col width="15%">
+          <col width="15%">
+        </colgroup>
+        <thead>
+        <tr class="text-center">
+          <th>
+            <input type="checkbox">
+          </th>
+          <th>이미지</th>
+          <th class="text-left">상품정보</th>
+          <th>금액</th>
+          <th>수량</th>
+          <th>합계</th>
+          <th>삭제</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr class="text-center custom" th:each="cartListDto : ${cartListDtos}">
+          <td>
+            <input type="checkbox">
+          </td>
+          <td>
+            <a th:href="@{/items/{id}(id=${cartListDto.itemId})}">
+              <img th:src="|/files/${cartListDto.mainImage.getStoreFileName()}|" width="100" height="100"/>
+            </a>
+          </td>
+          <td th:text="${cartListDto.itemName}"></td>
+          <td>
+            <span th:text="${cartListDto.itemPrice}"></span>원
+          </td>
+          <td>
+            <label for="quantity"></label>
+            <input type="number" id="quantity" min="1" th:value="${cartListDto.quantity}">
+          </td>
+          <td>
+            <span th:text="${cartListDto.totalPrice}"></span>원
+          </td>
+          <td>
+            <button type="button" class="btn btn-light btn-sm">삭제</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div> <!-- /container -->
+</section> <!-- End Item -->
+
+<!-- ======= Footer ======= -->
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+
+</html>

@@ -1,5 +1,9 @@
 package shop.tryit.web.cart.controller;
 
+import static java.util.stream.Collectors.toList;
+
+import java.security.Principal;
+import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,8 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +24,13 @@ import shop.tryit.domain.cart.entity.Cart;
 import shop.tryit.domain.cart.entity.CartItem;
 import shop.tryit.domain.cart.service.CartItemService;
 import shop.tryit.domain.cart.service.CartService;
+import shop.tryit.domain.item.Image;
 import shop.tryit.domain.item.ImageService;
 import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemService;
 import shop.tryit.web.cart.dto.CartItemAdapter;
 import shop.tryit.web.cart.dto.CartItemDto;
+import shop.tryit.web.cart.dto.CartListDto;
 
 @Slf4j
 @Controller
@@ -68,6 +76,28 @@ public class CartController {
         Long cartItemId = cartItemService.addCartItem(cartItem);
 
         return new ResponseEntity<Long>(cartItemId, HttpStatus.OK);
+    }
+
+    /**
+     * 장바구니에 담긴 상품 조회
+     */
+    @GetMapping
+    public String list(Model model, Principal principal) {
+        Cart cart = cartService.findCart(principal.getName());
+
+        List<CartItem> cartItems = cartItemService.findCartItemList(cart);
+
+        List<Image> mainImages = cartItems.stream()
+                .map(cartItem -> cartItem.getItemId()) // CartItem -> Long
+                .map(imageService::getMainImage)// Long -> Image
+                .collect(toList());
+
+        List<CartListDto> cartListDtos = CartItemAdapter.toDto(cartItems, mainImages);
+
+        // TODO: proxy 이슈 해결
+        model.addAttribute("cartListDtos", cartListDtos);
+
+        return "/cart/list";
     }
 
 }
