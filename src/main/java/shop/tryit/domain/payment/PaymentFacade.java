@@ -9,10 +9,10 @@ import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemService;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberService;
+import shop.tryit.domain.payment.dto.PaymentDto;
+import shop.tryit.domain.payment.dto.PaymentRequsetDto;
+import shop.tryit.domain.payment.dto.PaymentResponseDto;
 import shop.tryit.domain.payment.dto.PaymentSaveDto;
-import shop.tryit.web.payment.PaymentDto;
-import shop.tryit.web.payment.PaymentRequsetDto;
-import shop.tryit.web.payment.PaymentResponseDto;
 
 @Component
 @RequiredArgsConstructor

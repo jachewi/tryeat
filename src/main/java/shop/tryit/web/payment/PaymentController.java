@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import shop.tryit.domain.payment.PaymentFacade;
+import shop.tryit.domain.payment.dto.PaymentRequsetDto;
 import shop.tryit.domain.payment.dto.PaymentSaveDto;
 
 @Slf4j

@@ -1,4 +1,4 @@
-package shop.tryit.web.payment;
+package shop.tryit.domain.payment.dto;
 
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
