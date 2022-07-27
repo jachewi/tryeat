@@ -1,9 +1,10 @@
-package shop.tryit.domain.order;
+package shop.tryit.domain.order.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Getter;
+import shop.tryit.domain.order.OrderStatus;
 
 @Getter
 public class OrderSearchDto {

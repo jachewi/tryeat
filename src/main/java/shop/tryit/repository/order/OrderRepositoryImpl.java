@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.order.Order;
 import shop.tryit.domain.order.OrderRepository;
-import shop.tryit.domain.order.OrderSearchDto;
+import shop.tryit.domain.order.dto.OrderSearchDto;
 
 @Slf4j
 @Repository

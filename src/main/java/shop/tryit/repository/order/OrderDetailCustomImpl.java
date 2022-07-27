@@ -8,8 +8,8 @@ import lombok.RequiredArgsConstructor;
 import shop.tryit.domain.item.ItemRepository;
 import shop.tryit.domain.item.ItemSearchDto;
 import shop.tryit.domain.order.Order;
-import shop.tryit.domain.order.OrderDetailSearchDto;
 import shop.tryit.domain.order.QOrderDetailSearchDto;
+import shop.tryit.domain.order.dto.OrderDetailSearchDto;
 
 @RequiredArgsConstructor
 public class OrderDetailCustomImpl implements OrderDetailCustom {

@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import shop.tryit.domain.common.Pages;
 import shop.tryit.domain.order.OrderFacade;
-import shop.tryit.domain.order.OrderSearchDto;
+import shop.tryit.domain.order.dto.OrderFormDto;
+import shop.tryit.domain.order.dto.OrderSearchDto;
 
 @Slf4j
 @Controller
@@ -53,3 +54,5 @@ public class OrderController {
     }
 
 }
+
+

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.item.ItemRepository;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
+import shop.tryit.domain.order.dto.OrderSearchDto;
 
 @Service
 @Transactional(readOnly = true)

@@ -9,8 +9,9 @@ import org.springframework.security.core.userdetails.User;
 import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemService;
 import shop.tryit.domain.member.MemberService;
-import shop.tryit.web.order.OrderDto;
-import shop.tryit.web.order.OrderFormDto;
+import shop.tryit.domain.order.dto.OrderDto;
+import shop.tryit.domain.order.dto.OrderFormDto;
+import shop.tryit.domain.order.dto.OrderSearchDto;
 
 @RequiredArgsConstructor
 public class OrderFacade {

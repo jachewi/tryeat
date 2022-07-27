@@ -2,6 +2,7 @@ package shop.tryit.domain.order;
 
 import java.util.List;
 import java.util.Optional;
+import shop.tryit.domain.order.dto.OrderDetailSearchDto;
 
 public interface OrderDetailRepository {
 

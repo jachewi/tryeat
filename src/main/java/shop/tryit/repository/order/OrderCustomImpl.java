@@ -13,9 +13,9 @@ import org.springframework.data.support.PageableExecutionUtils;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.order.Order;
 import shop.tryit.domain.order.OrderDetailRepository;
-import shop.tryit.domain.order.OrderDetailSearchDto;
-import shop.tryit.domain.order.OrderSearchDto;
 import shop.tryit.domain.order.QOrderSearchDto;
+import shop.tryit.domain.order.dto.OrderDetailSearchDto;
+import shop.tryit.domain.order.dto.OrderSearchDto;
 
 @RequiredArgsConstructor
 public class OrderCustomImpl implements OrderCustom {
