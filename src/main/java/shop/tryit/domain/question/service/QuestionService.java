@@ -1,4 +1,4 @@
-package shop.tryit.domain.question;
+package shop.tryit.domain.question.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -7,6 +7,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.answer.AnswerRepository;
+import shop.tryit.domain.question.Question;
+import shop.tryit.domain.question.QuestionRepository;
+import shop.tryit.domain.question.QuestionSearchCondition;
+import shop.tryit.domain.question.QuestionSearchDto;
 
 @Service
 @RequiredArgsConstructor
