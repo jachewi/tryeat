@@ -1,23 +1,21 @@
-package shop.tryit.web.question;
+package shop.tryit.domain.question.dto;
 
 import javax.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import org.hibernate.validator.constraints.Length;
 
 @Data
-@ToString
 @NoArgsConstructor
-@AllArgsConstructor
-public class QuestionFormDto {
-
-    private Long questionId;
+public class QuestionSaveFormDto {
 
     @NotEmpty(message = "제목을 입력해주세요.")
     private String title;
-   
+
     @NotEmpty(message = "내용을 입력해주세요.")
     private String content;
+
+    @Length(min = 4, max = 4, message = "비밀번호는 4자리입니다.")
+    private String password;
 
 }
