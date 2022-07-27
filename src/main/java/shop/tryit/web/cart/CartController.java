@@ -1,4 +1,4 @@
-package shop.tryit.web.cart.controller;
+package shop.tryit.web.cart;
 
 import static java.util.stream.Collectors.toList;
 
