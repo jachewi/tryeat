@@ -21,7 +21,7 @@ class PaymentServiceTests {
     @Test
     void 결제_정보_저장() {
         //given
-        Payment payment = Payment.of("imp_560723464190", "5000");
+        Payment payment = Payment.of(560723464190L, "5000");
 
         //when
         Long sevedId = sut.register(payment);
