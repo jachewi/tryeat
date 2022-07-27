@@ -7,7 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import shop.tryit.domain.answer.Answer;
-import shop.tryit.domain.answer.AnswerService;
+import shop.tryit.domain.answer.dto.AnswerFormDto;
+import shop.tryit.domain.answer.service.AnswerService;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberService;
 import shop.tryit.domain.question.Question;
@@ -16,7 +17,6 @@ import shop.tryit.domain.question.QuestionSearchDto;
 import shop.tryit.domain.question.dto.QuestionCheckPasswordFormDto;
 import shop.tryit.domain.question.dto.QuestionFormDto;
 import shop.tryit.domain.question.dto.QuestionSaveFormDto;
-import shop.tryit.web.answer.AnswerFormDto;
 
 @Component
 @RequiredArgsConstructor
