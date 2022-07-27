@@ -59,7 +59,7 @@
 
 <script th:inline="javascript">
   $('#addCartItem').click(function() {
-    var url = "/cart";
+    var url = "/carts";
     var data = {
       itemId : $('#itemId').val(),
       quantity : $('#quantity').val()
@@ -77,6 +77,7 @@
       }
     })
   })
+
 
 </script>
 </body>

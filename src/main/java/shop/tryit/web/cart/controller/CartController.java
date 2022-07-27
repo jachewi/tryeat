@@ -34,7 +34,7 @@ import shop.tryit.web.cart.dto.CartListDto;
 
 @Slf4j
 @Controller
-@RequestMapping("/cart")
+@RequestMapping("/carts")
 @RequiredArgsConstructor
 public class CartController {
 
