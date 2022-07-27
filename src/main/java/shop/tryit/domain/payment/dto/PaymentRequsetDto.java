@@ -1,4 +1,4 @@
-package shop.tryit.web.payment;
+package shop.tryit.domain.payment.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
