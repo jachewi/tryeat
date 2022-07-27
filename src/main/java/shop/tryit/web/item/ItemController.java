@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import shop.tryit.domain.common.Pages;
 import shop.tryit.domain.item.Category;
-import shop.tryit.domain.item.ImageService;
-import shop.tryit.domain.item.Item;
+import shop.tryit.domain.item.ItemPacade;
 import shop.tryit.domain.item.ItemSearchCondition;
 import shop.tryit.domain.item.ItemSearchDto;
-import shop.tryit.domain.item.ItemService;
 import shop.tryit.domain.item.dto.ItemDto;
 import shop.tryit.domain.item.dto.ItemFormDto;
 
@@ -31,8 +29,7 @@ import shop.tryit.domain.item.dto.ItemFormDto;
 @RequestMapping("/items")
 public class ItemController {
 
-    private final ItemService itemService;
-    private final ImageService imageService;
+    private final ItemPacade itemPacade;
 
     @GetMapping("/new")
     public String newItemForm(Model model) {
@@ -62,8 +59,7 @@ public class ItemController {
             return "/items/register";
         }
 
-        Item item = imageService.addImage(ItemAdapter.toEntity(form), form);
-        itemService.register(item);
+        itemPacade.register(form);
 
         log.info("상품 등록 : {}, {}원", item.getName(), item.getPrice());
         log.info("======== 상품 등록 컨트롤러 종료 ========");
@@ -80,7 +76,7 @@ public class ItemController {
         Category[] categories = Category.values();
 
         PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 2); // 한 페이지에 2개씩
-        Page<ItemSearchDto> items = itemService.searchItem(itemSearchCondition, pageRequest);
+        Page<ItemSearchDto> items = itemPacade.findItems(itemSearchCondition, pageRequest);
         Pages<ItemSearchDto> pages = Pages.of(items, 4); // 페이지 버튼 4개씩
 
         model.addAttribute("categories", categories);
@@ -100,8 +96,7 @@ public class ItemController {
         Category[] categories = Category.values();
         model.addAttribute("categories", categories);
 
-        Item item = itemService.findOne(id);
-        ItemDto itemDto = ItemAdapter.toDto(item, imageService.getMainImage(id), imageService.getDetailImage(id));
+        ItemDto itemDto = itemPacade.findItem(id);
         model.addAttribute("item", itemDto);
 
         return "/items/update";
@@ -122,11 +117,7 @@ public class ItemController {
             return "/items/update";
         }
 
-        Item newItem = ItemAdapter.toEntity(form);
-
-        itemService.update(id, newItem);
-        imageService.updateMainImage(id, form);
-        imageService.updateDetailImage(id, form);
+        itemPacade.update(id, form);
 
         log.info("======== 상품 수정 컨트롤러 종료 ========");
 
@@ -135,9 +126,7 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public String detail(@PathVariable long id, Model model) {
-        Item item = itemService.findOne(id);
-
-        ItemDto itemDto = ItemAdapter.toDto(item, imageService.getMainImage(id), imageService.getDetailImage(id));
+        ItemDto itemDto = itemPacade.findItem(id);
         model.addAttribute("item", itemDto);
 
         return "/items/detail";
@@ -147,8 +136,7 @@ public class ItemController {
     public String delete(@PathVariable long id) throws IOException {
         log.info("======== 상품 삭제 컨트롤러 실행 ========");
 
-        imageService.deleteImage(id); // 상품 이미지 서버에서 삭제
-        itemService.delete(id);
+        itemPacade.delete(id);
 
         log.info("======== 상품 삭제 컨트롤러 종료 ========");
 
