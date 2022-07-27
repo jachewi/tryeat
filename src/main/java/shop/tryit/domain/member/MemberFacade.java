@@ -2,11 +2,11 @@ package shop.tryit.domain.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import shop.tryit.domain.common.Address;
 import shop.tryit.domain.member.dto.MemberFormDto;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class MemberFacade {
     private final MemberService memberService;
