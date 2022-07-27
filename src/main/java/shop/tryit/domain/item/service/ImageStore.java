@@ -1,4 +1,4 @@
-package shop.tryit.domain.item;
+package shop.tryit.domain.item.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import shop.tryit.domain.item.ImageType;
+import shop.tryit.domain.item.entity.Image;
 
 @Component
 public class ImageStore {

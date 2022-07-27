@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import shop.tryit.domain.cart.entity.Cart;
 import shop.tryit.domain.cart.entity.CartItem;
 import shop.tryit.domain.cart.repository.CartItemRepository;
-import shop.tryit.domain.item.Item;
+import shop.tryit.domain.item.entity.Item;
 
 @Repository
 @RequiredArgsConstructor

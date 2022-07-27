@@ -1,4 +1,4 @@
-package shop.tryit.domain.item;
+package shop.tryit.domain.item.service;
 
 import static shop.tryit.domain.item.ImageType.DETAIL;
 import static shop.tryit.domain.item.ImageType.MAIN;
@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.item.dto.ItemFormDto;
+import shop.tryit.domain.item.entity.Image;
+import shop.tryit.domain.item.entity.Item;
 
 @Slf4j
 @Service

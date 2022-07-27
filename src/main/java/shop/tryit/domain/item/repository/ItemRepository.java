@@ -1,9 +1,12 @@
-package shop.tryit.domain.item;
+package shop.tryit.domain.item.repository;
 
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import shop.tryit.domain.item.ItemSearchCondition;
+import shop.tryit.domain.item.dto.ItemSearchDto;
+import shop.tryit.domain.item.entity.Item;
 
 public interface ItemRepository {
 

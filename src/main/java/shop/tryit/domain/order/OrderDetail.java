@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import shop.tryit.domain.item.Item;
+import shop.tryit.domain.item.entity.Item;
 
 @Entity
 @Getter

@@ -19,11 +19,11 @@ import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import shop.tryit.domain.item.Category;
-import shop.tryit.domain.item.Image;
 import shop.tryit.domain.item.ImageType;
 import shop.tryit.domain.item.ItemSearchCondition;
-import shop.tryit.domain.item.ItemSearchDto;
 import shop.tryit.domain.item.QItemSearchDto;
+import shop.tryit.domain.item.dto.ItemSearchDto;
+import shop.tryit.domain.item.entity.Image;
 
 @Repository
 @RequiredArgsConstructor

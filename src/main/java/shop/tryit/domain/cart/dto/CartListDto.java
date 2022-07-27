@@ -3,7 +3,7 @@ package shop.tryit.domain.cart.dto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import shop.tryit.domain.item.Image;
+import shop.tryit.domain.item.entity.Image;
 
 /* 장바구니 조회 시 전달 */
 @Data
