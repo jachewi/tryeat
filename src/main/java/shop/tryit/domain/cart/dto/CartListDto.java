@@ -1,4 +1,4 @@
-package shop.tryit.web.cart.dto;
+package shop.tryit.domain.cart.dto;
 
 import lombok.Builder;
 import lombok.Data;

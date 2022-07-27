@@ -1,4 +1,4 @@
-package shop.tryit.web.cart.dto;
+package shop.tryit.domain.cart.dto;
 
 import javax.validation.constraints.Min;
 import lombok.Data;
