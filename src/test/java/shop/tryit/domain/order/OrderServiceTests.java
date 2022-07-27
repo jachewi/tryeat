@@ -13,6 +13,7 @@ import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemRepository;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
+import shop.tryit.domain.order.service.OrderService;
 import shop.tryit.repository.order.OrderDetailJpaRepository;
 import shop.tryit.repository.order.OrderJpaRepository;
 
@@ -37,29 +38,29 @@ class OrderServiceTests {
 
     @Test
     void 주문_저장() {
-        //given
+        // given
         Member member = Member.builder().build();
         Order order = Order.of(member, OrderStatus.ORDER);
 
-        //when
+        // when
         Long savedId = sut.register(order);
 
-        //then
+        // then
         assertTrue(orderJpaRepository.findById(savedId).isPresent());
     }
 
     @Test
     void 주문_상세_내역_저장() {
-        //given
+        // given
         Item item = Item.builder().stockQuantity(10).build();
         Member member = Member.builder().build();
         Order order = Order.of(member, OrderStatus.ORDER);
         OrderDetail orderDetail = OrderDetail.of(item, order, 2);
 
-        //when
+        // when
         Long savedId = sut.detailRegister(orderDetail);
 
-        //then
+        // then
         assertTrue(orderDetailJpaRepository.findById(savedId).isPresent());
         assertEquals("주문 후 재고는 주문수량만큼 줄어야 한다.", 8,
                 item.getStockQuantity());
@@ -67,7 +68,7 @@ class OrderServiceTests {
 
     @Test
     void 주문_취소() {
-        //given
+        // given
         Item item = Item.builder().stockQuantity(8).build();
         Member member = Member.builder().build();
         Order order = Order.of(member, OrderStatus.ORDER);
@@ -75,35 +76,35 @@ class OrderServiceTests {
         Long savedId = orderJpaRepository.save(order).getId();
         Order cancelOrder = sut.findOne(savedId);
 
-        //when1 : 주문정보 취소
+        // when1 : 주문정보 취소
         cancelOrder.cancel(OrderStatus.CANCEL);
 
-        //then1 : 주문 상태 확인
+        // then1 : 주문 상태 확인
         assertEquals("주문 취소시 상태는 CANCEL 이다.", OrderStatus.CANCEL,
                 cancelOrder.getStatus());
     }
 
     @Test
     void 주문_취소_재고_체크() {
-        //given
+        // given
         Item item = Item.builder().stockQuantity(8).build();
         Member member = Member.builder().build();
         Order order = Order.of(member, OrderStatus.CANCEL);
         OrderDetail orderDetail = OrderDetail.of(item, order, 2);
 
-        //when
+        // when
         Long savedDetailId = orderDetailJpaRepository.save(orderDetail).getId();
         OrderDetail cancelOrderDetail = sut.detailFindOne(savedDetailId);
         cancelOrderDetail.cancel();
 
-        //then2 : 주문수량 롤백확인
+        // then2 : 주문수량 롤백확인
         assertEquals("주문이 취소된 상품은 그만큼 재고가 증가해야 한다.", 10,
                 item.getStockQuantity());
     }
 
     @Test
     void 주문_목록() {
-        //given
+        // given
         Item item = Item.builder().stockQuantity(10).build();
         itemRepository.save(item);
 
@@ -122,10 +123,10 @@ class OrderServiceTests {
         sut.detailRegister(orderDetail1);
         sut.detailRegister(orderDetail2);
 
-        //when
+        // when
         List<OrderDetail> orderDetails = sut.findOrder();
 
-        //then
+        // then
         assertThat(orderDetails).hasSize(2);
     }
 

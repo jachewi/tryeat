@@ -1,4 +1,4 @@
-package shop.tryit.domain.order;
+package shop.tryit.domain.order.service;
 
 import static java.util.stream.Collectors.toList;
 
@@ -6,13 +6,17 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Component;
 import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemService;
 import shop.tryit.domain.member.MemberService;
+import shop.tryit.domain.order.Order;
+import shop.tryit.domain.order.OrderDetail;
 import shop.tryit.domain.order.dto.OrderDto;
 import shop.tryit.domain.order.dto.OrderFormDto;
 import shop.tryit.domain.order.dto.OrderSearchDto;
 
+@Component
 @RequiredArgsConstructor
 public class OrderFacade {
 
