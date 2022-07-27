@@ -8,6 +8,8 @@
 <!-- ======= Hero Section ======= -->
 <section id="hero">
   <div class="container">
+
+    <!-- 결제할 상품란 -->
     <h2>주문 / 결제</h2>
     <hr>
     <form>
@@ -20,18 +22,41 @@
         </tr>
         </thead>
         <tbody>
-        <tr align="center">
+        <tr align="center" name="paymentItem">
           <td>
             <img width="100px" height="100px" th:src="|/files/${payment.mainImage.getStoreFileName()}|" src="../img/portfolio-details-1.jpg"/>
           </td>
-          <input type="hidden" id="itemId" th:value="${payment.itemId}">
+          <input type="hidden" id="itemId" name="itemId" th:value="${payment.itemId}"> <!-- Todo: th:id="'문자열'+${payment.itemId}" 형식으로 활용하기 -->
           <td><input type="hidden" id="name" th:text="${payment.itemName}" th:value="${payment.itemName}"/></td>
-          <td><input type="hidden" id="quantity" th:text="${payment.quantity}" th:value="${payment.quantity}"/></td>
-          <td><input type="hidden" id="totalPrice" th:text="${payment.totalPrice}" th:value="${payment.totalPrice}"/></td>
+          <td><input type="hidden" id="quantity" name="quantity" th:text="${payment.quantity}" th:value="${payment.quantity}"/></td>
+          <td><input type="hidden" id="itemTotalPrice" th:text="${payment.totalPrice}" th:value="${payment.totalPrice}"/></td>
+        </tr>
+
+        <!-------------------------테스트용 데이터 시작---------------------->
+        <tr align="center" name="paymentItem">
+          <td>
+            <img width="100px" height="100px" src="../img/portfolio-details-1.jpg"/>
+          </td>
+          <input type="hidden" id="itemId1" name="itemId" value="2">
+          <td><input type="hidden" id="name1" th:text="고양이사료샘플" value="고양이 사료 샘플"/></td>
+          <td><input type="hidden" id="quantity1" name="quantity" th:text="5" value="5"/></td>
+          <td><input type="hidden" id="itemTotalPrice1" th:text="5000" value="5000"/></td>
+        </tr>
+        <!-------------------------테스트용 데이터 끝---------------------->
+
         </tbody>
       </table>
+
+      <!-------------------------테스트용 데이터 시작---------------------->
+      <div style="float: right">
+        <span>총 수량: <input type="hidden" id="totalQuantity" th:text="${payment.quantity}+5" value="${payment.quantity}+5"/></span>
+        <span>총 가격: <input type="hidden" id="totalPrice" th:text="${payment.totalPrice}+5000" value="${payment.totalPrice}+5000"/></span>
+      </div>
+      <!-------------------------테스트용 데이터 끝---------------------->
+
       <br><br><br>
 
+      <!-- 배송지 정보란 -->
       <h2>배송지 정보</h2>
       <hr>
       <table width="100%">
@@ -69,18 +94,25 @@
 <footer th:replace="fragments/footer :: footer" id="footer"></footer>
 
 <!-- ======= ImPort API ======= -->
-<script>
+<script th:inline="javascript">
     $("#check_module").click(function () {
       var IMP = window.IMP; // 생략가능
       IMP.init('imp56228241');
 
+      //총 수량
+      var totalQuantity = parseInt($("#quantity").val()) +  parseInt($("#quantity1").val())
+      //주문명
+      var paymentName = '주문명: ' + $("#name").val() + ' 외 ' + totalQuantity
+      //총 구매가격
+      var totalPrice = parseInt($("#itemTotalPrice").val()) + parseInt($("#itemTotalPrice1").val())
+
       IMP.request_pay({ //param
         pg: 'kakaopay',
         pay_method: 'card',
-        merchant_uid: new Date().getTime(),               //주문번호 ex) merchant_1658304667454
-        name: '주문명 : ' + $("#name").val(),                   // name: '주문명 : ${order.name}'
-        amount: $("#totalPrice").val(),                                     // amount: ${cart.totalPrice}
-        buyer_name: $("#memberName").val(),			                        // 구매자 이름, ${member.name}
+        merchant_uid: new Date().getTime(),                       //주문번호 ex) 1658304667454
+        name: paymentName,                                        // name: '주문명 : ${order.name}'
+        amount: totalPrice,                                       // amount: ${cart.totalPrice}
+        buyer_name: $("#memberName").val(),			                  // 구매자 이름 ${member.name}
         buyer_tel: $("#memberPhone").val(),                       // 구매자 전화번호 ${member.phone}
         }, function (rsp) { //callback
           console.log(rsp);
@@ -99,35 +131,51 @@
               data: {
                   "merchant_uid" : rsp.merchant_uid,
                   "amount" : rsp.paid_amount
-              }
+              },
+              statusCode: {
+                  200: function(args){
+
+                    /** 주문 컨트롤러로 결제 상품정보를 보내는 AJAX **/
+                    var dataList = new Array();
+                    var paramData = new Object();
+
+                    $("tr[name=paymentItem]").each(function() {
+                        var orderItemId = $("#itemId").val(); //타임리프를 사용한다 가정했을 때 th:each, th:id를 통해 값이 해당 id의 value 값을 잘 받아 확인 필요
+                        var orderQuantity = $("#quantity").val();  // 위와 동문
+                        var data = new Object();
+                        data["itemId"] = orderItemId;
+                        data["orderQuantity"] = orderQuantity;
+                        dataList.push(data);
+                    });
+
+                    paramData['OrderDtoList'] = dataList;
+                    var param = JSON.stringify(paramData);
+
+                    console.log(param);
+
+                    $.ajax({
+                          type: "POST",
+                          url: "/orders/new", //결제 금액을 보낼 URL 설정
+                          dataType : 'json',
+                          data: param,
+                          //Todo: orderController 이후 200포트를 받았다면 메인화면으로 이동되는지 확인
+                          statusCode: {
+                              200: function(args){
+                                location.href='/';
+                              }
+                          }
+                      });<!--ajax End-->
+                  }<!--200 function End-->
+              }<!--statusCode End-->
           });
         } else {
           var msg = '결제에 실패하였습니다.';
           msg += '에러내용 : ' + rsp.error_msg;
         }
         alert(msg);  // Todo: 알럿창으로 msg에 넘어오는 값 확인 후에 결제 완료 알럿메시지로 변경하기
-
-        //주문 컨트롤러로 결제 정보를 보내는 AJAX
-        $.ajax({
-              type: "POST",
-              url: "/orders/new", //결제 금액을 보낼 URL 설정
-              dataType : 'json',
-              data: {
-                  "itemId" : $("#itemId").val(),
-                  "orderQuantity" : $("#quantity").val(),
-                  "merchant_uid" : rsp.merchant_uid,
-              },
-              //Todo: orderController 이후 200포트를 받았다면 메인화면으로 이동되는지 확인
-              statusCode: {
-                  200: function(args){
-                    location.href='/';
-                  }
-              }
-          });
       });
     });
 
 </script>
 </body>
 </html>
-
