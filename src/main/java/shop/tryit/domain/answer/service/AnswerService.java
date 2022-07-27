@@ -1,4 +1,4 @@
-package shop.tryit.domain.answer;
+package shop.tryit.domain.answer.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -7,8 +7,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import shop.tryit.domain.question.Question;
-import shop.tryit.domain.question.QuestionService;
+import shop.tryit.domain.answer.Answer;
+import shop.tryit.domain.answer.AnswerRepository;
+import shop.tryit.domain.question.entity.Question;
+import shop.tryit.domain.question.service.QuestionService;
 
 @Service
 @RequiredArgsConstructor

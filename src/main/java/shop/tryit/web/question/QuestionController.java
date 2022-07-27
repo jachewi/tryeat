@@ -4,7 +4,6 @@ import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -17,16 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import shop.tryit.domain.answer.AnswerService;
+import shop.tryit.domain.answer.dto.AnswerFormDto;
 import shop.tryit.domain.common.Pages;
-import shop.tryit.domain.member.Member;
-import shop.tryit.domain.member.MemberService;
-import shop.tryit.domain.question.Question;
-import shop.tryit.domain.question.QuestionSearchCondition;
-import shop.tryit.domain.question.QuestionSearchDto;
-import shop.tryit.domain.question.QuestionService;
-import shop.tryit.web.answer.AnswerAdapter;
-import shop.tryit.web.answer.AnswerFormDto;
+import shop.tryit.domain.question.dto.QuestionCheckPasswordFormDto;
+import shop.tryit.domain.question.dto.QuestionFormDto;
+import shop.tryit.domain.question.dto.QuestionSaveFormDto;
+import shop.tryit.domain.question.dto.QuestionSearchCondition;
+import shop.tryit.domain.question.dto.QuestionSearchDto;
+import shop.tryit.domain.question.service.QnAFacade;
 
 @Slf4j
 @Controller
@@ -34,9 +31,7 @@ import shop.tryit.web.answer.AnswerFormDto;
 @RequestMapping("/questions")
 public class QuestionController {
 
-    private final QuestionService questionService;
-    private final AnswerService answerService;
-    private final MemberService memberService;
+    private final QnAFacade qnAFacade;
 
     @GetMapping("/new")
     public String newQuestionForm(@ModelAttribute QuestionSaveFormDto questionSaveFormDto) {
@@ -46,65 +41,39 @@ public class QuestionController {
     @PostMapping("/new")
     public String newQuestion(@Valid @ModelAttribute QuestionSaveFormDto questionSaveFormDto,
                               BindingResult bindingResult,
-                              @AuthenticationPrincipal User user
-    ) {
-
-        log.info("bindingResult={}", bindingResult);
-
+                              @AuthenticationPrincipal User user) {
         if (bindingResult.hasErrors()) {
+            log.info("bindingResult={}", bindingResult);
             return "questions/register";
         }
-
-        String userEmail = user.getUsername();
-        Member member = memberService.findMember(userEmail);
-        log.info("user = '{}'", user);
-        log.info("userEmail = '{}'", userEmail);
-
-        Question question = QuestionAdapter.toEntity(questionSaveFormDto, member);
-        questionService.register(question, questionSaveFormDto.getPassword());
+        qnAFacade.questionRegister(questionSaveFormDto, user);
         return "redirect:/questions";
     }
 
     @GetMapping
     public String searchQuestion(Model model,
                                  @ModelAttribute QuestionSearchCondition questionSearchCondition,
-                                 Pageable pageable
-    ) {
-        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 2);
-        Page<QuestionSearchDto> questions = questionService.searchList(questionSearchCondition, pageRequest);
+                                 Pageable pageable) {
+        Page<QuestionSearchDto> questions = qnAFacade.searchQuestion(pageable, questionSearchCondition);
         Pages<QuestionSearchDto> pages = Pages.of(questions, 4);
 
         model.addAttribute("questions", questions);
         model.addAttribute("pages", pages.getPages());
-
-        log.info("questionSearchCondition = '{}'", questionSearchCondition);
-        log.info("questions = '{}'", questions);
-        log.info("questions.size = '{}'", questions.getContent().size());
-
         return "questions/list";
     }
 
     @PostMapping("/{questionId}/authority")
-    public String findOne1(@PathVariable Long questionId,
-                           Model model,
-                           @RequestParam(defaultValue = "0") int page,
-                           @ModelAttribute AnswerFormDto answerFormDto) {
-
-        log.info("post 방식");
-        Question question = questionService.findOne(questionId);
-        QuestionFormDto questionFormDto = QuestionAdapter.toDto(question);
-
-        Page<AnswerFormDto> answers = answerService.findAnswersByQuestionId(questionId, page)
-                .map(AnswerAdapter::toForm);
-
+    public String findOne(@PathVariable Long questionId,
+                          Model model,
+                          @RequestParam(defaultValue = "0") int page,
+                          @ModelAttribute AnswerFormDto answerFormDto) {
+        Page<AnswerFormDto> answers = qnAFacade.findAnswersByQuestionId(questionId, page);
         Pages<AnswerFormDto> pages = Pages.of(answers, 4);
 
-        log.info("questionFormDto='{}'", questionFormDto);
-        log.info("answers='{}'", answers);
-
-        model.addAttribute("pages", pages.getPages());
+        QuestionFormDto questionFormDto = qnAFacade.toDto(questionId);
         model.addAttribute("questionFormDto", questionFormDto);
         model.addAttribute("answers", answers);
+        model.addAttribute("pages", pages.getPages());
 
         return "questions/detail-view";
     }
@@ -118,20 +87,14 @@ public class QuestionController {
     @PostMapping("/{questionId}/update")
     public String update(@PathVariable Long questionId,
                          @Valid @ModelAttribute QuestionFormDto questionFormDto,
-                         @AuthenticationPrincipal User user
-    ) {
-
-        String userEmail = user.getUsername();
-        Member member = memberService.findMember(userEmail);
-        Question newQuestion = QuestionAdapter.toEntity(questionFormDto, member);
-        questionService.update(questionId, newQuestion);
+                         @AuthenticationPrincipal User user) {
+        qnAFacade.update(questionId, questionFormDto, user);
         return String.format("redirect:/questions/%s", questionId);
     }
 
     @GetMapping("/{questionId}")
     public String passwordCheckForm(
-            @ModelAttribute QuestionCheckPasswordFormDto questionCheckPasswordFormDto
-    ) {
+            @ModelAttribute QuestionCheckPasswordFormDto questionCheckPasswordFormDto) {
         return "questions/check-password";
     }
 
@@ -139,20 +102,15 @@ public class QuestionController {
     public String passwordCheck(
             @ModelAttribute QuestionCheckPasswordFormDto questionCheckPasswordFormDto,
             BindingResult bindingResult,
-            @PathVariable Long questionId
-    ) {
+            @PathVariable Long questionId) {
         if (bindingResult.hasErrors()) {
             log.info("bindingResult={}", bindingResult);
             return "questions/check-password";
         }
 
-        Question question = questionService.findOne(questionId);
-        boolean authorized = questionService.checkPassword(questionCheckPasswordFormDto.getPassword(), question);
-
-        if (authorized) {
+        if (qnAFacade.checkPassword(questionId, questionCheckPasswordFormDto)) {
             return String.format("forward:/questions/%d/authority", questionId);
         }
-
         return "questions/check-password";
     }
 

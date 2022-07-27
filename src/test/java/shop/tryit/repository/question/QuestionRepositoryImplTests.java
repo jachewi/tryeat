@@ -14,10 +14,10 @@ import shop.tryit.domain.answer.Answer;
 import shop.tryit.domain.answer.AnswerRepository;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
-import shop.tryit.domain.question.Question;
 import shop.tryit.domain.question.QuestionRepository;
-import shop.tryit.domain.question.QuestionSearchCondition;
-import shop.tryit.domain.question.QuestionSearchDto;
+import shop.tryit.domain.question.dto.QuestionSearchCondition;
+import shop.tryit.domain.question.dto.QuestionSearchDto;
+import shop.tryit.domain.question.entity.Question;
 
 @SpringBootTest
 @Transactional

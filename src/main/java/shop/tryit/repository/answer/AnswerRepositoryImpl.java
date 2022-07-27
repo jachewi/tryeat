@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import shop.tryit.domain.answer.Answer;
 import shop.tryit.domain.answer.AnswerRepository;
-import shop.tryit.domain.question.Question;
+import shop.tryit.domain.question.entity.Question;
 
 @Repository
 @RequiredArgsConstructor

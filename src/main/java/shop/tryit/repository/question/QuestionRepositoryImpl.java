@@ -5,10 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import shop.tryit.domain.question.Question;
 import shop.tryit.domain.question.QuestionRepository;
-import shop.tryit.domain.question.QuestionSearchCondition;
-import shop.tryit.domain.question.QuestionSearchDto;
+import shop.tryit.domain.question.dto.QuestionSearchCondition;
+import shop.tryit.domain.question.dto.QuestionSearchDto;
+import shop.tryit.domain.question.entity.Question;
 
 @Repository
 @RequiredArgsConstructor

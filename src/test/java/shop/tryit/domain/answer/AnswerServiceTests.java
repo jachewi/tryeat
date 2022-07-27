@@ -10,10 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.domain.answer.service.AnswerService;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
-import shop.tryit.domain.question.Question;
 import shop.tryit.domain.question.QuestionRepository;
+import shop.tryit.domain.question.entity.Question;
 import shop.tryit.repository.answer.AnswerJpaRepository;
 
 @Transactional
@@ -49,7 +50,7 @@ class AnswerServiceTests {
 
     @Test
     void 수정_기능_테스트() {
-        //given
+        // given
         Member member = Member.builder().build();
         Question question = Question.of("title", "content", member);
         Answer answer = Answer.of("content2", question, member);

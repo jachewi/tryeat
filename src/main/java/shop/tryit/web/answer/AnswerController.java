@@ -1,6 +1,5 @@
 package shop.tryit.web.answer;
 
-
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,12 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import shop.tryit.domain.answer.Answer;
-import shop.tryit.domain.answer.AnswerService;
-import shop.tryit.domain.member.Member;
-import shop.tryit.domain.member.MemberService;
-import shop.tryit.domain.question.Question;
-import shop.tryit.domain.question.QuestionService;
+import shop.tryit.domain.answer.dto.AnswerFormDto;
+import shop.tryit.domain.question.service.QnAFacade;
 
 @Slf4j
 @Controller
@@ -25,39 +20,26 @@ import shop.tryit.domain.question.QuestionService;
 @RequestMapping("/answers")
 public class AnswerController {
 
-    private final AnswerService answerService;
-    private final QuestionService questionService;
-    private final MemberService memberService;
+    private final QnAFacade qnAFacade;
 
     @PostMapping("/new/{questionId}")
     public String register(@PathVariable Long questionId,
                            @AuthenticationPrincipal User user,
                            @Valid @ModelAttribute AnswerFormDto answerFormDto,
-                           BindingResult bindingResult
-    ) {
-        log.info("answerFormDto='{}'", answerFormDto);
-
+                           BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.info("bindingResult={}", bindingResult);
             return String.format("redirect:/questions/%s", questionId);
-
         }
 
-        Member member = memberService.findMember(user.getUsername());
-        Question question = questionService.findOne(questionId);
-        Answer answer = AnswerAdapter.toEntity(answerFormDto, question, member);
-        answerService.register(answer);
-
+        qnAFacade.answerRegister(user, questionId, answerFormDto);
         return String.format("redirect:/questions/%s", questionId);
     }
 
     @PostMapping("/delete/{answerId}")
     public String delete(@PathVariable Long answerId) {
-        Answer answer = answerService.findById(answerId);
-        Long questionId = answer.getQuestionId();
-
-        answerService.delete(answer);
-
+        qnAFacade.delete(answerId);
+        Long questionId = qnAFacade.findQuestionIdByAnswerId(answerId);
         return String.format("redirect:/questions/%s", questionId);
     }
 

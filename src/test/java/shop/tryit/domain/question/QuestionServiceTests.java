@@ -1,12 +1,12 @@
 package shop.tryit.domain.question;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +17,10 @@ import shop.tryit.domain.answer.Answer;
 import shop.tryit.domain.answer.AnswerRepository;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
+import shop.tryit.domain.question.dto.QuestionSearchCondition;
+import shop.tryit.domain.question.dto.QuestionSearchDto;
+import shop.tryit.domain.question.entity.Question;
+import shop.tryit.domain.question.service.QuestionService;
 import shop.tryit.repository.question.QuestionJpaRepository;
 
 @Transactional
@@ -109,7 +113,7 @@ class QuestionServiceTests {
         List<QuestionSearchDto> content = questionSearchDtos.getContent();
 
         // then
-        Assertions.assertThat(content.size()).isEqualTo(pageRequest.getPageSize());
+        assertThat(content.size()).isEqualTo(pageRequest.getPageSize());
     }
 
 }

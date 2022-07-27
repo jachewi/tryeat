@@ -1,4 +1,4 @@
-package shop.tryit.web.question;
+package shop.tryit.domain.question.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package shop.tryit.web.answer;
+package shop.tryit.domain.answer.dto;
 
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotBlank;
@@ -19,5 +19,5 @@ public class AnswerFormDto {
     private String content;
 
     private LocalDateTime createdDateTime;
-    
+
 }
