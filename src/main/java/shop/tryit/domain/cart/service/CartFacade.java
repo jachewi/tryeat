@@ -7,7 +7,6 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.cart.dto.CartItemDto;
 import shop.tryit.domain.cart.dto.CartListDto;
 import shop.tryit.domain.cart.entity.Cart;
@@ -19,7 +18,6 @@ import shop.tryit.domain.item.ItemService;
 
 @Component
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class CartFacade {
 
     private final CartItemService cartItemService;
