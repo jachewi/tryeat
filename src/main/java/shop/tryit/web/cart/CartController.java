@@ -44,9 +44,10 @@ public class CartController {
 
         Item item = itemService.findOne(cartItemDto.getItemId());
 
+        // TODO : if문 로직을 비즈니스 로직으로 분리
         // 수량 검증
         if (item.getStockQuantity() < cartItemDto.getQuantity()) {
-            bindingResult.rejectValue("quantity", "StockError", String.format("현재 남은 수량은 %d개 입니다.%n %d개 이하로 담아주세요.", item.getStockQuantity(), item.getStockQuantity()));
+            bindingResult.rejectValue("quantity", "StockError", String.format("현재 남은 수량은 %d개 입니다.%n%d개 이하로 담아주세요.", item.getStockQuantity(), item.getStockQuantity()));
         }
 
         // 검증 실패시 400
