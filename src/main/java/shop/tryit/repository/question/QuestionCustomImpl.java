@@ -21,8 +21,8 @@ import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import shop.tryit.domain.question.QQuestionSearchDto;
-import shop.tryit.domain.question.QuestionSearchCondition;
-import shop.tryit.domain.question.QuestionSearchDto;
+import shop.tryit.domain.question.dto.QuestionSearchCondition;
+import shop.tryit.domain.question.dto.QuestionSearchDto;
 
 @Repository
 @RequiredArgsConstructor
@@ -31,7 +31,7 @@ public class QuestionCustomImpl implements QuestionCustom {
     private final JPAQueryFactory queryFactory;
 
     private static Map<Long, QuestionSearchDto> map;
-    
+
     @Override
     public Page<QuestionSearchDto> searchQuestion(QuestionSearchCondition condition, Pageable pageable) {
         List<QuestionSearchDto> content = searchContent(condition, pageable);
@@ -91,7 +91,6 @@ public class QuestionCustomImpl implements QuestionCustom {
     private BooleanExpression containsCondition(String condition) {
         String nullSafeCondition = StringUtils.hasText(condition) ? condition:"";
         return questionTitleContains(nullSafeCondition).or(memberEmailContains(nullSafeCondition));
-
     }
 
     private BooleanExpression questionTitleContains(String condition) {

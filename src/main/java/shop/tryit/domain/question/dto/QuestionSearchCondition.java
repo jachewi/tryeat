@@ -1,4 +1,4 @@
-package shop.tryit.domain.question;
+package shop.tryit.domain.question.dto;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -2,8 +2,8 @@ package shop.tryit.repository.question;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import shop.tryit.domain.question.QuestionSearchCondition;
-import shop.tryit.domain.question.QuestionSearchDto;
+import shop.tryit.domain.question.dto.QuestionSearchCondition;
+import shop.tryit.domain.question.dto.QuestionSearchDto;
 
 public interface QuestionCustom {
 
