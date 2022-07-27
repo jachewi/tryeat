@@ -20,17 +20,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import shop.tryit.domain.cart.entity.Cart;
-import shop.tryit.domain.cart.entity.CartItem;
-import shop.tryit.domain.cart.service.CartItemService;
-import shop.tryit.domain.cart.service.CartService;
-import shop.tryit.domain.item.Image;
-import shop.tryit.domain.item.ImageService;
+import shop.tryit.domain.cart.dto.CartItemDto;
+import shop.tryit.domain.cart.dto.CartListDto;
 import shop.tryit.domain.item.Item;
 import shop.tryit.domain.item.ItemService;
-import shop.tryit.web.cart.dto.CartItemAdapter;
-import shop.tryit.web.cart.dto.CartItemDto;
-import shop.tryit.web.cart.dto.CartListDto;
 
 @Slf4j
 @Controller
