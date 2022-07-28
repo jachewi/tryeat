@@ -1,4 +1,4 @@
-package shop.tryit.domain.notice;
+package shop.tryit.domain.notice.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

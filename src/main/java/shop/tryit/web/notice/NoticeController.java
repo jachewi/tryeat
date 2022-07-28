@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import shop.tryit.domain.common.Pages;
-import shop.tryit.domain.notice.NoticeFacade;
 import shop.tryit.domain.notice.dto.NoticeSaveFormDto;
 import shop.tryit.domain.notice.dto.NoticeSearchFormDto;
 import shop.tryit.domain.notice.dto.NoticeUpdateFormDto;
 import shop.tryit.domain.notice.dto.NoticeViewFormDto;
+import shop.tryit.domain.notice.service.NoticeFacade;
 
 @Slf4j
 @Controller
