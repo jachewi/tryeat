@@ -50,16 +50,14 @@ public class NoticeController {
     }
 
     @GetMapping("/{noticeId}")
-    public String findOne(@PathVariable Long noticeId,
-                          Model model) {
+    public String findOne(@PathVariable Long noticeId, Model model) {
         NoticeViewFormDto noticeViewFormDto = noticeFacade.toViewForm(noticeId);
         model.addAttribute("noticeViewFormDto", noticeViewFormDto);
         return "notices/detail";
     }
 
     @GetMapping("/{noticeId}/update")
-    public String updateForm(@PathVariable Long noticeId,
-                             Model model) {
+    public String updateForm(@PathVariable Long noticeId, Model model) {
         NoticeUpdateFormDto noticeUpdateFormDto = noticeFacade.toUpdateForm(noticeId);
         model.addAttribute("noticeUpdateFormDto", noticeUpdateFormDto);
         return "notices/update";
