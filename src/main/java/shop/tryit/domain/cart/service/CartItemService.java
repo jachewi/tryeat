@@ -26,7 +26,7 @@ public class CartItemService {
     @Transactional
     public Long addCartItem(CartItem cartItem) {
         // 장바구니에 담을 상품 엔티티 조회
-        Item item = itemRepository.findById(cartItem.getItem().getId())
+        Item item = itemRepository.findById(cartItem.getItemId())
                 .orElseThrow(() -> new IllegalStateException("해당 상품을 찾을 수 없습니다."));
 
         // 장바구니에 해당 상품이 있는지 확인
