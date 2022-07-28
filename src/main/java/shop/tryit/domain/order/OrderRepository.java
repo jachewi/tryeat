@@ -4,6 +4,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import shop.tryit.domain.member.Member;
+import shop.tryit.domain.order.dto.OrderSearchDto;
 
 public interface OrderRepository {
 

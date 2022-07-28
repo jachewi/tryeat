@@ -1,8 +1,8 @@
 package shop.tryit.repository.item;
 
 import static java.util.stream.Collectors.toMap;
-import static shop.tryit.domain.item.QImage.image;
-import static shop.tryit.domain.item.QItem.item;
+import static shop.tryit.domain.item.entity.QImage.image;
+import static shop.tryit.domain.item.entity.QItem.item;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -19,11 +19,11 @@ import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import shop.tryit.domain.item.Category;
-import shop.tryit.domain.item.Image;
 import shop.tryit.domain.item.ImageType;
 import shop.tryit.domain.item.ItemSearchCondition;
-import shop.tryit.domain.item.ItemSearchDto;
-import shop.tryit.domain.item.QItemSearchDto;
+import shop.tryit.domain.item.dto.ItemSearchDto;
+import shop.tryit.domain.item.dto.QItemSearchDto;
+import shop.tryit.domain.item.entity.Image;
 
 @Repository
 @RequiredArgsConstructor

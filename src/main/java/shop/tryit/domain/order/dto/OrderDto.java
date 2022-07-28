@@ -1,4 +1,4 @@
-package shop.tryit.web.order;
+package shop.tryit.domain.order.dto;
 
 import java.time.LocalDateTime;
 import lombok.Builder;
@@ -9,6 +9,7 @@ import shop.tryit.domain.order.OrderStatus;
 @Data
 @NoArgsConstructor
 public class OrderDto {
+
     /**
      * 주문 정보 DTO
      */

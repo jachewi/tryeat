@@ -1,4 +1,4 @@
-package shop.tryit.domain.item;
+package shop.tryit.domain.item.dto;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -6,6 +6,7 @@ import com.querydsl.core.annotations.QueryProjection;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import shop.tryit.domain.item.entity.Image;
 
 @Data
 @NoArgsConstructor(access = PROTECTED)

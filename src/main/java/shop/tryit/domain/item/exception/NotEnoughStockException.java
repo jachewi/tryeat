@@ -1,4 +1,4 @@
-package shop.tryit.domain.item;
+package shop.tryit.domain.item.exception;
 
 public class NotEnoughStockException extends RuntimeException {
     public NotEnoughStockException() {

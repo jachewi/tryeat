@@ -1,4 +1,4 @@
-package shop.tryit.domain.item;
+package shop.tryit.domain.item.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,8 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+import shop.tryit.domain.item.ItemSearchCondition;
 import shop.tryit.domain.item.dto.ItemDto;
 import shop.tryit.domain.item.dto.ItemFormDto;
+import shop.tryit.domain.item.dto.ItemSearchDto;
+import shop.tryit.domain.item.entity.Image;
+import shop.tryit.domain.item.entity.Item;
 
 @Component
 @RequiredArgsConstructor

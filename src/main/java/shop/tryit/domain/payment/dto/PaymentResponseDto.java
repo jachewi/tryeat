@@ -2,7 +2,7 @@ package shop.tryit.domain.payment.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import shop.tryit.domain.item.Image;
+import shop.tryit.domain.item.entity.Image;
 
 @Data
 public class PaymentResponseDto {

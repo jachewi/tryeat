@@ -1,4 +1,4 @@
-package shop.tryit.web.order;
+package shop.tryit.domain.order.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -13,11 +13,11 @@ public class OrderFormDto {
 
     // View에서 넘겨받는 값
     private Long itemId;
-    private int orderQuantity; //주문 수량
+    private int orderQuantity; // 주문 수량
 
     // DB에서 조회해오는 값
-    private String itemName;  //상품이름
-    private int itemPrice; //상품 가격
+    private String itemName;  // 상품이름
+    private int itemPrice; // 상품 가격
 
     @Builder
     private OrderFormDto(Long itemId, String itemName, int orderQuantity, int itemPrice) {

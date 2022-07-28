@@ -1,4 +1,4 @@
-package shop.tryit.domain.item;
+package shop.tryit.domain.item.entity;
 
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.CascadeType.REMOVE;
@@ -19,6 +19,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import shop.tryit.domain.common.BaseTimeEntity;
+import shop.tryit.domain.item.Category;
+import shop.tryit.domain.item.exception.NotEnoughStockException;
 
 @Entity
 @Getter
