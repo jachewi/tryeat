@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import shop.tryit.domain.common.Pages;
-import shop.tryit.domain.member.Member;
-import shop.tryit.domain.member.MemberService;
-import shop.tryit.domain.notice.Notice;
-import shop.tryit.domain.notice.NoticeService;
+import shop.tryit.domain.notice.dto.NoticeSaveFormDto;
+import shop.tryit.domain.notice.dto.NoticeSearchFormDto;
+import shop.tryit.domain.notice.dto.NoticeUpdateFormDto;
+import shop.tryit.domain.notice.dto.NoticeViewFormDto;
+import shop.tryit.domain.notice.service.NoticeFacade;
 
 @Slf4j
 @Controller
@@ -28,8 +29,7 @@ import shop.tryit.domain.notice.NoticeService;
 @RequestMapping("/notices")
 public class NoticeController {
 
-    private final NoticeService noticeService;
-    private final MemberService memberService;
+    private final NoticeFacade noticeFacade;
 
     @GetMapping("/new")
     public String saveForm(@ModelAttribute NoticeSaveFormDto noticeSaveFormDto) {
@@ -39,37 +39,26 @@ public class NoticeController {
     @PostMapping("/new")
     public String save(@Valid @ModelAttribute NoticeSaveFormDto noticeSaveFormDto,
                        BindingResult bindingResult,
-                       @AuthenticationPrincipal User user
-    ) {
+                       @AuthenticationPrincipal User user) {
         if (bindingResult.hasErrors()) {
             log.info("bindingResult = '{}'", bindingResult);
             return "notices/register";
         }
-        String userEmail = user.getUsername();
-        Member member = memberService.findMember(userEmail);
-        Notice notice = NoticeAdapter.toEntity(noticeSaveFormDto, member);
-        Long savedId = noticeService.save(notice);
+
+        Long savedId = noticeFacade.register(user, noticeSaveFormDto);
         return String.format("redirect:/notices/%s", savedId);
     }
 
     @GetMapping("/{noticeId}")
-    public String findOne(@PathVariable Long noticeId,
-                          Model model
-    ) {
-        Notice notice = noticeService.findById(noticeId);
-        String memberEmail = noticeService.findMemberEmailById(noticeId);
-        NoticeViewFormDto noticeViewFormDto = NoticeAdapter.toViewForm(notice, memberEmail);
+    public String findOne(@PathVariable Long noticeId, Model model) {
+        NoticeViewFormDto noticeViewFormDto = noticeFacade.toViewForm(noticeId);
         model.addAttribute("noticeViewFormDto", noticeViewFormDto);
         return "notices/detail";
     }
 
     @GetMapping("/{noticeId}/update")
-    public String updateForm(@PathVariable Long noticeId,
-                             Model model
-    ) {
-        Notice notice = noticeService.findById(noticeId);
-        String memberEmail = noticeService.findMemberEmailById(noticeId);
-        NoticeUpdateFormDto noticeUpdateFormDto = NoticeAdapter.toUpdateForm(notice, memberEmail);
+    public String updateForm(@PathVariable Long noticeId, Model model) {
+        NoticeUpdateFormDto noticeUpdateFormDto = noticeFacade.toUpdateForm(noticeId);
         model.addAttribute("noticeUpdateFormDto", noticeUpdateFormDto);
         return "notices/update";
     }
@@ -78,39 +67,28 @@ public class NoticeController {
     public String update(@PathVariable Long noticeId,
                          @ModelAttribute NoticeUpdateFormDto noticeUpdateFormDto,
                          BindingResult bindingResult,
-                         @AuthenticationPrincipal User user
-    ) {
+                         @AuthenticationPrincipal User user) {
         if (bindingResult.hasErrors()) {
             log.info("bindingResult = '{}'", bindingResult);
             return "notices/register";
         }
 
-        String userEmail = user.getUsername();
-        Member member = memberService.findMember(userEmail);
-
-        Notice newNotice = NoticeAdapter.toEntity(noticeUpdateFormDto, member);
-        noticeService.update(noticeId, newNotice);
-
+        noticeFacade.update(user, noticeId, noticeUpdateFormDto);
         return String.format("redirect:/notices/%s", noticeId);
     }
 
     @PostMapping("/{noticeId}/delete")
     public String delete(@PathVariable Long noticeId) {
-        noticeService.delete(noticeId);
+        noticeFacade.delete(noticeId);
         return "redirect:/notices";
     }
 
     @GetMapping
     public String search(@RequestParam(defaultValue = "0") int page, Model model) {
-        Page<NoticeSearchFormDto> notices = noticeService.searchNotices(page)
-                .map(notice ->
-                        NoticeAdapter.toSearchForm(notice, noticeService.findMemberEmailById(notice.getId()))
-                );
-
+        Page<NoticeSearchFormDto> notices = noticeFacade.searchNotices(page);
         List<Integer> pages = Pages.of(notices, 4).getPages();
         model.addAttribute("notices", notices);
         model.addAttribute("pages", pages);
-
         return "notices/list";
     }
 

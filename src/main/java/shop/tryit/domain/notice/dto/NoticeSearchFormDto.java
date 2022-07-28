@@ -1,4 +1,4 @@
-package shop.tryit.web.notice;
+package shop.tryit.domain.notice.dto;
 
 import java.time.LocalDateTime;
 import lombok.Builder;

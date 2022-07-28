@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.domain.notice.entity.Notice;
+import shop.tryit.domain.notice.service.NoticeService;
 
 @Transactional
 @SpringBootTest
