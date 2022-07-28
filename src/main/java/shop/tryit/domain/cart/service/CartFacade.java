@@ -19,6 +19,7 @@ import shop.tryit.domain.item.service.ItemService;
 
 @Component
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class CartFacade {
 
     private final CartItemService cartItemService;
@@ -29,7 +30,6 @@ public class CartFacade {
     /**
      * 장바구니 상품 추가
      */
-    @Transactional(readOnly = true)
     public Long addCartItem(CartItemDto cartItemDto, User user) {
         Cart cart = cartService.findCart(user.getUsername());
         Item item = itemService.findOne(cartItemDto.getItemId());
@@ -42,7 +42,6 @@ public class CartFacade {
     /**
      * 장바구니 상품 조회
      */
-    @Transactional(readOnly = true)
     public List<CartListDto> findCartItems(User user) {
         Cart cart = cartService.findCart(user.getUsername());
         List<CartItem> cartItems = cartItemService.findCartItemList(cart);
