@@ -3,7 +3,7 @@ package shop.tryit.repository.question;
 import static java.util.stream.Collectors.toMap;
 import static shop.tryit.domain.answer.QAnswer.answer;
 import static shop.tryit.domain.member.QMember.member;
-import static shop.tryit.domain.question.QQuestion.question;
+import static shop.tryit.domain.question.entity.QQuestion.question;
 
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -20,7 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
-import shop.tryit.domain.question.QQuestionSearchDto;
+import shop.tryit.domain.question.dto.QQuestionSearchDto;
 import shop.tryit.domain.question.dto.QuestionSearchCondition;
 import shop.tryit.domain.question.dto.QuestionSearchDto;
 
