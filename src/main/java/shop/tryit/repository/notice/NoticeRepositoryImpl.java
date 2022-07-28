@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import shop.tryit.domain.notice.Notice;
 import shop.tryit.domain.notice.NoticeRepository;
+import shop.tryit.domain.notice.entity.Notice;
 
 @Repository
 @RequiredArgsConstructor

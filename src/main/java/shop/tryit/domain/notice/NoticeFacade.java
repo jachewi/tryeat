@@ -11,6 +11,7 @@ import shop.tryit.domain.notice.dto.NoticeSaveFormDto;
 import shop.tryit.domain.notice.dto.NoticeSearchFormDto;
 import shop.tryit.domain.notice.dto.NoticeUpdateFormDto;
 import shop.tryit.domain.notice.dto.NoticeViewFormDto;
+import shop.tryit.domain.notice.entity.Notice;
 
 @Component
 @RequiredArgsConstructor
