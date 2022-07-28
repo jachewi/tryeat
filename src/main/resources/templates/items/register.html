@@ -7,8 +7,8 @@
 <!-- ======= Header ======= -->
 <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></div>
 
-<!-- ======= Item Section ======= -->
-<section class="item">
+<!-- ======= Section ======= -->
+<section class="common item">
   <div class="container">
     <form class="register-margin" th:action th:object="${item}" method="post" enctype="multipart/form-data">
 
@@ -59,7 +59,7 @@
 
     </form>
   </div> <!-- /container -->
-</section> <!-- End Item -->
+</section>
 
 <!-- ======= Footer ======= -->
 <div th:replace="fragments/footer :: footer"></div>
