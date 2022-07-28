@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.item.entity.Item;
 import shop.tryit.domain.order.Order;
 import shop.tryit.domain.order.OrderDetail;
@@ -16,6 +17,7 @@ import shop.tryit.domain.order.dto.OrderSearchDto;
 
 @Component
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class OrderFacade {
 
     private final OrderService orderService;
