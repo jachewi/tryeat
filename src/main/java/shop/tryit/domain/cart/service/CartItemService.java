@@ -34,7 +34,7 @@ public class CartItemService {
 
         // 상품이 이미 있을 경우, 개수 증가
         if (nonNull(savedCartItem)) {
-            savedCartItem.addCount(cartItem.getQuantity());
+            savedCartItem.addQuantity(cartItem.getQuantity());
             return savedCartItem.getId();
         }
 
@@ -66,7 +66,7 @@ public class CartItemService {
                 .orElseThrow(() -> new IllegalStateException("해당 장바구니 상품을 찾을 수 없습니다."));
 
         // 장바구니 상품의 수량 변경
-        cartItem.updateCount(count);
+        cartItem.updateQuantity(count);
     }
 
     /**
