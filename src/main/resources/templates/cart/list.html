@@ -19,11 +19,11 @@
         <colgroup>
           <col width="5%">
           <col width="10%">
-          <col width="25%">
-          <col width="15%">
-          <col width="15%">
-          <col width="15%">
-          <col width="15%">
+          <col width="45%">
+          <col width="10%">
+          <col width="10%">
+          <col width="10%">
+          <col width="10%">
         </colgroup>
         <thead>
         <tr class="text-center">
@@ -35,12 +35,12 @@
           <th>금액</th>
           <th>수량</th>
           <th>합계</th>
-          <th>삭제</th>
+          <th>선택</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr class="text-center custom" th:each="cartListDto : ${cartListDtos}">
+        <tr class="text-center" th:each="cartListDto : ${cartListDtos}">
           <td>
             <input type="checkbox">
           </td>
@@ -61,11 +61,25 @@
             <span th:text="${cartListDto.totalPrice}"></span>원
           </td>
           <td>
-            <button type="button" class="btn btn-light btn-sm">삭제</button>
+            <button type="button" class="btn btn-custom btn-sm">삭제</button>
           </td>
         </tr>
         </tbody>
+
+        <tfoot>
+        <tr>
+          <td colspan="10" class="cart-total-info">
+            결제 예정 금액: <span>0</span>원
+          </td>
+        </tr>
+        </tfoot>
       </table>
+    </div>
+
+    <div class="cart-btn text-center">
+      <a class="btn btn-dark">전체 상품 주문</a>
+      <a class="btn btn-secondary">선택 상품 주문</a>
+      <a class="btn btn-custom" href="/items">쇼핑 계속하기</a>
     </div>
   </div> <!-- /container -->
 </section>
