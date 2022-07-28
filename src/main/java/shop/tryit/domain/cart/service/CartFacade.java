@@ -30,6 +30,7 @@ public class CartFacade {
     /**
      * 장바구니 상품 추가
      */
+    @Transactional
     public Long addCartItem(CartItemDto cartItemDto, User user) {
         Cart cart = cartService.findCart(user.getUsername());
         Item item = itemService.findOne(cartItemDto.getItemId());
