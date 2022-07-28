@@ -1,7 +1,5 @@
 package shop.tryit.domain.order.service;
 
-import static java.util.stream.Collectors.toList;
-
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,8 +14,6 @@ import shop.tryit.domain.order.Order;
 import shop.tryit.domain.order.OrderDetail;
 import shop.tryit.domain.order.OrderStatus;
 import shop.tryit.domain.order.dto.OrderDetailDto;
-import shop.tryit.domain.order.dto.OrderDto;
-import shop.tryit.domain.order.dto.OrderFormDto;
 import shop.tryit.domain.order.dto.OrderSearchDto;
 
 @Component
@@ -46,34 +42,6 @@ public class OrderFacade {
         orderDetailDtos.stream()
                 .map(orderDetailDto -> toEntity(orderDetailDto, findOrder))
                 .forEach(orderDetailService::save);
-    }
-
-    public OrderDetail toEntity(OrderFormDto orderFormDto, Item item, Order order) {
-        return OrderDetail.of(item, order, orderFormDto.getOrderQuantity());
-    }
-
-    public OrderFormDto toDto(OrderDetail orderDetail) {
-        return OrderFormDto.builder()
-                .itemId(orderDetail.getItem().getId())
-                .itemName(orderDetail.getItem().getName())
-                .orderQuantity(orderDetail.getQuantity())
-                .build();
-    }
-
-    public List<OrderDto> toListDto(List<OrderDetail> orderDetails) {
-        return orderDetails.stream()
-                .map(this::toOrderDto)
-                .collect(toList());
-    }
-
-    private OrderDto toOrderDto(OrderDetail orderDetail) {
-        return OrderDto.builder()
-                .detailId(orderDetail.getId())
-                .number(orderDetail.orderNumber())
-                .itemName(orderDetail.itemName())
-                .date(orderDetail.orderCreateDate())
-                .status(orderDetail.orderStatus())
-                .build();
     }
 
     private OrderDetail toEntity(OrderDetailDto orderDetailDto, Order order) {
