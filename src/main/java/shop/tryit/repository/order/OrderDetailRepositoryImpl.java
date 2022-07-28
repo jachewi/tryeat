@@ -29,13 +29,13 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository {
     }
 
     @Override
-    public List<OrderDetail> findAll() {
-        return detailJpaRepository.findAll();
+    public List<OrderDetailSearchDto> searchOrderDetails(Order order) {
+        return detailJpaRepository.searchOrderDetails(order);
     }
 
     @Override
-    public List<OrderDetailSearchDto> searchOrderDetails(Order order) {
-        return detailJpaRepository.searchOrderDetails(order);
+    public List<OrderDetail> findByOrder(Order order) {
+        return detailJpaRepository.findByOrder(order);
     }
 
 }
