@@ -28,7 +28,7 @@
         <thead>
         <tr class="text-center">
           <th>
-            <input type="checkbox">
+            <input type="checkbox" id="check-all">
           </th>
           <th>이미지</th>
           <th class="text-left">상품정보</th>
@@ -42,7 +42,7 @@
         <tbody>
         <tr class="text-center" th:each="cartListDto : ${cartListDtos}">
           <td>
-            <input type="checkbox">
+            <input type="checkbox" id="check-box">
           </td>
           <td>
             <a th:href="@{/items/{id}(id=${cartListDto.itemId})}">
@@ -86,6 +86,20 @@
 
 <!-- ======= Footer ======= -->
 <div th:replace="fragments/footer :: footer"></div>
+
+<!-- ======= Js ======= -->
+<script th:inline="javascript">
+  /* 체크박스 전체 선택 */
+  $("#check-all").click(function() {
+    if($("#check-all").prop("checked")) {
+      $("#check-box").prop("checked", true);
+    } else {
+      $("#check-box").prop("checked", false);
+    }
+  });
+
+
+</script>
 </body>
 
 </html>
