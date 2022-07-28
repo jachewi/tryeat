@@ -55,6 +55,22 @@ public class CartFacade {
         return toDto(cartItems, mainImages);
     }
 
+    /**
+     * 장바구니 상품 수량과 상품 재고 비교
+     */
+    public Boolean checkItemStock(CartItemDto cartItemDto) {
+        Item item = itemService.findOne(cartItemDto.getItemId());
+        return item.checkStock(cartItemDto.getQuantity());
+    }
+
+    /**
+     * 장바구니에 담을 상품 재고 조회
+     */
+    public int getItemStock(CartItemDto cartItemDto) {
+        Item item = itemService.findOne(cartItemDto.getItemId());
+        return item.getStockQuantity();
+    }
+
     public CartItem toEntity(CartItemDto cartItemDto, Item item, Cart cart) {
         return CartItem.builder()
                 .cart(cart)
