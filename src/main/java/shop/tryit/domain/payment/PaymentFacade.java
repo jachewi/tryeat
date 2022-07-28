@@ -3,6 +3,7 @@ package shop.tryit.domain.payment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.item.entity.Image;
 import shop.tryit.domain.item.entity.Item;
 import shop.tryit.domain.item.service.ImageService;
