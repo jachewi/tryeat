@@ -40,7 +40,7 @@ public class CartController {
         log.info("장바구니에 담을 상품의 수량 = {}", cartItemDto.getQuantity());
 
         // 상품 재고 검증
-        if (cartFacade.checkItemStock(cartItemDto)) {
+        if (Boolean.FALSE.equals(cartFacade.checkItemStock(cartItemDto))) {
             bindingResult.rejectValue("quantity", "StockError",
                     String.format("현재 남은 수량은 %d개 입니다.%n%d개 이하로 담아주세요.", cartFacade.getItemStock(cartItemDto), cartFacade.getItemStock(cartItemDto)));
         }
