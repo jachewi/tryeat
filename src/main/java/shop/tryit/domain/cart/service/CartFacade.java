@@ -70,7 +70,7 @@ public class CartFacade {
         return item.getStockQuantity();
     }
 
-    public CartItem toEntity(CartItemDto cartItemDto, Item item, Cart cart) {
+    private CartItem toEntity(CartItemDto cartItemDto, Item item, Cart cart) {
         return CartItem.builder()
                 .cart(cart)
                 .item(item)
@@ -78,7 +78,7 @@ public class CartFacade {
                 .build();
     }
 
-    public CartListDto toDto(CartItem cartItem, Image mainImage) {
+    private CartListDto toDto(CartItem cartItem, Image mainImage) {
         return CartListDto.builder()
                 .itemId(cartItem.getItemId())
                 .itemName(cartItem.getItemName())
@@ -88,7 +88,7 @@ public class CartFacade {
                 .build();
     }
 
-    public List<CartListDto> toDto(List<CartItem> cartItems, List<Image> mainImages) {
+    private List<CartListDto> toDto(List<CartItem> cartItems, List<Image> mainImages) {
         List<CartListDto> cartListDtos = new ArrayList<>();
 
         for (int i = 0; i < cartItems.size(); i++) {
