@@ -10,8 +10,6 @@ public interface OrderDetailRepository {
 
     Optional<OrderDetail> findById(Long id);
 
-    List<OrderDetail> findAll();
-
     List<OrderDetailSearchDto> searchOrderDetails(Order order);
 
     List<OrderDetail> findByOrder(Order order);

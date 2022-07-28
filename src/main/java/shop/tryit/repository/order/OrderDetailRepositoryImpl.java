@@ -29,11 +29,6 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository {
     }
 
     @Override
-    public List<OrderDetail> findAll() {
-        return detailJpaRepository.findAll();
-    }
-
-    @Override
     public List<OrderDetailSearchDto> searchOrderDetails(Order order) {
         return detailJpaRepository.searchOrderDetails(order);
     }
