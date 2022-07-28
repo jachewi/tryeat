@@ -58,12 +58,12 @@ public class CartItem {
      * 비즈니스 로직
      **/
     // 장바구니에 이미 상품이 있을 경우 수량 증가를 위한 로직
-    public void addCount(int quantity) {
+    public void addQuantity(int quantity) {
         this.quantity += quantity;
     }
 
     // 장바구니 상품의 수량 변경을 위한 로직
-    public void updateCount(int quantity) {
+    public void updateQuantity(int quantity) {
         this.quantity = quantity;
     }
 

@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import shop.tryit.domain.cart.dto.CartItemDto;
 import shop.tryit.domain.cart.dto.CartListDto;
 import shop.tryit.domain.cart.service.CartFacade;
-import shop.tryit.domain.item.entity.Item;
-import shop.tryit.domain.item.service.ItemService;
 
 @Slf4j
 @Controller
@@ -30,7 +28,6 @@ import shop.tryit.domain.item.service.ItemService;
 public class CartController {
 
     private final CartFacade cartFacade;
-    private final ItemService itemService;
 
     /**
      * 장바구니에 상품 담기
@@ -42,12 +39,10 @@ public class CartController {
         log.info("장바구니에 담을 상품의 id = {}", cartItemDto.getItemId());
         log.info("장바구니에 담을 상품의 수량 = {}", cartItemDto.getQuantity());
 
-        Item item = itemService.findOne(cartItemDto.getItemId());
-
-        // TODO : if문 로직을 비즈니스 로직으로 분리
-        // 수량 검증
-        if (item.getStockQuantity() < cartItemDto.getQuantity()) {
-            bindingResult.rejectValue("quantity", "StockError", String.format("현재 남은 수량은 %d개 입니다.%n%d개 이하로 담아주세요.", item.getStockQuantity(), item.getStockQuantity()));
+        // 상품 재고 검증
+        if (Boolean.FALSE.equals(cartFacade.checkItemStock(cartItemDto))) {
+            bindingResult.rejectValue("quantity", "StockError",
+                    String.format("현재 남은 수량은 %d개 입니다.%n%d개 이하로 담아주세요.", cartFacade.getItemStock(cartItemDto), cartFacade.getItemStock(cartItemDto)));
         }
 
         // 검증 실패시 400

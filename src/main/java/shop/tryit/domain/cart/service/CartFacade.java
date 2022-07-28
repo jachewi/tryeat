@@ -19,6 +19,7 @@ import shop.tryit.domain.item.service.ItemService;
 
 @Component
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class CartFacade {
 
     private final CartItemService cartItemService;
@@ -29,7 +30,7 @@ public class CartFacade {
     /**
      * 장바구니 상품 추가
      */
-    @Transactional(readOnly = true)
+    @Transactional
     public Long addCartItem(CartItemDto cartItemDto, User user) {
         Cart cart = cartService.findCart(user.getUsername());
         Item item = itemService.findOne(cartItemDto.getItemId());
@@ -42,7 +43,6 @@ public class CartFacade {
     /**
      * 장바구니 상품 조회
      */
-    @Transactional(readOnly = true)
     public List<CartListDto> findCartItems(User user) {
         Cart cart = cartService.findCart(user.getUsername());
         List<CartItem> cartItems = cartItemService.findCartItemList(cart);
@@ -55,7 +55,23 @@ public class CartFacade {
         return toDto(cartItems, mainImages);
     }
 
-    public CartItem toEntity(CartItemDto cartItemDto, Item item, Cart cart) {
+    /**
+     * 장바구니 상품 수량과 상품 재고 비교
+     */
+    public Boolean checkItemStock(CartItemDto cartItemDto) {
+        Item item = itemService.findOne(cartItemDto.getItemId());
+        return item.checkStock(cartItemDto.getQuantity());
+    }
+
+    /**
+     * 장바구니에 담을 상품 재고 조회
+     */
+    public int getItemStock(CartItemDto cartItemDto) {
+        Item item = itemService.findOne(cartItemDto.getItemId());
+        return item.getStockQuantity();
+    }
+
+    private CartItem toEntity(CartItemDto cartItemDto, Item item, Cart cart) {
         return CartItem.builder()
                 .cart(cart)
                 .item(item)
@@ -63,7 +79,7 @@ public class CartFacade {
                 .build();
     }
 
-    public CartListDto toDto(CartItem cartItem, Image mainImage) {
+    private CartListDto toDto(CartItem cartItem, Image mainImage) {
         return CartListDto.builder()
                 .itemId(cartItem.getItemId())
                 .itemName(cartItem.getItemName())
@@ -73,7 +89,7 @@ public class CartFacade {
                 .build();
     }
 
-    public List<CartListDto> toDto(List<CartItem> cartItems, List<Image> mainImages) {
+    private List<CartListDto> toDto(List<CartItem> cartItems, List<Image> mainImages) {
         List<CartListDto> cartListDtos = new ArrayList<>();
 
         for (int i = 0; i < cartItems.size(); i++) {
