@@ -35,6 +35,7 @@ public class OrderFacade {
         return orderService.searchOrders(page, email);
     }
 
+    @Transactional
     public void register(User user, List<OrderDetailDto> orderDetailDtos) {
         String email = user.getUsername();
         Member member = memberService.findMember(email);
