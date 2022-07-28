@@ -1,4 +1,4 @@
-package shop.tryit.web.notice;
+package shop.tryit.domain.notice.dto;
 
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;

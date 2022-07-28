@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberService;
-import shop.tryit.web.notice.NoticeSaveFormDto;
-import shop.tryit.web.notice.NoticeSearchFormDto;
-import shop.tryit.web.notice.NoticeUpdateFormDto;
-import shop.tryit.web.notice.NoticeViewFormDto;
+import shop.tryit.domain.notice.dto.NoticeSaveFormDto;
+import shop.tryit.domain.notice.dto.NoticeSearchFormDto;
+import shop.tryit.domain.notice.dto.NoticeUpdateFormDto;
+import shop.tryit.domain.notice.dto.NoticeViewFormDto;
 
 @Component
 @RequiredArgsConstructor
