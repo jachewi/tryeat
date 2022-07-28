@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.answer.Answer;
 import shop.tryit.domain.answer.dto.AnswerFormDto;
 import shop.tryit.domain.answer.service.AnswerService;
@@ -20,6 +21,7 @@ import shop.tryit.domain.question.entity.Question;
 
 @Component
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class QnAFacade {
 
     private final QuestionService questionService;
