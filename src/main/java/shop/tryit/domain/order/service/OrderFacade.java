@@ -27,8 +27,8 @@ public class OrderFacade {
     private final ItemService itemService;
 
     public Page<OrderSearchDto> searchOrders(int page, User user) {
-        String email = user.getUsername();
-        return orderService.searchOrders(page, email);
+        Member member = memberService.findMember(user.getUsername());
+        return orderService.searchOrders(page, member);
     }
 
     @Transactional
