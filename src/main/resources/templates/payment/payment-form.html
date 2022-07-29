@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr align="center" name="paymentItem">
+        <tr th:each="payment : ${payments}" align="center" name="paymentItem">
           <td>
             <img width="100px" height="100px" th:src="|/files/${payment.mainImage.getStoreFileName()}|" src="../img/portfolio-details-1.jpg"/>
           </td>
@@ -32,27 +32,27 @@
           <td><input type="hidden" id="itemTotalPrice" th:text="${payment.totalPrice}" th:value="${payment.totalPrice}"/></td>
         </tr>
 
-        <!-------------------------테스트용 데이터 시작---------------------->
-        <tr align="center" name="paymentItem">
-          <td>
-            <img width="100px" height="100px" src="../img/portfolio-details-1.jpg"/>
-          </td>
-          <input type="hidden" id="itemId1" name="itemId" value="2">
-          <td><input type="hidden" id="name1" th:text="고양이사료샘플" value="고양이 사료 샘플"/></td>
-          <td><input type="hidden" id="quantity1" name="quantity" th:text="5" value="5"/></td>
-          <td><input type="hidden" id="itemTotalPrice1" th:text="5000" value="5000"/></td>
-        </tr>
-        <!-------------------------테스트용 데이터 끝---------------------->
+        <!--        &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;테스트용 데이터 시작&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+        <!--        <tr align="center" name="paymentItem">-->
+        <!--          <td>-->
+        <!--            <img width="100px" height="100px" src="../img/portfolio-details-1.jpg"/>-->
+        <!--          </td>-->
+        <!--          <input type="hidden" id="itemId1" name="itemId" value="2">-->
+        <!--          <td><input type="hidden" id="name1" th:text="고양이사료샘플" value="고양이 사료 샘플"/></td>-->
+        <!--          <td><input type="hidden" id="quantity1" name="quantity" th:text="5" value="5"/></td>-->
+        <!--          <td><input type="hidden" id="itemTotalPrice1" th:text="5000" value="5000"/></td>-->
+        <!--        </tr>-->
+        <!--        &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;테스트용 데이터 끝&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
 
         </tbody>
       </table>
 
-      <!-------------------------테스트용 데이터 시작---------------------->
-      <div style="float: right">
-        <span>총 수량: <input type="hidden" id="totalQuantity" th:text="${payment.quantity}+5" value="${payment.quantity}+5"/></span>
-        <span>총 가격: <input type="hidden" id="totalPrice" th:text="${payment.totalPrice}+5000" value="${payment.totalPrice}+5000"/></span>
-      </div>
-      <!-------------------------테스트용 데이터 끝---------------------->
+      <!--      &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;테스트용 데이터 시작&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+      <!--      <div style="float: right">-->
+      <!--        <span>총 수량: <input type="hidden" id="totalQuantity" th:text="${payment.quantity}+5" value="${payment.quantity}+5"/></span>-->
+      <!--        <span>총 가격: <input type="hidden" id="totalPrice" th:text="${payment.totalPrice}+5000" value="${payment.totalPrice}+5000"/></span>-->
+      <!--      </div>-->
+      <!--      &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;테스트용 데이터 끝&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
 
       <br><br><br>
 
@@ -63,20 +63,20 @@
         <tbody>
         <tr>
           <th>받는 사람</th>
-          <td><input type="hidden" id="memberName" th:text="${payment.memberName}" th:value="${payment.memberName}"/></td>
+          <td><input type="hidden" id="memberName" th:text="${member.memberName}" th:value="${member.memberName}"/></td>
         </tr>
         <tr>
           <th>연락처</th>
-          <td><input type="hidden" id="memberPhone" th:text="${payment.memberPhone}" th:value="${payment.memberPhone}"/></td>
+          <td><input type="hidden" id="memberPhone" th:text="${member.memberPhone}" th:value="${member.memberPhone}"/></td>
         </tr>
         <tr>
           <th>주소</th>
           <td>
-            <input type="hidden" id="zipcode" th:text="${payment.zipcode}" placeholder="우편번호" readonly>
-            <input type="hidden" id="street_address" th:text="${payment.street_address}" placeholder="도로명주소" readonly>
-            <input type="hidden" id="jibeon_address" th:text="${payment.jibeon_address}" placeholder="지번주소" readonly>
+            <input type="hidden" id="zipcode" th:text="${member.zipcode}" placeholder="우편번호" readonly>
+            <input type="hidden" id="street_address" th:text="${member.street_address}" placeholder="도로명주소" readonly>
+            <input type="hidden" id="jibeon_address" th:text="${member.jibeon_address}" placeholder="지번주소" readonly>
             <span id="guide" style="color:#999;display:none"></span>
-            <input type="hidden" id="detail_address" th:text="${payment.detail_address}" placeholder="상세주소">
+            <input type="hidden" id="detail_address" th:text="${member.detail_address}" placeholder="상세주소">
           </td>
         </tr>
         </tbody>
@@ -100,11 +100,11 @@
       IMP.init('imp56228241');
 
       //총 수량
-      var totalQuantity = parseInt($("#quantity").val()) +  parseInt($("#quantity1").val())
+      var totalQuantity = parseInt($("#quantity").val())
       //주문명
       var paymentName = '주문명: ' + $("#name").val() + ' 외 ' + totalQuantity
       //총 구매가격
-      var totalPrice = parseInt($("#itemTotalPrice").val()) + parseInt($("#itemTotalPrice1").val())
+      var totalPrice = parseInt($("#itemTotalPrice").val())
 
       IMP.request_pay({ //param
         pg: 'kakaopay',
@@ -175,6 +175,8 @@
         alert(msg);  // Todo: 알럿창으로 msg에 넘어오는 값 확인 후에 결제 완료 알럿메시지로 변경하기
       });
     });
+
+
 
 </script>
 </body>
