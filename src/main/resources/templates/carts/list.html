@@ -80,9 +80,13 @@
     </div>
 
     <div class="cart-btn text-center">
-      <button class="btn btn-dark" onclick="orders()">주문하기</button>
+      <button class="btn btn-dark" type="button" id="order-btn">주문하기</button>
       <a class="btn btn-custom" href="/items">쇼핑 계속하기</a>
     </div>
+
+    <!-- 주문 form -->
+    <form th:action="@{/payment}" method="get" class="order-form">
+    </form>
   </div> <!-- /container -->
 </section>
 
@@ -130,32 +134,28 @@
   }
 
   /* 체크된 항목 주문 */
-  function orders() {
-    var url = "/payment";
-
-    var dataList = new Array();
+  $("#order-btn").click(function() {
+    let formData = "";
+    let idx = 0;
 
     $(".cart-info").each(function(index, element) {
-      if($(element).find("#check-box").is(":checked") == true) { // 체크된 항목만
-        var data = {
-          itemId : $(element).find("#individual-itemId").val(),
-          quantity: $(element).find("#individual-quantity").val()
-        }
+      if($(element).find("#check-box").is(":checked") == true) {
+        let itemId = $(element).find("#individual-itemId").val();
+        let quantity = $(element).find("#individual-quantity").val();
 
-        dataList.push(data);
+        let itemId_input = '<input type="hidden" name="payments[' + idx + '].itemId" value="' + itemId + '">';
+        formData += itemId_input;
+
+        let quantity_input = '<input type="hidden" name="payments[' + idx + '].quantity" value="' + quantity + '">';
+        formData += quantity_input;
+        
+        idx += 1;
       }
     });
 
-    var param = JSON.stringify(dataList);
-
-    $.ajax ({
-      url: url,
-      type: "POST",
-      contentType: "application/json",
-      data: param,
-    });
-  }
-
+    $(".order-form").html(formData);
+    $(".order-form").submit();
+  });
 </script>
 </body>
 
