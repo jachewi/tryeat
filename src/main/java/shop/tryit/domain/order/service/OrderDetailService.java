@@ -14,6 +14,7 @@ public class OrderDetailService {
     private final OrderDetailRepository orderDetailRepository;
 
     public Long save(OrderDetail orderDetail) {
+        orderDetail.itemRemoveStock();
         return orderDetailRepository.save(orderDetail);
     }
 

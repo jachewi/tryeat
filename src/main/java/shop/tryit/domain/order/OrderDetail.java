@@ -4,7 +4,6 @@ import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -46,34 +45,12 @@ public class OrderDetail {
         return new OrderDetail(item, order, count);
     }
 
-    /**
-     * 주문 취소
-     */
-    public void cancel() {
-        getItem().addStock(quantity);
-    }
-
     public void itemRemoveStock() {
-        getItem().removeStock(quantity);
-    }
-
-    /**
-     * 주문 정보 목록
-     */
-    public LocalDateTime orderCreateDate() {
-        return order.getCreateDate();
+        item.removeStock(quantity);
     }
 
     public String itemName() {
         return item.getName();
-    }
-
-    public String orderNumber() {
-        return order.getNumber();
-    }
-
-    public OrderStatus orderStatus() {
-        return order.getStatus();
     }
 
     @Override
