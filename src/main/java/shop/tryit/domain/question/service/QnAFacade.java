@@ -28,6 +28,7 @@ public class QnAFacade {
     private final AnswerService answerService;
     private final MemberService memberService;
 
+    @Transactional
     public void questionRegister(QuestionSaveFormDto questionSaveFormDto, User user) {
         String userEmail = user.getUsername();
         Member member = memberService.findMember(userEmail);
@@ -46,6 +47,7 @@ public class QnAFacade {
         return questionService.checkPassword(questionCheckPasswordFormDto.getPassword(), question);
     }
 
+    @Transactional
     public void answerRegister(User user, Long questionId, AnswerFormDto answerFormDto) {
         Member member = memberService.findMember(user.getUsername());
         Question question = questionService.findOne(questionId);
@@ -53,6 +55,7 @@ public class QnAFacade {
         answerService.register(answer);
     }
 
+    @Transactional
     public void delete(Long answerId) {
         Answer answer = answerService.findById(answerId);
         answerService.delete(answer);
@@ -68,6 +71,7 @@ public class QnAFacade {
                 .map(this::toForm);
     }
 
+    @Transactional
     public void update(Long questionId, QuestionFormDto questionFormDto, User user) {
         String userEmail = user.getUsername();
         Member member = memberService.findMember(userEmail);
