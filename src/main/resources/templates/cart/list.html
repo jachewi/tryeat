@@ -92,9 +92,9 @@
   /* 체크박스 전체 선택 */
   $("#check-all").click(function() {
     if($("#check-all").prop("checked")) {
-      $("#check-box").prop("checked", true);
+      $("input:checkbox[id=check-box]").prop("checked", true);
     } else {
-      $("#check-box").prop("checked", false);
+      $("input:checkbox[id=check-box]").prop("checked", false);
     }
   });
 
