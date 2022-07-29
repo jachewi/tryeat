@@ -3,8 +3,8 @@ package shop.tryit.domain.order.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import shop.tryit.domain.order.OrderDetail;
 import shop.tryit.domain.order.OrderDetailRepository;
+import shop.tryit.domain.order.entity.OrderDetail;
 
 @Service
 @RequiredArgsConstructor

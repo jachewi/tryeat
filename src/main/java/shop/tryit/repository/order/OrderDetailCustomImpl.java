@@ -1,6 +1,6 @@
 package shop.tryit.repository.order;
 
-import static shop.tryit.domain.order.QOrderDetail.orderDetail;
+import static shop.tryit.domain.order.entity.QOrderDetail.orderDetail;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;

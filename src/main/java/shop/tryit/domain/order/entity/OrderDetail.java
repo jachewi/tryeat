@@ -1,4 +1,4 @@
-package shop.tryit.domain.order;
+package shop.tryit.domain.order.entity;
 
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import shop.tryit.domain.item.entity.Item;
-import shop.tryit.domain.order.entity.Order;
+import shop.tryit.domain.order.OrderStatus;
 
 @Entity
 @Getter

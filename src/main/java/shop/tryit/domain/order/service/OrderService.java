@@ -7,11 +7,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
-import shop.tryit.domain.order.OrderDetail;
 import shop.tryit.domain.order.OrderDetailRepository;
 import shop.tryit.domain.order.OrderRepository;
 import shop.tryit.domain.order.dto.OrderSearchDto;
 import shop.tryit.domain.order.entity.Order;
+import shop.tryit.domain.order.entity.OrderDetail;
 
 @Service
 @RequiredArgsConstructor
