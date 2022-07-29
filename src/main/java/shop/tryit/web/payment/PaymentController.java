@@ -35,7 +35,9 @@ public class PaymentController {
 
         List<PaymentRequestDto> payments = paymentRequestListDto.getPayments();
         log.info(payments.toString());
-        model.addAttribute("");
+
+        model.addAttribute("payments", paymentFacade.paymentForm(payments));
+        model.addAttribute("member", paymentFacade.paymentForm(user));
 
         return "/payment/payment-form";
     }
