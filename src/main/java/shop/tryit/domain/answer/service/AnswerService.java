@@ -6,7 +6,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.answer.Answer;
 import shop.tryit.domain.answer.AnswerRepository;
 import shop.tryit.domain.question.entity.Question;
@@ -14,25 +13,21 @@ import shop.tryit.domain.question.service.QuestionService;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class AnswerService {
 
     private final QuestionService questionService;
     private final AnswerRepository answerRepository;
 
-    @Transactional
     public Long register(Answer answer) {
         return answerRepository.save(answer);
     }
 
-    @Transactional
     public Long update(Long id, Answer newAnswer) {
         Answer findAnswer = findOne(id);
         findAnswer.update(newAnswer.getContent());
         return findAnswer.getId();
     }
 
-    @Transactional
     public void delete(Answer answer) {
         answerRepository.delete(answer);
     }
