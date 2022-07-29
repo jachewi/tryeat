@@ -41,8 +41,9 @@
 
         <tbody>
         <tr class="text-center" th:each="cartListDto : ${cartListDtos}">
-          <td>
+          <td class="cart-info">
             <input type="checkbox" id="check-box">
+            <input type="hidden" id="individual-totalPrice" th:value="${cartListDto.totalPrice}">
           </td>
           <td>
             <a th:href="@{/items/{id}(id=${cartListDto.itemId})}">
@@ -69,7 +70,7 @@
         <tfoot>
         <tr>
           <td colspan="10" class="cart-total-info">
-            결제 예정 금액: <span>0</span>원
+            결제 예정 금액: <span th:id="cartTotalPrice"></span>원
           </td>
         </tr>
         </tfoot>
@@ -89,6 +90,10 @@
 
 <!-- ======= Js ======= -->
 <script th:inline="javascript">
+  $(document).ready(function() {
+    setCartTotalInfo();
+  })
+
   /* 체크박스 전체 선택 */
   $("#check-all").click(function() {
     if($("#check-all").prop("checked")) {
@@ -96,7 +101,33 @@
     } else {
       $("input:checkbox[id=check-box]").prop("checked", false);
     }
+
+    // 총 장바구니 정보 세팅
+    setCartTotalInfo();
   });
+
+  /* 체크박스에 변화가 있을 경우 장바구니 정보 세팅 */
+  $(document).ready(function() {
+    $("input:checkbox[id=check-box]").change(function() {
+      setCartTotalInfo();
+    });
+  });
+
+  /* 총 장바구니 정보 세팅 */
+  function setCartTotalInfo() {
+    var cartTotalPrice = 0; // 총 가격 (결제 예정 금액)
+
+    $(".cart-info").each(function(index, element) {
+      if($(element).find("#check-box").is(":checked") == true) { // 체크된 항목
+        var totalPrice = $(element).find("#individual-totalPrice").val();
+        cartTotalPrice += parseInt(totalPrice);
+      }
+    })
+
+    $("#cartTotalPrice").text(cartTotalPrice.toLocaleString()); // toLocaleString() : 세자리 컴마 표시
+    console.log("결제 예정 금액 : " + cartTotalPrice);
+  }
+
 
 
 </script>
