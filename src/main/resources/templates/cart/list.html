@@ -43,6 +43,8 @@
         <tr class="text-center" th:each="cartListDto : ${cartListDtos}">
           <td class="cart-info">
             <input type="checkbox" id="check-box">
+            <input type="hidden" id="individual-itemId" th:value="${cartListDto.itemId}">
+            <input type="hidden" id="individual-quantity" th:value="${cartListDto.quantity}">
             <input type="hidden" id="individual-totalPrice" th:value="${cartListDto.totalPrice}">
           </td>
           <td>
@@ -78,8 +80,7 @@
     </div>
 
     <div class="cart-btn text-center">
-      <a class="btn btn-dark">전체 상품 주문</a>
-      <a class="btn btn-secondary">선택 상품 주문</a>
+      <button class="btn btn-dark" onclick="orders()">주문하기</button>
       <a class="btn btn-custom" href="/items">쇼핑 계속하기</a>
     </div>
   </div> <!-- /container -->
@@ -128,7 +129,32 @@
     console.log("결제 예정 금액 : " + cartTotalPrice);
   }
 
+  /* 체크된 항목 주문 */
+  function orders() {
+    var url = "/payment";
 
+    var dataList = new Array();
+
+    $(".cart-info").each(function(index, element) {
+      if($(element).find("#check-box").is(":checked") == true) { // 체크된 항목만
+        var data = {
+          itemId : $(element).find("#individual-itemId").val(),
+          quantity: $(element).find("#individual-quantity").val()
+        }
+
+        dataList.push(data);
+      }
+    });
+
+    var param = JSON.stringify(dataList);
+
+    $.ajax ({
+      url: url,
+      type: "POST",
+      contentType: "application/json",
+      data: param,
+    });
+  }
 
 </script>
 </body>
