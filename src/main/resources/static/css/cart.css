@@ -3,7 +3,7 @@
 --------------------------------------------------------------*/
 .cart .btn-custom {
   border: 1px solid #e5e5e5;
-  background-color: azure;
+  background-color: rgba(240, 255, 255, 0);
 }
 
 .cart .btn-custom:hover {

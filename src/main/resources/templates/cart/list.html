@@ -19,30 +19,33 @@
         <colgroup>
           <col width="5%">
           <col width="10%">
-          <col width="25%">
-          <col width="15%">
-          <col width="15%">
-          <col width="15%">
-          <col width="15%">
+          <col width="45%">
+          <col width="10%">
+          <col width="10%">
+          <col width="10%">
+          <col width="10%">
         </colgroup>
         <thead>
         <tr class="text-center">
           <th>
-            <input type="checkbox">
+            <input type="checkbox" id="check-all">
           </th>
           <th>이미지</th>
           <th class="text-left">상품정보</th>
           <th>금액</th>
           <th>수량</th>
           <th>합계</th>
-          <th>삭제</th>
+          <th>선택</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr class="text-center custom" th:each="cartListDto : ${cartListDtos}">
-          <td>
-            <input type="checkbox">
+        <tr class="text-center" th:each="cartListDto : ${cartListDtos}">
+          <td class="cart-info">
+            <input type="checkbox" id="check-box">
+            <input type="hidden" id="individual-itemId" th:value="${cartListDto.itemId}">
+            <input type="hidden" id="individual-quantity" th:value="${cartListDto.quantity}">
+            <input type="hidden" id="individual-totalPrice" th:value="${cartListDto.totalPrice}">
           </td>
           <td>
             <a th:href="@{/items/{id}(id=${cartListDto.itemId})}">
@@ -61,17 +64,99 @@
             <span th:text="${cartListDto.totalPrice}"></span>원
           </td>
           <td>
-            <button type="button" class="btn btn-light btn-sm">삭제</button>
+            <button type="button" class="btn btn-custom btn-sm">삭제</button>
           </td>
         </tr>
         </tbody>
+
+        <tfoot>
+        <tr>
+          <td colspan="10" class="cart-total-info">
+            결제 예정 금액: <span th:id="cartTotalPrice"></span>원
+          </td>
+        </tr>
+        </tfoot>
       </table>
+    </div>
+
+    <div class="cart-btn text-center">
+      <button class="btn btn-dark" onclick="orders()">주문하기</button>
+      <a class="btn btn-custom" href="/items">쇼핑 계속하기</a>
     </div>
   </div> <!-- /container -->
 </section>
 
 <!-- ======= Footer ======= -->
 <div th:replace="fragments/footer :: footer"></div>
+
+<!-- ======= Js ======= -->
+<script th:inline="javascript">
+  $(document).ready(function() {
+    setCartTotalInfo();
+  })
+
+  /* 체크박스 전체 선택 */
+  $("#check-all").click(function() {
+    if($("#check-all").prop("checked")) {
+      $("input:checkbox[id=check-box]").prop("checked", true);
+    } else {
+      $("input:checkbox[id=check-box]").prop("checked", false);
+    }
+
+    // 총 장바구니 정보 세팅
+    setCartTotalInfo();
+  });
+
+  /* 체크박스에 변화가 있을 경우 장바구니 정보 세팅 */
+  $(document).ready(function() {
+    $("input:checkbox[id=check-box]").change(function() {
+      setCartTotalInfo();
+    });
+  });
+
+  /* 총 장바구니 정보 세팅 */
+  function setCartTotalInfo() {
+    var cartTotalPrice = 0; // 총 가격 (결제 예정 금액)
+
+    $(".cart-info").each(function(index, element) {
+      if($(element).find("#check-box").is(":checked") == true) { // 체크된 항목
+        var totalPrice = $(element).find("#individual-totalPrice").val();
+        cartTotalPrice += parseInt(totalPrice);
+      }
+    })
+
+    $("#cartTotalPrice").text(cartTotalPrice.toLocaleString()); // toLocaleString() : 세자리 컴마 표시
+    console.log("결제 예정 금액 : " + cartTotalPrice);
+  }
+
+  /* 체크된 항목 주문 */
+  function orders() {
+    var url = "/payment";
+
+    var dataList = new Array();
+
+    $(".cart-info").each(function(index, element) {
+      if($(element).find("#check-box").is(":checked") == true) { // 체크된 항목만
+        var data = {
+          itemId : $(element).find("#individual-itemId").val(),
+          quantity: $(element).find("#individual-quantity").val()
+        }
+
+        dataList.push(data);
+      }
+    });
+
+    var param = JSON.stringify(dataList);
+
+    $.ajax ({
+      url: url,
+      type: "POST",
+      contentType: "application/json",
+      data: param,
+    });
+  }
+
+</script>
 </body>
 
 </html>
