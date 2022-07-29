@@ -1,5 +1,6 @@
 package shop.tryit.web.payment;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import shop.tryit.domain.payment.PaymentFacade;
-import shop.tryit.domain.payment.dto.PaymentRequsetDto;
+import shop.tryit.domain.payment.dto.PaymentRequestDto;
+import shop.tryit.domain.payment.dto.PaymentRequestListDto;
 import shop.tryit.domain.payment.dto.PaymentSaveDto;
 
 @Slf4j
@@ -26,14 +28,14 @@ public class PaymentController {
     private final PaymentFacade paymentFacade;
 
     @GetMapping
-    public String newPaymentForm(Model model,
-                                 @RequestBody @ModelAttribute PaymentRequsetDto paymentRequsetDto,
-                                 @AuthenticationPrincipal User user) {
+    public String newPaymentForm(@ModelAttribute PaymentRequestListDto paymentRequestListDto,
+                                 @AuthenticationPrincipal User user,
+                                 Model model) {
         log.info("======== 결제 폼 컨트롤러 시작 ========");
-        log.info("결제할 상품 아이디 = {}", paymentRequsetDto.getItemId());
-        log.info("결제할 상품 수량 = {}", paymentRequsetDto.getQuantity());
 
-        model.addAttribute("payment", paymentFacade.paymentForm(paymentRequsetDto, user));
+        List<PaymentRequestDto> payments = paymentRequestListDto.getPayments();
+        log.info(payments.toString());
+        model.addAttribute("");
 
         return "/payment/payment-form";
     }
