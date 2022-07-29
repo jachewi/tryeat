@@ -70,7 +70,14 @@ public class CartController {
 
         model.addAttribute("cartListDtos", cartListDtos);
 
-        return "/cart/list";
+        return "/carts/list";
     }
-
+//
+//    /**
+//     * 장바구니에 담긴 상품 수량 변경
+//     */
+//
+//    /**
+//     * 장바구니에 담긴 상품 삭제
+//     */
 }

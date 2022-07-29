@@ -33,22 +33,26 @@
         </table>
 
         <div class="order-info">
-          <form th:action="@{/payment}" method="get">
-            <input type="hidden" id="itemId" name=itemId th:value="${item.id}">
-            <div class="quantity">
-              <label for="quantity">수량</label>
-              <input type="number" id="quantity" min="1" value="1" name="quantity">
-            </div>
-            <hr/>
-            <!--<div class="total-price">
-              총 상품금액 : <span>1000</span>원
-            </div>-->
-            <div class="order-click">
-              <button type="button" id="addCartItem" class="btn btn-secondary" value="장바구니 담기">Add Cart</button>
-              <button type="submit" class="btn btn-outline-secondary">Buy Now</button>
-            </div>
-          </form>
+          <input type="hidden" id="itemId" th:value="${item.id}">
+          <div class="quantity">
+            <label for="quantity">수량</label>
+            <input type="number" id="quantity" min="1" value="1">
+          </div>
+          <hr/>
+          <!--<div class="total-price">
+            총 상품금액 : <span>1000</span>원
+          </div>-->
+          <div class="order-click">
+            <button type="button" id="addCartItem" class="btn btn-secondary" value="장바구니 담기">Add Cart</button>
+            <button type="button" id="order-btn" class="btn btn-outline-secondary">Buy Now</button>
+          </div>
         </div>
+
+        <!-- 주문 form -->
+        <form th:action="@{/payment}" method="get" class="order-form">
+          <input type="hidden" name="payments[0].itemId" th:value="${item.id}">
+          <input type="hidden" name="payments[0].quantity" value="">
+        </form>
       </div>
     </div>
   </div> <!-- /container -->
@@ -59,6 +63,7 @@
 
 <!-- ======= Js ======= -->
 <script th:inline="javascript">
+  /* 장바구니 담기 */
   $('#addCartItem').click(function() {
     var url = "/carts";
     var data = {
@@ -78,6 +83,15 @@
       }
     })
   })
+
+  /* 바로 주문하기 */
+  $("#order-btn").click(function() {
+    let quantity = $("#quantity").val();
+
+    $(".order-form").find('input[name="orders[0].quantity"]').val(quantity);
+    $(".order-form").submit();
+  });
+
 </script>
 </body>
 

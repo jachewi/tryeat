@@ -11,7 +11,7 @@ import shop.tryit.domain.item.service.ItemService;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberService;
 import shop.tryit.domain.payment.dto.PaymentDto;
-import shop.tryit.domain.payment.dto.PaymentRequsetDto;
+import shop.tryit.domain.payment.dto.PaymentRequestDto;
 import shop.tryit.domain.payment.dto.PaymentResponseDto;
 import shop.tryit.domain.payment.dto.PaymentSaveDto;
 
@@ -28,12 +28,12 @@ public class PaymentFacade {
      * 결제 폼
      */
     @Transactional(readOnly = true)
-    public PaymentResponseDto paymentForm(PaymentRequsetDto paymentRequsetDto, User user) {
-        Item item = itemService.findOne(paymentRequsetDto.getItemId());
+    public PaymentResponseDto paymentForm(PaymentRequestDto paymentRequestDto, User user) {
+        Item item = itemService.findOne(paymentRequestDto.getItemId());
         Image mainImage = imageService.getMainImage(item.getId());
         Member member = memberService.findMember(user.getUsername());
 
-        return toDto(item, mainImage, member, paymentRequsetDto);
+        return toDto(item, mainImage, member, paymentRequestDto);
     }
 
     /**
@@ -54,13 +54,13 @@ public class PaymentFacade {
                 .build();
     }
 
-    public PaymentResponseDto toDto(Item item, Image mainImage, Member member, PaymentRequsetDto paymentRequsetDto) {
+    public PaymentResponseDto toDto(Item item, Image mainImage, Member member, PaymentRequestDto paymentRequestDto) {
         return PaymentResponseDto.builder()
                 .itemId(item.getId())
                 .mainImage(mainImage)
                 .itemName(item.getName())
-                .quantity(paymentRequsetDto.getQuantity())
-                .totalPrice(item.getPrice() * paymentRequsetDto.getQuantity())
+                .quantity(paymentRequestDto.getQuantity())
+                .totalPrice(item.getPrice() * paymentRequestDto.getQuantity())
                 .memberName(member.getName())
                 .memberPhone(member.getPhoneNumber())
                 .zipcode(member.addressZipcode())
