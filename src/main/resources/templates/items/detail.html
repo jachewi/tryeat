@@ -88,7 +88,7 @@
   $("#order-btn").click(function() {
     let quantity = $("#quantity").val();
 
-    $(".order-form").find('input[name="orders[0].quantity"]').val(quantity);
+    $(".order-form").find('input[name="payments[0].quantity"]').val(quantity);
     $(".order-form").submit();
   });
 
