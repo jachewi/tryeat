@@ -1,7 +1,7 @@
 package shop.tryit.repository.order;
 
 import static shop.tryit.domain.member.QMember.member;
-import static shop.tryit.domain.order.QOrder.order;
+import static shop.tryit.domain.order.entity.QOrder.order;
 
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -11,11 +11,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import shop.tryit.domain.member.Member;
-import shop.tryit.domain.order.Order;
 import shop.tryit.domain.order.OrderDetailRepository;
 import shop.tryit.domain.order.dto.OrderDetailSearchDto;
 import shop.tryit.domain.order.dto.OrderSearchDto;
 import shop.tryit.domain.order.dto.QOrderSearchDto;
+import shop.tryit.domain.order.entity.Order;
 
 @RequiredArgsConstructor
 public class OrderCustomImpl implements OrderCustom {

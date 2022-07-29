@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import shop.tryit.domain.item.entity.Item;
+import shop.tryit.domain.order.entity.Order;
 
 @Entity
 @Getter
