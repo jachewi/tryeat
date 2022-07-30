@@ -68,7 +68,11 @@
             </span>원
           </td>
           <td>
-            <button type="button" class="btn btn-custom btn-sm">삭제</button>
+            <button type="button" class="btn btn-custom btn-sm" 
+                    onclick="deleteCartItem(this)" 
+                    th:value="${cartListDto.cartItemId}">
+              삭제
+            </button>
           </td>
         </tr>
         </tbody>
@@ -196,6 +200,23 @@
     updateQuantity(cartItemId, newQuantity);
   };
 
+  /* 장바구니 상품 삭제 요청*/
+  function deleteCartItem(obj) {
+    let cartItemId = obj.value;
+    let url = "/carts/" + cartItemId + "/delete";
+
+    $.ajax({
+      url    : url,
+      type   : "POST",
+      success: function(result) {
+        console.log("장바구니 상품 삭제 성공");
+        location.href = "/carts"; // 새로고침
+      },
+      error  : function(jqXHR) {
+        alert(jqXHR.responseText);
+      }
+    });
+  };
 </script>
 </body>
 
