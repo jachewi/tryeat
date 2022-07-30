@@ -32,6 +32,13 @@
           <td><input type="hidden" id="itemTotalPrice" th:text="${payment.totalPrice}" th:value="${payment.totalPrice}"/></td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="10 " class="payment-total-info" name="paymentTotalPrice">
+            결제 금액: <span id="paymentTotalPrice"></span>원
+          </td>
+        </tr>
+        </tfoot>
       </table>
 
       <br><br><br>
@@ -73,8 +80,20 @@
 <!-- ======= Footer ======= -->
 <footer th:replace="fragments/footer :: footer" id="footer"></footer>
 
-<!-- ======= ImPort API ======= -->
+<!-- ======= Js ======= -->
 <script th:inline="javascript">
+    
+      //총 구매가격
+      var paymentTotalPrice = 0; // 총 가격 (결제 예정 금액)
+      $("tr[name=paymentItem]").each(function(index, element) {
+        var totalPrice = $(element).find("#itemTotalPrice").val();
+        paymentTotalPrice += parseInt(totalPrice);
+      })
+
+      $("#paymentTotalPrice").text(paymentTotalPrice.toLocaleString());
+      console.log("총 구매가격: " + paymentTotalPrice);
+  
+    /** ======= ImPort API ======= **/
     $("#check_module").click(function () {
       var IMP = window.IMP; // 생략가능
       IMP.init('imp56228241');
@@ -90,14 +109,6 @@
       var paymentName = '주문명: ' + $("#name").val() + ' 외 ' + paymentTotalItem
 
       console.log("주문명: " + paymentName);
-
-      //총 구매가격
-      var paymentTotalPrice = 0; // 총 가격 (결제 예정 금액)
-      $("tr[name=paymentItem]").each(function(index, element) {
-        var totalPrice = $(element).find("#itemTotalPrice").val();
-        paymentTotalPrice += parseInt(totalPrice);
-      })
-
       console.log("총 구매가격: " + paymentTotalPrice);
 
 
