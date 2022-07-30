@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr align="center" name="paymentItem">
+        <tr th:each="payment : ${payments}" align="center" name="paymentItem">
           <td>
             <img width="100px" height="100px" th:src="|/files/${payment.mainImage.getStoreFileName()}|" src="../img/portfolio-details-1.jpg"/>
           </td>
@@ -31,28 +31,15 @@
           <td><input type="hidden" id="quantity" name="quantity" th:text="${payment.quantity}" th:value="${payment.quantity}"/></td>
           <td><input type="hidden" id="itemTotalPrice" th:text="${payment.totalPrice}" th:value="${payment.totalPrice}"/></td>
         </tr>
-
-        <!-------------------------테스트용 데이터 시작---------------------->
-        <tr align="center" name="paymentItem">
-          <td>
-            <img width="100px" height="100px" src="../img/portfolio-details-1.jpg"/>
-          </td>
-          <input type="hidden" id="itemId1" name="itemId" value="2">
-          <td><input type="hidden" id="name1" th:text="고양이사료샘플" value="고양이 사료 샘플"/></td>
-          <td><input type="hidden" id="quantity1" name="quantity" th:text="5" value="5"/></td>
-          <td><input type="hidden" id="itemTotalPrice1" th:text="5000" value="5000"/></td>
-        </tr>
-        <!-------------------------테스트용 데이터 끝---------------------->
-
         </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="10 " class="payment-total-info" name="paymentTotalPrice">
+            결제 금액: <span id="paymentTotalPrice"></span>원
+          </td>
+        </tr>
+        </tfoot>
       </table>
-
-      <!-------------------------테스트용 데이터 시작---------------------->
-      <div style="float: right">
-        <span>총 수량: <input type="hidden" id="totalQuantity" th:text="${payment.quantity}+5" value="${payment.quantity}+5"/></span>
-        <span>총 가격: <input type="hidden" id="totalPrice" th:text="${payment.totalPrice}+5000" value="${payment.totalPrice}+5000"/></span>
-      </div>
-      <!-------------------------테스트용 데이터 끝---------------------->
 
       <br><br><br>
 
@@ -63,20 +50,20 @@
         <tbody>
         <tr>
           <th>받는 사람</th>
-          <td><input type="hidden" id="memberName" th:text="${payment.memberName}" th:value="${payment.memberName}"/></td>
+          <td><input type="hidden" id="memberName" th:text="${member.memberName}" th:value="${member.memberName}"/></td>
         </tr>
         <tr>
           <th>연락처</th>
-          <td><input type="hidden" id="memberPhone" th:text="${payment.memberPhone}" th:value="${payment.memberPhone}"/></td>
+          <td><input type="hidden" id="memberPhone" th:text="${member.memberPhone}" th:value="${member.memberPhone}"/></td>
         </tr>
         <tr>
           <th>주소</th>
           <td>
-            <input type="hidden" id="zipcode" th:text="${payment.zipcode}" placeholder="우편번호" readonly>
-            <input type="hidden" id="street_address" th:text="${payment.street_address}" placeholder="도로명주소" readonly>
-            <input type="hidden" id="jibeon_address" th:text="${payment.jibeon_address}" placeholder="지번주소" readonly>
+            <input type="hidden" id="zipcode" th:text="${member.zipcode}" placeholder="우편번호" readonly>
+            <input type="hidden" id="street_address" th:text="${member.street_address}" placeholder="도로명주소" readonly>
+            <input type="hidden" id="jibeon_address" th:text="${member.jibeon_address}" placeholder="지번주소" readonly>
             <span id="guide" style="color:#999;display:none"></span>
-            <input type="hidden" id="detail_address" th:text="${payment.detail_address}" placeholder="상세주소">
+            <input type="hidden" id="detail_address" th:text="${member.detail_address}" placeholder="상세주소">
           </td>
         </tr>
         </tbody>
@@ -93,44 +80,57 @@
 <!-- ======= Footer ======= -->
 <footer th:replace="fragments/footer :: footer" id="footer"></footer>
 
-<!-- ======= ImPort API ======= -->
+<!-- ======= Js ======= -->
+<!--Todo: 맨 마지막에 console.log() 삭제하기-->
 <script th:inline="javascript">
+    
+      //총 구매가격
+      var paymentTotalPrice = 0; // 총 가격 (결제 예정 금액)
+      $("tr[name=paymentItem]").each(function(index, element) {
+        var totalPrice = $(element).find("#itemTotalPrice").val();
+        paymentTotalPrice += parseInt(totalPrice);
+      })
+
+      $("#paymentTotalPrice").text(paymentTotalPrice.toLocaleString());
+      console.log("총 구매가격: " + paymentTotalPrice);
+  
+    /** ======= ImPort API ======= **/
     $("#check_module").click(function () {
       var IMP = window.IMP; // 생략가능
       IMP.init('imp56228241');
 
-      //총 수량
-      var totalQuantity = parseInt($("#quantity").val()) +  parseInt($("#quantity1").val())
+      //총 주문 상품
+      var paymentTotalItem = $("tr[name=paymentItem]").length -1;
+      console.log("총 주문 상품 개수: " + paymentTotalItem);
+
       //주문명
-      var paymentName = '주문명: ' + $("#name").val() + ' 외 ' + totalQuantity
-      //총 구매가격
-      var totalPrice = parseInt($("#itemTotalPrice").val()) + parseInt($("#itemTotalPrice1").val())
+      if(paymentTotalItem == 0) {
+        var paymentName = '츄라잇: ' + $("#name").val()
+      } else{
+        var paymentName = '츄라잇: ' + $("#name").val() + ' 외 ' + paymentTotalItem
+      }
+      
+      console.log("주문명: " + paymentName);
+      console.log("총 구매가격: " + paymentTotalPrice);
 
       IMP.request_pay({ //param
         pg: 'kakaopay',
         pay_method: 'card',
-        merchant_uid: new Date().getTime(),                       //주문번호 ex) 1658304667454
-        name: paymentName,                                        // name: '주문명 : ${order.name}'
-        amount: totalPrice,                                       // amount: ${cart.totalPrice}
-        buyer_name: $("#memberName").val(),			                  // 구매자 이름 ${member.name}
-        buyer_tel: $("#memberPhone").val(),                       // 구매자 전화번호 ${member.phone}
+        merchant_uid: new Date().getTime(),
+        name: paymentName,
+        amount: paymentTotalPrice,
+        buyer_name: $("#memberName").val(),
+        buyer_tel: $("#memberPhone").val(),
         }, function (rsp) { //callback
           console.log(rsp);
         if (rsp.success) {
           var msg = '결제가 완료되었습니다.';
-
-          //Todo: 값 확인용 삭제 예정
-          msg += '고유ID : ' + rsp.imp_uid;                //ex) imp_560723464190
-          msg += '상점 거래ID : ' + rsp.merchant_uid;
-          msg += '결제 금액 : ' + rsp.paid_amount;
-          msg += '카드 승인번호 : ' + rsp.apply_num;
-
           $.ajax({
               type: "POST",
               url: "/payment/kakao", //결제 금액을 보낼 URL 설정
               data: {
-                  "merchant_uid" : rsp.merchant_uid,
-                  "amount" : rsp.paid_amount
+                  merchant_uid : rsp.merchant_uid,
+                  amount : rsp.paid_amount
               },
               statusCode: {
                   200: function(args){
@@ -138,43 +138,41 @@
                     /** 주문 컨트롤러로 결제 상품정보를 보내는 AJAX **/
                     var dataList = new Array();
                     var paramData = new Object();
-
-                    $("tr[name=paymentItem]").each(function() {
-                        var orderItemId = $("#itemId").val(); //타임리프를 사용한다 가정했을 때 th:each, th:id를 통해 값이 해당 id의 value 값을 잘 받아 확인 필요
-                        var orderQuantity = $("#quantity").val();  // 위와 동문
-                        var data = new Object();
-                        data["itemId"] = orderItemId;
-                        data["orderQuantity"] = orderQuantity;
+                    $("tr[name=paymentItem]").each(function(index, element) {
+                        var data = {
+                          merchant_uid : rsp.merchant_uid,
+                          itemId: $(element).find("#itemId").val(),
+                          orderQuantity: $(element).find("#quantity").val()
+                        }
                         dataList.push(data);
                     });
 
-                    paramData['OrderDtoList'] = dataList;
-                    var param = JSON.stringify(paramData);
-
+                    var param = JSON.stringify(dataList);
                     console.log(param);
 
                     $.ajax({
                           type: "POST",
                           url: "/orders/new", //결제 금액을 보낼 URL 설정
-                          dataType : 'json',
+                          contentType: 'application/json',
                           data: param,
-                          //Todo: orderController 이후 200포트를 받았다면 메인화면으로 이동되는지 확인
                           statusCode: {
                               200: function(args){
+                                //Todo: 추후 '/orders'(주문 목록)(으)로 변경 예정
                                 location.href='/';
                               }
                           }
-                      });<!--ajax End-->
-                  }<!--200 function End-->
-              }<!--statusCode End-->
+                      });//ajax End
+                  }//200 function End
+              }//statusCode End
           });
         } else {
           var msg = '결제에 실패하였습니다.';
           msg += '에러내용 : ' + rsp.error_msg;
         }
-        alert(msg);  // Todo: 알럿창으로 msg에 넘어오는 값 확인 후에 결제 완료 알럿메시지로 변경하기
+        alert(msg);
       });
     });
+
 
 </script>
 </body>
