@@ -19,6 +19,7 @@ import shop.tryit.domain.payment.dto.PaymentSaveDto;
 
 @Component
 @RequiredArgsConstructor
+
 public class PaymentFacade {
 
     private final PaymentService paymentService;
@@ -61,11 +62,11 @@ public class PaymentFacade {
         return paymentService.register(toEntity(paymentSaveDto));
     }
 
-    public Payment toEntity(PaymentSaveDto paymentSaveDto) {
+    private Payment toEntity(PaymentSaveDto paymentSaveDto) {
         return Payment.of(paymentSaveDto.getMerchant_uid(), paymentSaveDto.getAmount());
     }
 
-    public static List<PaymentResponseDto> toProductDtoList(List<Item> itemList, List<Image> mainImages, List<PaymentRequestDto> paymentRequestDtoList) {
+    private List<PaymentResponseDto> toProductDtoList(List<Item> itemList, List<Image> mainImages, List<PaymentRequestDto> paymentRequestDtoList) {
         List<PaymentResponseDto> productDtoList = new ArrayList<>();
         for (int i = 0; i < paymentRequestDtoList.size(); i++) {
             PaymentResponseDto productDto = PaymentResponseDto.builder()
@@ -80,7 +81,7 @@ public class PaymentFacade {
         return productDtoList;
     }
 
-    public PaymentResponseDto toMemberDto(Member member) {
+    private PaymentResponseDto toMemberDto(Member member) {
         return PaymentResponseDto.builder()
                 .memberName(member.getName())
                 .memberPhone(member.getPhoneNumber())
