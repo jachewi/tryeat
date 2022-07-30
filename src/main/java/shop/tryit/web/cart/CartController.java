@@ -1,5 +1,6 @@
 package shop.tryit.web.cart;
 
+import java.net.URI;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import shop.tryit.domain.cart.dto.CartItemDto;
 import shop.tryit.domain.cart.dto.CartListDto;
 import shop.tryit.domain.cart.service.CartFacade;
@@ -35,9 +37,9 @@ public class CartController {
      * 장바구니에 상품 담기
      */
     @PostMapping
-    public @ResponseBody ResponseEntity addCartItem(@Valid @ModelAttribute CartItemDto cartItemDto,
-                                                    BindingResult bindingResult,
-                                                    @AuthenticationPrincipal User user) {
+    public @ResponseBody ResponseEntity<String> addCartItem(@Valid @ModelAttribute CartItemDto cartItemDto,
+                                                            BindingResult bindingResult,
+                                                            @AuthenticationPrincipal User user) {
         log.info("장바구니에 담을 상품의 id = {}", cartItemDto.getItemId());
         log.info("장바구니에 담을 상품의 수량 = {}", cartItemDto.getQuantity());
 
@@ -54,13 +56,15 @@ public class CartController {
             for (FieldError error : bindingResult.getFieldErrors())
                 sb.append(error.getDefaultMessage());
 
-            return new ResponseEntity<String>(sb.toString(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
         }
 
-        // 검증 성공시 장바구니에 상품 담기
-        Long cartItemId = cartFacade.addCartItem(cartItemDto, user);
+        // 검증 성공시 장바구니에 상품 담기 + 201
+        cartFacade.addCartItem(cartItemDto, user);
 
-        return new ResponseEntity<Long>(cartItemId, HttpStatus.OK);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+
+        return ResponseEntity.created(location).build();
     }
 
     /**
@@ -83,3 +87,5 @@ public class CartController {
         cartFacade.updateCartItemQuantity(cartItemId, newQuantity);
         return ResponseEntity.ok("cartItem quantity update success");
     }
+
+}
