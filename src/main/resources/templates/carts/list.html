@@ -41,11 +41,9 @@
 
         <tbody>
         <tr class="text-center" th:each="cartListDto : ${cartListDtos}">
-          <td class="cart-info">
-            <input type="checkbox" checked="checked" id="check-box">
-            <input type="hidden" id="individual-itemId" th:value="${cartListDto.itemId}">
-            <input type="hidden" id="individual-quantity" th:value="${cartListDto.quantity}">
-            <input type="hidden" id="individual-totalPrice" th:value="${cartListDto.totalPrice}">
+          <td>
+            <input type="checkbox" checked="checked" id="check-box" th:value="${cartListDto.cartItemId}">
+            <input type="hidden" th:id="'itemId' + ${cartListDto.cartItemId}" th:value="${cartListDto.itemId}">
           </td>
           <td>
             <a th:href="@{/items/{id}(id=${cartListDto.itemId})}">
@@ -139,24 +137,23 @@
     $("#cartTotalPrice").text(cartTotalPrice.toLocaleString()); // toLocaleString() : 세자리 컴마 표시
   }
 
-  /* 체크된 항목 주문 */
+  /* 체크된 항목 주문(결제) 요청 */
   $("#order-btn").click(function() {
     let formData = "";
     let idx = 0;
 
-    $(".cart-info").each(function(index, element) {
-      if($(element).find("#check-box").is(":checked") == true) {
-        let itemId = $(element).find("#individual-itemId").val();
-        let quantity = $(element).find("#individual-quantity").val();
+    $("input:checkbox[id=check-box]:checked").each(function() {
+      let cartItemId = $(this).val();
+      let itemId = $("#itemId" + cartItemId).val();
+      let quantity = $("#quantity_" + cartItemId).val();
 
-        let itemId_input = '<input type="hidden" name="payments[' + idx + '].itemId" value="' + itemId + '">';
-        formData += itemId_input;
+      let itemId_input = '<input type="hidden" name="payments[' + idx + '].itemId" value="' + itemId + '">';
+      formData += itemId_input;
 
-        let quantity_input = '<input type="hidden" name="payments[' + idx + '].quantity" value="' + quantity + '">';
-        formData += quantity_input;
+      let quantity_input = '<input type="hidden" name="payments[' + idx + '].quantity" value="' + quantity + '">';
+      formData += quantity_input;
         
-        idx += 1;
-      }
+      idx += 1;
     });
 
     $(".order-form").html(formData);
