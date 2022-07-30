@@ -114,7 +114,7 @@ class CartItemServiceTests {
         cartItemJpaRepository.save(cartItem);
 
         // when
-        sut.updateCartItemCount(cartItem.getId(), 5);
+        sut.updateCartItemQuantity(cartItem.getId(), 5);
 
         // then
         assertThat(cartItem.getQuantity()).isEqualTo(5);
