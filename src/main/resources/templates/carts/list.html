@@ -126,17 +126,17 @@
 
   /* 총 장바구니 정보 세팅 */
   function setCartTotalInfo() {
-    var cartTotalPrice = 0; // 총 가격 (결제 예정 금액)
+    let cartTotalPrice = 0; // 총 가격 (결제 예정 금액)
 
-    $(".cart-info").each(function(index, element) {
-      if($(element).find("#check-box").is(":checked") == true) { // 체크된 항목
-        var totalPrice = $(element).find("#individual-totalPrice").val();
-        cartTotalPrice += parseInt(totalPrice);
-      }
-    })
+    $("input:checkbox[id=check-box]:checked").each(function() {
+      let cartItemId = $(this).val();
+      let price = $("#itemPrice_" + cartItemId).text();
+      let quantity = $("#quantity_" + cartItemId).val();
+
+      cartTotalPrice += price * quantity;
+    });
 
     $("#cartTotalPrice").text(cartTotalPrice.toLocaleString()); // toLocaleString() : 세자리 컴마 표시
-    console.log("결제 예정 금액 : " + cartTotalPrice);
   }
 
   /* 체크된 항목 주문 */
