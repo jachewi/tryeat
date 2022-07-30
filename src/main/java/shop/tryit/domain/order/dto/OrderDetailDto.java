@@ -1,10 +1,10 @@
 package shop.tryit.domain.order.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@AllArgsConstructor
+@Data
+@NoArgsConstructor
 public class OrderDetailDto {
 
     private Long itemId;
