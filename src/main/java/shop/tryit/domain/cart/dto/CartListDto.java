@@ -22,8 +22,6 @@ public class CartListDto {
 
     private Image mainImage; // 상품 메인이미지
 
-    private int totalPrice; // 상품 금액 * 수량
-
     @Builder
     private CartListDto(Long cartItemId, Long itemId, String itemName, int itemPrice, int quantity, Image mainImage) {
         this.cartItemId = cartItemId;
@@ -32,7 +30,6 @@ public class CartListDto {
         this.itemPrice = itemPrice;
         this.quantity = quantity;
         this.mainImage = mainImage;
-        this.totalPrice = itemPrice * quantity;
     }
 
 }
