@@ -81,6 +81,7 @@
 <footer th:replace="fragments/footer :: footer" id="footer"></footer>
 
 <!-- ======= Js ======= -->
+<!--Todo: 맨 마지막에 console.log() 삭제하기-->
 <script th:inline="javascript">
     
       //총 구매가격
@@ -112,15 +113,14 @@
       console.log("주문명: " + paymentName);
       console.log("총 구매가격: " + paymentTotalPrice);
 
-
       IMP.request_pay({ //param
         pg: 'kakaopay',
         pay_method: 'card',
-        merchant_uid: new Date().getTime(),                       //주문번호 ex) 1658304667454
-        name: paymentName,                                        // name: '주문명 : ${order.name}'
-        amount: paymentTotalPrice,                                       // amount: ${cart.totalPrice}
-        buyer_name: $("#memberName").val(),			                  // 구매자 이름 ${member.name}
-        buyer_tel: $("#memberPhone").val(),                       // 구매자 전화번호 ${member.phone}
+        merchant_uid: new Date().getTime(),
+        name: paymentName,
+        amount: paymentTotalPrice,
+        buyer_name: $("#memberName").val(),
+        buyer_tel: $("#memberPhone").val(),
         }, function (rsp) { //callback
           console.log(rsp);
         if (rsp.success) {
@@ -153,12 +153,11 @@
                     $.ajax({
                           type: "POST",
                           url: "/orders/new", //결제 금액을 보낼 URL 설정
-                          // dataType : 'json',
                           contentType: 'application/json',
                           data: param,
-                          //Todo: orderController 이후 200포트를 받았다면 메인화면으로 이동되는지 확인
                           statusCode: {
                               200: function(args){
+                                //Todo: 추후 '/orders'(주문 목록)(으)로 변경 예정
                                 location.href='/';
                               }
                           }
@@ -170,9 +169,10 @@
           var msg = '결제에 실패하였습니다.';
           msg += '에러내용 : ' + rsp.error_msg;
         }
-        alert(msg);  // Todo: 알럿창으로 msg에 넘어오는 값 확인 후에 결제 완료 알럿메시지로 변경하기
+        alert(msg);
       });
     });
+
 
 </script>
 </body>
