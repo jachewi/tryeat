@@ -163,12 +163,9 @@
     $(".order-form").submit();
   });
 
-  /* 장바구니에서 상품 수량 변경 */
-  function updateQuantity(obj) {
-    let data = { newQuantity : obj.value}
-    console.log(data);
-
-    let cartItemId = obj.id.split('_')[1];
+  /* 장바구니 상품 수량 변경 요청 */
+  function updateQuantity(cartItemId, newQuantity) {
+    let data = { newQuantity : newQuantity}
     let url = "/carts/" + cartItemId + "/update";
     
     $.ajax({
@@ -177,7 +174,6 @@
       data   : data,
       success: function(result) {
         console.log("장바구니 수량 변경 성공");
-        location.href="/carts";
       },
       error  : function(jqXHR) {
         alert(jqXHR.responseText);
