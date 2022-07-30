@@ -29,14 +29,6 @@ public class PaymentFacade {
     /**
      * 결제 폼
      */
-//    @Transactional(readOnly = true)
-//    public PaymentResponseDto paymentForm(PaymentRequestDto paymentRequestDto, User user) {
-//        Item item = itemService.findOne(paymentRequestDto.getItemId());
-//        Image mainImage = imageService.getMainImage(item.getId());
-//        Member member = memberService.findMember(user.getUsername());
-//
-//        return toDto(item, mainImage, member, paymentRequestDto);
-//    }
     @Transactional(readOnly = true)
     public List<PaymentResponseDto> paymentForm(List<PaymentRequestDto> paymentRequestDtoList) {
 
@@ -72,29 +64,6 @@ public class PaymentFacade {
     public Payment toEntity(PaymentSaveDto paymentSaveDto) {
         return Payment.of(paymentSaveDto.getMerchant_uid(), paymentSaveDto.getAmount());
     }
-
-//    public PaymentDto toDto(Payment payment) {
-//        return PaymentDto.builder()
-//                .number(payment.getNumber())
-//                .totalPrice(payment.getTotalPrice())
-//                .build();
-//    }
-//
-//    public PaymentResponseDto toDto(Item item, Image mainImage, Member member, PaymentRequestDto paymentRequestDto) {
-//        return PaymentResponseDto.builder()
-//                .itemId(item.getId())
-//                .mainImage(mainImage)
-//                .itemName(item.getName())
-//                .quantity(paymentRequestDto.getQuantity())
-//                .totalPrice(item.getPrice() * paymentRequestDto.getQuantity())
-//                .memberName(member.getName())
-//                .memberPhone(member.getPhoneNumber())
-//                .zipcode(member.addressZipcode())
-//                .street_address(member.addressStreet())
-//                .jibeon_address(member.addressJibeon())
-//                .detail_address(member.addressDetail())
-//                .build();
-//    }
 
     public static List<PaymentResponseDto> toProductDtoList(List<Item> itemList, List<Image> mainImages, List<PaymentRequestDto> paymentRequestDtoList) {
         List<PaymentResponseDto> productDtoList = new ArrayList<>();
