@@ -81,6 +81,7 @@ public class CartFacade {
 
     private CartListDto toDto(CartItem cartItem, Image mainImage) {
         return CartListDto.builder()
+                .cartItemId(cartItem.getId())
                 .itemId(cartItem.getItemId())
                 .itemName(cartItem.getItemName())
                 .itemPrice(cartItem.getItemPrice())
