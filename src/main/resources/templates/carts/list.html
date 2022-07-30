@@ -101,7 +101,7 @@
 <script th:inline="javascript">
   $(document).ready(function() {
     setCartTotalInfo();
-  })
+  });
 
   /* 체크박스 전체 선택 */
   $("#check-all").click(function() {
@@ -162,7 +162,7 @@
 
   /* 장바구니 상품 수량 변경 요청 */
   function updateQuantity(cartItemId, newQuantity) {
-    let data = { newQuantity : newQuantity}
+    let data = { newQuantity : newQuantity };
     let url = "/carts/" + cartItemId + "/update";
     
     $.ajax({
@@ -176,7 +176,7 @@
         alert(jqXHR.responseText);
       }
     });
-  }
+  };
 
   /* 수량 버튼 조작 */
   function changeQuantity(obj) {
@@ -194,7 +194,7 @@
 
     // 장바구니 상품 수량 변경
     updateQuantity(cartItemId, newQuantity);
-  }
+  };
 
 </script>
 </body>
