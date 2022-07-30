@@ -99,15 +99,16 @@
       IMP.init('imp56228241');
 
       //총 주문 상품
-      var paymentTotalItem = 0; 
-      $("tr[name=paymentItem]").each(function(index, element) {
-        paymentTotalPrice += parseInt(1);
-      })
+      var paymentTotalItem = $("tr[name=paymentItem]").length -1;
       console.log("총 주문 상품 개수: " + paymentTotalItem);
 
       //주문명
-      var paymentName = '주문명: ' + $("#name").val() + ' 외 ' + paymentTotalItem
-
+      if(paymentTotalItem == 0) {
+        var paymentName = '츄라잇: ' + $("#name").val()
+      } else{
+        var paymentName = '츄라잇: ' + $("#name").val() + ' 외 ' + paymentTotalItem
+      }
+      
       console.log("주문명: " + paymentName);
       console.log("총 구매가격: " + paymentTotalPrice);
 
