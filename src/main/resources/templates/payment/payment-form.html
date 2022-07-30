@@ -125,9 +125,10 @@
 
                     /** 주문 컨트롤러로 결제 상품정보를 보내는 AJAX **/
                     var dataList = new Array();
-                    
+                    var paramData = new Object();
                     $("tr[name=paymentItem]").each(function(index, element) {
                         var data = {
+                          merchant_uid : rsp.merchant_uid,
                           itemId: $(element).find("#itemId").val(),
                           orderQuantity: $(element).find("#quantity").val()
                         }
