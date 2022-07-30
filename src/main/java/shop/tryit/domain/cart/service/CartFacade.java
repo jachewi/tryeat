@@ -71,6 +71,14 @@ public class CartFacade {
         return item.getStockQuantity();
     }
 
+    /**
+     * 장바구니 상품 수량 변경
+     */
+    @Transactional
+    public Long updateCartItemQuantity(Long cartItemId, int newQuantity) {
+        return cartItemService.updateCartItemQuantity(cartItemId, newQuantity);
+    }
+
     private CartItem toEntity(CartItemDto cartItemDto, Item item, Cart cart) {
         return CartItem.builder()
                 .cart(cart)
@@ -81,6 +89,7 @@ public class CartFacade {
 
     private CartListDto toDto(CartItem cartItem, Image mainImage) {
         return CartListDto.builder()
+                .cartItemId(cartItem.getId())
                 .itemId(cartItem.getItemId())
                 .itemName(cartItem.getItemName())
                 .itemPrice(cartItem.getItemPrice())

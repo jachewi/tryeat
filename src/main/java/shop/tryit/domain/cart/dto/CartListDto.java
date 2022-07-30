@@ -10,6 +10,8 @@ import shop.tryit.domain.item.entity.Image;
 @NoArgsConstructor
 public class CartListDto {
 
+    private Long cartItemId; // 장바구니 상품 ID
+
     private Long itemId; // 상품 ID
 
     private String itemName; // 상품 이름
@@ -23,7 +25,8 @@ public class CartListDto {
     private int totalPrice; // 상품 금액 * 수량
 
     @Builder
-    private CartListDto(Long itemId, String itemName, int itemPrice, int quantity, Image mainImage) {
+    private CartListDto(Long cartItemId, Long itemId, String itemName, int itemPrice, int quantity, Image mainImage) {
+        this.cartItemId = cartItemId;
         this.itemId = itemId;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
