@@ -79,6 +79,14 @@ public class CartFacade {
         return cartItemService.updateCartItemQuantity(cartItemId, newQuantity);
     }
 
+    /**
+     * 장바구니 상품 삭제
+     */
+    @Transactional
+    public void deleteCartItem(Long cartItemId) {
+        cartItemService.deleteCartItem(cartItemId);
+    }
+
     private CartItem toEntity(CartItemDto cartItemDto, Item item, Cart cart) {
         return CartItem.builder()
                 .cart(cart)

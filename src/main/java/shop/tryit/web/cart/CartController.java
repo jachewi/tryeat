@@ -88,4 +88,13 @@ public class CartController {
         return ResponseEntity.ok("cartItem quantity update success");
     }
 
+    /**
+     * 장바구니에 담긴 상품 삭제
+     */
+    @PostMapping("/{cartItemId}/delete")
+    public @ResponseBody ResponseEntity<String> delete(@PathVariable Long cartItemId) {
+        cartFacade.deleteCartItem(cartItemId);
+        return ResponseEntity.ok("cartItem delete success");
+    }
+
 }
