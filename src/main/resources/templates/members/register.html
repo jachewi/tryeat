@@ -70,100 +70,97 @@
                     .open();
             }
 
-
 </script>
 
 <!-- ======= Hero Section ======= -->
-<section id="hero">
-  <div class="wrap wd668">
-    <div class="container">
-      <div class="form_txtInput">
-        <h2 class="sub_tit_txt">회원가입</h2>
-        <form
-            class="join_form"
-            th:action="@{/members/new}"
-            th:object="${memberForm}"
-            method="post">
-          <table>
-            <colgroup>
-              <col width="30%"/>
-              <col width="auto"/>
-            </colgroup>
-            <tbody>
-            <tr>
-              <th>
-                <span>아이디</span></th>
-              <td>
-                <input type="email" th:field="*{email}" placeholder="ex) abcdef1234@gmail.com">
-                <div th:errors="*{email}"></div>
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <span>이름</span></th>
-              <td>
-                <input type="text" th:field="*{name}" placeholder="">
-                <div th:errors="*{name}"></div>
-              </td>
+<section class="common">
+  <div class="container">
+    <div class="form_txtInput">
+      <h3 class="text-center mb-5">회원가입</h3>
+      <form
+          class="join_form"
+          th:action="@{/members/new}"
+          th:object="${memberForm}"
+          method="post">
+        <table>
+          <colgroup>
+            <col width="30%"/>
+            <col width="auto"/>
+          </colgroup>
+          <tbody>
+          <tr>
+            <th>
+              <span>아이디</span></th>
+            <td>
+              <input type="email" th:field="*{email}" placeholder="ex) abcdef1234@gmail.com">
+              <div class="red_txt" th:errors="*{email}"></div>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <span>이름</span></th>
+            <td>
+              <input type="text" th:field="*{name}" placeholder="">
+              <div class="red_txt" th:errors="*{name}"></div>
+            </td>
 
-            </tr>
-            <tr>
-              <th>
-                <span>비밀번호</span></th>
-              <td>
-                <input type="password" th:field="*{password1}" placeholder="비밀번호를 입력해주세요.">
-                <div th:errors="*{password1}"></div>
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <span>비밀번호 확인</span></th>
-              <td>
-                <input type="password" th:field="*{password2}" placeholder="비밀번호를 확인하세요">
-                <div th:errors="*{password2}"></div>
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <span>주소</span></th>
-              <td>
-                <input type="text" th:field="*{zipcode}" id="zipcode" placeholder="우편번호" readonly>
-                <div th:errors="*{zipcode}"></div>
-                <input type="button" onclick='execDaumPostcode()' value="우편번호 찾기"><br>
-                <input type="text" th:field="*{street_address}" id="street_address" placeholder="도로명주소" readonly>
-                <div th:errors="*{street_address}"></div>
-                <input type="text" th:field="*{jibeon_address}" id="jibeon_address" placeholder="지번주소" readonly>
-                <div th:errors="*{jibeon_address}"></div>
-                <span id="guide" style="color:#999;display:none"></span>
-                <input type="text" th:field="*{detail_address}" id="detail_address" placeholder="상세주소">
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <span>휴대폰 번호</span></th>
-              <td>
-                <input type="text" th:field="*{phone}" placeholder="">
-                <div th:errors="*{phone}"></div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-          <div class="exform_txt">
-            <span>표시는 필수적으로 입력해주셔야 가입이 가능합니다.</span>
-          </div>
-          <div class="btn_wrap">
-            <br>
-            <button type="submit">
-              회원가입
-            </button>
-          </div>
-        </form>
-        <!-- join_form E -->
-      </div>
-      <!-- form_txtInput E -->
+          </tr>
+          <tr>
+            <th>
+              <span>비밀번호</span></th>
+            <td>
+              <input type="password" th:field="*{password1}" placeholder="비밀번호를 입력해주세요.">
+              <div class="red_txt" th:errors="*{password1}"></div>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <span>비밀번호 확인</span></th>
+            <td>
+              <input type="password" th:field="*{password2}" placeholder="비밀번호를 확인하세요">
+              <div class="red_txt" th:errors="*{password2}"></div>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <span>주소</span></th>
+            <td>
+              <input type="text" th:field="*{zipcode}" id="zipcode" placeholder="우편번호" readonly>
+              <div class="red_txt" th:errors="*{zipcode}"></div>
+              <input type="button" onclick='execDaumPostcode()' value="우편번호 찾기"><br>
+              <input type="text" th:field="*{street_address}" id="street_address" placeholder="도로명주소" readonly>
+              <div class="red_txt" th:errors="*{street_address}"></div>
+              <input type="text" th:field="*{jibeon_address}" id="jibeon_address" placeholder="지번주소" readonly>
+              <div class="red_txt" th:errors="*{jibeon_address}"></div>
+              <span id="guide" style="color:#999;display:none"></span>
+              <input type="text" th:field="*{detail_address}" id="detail_address" placeholder="상세주소">
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <span>휴대폰 번호</span></th>
+            <td>
+              <input type="text" th:field="*{phone}" placeholder="ex) 01012341234">
+              <div class="red_txt" th:errors="*{phone}"></div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="exform_txt">
+          <span>표시는 필수적으로 입력해주셔야 가입이 가능합니다.</span>
+        </div>
+        <div class="btn_wrap">
+          <br>
+          <button class="btn btn-dark" type="submit">
+            <h5>가입하기</h5>
+          </button>
+        </div>
+      </form>
+      <!-- join_form E -->
     </div>
-    <!--content E-->
+    <!-- form_txtInput E -->
   </div>
+  <!--content E-->
 </section>
 <!-- End Hero -->
 
