@@ -75,8 +75,8 @@ public class CartFacade {
      * 장바구니 상품 수량 변경
      */
     @Transactional
-    public Long updateCartItemQuantity(Long cartItemId, int newQuantity) {
-        return cartItemService.updateCartItemQuantity(cartItemId, newQuantity);
+    public Long updateCartItemQuantity(Long cartItemId, CartItemDto cartItemDto) {
+        return cartItemService.updateCartItemQuantity(cartItemId, cartItemDto.getQuantity());
     }
 
     /**
