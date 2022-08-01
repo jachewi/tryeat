@@ -9,7 +9,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,14 +29,10 @@ public class OrderController {
     private final OrderFacade orderFacade;
 
     @PostMapping("/new")
-    public ResponseEntity<String> newOrder(@RequestBody List<OrderDetailDto> orderFormDto,
-                                           BindingResult bindingResult,
+    public ResponseEntity<String> newOrder(@RequestBody List<OrderDetailDto> orderDetailDtos,
                                            @AuthenticationPrincipal User user) {
-        log.info("======== 결제 폼 컨트롤러 시작 ========");
-        log.info("orderFormDto: {}", orderFormDto.toString());
-
-        // TODO : 주문 등록 기능 구현
-        return ResponseEntity.ok(orderFormDto.toString());
+        orderFacade.register(user, orderDetailDtos);
+        return ResponseEntity.ok(orderDetailDtos.toString());
     }
 
     @GetMapping
@@ -49,6 +44,14 @@ public class OrderController {
         model.addAttribute("pages", pages.getPages());
 
         return "/orders/list";
+    }
+
+    @GetMapping("/{orderId}")
+    public String findOne(@PathVariable Long orderId, Model model) {
+
+        log.info("order='{}'", orderFacade.findOne(orderId));
+        model.addAttribute("order", orderFacade.findOne(orderId));
+        return "orders/detail";
     }
 
     @PostMapping("/{orderId}/cancel")
