@@ -40,25 +40,26 @@ public class ItemCustomImpl implements ItemCustom {
 
     @Override
     @SuppressWarnings("all")
-    public ItemSearchDto findItemSearchDtoByOrderDetailId(Long orderDetailItemId) {
+    public ItemSearchDto findItemDtoById(Long itemId) {
         QItemSearchDto qItemListDto = new QItemSearchDto(item.id, item.name, item.price);
         ItemSearchDto itemSearchDto = queryFactory
                 .select(qItemListDto)
                 .from(item)
-                .where(item.id.eq(orderDetailItemId))
+                .where(item.id.eq(itemId))
                 .fetchOne();
 
-        Image itemMainImage = findMainImageByOrderDetailItemId(orderDetailItemId);
+        Image itemMainImage = findMainImageById(itemId);
         itemSearchDto.injectMainImage(itemMainImage);
 
         return itemSearchDto;
     }
 
-    private Image findMainImageByOrderDetailItemId(Long orderDetailItemId) {
-        return queryFactory.selectFrom(image)
+    private Image findMainImageById(Long itemId) {
+        return queryFactory
+                .selectFrom(image)
                 .where(
                         image.type.eq(ImageType.MAIN),
-                        item.id.in(orderDetailItemId)
+                        item.id.in(itemId)
                 )
                 .join(image.item, item)
                 .fetchOne();

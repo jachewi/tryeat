@@ -1,5 +1,6 @@
 package shop.tryit.repository.order;
 
+import static shop.tryit.domain.item.entity.QItem.item;
 import static shop.tryit.domain.order.QOrderDetail.orderDetail;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -19,11 +20,12 @@ public class OrderDetailCustomImpl implements OrderDetailCustom {
 
     @Override
     public List<OrderDetailSearchDto> searchOrderDetails(Order order) {
-        QOrderDetailSearchDto qOrderDetailSearchDto = new QOrderDetailSearchDto(orderDetail.quantity, orderDetail.id);
+        QOrderDetailSearchDto qOrderDetailSearchDto = new QOrderDetailSearchDto(orderDetail.id, item.id, orderDetail.quantity);
         List<OrderDetailSearchDto> orderDetailSearchDtoList = queryFactory
                 .select(qOrderDetailSearchDto)
                 .from(orderDetail)
                 .where(orderDetail.order.eq(order))
+                .join(orderDetail.item, item)
                 .fetch();
 
         orderDetailSearchDtoList.forEach(this::injectItem);
@@ -32,8 +34,8 @@ public class OrderDetailCustomImpl implements OrderDetailCustom {
     }
 
     private void injectItem(OrderDetailSearchDto orderDetailSearchDto) {
-        Long orderDetailId = orderDetailSearchDto.getOrderDetailId();
-        ItemSearchDto itemSearchDto = itemRepository.findItemSearchDtoByOrderDetailId(orderDetailId);
+        Long itemId = orderDetailSearchDto.getItemId();
+        ItemSearchDto itemSearchDto = itemRepository.findItemDtoById(itemId);
         orderDetailSearchDto.injectItemSearchDto(itemSearchDto);
     }
 
