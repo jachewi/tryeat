@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import shop.tryit.domain.cart.dto.CartItemDto;
@@ -83,8 +82,27 @@ public class CartController {
      * 장바구니에 담긴 상품 수량 변경
      */
     @PostMapping("/{cartItemId}/update")
-    public @ResponseBody ResponseEntity<String> update(@PathVariable Long cartItemId, @RequestParam int newQuantity) {
-        cartFacade.updateCartItemQuantity(cartItemId, newQuantity);
+    public @ResponseBody ResponseEntity<String> update(@Valid @ModelAttribute CartItemDto cartItemDto,
+                                                       BindingResult bindingResult,
+                                                       @PathVariable Long cartItemId) {
+        // 상품 재고 검증
+        if (Boolean.FALSE.equals(cartFacade.checkItemStock(cartItemDto))) {
+            bindingResult.rejectValue("quantity", "StockError",
+                    String.format("현재 남은 수량은 %d개 입니다.%n%d개 이하로 담아주세요.", cartFacade.getItemStock(cartItemDto), cartFacade.getItemStock(cartItemDto)));
+        }
+
+        // 검증 실패시 400
+        if (bindingResult.hasErrors()) {
+            StringBuilder sb = new StringBuilder();
+
+            for (FieldError error : bindingResult.getFieldErrors())
+                sb.append(error.getDefaultMessage());
+
+            return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
+        }
+
+        // 검증 성공시 장바구니 상품 수량 변경 + 200
+        cartFacade.updateCartItemQuantity(cartItemId, cartItemDto);
         return ResponseEntity.ok("cartItem quantity update success");
     }
 
