@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import shop.tryit.domain.item.entity.Image;
 import shop.tryit.domain.item.entity.Item;
 
 @Entity
@@ -68,6 +69,10 @@ public class OrderDetail {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public Image mainImage() {
+        return item.getMainImage();
     }
 
 }

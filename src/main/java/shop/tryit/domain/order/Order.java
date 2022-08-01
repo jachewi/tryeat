@@ -83,4 +83,20 @@ public class Order extends BaseTimeEntity {
         return Objects.hash(id);
     }
 
+    public Long zipCode() {
+        return member.addressZipcode();
+    }
+
+    public String streetAddress() {
+        return member.addressStreet();
+    }
+
+    public String jibeonAddress() {
+        return member.addressJibeon();
+    }
+
+    public String detailAddress() {
+        return member.addressJibeon();
+    }
+
 }

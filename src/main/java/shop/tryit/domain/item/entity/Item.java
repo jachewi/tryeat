@@ -6,6 +6,7 @@ import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
+import static shop.tryit.domain.item.ImageType.MAIN;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,6 +94,13 @@ public class Item extends BaseTimeEntity {
     // 상품 재고와 장바구니 수량 비교를 위한 로직
     public boolean checkStock(int quantity) {
         return stockQuantity >= quantity;
+    }
+
+    public Image getMainImage() {
+        return images.stream()
+                .filter(image -> image.getType()==MAIN)
+                .findFirst()
+                .orElseThrow();
     }
 
 }
