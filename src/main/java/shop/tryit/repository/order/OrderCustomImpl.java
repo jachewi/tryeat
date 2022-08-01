@@ -44,7 +44,7 @@ public class OrderCustomImpl implements OrderCustom {
                 .from(order)
                 .where(order.member.eq(findMember))
                 .orderBy(order.createDate.desc())
-                .join(order.member, member).fetchJoin()
+                .join(order.member, member)
                 .fetch();
 
         content.forEach(this::injectOrderDetails);
