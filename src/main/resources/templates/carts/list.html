@@ -160,8 +160,12 @@
       idx += 1;
     });
 
-    $(".order-form").html(formData);
-    $(".order-form").submit();
+    if (formData == "") {
+      alert("선택된 상품이 없습니다.");
+    } else {
+      $(".order-form").html(formData);
+      $(".order-form").submit();
+    };
   });
 
   /* 장바구니 상품 수량 변경 요청 */
