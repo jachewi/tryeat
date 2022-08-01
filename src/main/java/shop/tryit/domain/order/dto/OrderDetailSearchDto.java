@@ -9,13 +9,15 @@ public class OrderDetailSearchDto {
 
     private Long orderDetailId;
 
+    private Long itemId;
     private ItemSearchDto itemSearchDto;
     private int quantity;
 
     @QueryProjection
-    public OrderDetailSearchDto(int quantity, Long orderDetailId) {
-        this.quantity = quantity;
+    public OrderDetailSearchDto(Long orderDetailId, Long itemId, int quantity) {
         this.orderDetailId = orderDetailId;
+        this.itemId = itemId;
+        this.quantity = quantity;
     }
 
     public void injectItemSearchDto(ItemSearchDto itemSearchDto) {
