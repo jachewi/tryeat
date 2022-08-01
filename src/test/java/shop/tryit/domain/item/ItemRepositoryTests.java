@@ -108,7 +108,7 @@ class ItemRepositoryTests {
         Long savedOrderDetailId = orderDetailRepository.save(orderDetail);
 
         // when
-        ItemSearchDto itemSearchDto = assertDoesNotThrow(() -> sut.findItemSearchDtoByOrderDetailId(savedOrderDetailId));
+        ItemSearchDto itemSearchDto = assertDoesNotThrow(() -> sut.findItemDtoById(savedOrderDetailId));
 
         // then
         assertThat(itemSearchDto.getId()).isEqualTo(savedItemId);
