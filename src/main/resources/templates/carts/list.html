@@ -43,7 +43,7 @@
         <tr class="text-center" th:each="cartListDto : ${cartListDtos}">
           <td>
             <input type="checkbox" checked="checked" id="check-box" th:value="${cartListDto.cartItemId}">
-            <input type="hidden" th:id="'itemId' + ${cartListDto.cartItemId}" th:value="${cartListDto.itemId}">
+            <input type="hidden" th:id="'itemId_' + ${cartListDto.cartItemId}" th:value="${cartListDto.itemId}">
           </td>
           <td>
             <a th:href="@{/items/{id}(id=${cartListDto.itemId})}">
@@ -148,7 +148,7 @@
 
     $("input:checkbox[id=check-box]:checked").each(function() {
       let cartItemId = $(this).val();
-      let itemId = $("#itemId" + cartItemId).val();
+      let itemId = $("#itemId_" + cartItemId).val();
       let quantity = $("#quantity_" + cartItemId).val();
 
       let itemId_input = '<input type="hidden" name="payments[' + idx + '].itemId" value="' + itemId + '">';
@@ -166,8 +166,13 @@
 
   /* 장바구니 상품 수량 변경 요청 */
   function updateQuantity(cartItemId, newQuantity) {
-    let data = { newQuantity : newQuantity };
     let url = "/carts/" + cartItemId + "/update";
+    let itemId = $("#itemId_" + cartItemId).val();
+
+    let data = { 
+      itemId  : itemId,
+      quantity : newQuantity 
+    };
     
     $.ajax({
       url    : url,
@@ -178,6 +183,7 @@
       },
       error  : function(jqXHR) {
         alert(jqXHR.responseText);
+        location.href = "/carts"; // 새로고침
       }
     });
   };

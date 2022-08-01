@@ -92,7 +92,7 @@ public class Item extends BaseTimeEntity {
 
     // 상품 재고와 장바구니 수량 비교를 위한 로직
     public boolean checkStock(int quantity) {
-        return stockQuantity > quantity;
+        return stockQuantity >= quantity;
     }
 
 }
