@@ -22,14 +22,17 @@ public class CartListDto {
 
     private Image mainImage; // 상품 메인이미지
 
+    private int itemStock; // 상품 재고
+
     @Builder
-    private CartListDto(Long cartItemId, Long itemId, String itemName, int itemPrice, int quantity, Image mainImage) {
+    private CartListDto(Long cartItemId, Long itemId, String itemName, int itemPrice, int quantity, Image mainImage, int itemStock) {
         this.cartItemId = cartItemId;
         this.itemId = itemId;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.quantity = quantity;
         this.mainImage = mainImage;
+        this.itemStock = itemStock;
     }
 
 }

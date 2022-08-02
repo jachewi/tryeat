@@ -103,6 +103,7 @@ public class CartFacade {
                 .itemPrice(cartItem.getItemPrice())
                 .quantity(cartItem.getQuantity())
                 .mainImage(mainImage)
+                .itemStock(cartItem.getItemStock())
                 .build();
     }
 
