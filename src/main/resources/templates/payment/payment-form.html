@@ -156,9 +156,9 @@
                           contentType: 'application/json',
                           data: param,
                           statusCode: {
-                              200: function(args){
+                              201: function(args){
                                 //Todo: 추후 '/orders'(주문 목록)(으)로 변경 예정
-                                location.href='/';
+                                location.href='/orders';
                               }
                           }
                       });//ajax End
@@ -172,6 +172,7 @@
         alert(msg);
       });
     });
+
 
 
 </script>
