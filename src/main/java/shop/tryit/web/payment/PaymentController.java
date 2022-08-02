@@ -31,8 +31,7 @@ public class PaymentController {
 
     @GetMapping
     public String newPaymentForm(@Valid @ModelAttribute PaymentRequestListDto paymentRequestListDto,
-                                 @AuthenticationPrincipal User user, Model model,
-                                 BindingResult bindingResult) {
+                                 BindingResult bindingResult, @AuthenticationPrincipal User user, Model model) {
         log.info("======== 결제 폼 컨트롤러 시작 ========");
 
         List<PaymentRequestDto> payments = paymentRequestListDto.getPayments();
