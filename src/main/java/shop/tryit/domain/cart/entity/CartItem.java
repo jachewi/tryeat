@@ -54,6 +54,10 @@ public class CartItem {
         return item.getPrice();
     }
 
+    public int getItemStock() {
+        return item.getStockQuantity();
+    }
+
     /**
      * 비즈니스 로직
      **/
