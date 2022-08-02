@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import shop.tryit.domain.payment.dto.PaymentRequestDto;
 import shop.tryit.domain.payment.dto.PaymentResponseDto;
 import shop.tryit.domain.payment.dto.PaymentSaveDto;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 
@@ -60,6 +62,24 @@ public class PaymentFacade {
      */
     public Long register(PaymentSaveDto paymentSaveDto) {
         return paymentService.register(toEntity(paymentSaveDto));
+    }
+
+    /**
+     * 장바구니에서 넘어온 상품 수량과 상품 재고 비교
+     */
+    public Boolean checkItemStock(List<PaymentRequestDto> paymentRequestDtoList) {
+        List<Item> itemList = paymentRequestDtoList.stream()
+                .map(paymentRequestDto -> paymentRequestDto.getItemId())
+                .map(itemService::findOne)
+                .collect(Collectors.toList());
+        for (int i = 0; i < itemList.size(); i++) {
+            if (Boolean.FALSE.equals(itemList.get(i).checkStock(paymentRequestDtoList.get(i).getQuantity()))) {
+                log.info("-----------수량보다 많이 주문--------");
+                return false;
+            }
+        }
+        log.info("------------정상 주문 처리----------");
+        return true;
     }
 
     private Payment toEntity(PaymentSaveDto paymentSaveDto) {
