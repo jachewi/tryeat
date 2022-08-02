@@ -6,10 +6,11 @@
 <header th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></header>
 
 <!-- ======= Hero Section ======= -->
-<section id="hero">
+<section class="common">
   <div layout:fragment="content" class="container my-3">
     <div class="form-margin">
       <form class="form-login" th:action="@{/members/login}" method="post">
+        <h3 class="text-center mb-5">Login</h3>
         <div th:if="${param.error}">
           <div class="alert alert-danger">
             사용자ID 또는 비밀번호를 확인해 주세요.
@@ -23,7 +24,7 @@
           <label for="password" class="form-label">비밀번호</label>
           <input type="password" name="password" id="password" class="form-control">
         </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
+        <button type="submit" class="btn btn-dark login-btn">로그인</button>
       </form>
     </div>
   </div>
