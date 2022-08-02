@@ -21,7 +21,7 @@
         </thead>
 
         <tbody>
-        <tr th:each="order, loop : ${orders}" th:object="order">
+        <tr th:each="order, loop : ${orders}" th:object="${order}">
           <td>
             <a th:href="@{/orders/{id} (id=*{orderId})}" th:text="${orders.getTotalElements - (orders.number * orders.size) - loop.index}"></a>
           </td>

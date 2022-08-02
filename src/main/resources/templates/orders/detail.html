@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+<!-- ======= Header ======= -->
+<div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></div>
+
+<!-- ======= Section ======= -->
+<section class="common item item-detail">
+  <div class="container">
+    <div class="row gy-4">
+
+      <div th:text="${order.orderStatus}"></div>
+      <div th:text="${order.orderNumber}"></div>
+
+
+      <div th:each="detail : ${order.orderDetailFindDtos}" th:object="${detail}">
+        <div>
+          <img th:src="|/files/*{itemMainImage.getStoreFileName()}|" class="main-img">
+          <div th:text="*{ItemName}"></div>
+          <div th:text="*{orderQuantity}"></div>
+        </div>
+      </div>
+
+    </div>
+  </div> <!-- /container -->
+</section>
+
+<!-- ======= Footer ======= -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+
+</html>
