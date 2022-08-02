@@ -65,12 +65,6 @@ public class OrderController {
         return "orders/detail";
     }
 
-    @PostMapping("/{orderId}/cancel")
-    public String cancelOrder(@PathVariable("orderId") Long orderId) {
-        // TODO : 취소 로직 구현
-        return "redirect:/orders/list";
-    }
-
 }
 
 
