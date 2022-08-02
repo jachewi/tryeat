@@ -1,5 +1,6 @@
 package shop.tryit.domain.order.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,7 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderDetailDto {
 
-    private Long merchant_uid;
+    @JsonProperty("merchant_uid")
+    private Long merchantUid;
     private Long itemId;
     private int orderQuantity;
 
