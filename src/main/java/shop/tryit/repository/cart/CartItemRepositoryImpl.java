@@ -36,7 +36,7 @@ public class CartItemRepositoryImpl implements CartItemRepository {
     }
 
     @Override
-    public void deleteByCartItem(CartItem cartItem) {
+    public void delete(CartItem cartItem) {
         cartItemJpaRepository.delete(cartItem);
     }
 
