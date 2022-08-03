@@ -1,7 +1,6 @@
 package shop.tryit.repository.cart;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import shop.tryit.domain.cart.entity.Cart;
 import shop.tryit.domain.cart.entity.CartItem;
@@ -12,7 +11,5 @@ public interface CartItemJpaRepository extends JpaRepository<CartItem, Long> {
     CartItem findByCartAndItem(Cart cart, Item item);
 
     List<CartItem> findByCart(Cart cart);
-
-    Optional<CartItem> findByItem(Item item);
 
 }

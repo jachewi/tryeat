@@ -8,7 +8,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.domain.cart.entity.Cart;
+import shop.tryit.domain.cart.entity.CartItem;
 import shop.tryit.domain.cart.service.CartItemService;
+import shop.tryit.domain.cart.service.CartService;
 import shop.tryit.domain.item.entity.Item;
 import shop.tryit.domain.item.service.ItemService;
 import shop.tryit.domain.member.Member;
@@ -31,6 +34,7 @@ public class OrderFacade {
     private final MemberService memberService;
     private final ItemService itemService;
     private final CartItemService cartItemService;
+    private final CartService cartService;
 
     public Page<OrderSearchDto> searchOrders(int page, User user) {
         Member member = memberService.findMember(user.getUsername());
@@ -46,7 +50,7 @@ public class OrderFacade {
         Order findOrder = orderService.findOne(savedOrderId);
 
         registerOrderDetail(orderDetailDtos, findOrder);
-        deleteCartItems(orderDetailDtos);
+        deleteCartItems(orderDetailDtos, member);
 
         return findOrder.getId();
     }
@@ -57,12 +61,24 @@ public class OrderFacade {
                 .forEach(orderDetailService::save);
     }
 
-    private void deleteCartItems(List<OrderDetailDto> orderDetailDtos) {
-        orderDetailDtos.forEach(this::deleteCartItem);
-    }
+    private void deleteCartItems(List<OrderDetailDto> orderDetailDtos, Member member) {
+        List<Long> orderDetailItemIds = orderDetailDtos.stream()
+                .map(OrderDetailDto::getItemId)
+                .collect(toList());
 
-    private void deleteCartItem(OrderDetailDto orderDetailDto) {
-        cartItemService.deleteCartItem(orderDetailDto.getItemId());
+        // TODO : 리팩토링 고려 사항
+        Cart cart = cartService.findCart(member.getEmail());
+        List<CartItem> cartItemList = cartItemService.findCartItemList(cart);
+
+        List<Long> cartItemIds = cartItemList.stream()
+                .map(CartItem::getItemId)
+                .collect(toList());
+
+        List<Long> collect = orderDetailItemIds.stream()
+                .filter(cartItemIds::contains)
+                .collect(toList());
+
+        collect.forEach(aLong -> cartItemService.deleteAfterOrder(cart, aLong));
     }
 
     public OrderFindDto findOne(Long orderId) {
