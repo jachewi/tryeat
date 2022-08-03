@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.domain.cart.service.CartItemService;
 import shop.tryit.domain.item.entity.Item;
 import shop.tryit.domain.item.service.ItemService;
 import shop.tryit.domain.member.Member;
@@ -29,6 +30,7 @@ public class OrderFacade {
     private final OrderDetailService orderDetailService;
     private final MemberService memberService;
     private final ItemService itemService;
+    private final CartItemService cartItemService;
 
     public Page<OrderSearchDto> searchOrders(int page, User user) {
         Member member = memberService.findMember(user.getUsername());
@@ -43,10 +45,24 @@ public class OrderFacade {
         Long savedOrderId = orderService.register(Order.of(member, OrderStatus.ORDER));
         Order findOrder = orderService.findOne(savedOrderId);
 
+        registerOrderDetail(orderDetailDtos, findOrder);
+        deleteCartItems(orderDetailDtos);
+
+        return findOrder.getId();
+    }
+
+    private void registerOrderDetail(List<OrderDetailDto> orderDetailDtos, Order findOrder) {
         orderDetailDtos.stream()
                 .map(orderDetailDto -> toEntity(orderDetailDto, findOrder))
                 .forEach(orderDetailService::save);
-        return findOrder.getId();
+    }
+
+    private void deleteCartItems(List<OrderDetailDto> orderDetailDtos) {
+        orderDetailDtos.forEach(this::deleteCartItem);
+    }
+
+    private void deleteCartItem(OrderDetailDto orderDetailDto) {
+        cartItemService.deleteCartItem(orderDetailDto.getItemId());
     }
 
     public OrderFindDto findOne(Long orderId) {
