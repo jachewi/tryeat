@@ -68,7 +68,7 @@ public class ItemController {
                        Pageable pageable) throws IOException {
         Category[] categories = Category.values();
 
-        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 2); // 한 페이지에 2개씩
+        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 12); // 한 페이지에 12개씩(4*3)
         Page<ItemSearchDto> items = itemPacade.findItems(itemSearchCondition, pageRequest);
         Pages<ItemSearchDto> pages = Pages.of(items, 4); // 페이지 버튼 4개씩
 
