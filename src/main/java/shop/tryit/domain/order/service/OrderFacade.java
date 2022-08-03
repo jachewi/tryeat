@@ -36,7 +36,7 @@ public class OrderFacade {
     }
 
     @Transactional
-    public void register(User user, List<OrderDetailDto> orderDetailDtos) {
+    public Long register(User user, List<OrderDetailDto> orderDetailDtos) {
         String email = user.getUsername();
         Member member = memberService.findMember(email);
 
@@ -46,6 +46,7 @@ public class OrderFacade {
         orderDetailDtos.stream()
                 .map(orderDetailDto -> toEntity(orderDetailDto, findOrder))
                 .forEach(orderDetailService::save);
+        return findOrder.getId();
     }
 
     public OrderFindDto findOne(Long orderId) {

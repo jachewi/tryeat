@@ -1,5 +1,6 @@
 package shop.tryit.web.order;
 
+import java.net.URI;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.UriComponentsBuilder;
 import shop.tryit.domain.common.Pages;
 import shop.tryit.domain.order.dto.OrderDetailDto;
 import shop.tryit.domain.order.dto.OrderSearchDto;
@@ -28,11 +31,19 @@ public class OrderController {
 
     private final OrderFacade orderFacade;
 
+    @ResponseBody
     @PostMapping("/new")
-    public ResponseEntity<String> newOrder(@RequestBody List<OrderDetailDto> orderDetailDtos,
+    public ResponseEntity<Object> newOrder(@RequestBody List<OrderDetailDto> OrderDetailDtos,
                                            @AuthenticationPrincipal User user) {
-        orderFacade.register(user, orderDetailDtos);
-        return ResponseEntity.ok(orderDetailDtos.toString());
+        Long orderId = orderFacade.register(user, OrderDetailDtos);
+
+        URI location = UriComponentsBuilder.newInstance()
+                .scheme("http")
+                .path("localhost:8080/orders/{id}")
+                .buildAndExpand(orderId)
+                .toUri();
+
+        return ResponseEntity.created(location).build();
     }
 
     @GetMapping
@@ -52,12 +63,6 @@ public class OrderController {
         log.info("order='{}'", orderFacade.findOne(orderId));
         model.addAttribute("order", orderFacade.findOne(orderId));
         return "orders/detail";
-    }
-
-    @PostMapping("/{orderId}/cancel")
-    public String cancelOrder(@PathVariable("orderId") Long orderId) {
-        // TODO : 취소 로직 구현
-        return "redirect:/orders/list";
     }
 
 }
