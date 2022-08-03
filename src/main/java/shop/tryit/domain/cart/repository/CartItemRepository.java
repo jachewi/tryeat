@@ -12,7 +12,7 @@ public interface CartItemRepository {
 
     Optional<CartItem> findById(Long cartItemId);
 
-    CartItem findByCartAndItem(Cart cart, Item item);
+    Optional<CartItem> findByCartAndItem(Cart cart, Item item);
 
     List<CartItem> findByCart(Cart cart);
 
