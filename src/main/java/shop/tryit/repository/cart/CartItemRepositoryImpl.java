@@ -26,7 +26,7 @@ public class CartItemRepositoryImpl implements CartItemRepository {
     }
 
     @Override
-    public CartItem findByCartAndItem(Cart cart, Item item) {
+    public Optional<CartItem> findByCartAndItem(Cart cart, Item item) {
         return cartItemJpaRepository.findByCartAndItem(cart, item);
     }
 
@@ -39,5 +39,5 @@ public class CartItemRepositoryImpl implements CartItemRepository {
     public void delete(CartItem cartItem) {
         cartItemJpaRepository.delete(cartItem);
     }
-    
+
 }

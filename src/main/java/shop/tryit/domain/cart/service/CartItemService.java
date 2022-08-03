@@ -27,7 +27,8 @@ public class CartItemService {
                 .orElseThrow(() -> new IllegalStateException("해당 상품을 찾을 수 없습니다."));
 
         // 장바구니에 해당 상품이 있는지 확인
-        CartItem savedCartItem = cartItemRepository.findByCartAndItem(cartItem.getCart(), item);
+        CartItem savedCartItem = cartItemRepository.findByCartAndItem(cartItem.getCart(), item)
+                .orElseThrow(() -> new IllegalStateException("장바구니에서 해당 상품을 찾을 수 없습니다."));
 
         // 상품이 이미 있을 경우, 개수 증가
         if (nonNull(savedCartItem)) {
@@ -83,7 +84,9 @@ public class CartItemService {
     public void deleteAfterOrder(Cart cart, Long itemId) {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalStateException("해당 상품을 찾을 수 없습니다."));
-        CartItem cartItem = cartItemRepository.findByCartAndItem(cart, item);
+        CartItem cartItem = cartItemRepository.findByCartAndItem(cart, item)
+                .orElseThrow(() -> new IllegalStateException("장바구니에서 해당 상품을 찾을 수 없습니다."));
+
         deleteCartItem(cartItem.getId());
     }
 
