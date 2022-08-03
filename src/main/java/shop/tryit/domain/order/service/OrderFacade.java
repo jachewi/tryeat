@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.cart.entity.Cart;
-import shop.tryit.domain.cart.entity.CartItem;
 import shop.tryit.domain.cart.service.CartItemService;
 import shop.tryit.domain.cart.service.CartService;
 import shop.tryit.domain.item.entity.Item;
@@ -62,23 +61,8 @@ public class OrderFacade {
     }
 
     private void deleteCartItems(List<OrderDetailDto> orderDetailDtos, Member member) {
-        List<Long> orderDetailItemIds = orderDetailDtos.stream()
-                .map(OrderDetailDto::getItemId)
-                .collect(toList());
-
-        // TODO : 리팩토링 고려 사항
         Cart cart = cartService.findCart(member.getEmail());
-        List<CartItem> cartItemList = cartItemService.findCartItemList(cart);
-
-        List<Long> cartItemIds = cartItemList.stream()
-                .map(CartItem::getItemId)
-                .collect(toList());
-
-        List<Long> collect = orderDetailItemIds.stream()
-                .filter(cartItemIds::contains)
-                .collect(toList());
-
-        collect.forEach(aLong -> cartItemService.deleteAfterOrder(cart, aLong));
+        orderDetailDtos.forEach(orderDetailDto -> cartItemService.deleteAfterOrder(cart, orderDetailDto.getItemId()));
     }
 
     public OrderFindDto findOne(Long orderId) {
