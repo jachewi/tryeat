@@ -6,6 +6,7 @@ import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
+import static shop.tryit.domain.item.entity.ImageType.DETAIL;
 import static shop.tryit.domain.item.entity.ImageType.MAIN;
 
 import java.util.ArrayList;
@@ -48,6 +49,20 @@ public class Item extends BaseTimeEntity {
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.category = category;
+    }
+
+    public Image getMainImage() {
+        return images.stream()
+                .filter(image -> image.getType()==MAIN)
+                .findFirst()
+                .orElseThrow();
+    }
+
+    public Image getDetailImage() {
+        return images.stream()
+                .filter(image -> image.getType()==DETAIL)
+                .findFirst()
+                .orElseThrow();
     }
 
     public void update(String name, int price, int stockQuantity, Category category) {
@@ -93,13 +108,6 @@ public class Item extends BaseTimeEntity {
     // 상품 재고와 장바구니 수량 비교를 위한 로직
     public boolean checkStock(int quantity) {
         return stockQuantity >= quantity;
-    }
-
-    public Image getMainImage() {
-        return images.stream()
-                .filter(image -> image.getType()==MAIN)
-                .findFirst()
-                .orElseThrow();
     }
 
 }

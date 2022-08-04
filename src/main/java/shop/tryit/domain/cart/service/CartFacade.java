@@ -14,7 +14,6 @@ import shop.tryit.domain.cart.entity.Cart;
 import shop.tryit.domain.cart.entity.CartItem;
 import shop.tryit.domain.item.entity.Image;
 import shop.tryit.domain.item.entity.Item;
-import shop.tryit.domain.item.service.ImageService;
 import shop.tryit.domain.item.service.ItemService;
 
 @Component
@@ -25,7 +24,6 @@ public class CartFacade {
     private final CartItemService cartItemService;
     private final CartService cartService;
     private final ItemService itemService;
-    private final ImageService imageService;
 
     /**
      * 장바구니 상품 추가
@@ -48,8 +46,8 @@ public class CartFacade {
         List<CartItem> cartItems = cartItemService.findCartItemList(cart);
 
         List<Image> mainImages = cartItems.stream()
-                .map(CartItem::getItemId) // CartItem -> Long
-                .map(imageService::getMainImage)// Long -> Image
+                .map(CartItem::getItem) // CartItem -> Item
+                .map(Item::getMainImage)// Item -> Image
                 .collect(toList());
 
         return toDto(cartItems, mainImages);
