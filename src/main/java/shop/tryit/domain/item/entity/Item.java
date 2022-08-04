@@ -72,9 +72,11 @@ public class Item extends BaseTimeEntity {
         this.category = category;
     }
 
-    public void addImage(Image image) {
-        image.setItem(this);
-        images.add(image);
+    public void addImage(Image mainImage, Image detailImage) {
+        mainImage.setItem(this);
+        detailImage.setItem(this);
+        images.add(mainImage);
+        images.add(detailImage);
     }
 
     public void addStock(int quantity) {

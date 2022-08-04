@@ -25,7 +25,12 @@ public class ItemFacade {
      * 상품 등록
      */
     public Long register(ItemFormDto itemFormDto) throws IOException {
-        Item item = imageService.addImage(toEntity(itemFormDto), itemFormDto);
+        Image mainImage = imageService.uploadMainImage(itemFormDto); // 서버에 이미지 저장
+        Image detailImage = imageService.uploadDetailImage(itemFormDto); // 서버에 이미지 저장
+
+        Item item = toEntity(itemFormDto);
+        item.addImage(mainImage, detailImage);
+
         return itemService.register(item);
     }
 

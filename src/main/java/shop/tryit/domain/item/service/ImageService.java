@@ -59,20 +59,6 @@ public class ImageService {
     }
 
     /**
-     * 이미지 정보 추가
-     */
-    @Transactional
-    public Item addImage(Item item, ItemFormDto form) throws IOException {
-        Image mainImage = uploadMainImage(form);
-        Image detailImage = uploadDetailImage(form);
-
-        item.addImage(mainImage);
-        item.addImage(detailImage);
-
-        return item;
-    }
-
-    /**
      * 메인 이미지 수정
      */
     @Transactional
