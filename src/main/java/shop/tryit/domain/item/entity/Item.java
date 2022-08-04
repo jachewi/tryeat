@@ -6,7 +6,7 @@ import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
-import static shop.tryit.domain.item.ImageType.MAIN;
+import static shop.tryit.domain.item.entity.ImageType.MAIN;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import shop.tryit.domain.common.BaseTimeEntity;
-import shop.tryit.domain.item.Category;
 import shop.tryit.domain.item.exception.NotEnoughStockException;
 
 @Entity

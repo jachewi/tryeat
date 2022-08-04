@@ -8,7 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
-import shop.tryit.domain.item.Category;
+import shop.tryit.domain.item.entity.Category;
 import shop.tryit.domain.item.entity.Image;
 
 @Data

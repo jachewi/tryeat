@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
-import shop.tryit.domain.item.Category;
+import shop.tryit.domain.item.entity.Category;
 
 @Data
 @NoArgsConstructor(access = PROTECTED)

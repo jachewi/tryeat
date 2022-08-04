@@ -1,7 +1,8 @@
-package shop.tryit.domain.item;
+package shop.tryit.domain.item.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import shop.tryit.domain.item.entity.Category;
 
 @Getter
 public class ItemSearchCondition {

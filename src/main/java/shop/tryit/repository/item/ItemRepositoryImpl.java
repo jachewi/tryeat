@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import shop.tryit.domain.item.ItemSearchCondition;
+import shop.tryit.domain.item.dto.ItemSearchCondition;
 import shop.tryit.domain.item.dto.ItemSearchDto;
 import shop.tryit.domain.item.entity.Item;
 import shop.tryit.domain.item.repository.ItemRepository;
