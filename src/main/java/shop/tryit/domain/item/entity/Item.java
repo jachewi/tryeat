@@ -65,6 +65,9 @@ public class Item extends BaseTimeEntity {
                 .orElseThrow();
     }
 
+    /**
+     * 비즈니스 로직
+     */
     public void update(String name, int price, int stockQuantity, Category category) {
         this.name = name;
         this.price = price;
@@ -79,10 +82,12 @@ public class Item extends BaseTimeEntity {
         images.add(detailImage);
     }
 
+    // 주문 취소가 일어났을 경우 재고 추가를 위한 로직
     public void addStock(int quantity) {
         this.stockQuantity += quantity;
     }
 
+    // 주문이 일어났을 경우 재고 감소를 위한 로직
     public void removeStock(int quantity) {
         int restStock = this.stockQuantity - quantity;
         if (restStock < 0) {
