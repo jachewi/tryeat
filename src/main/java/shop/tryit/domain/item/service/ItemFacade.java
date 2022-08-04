@@ -47,7 +47,7 @@ public class ItemFacade {
     /**
      * 특정 상품 조회
      */
-    public ItemDto findItem(Long itemId) {
+    public ItemResponseDto findItem(Long itemId) {
         Item item = itemService.findItem(itemId);
         return toDto(item, item.getMainImage(), item.getDetailImage());
     }
@@ -85,8 +85,8 @@ public class ItemFacade {
                 .build();
     }
 
-    public ItemDto toDto(Item item, Image mainImage, Image detailImage) {
-        return ItemDto.builder()
+    public ItemResponseDto toDto(Item item, Image mainImage, Image detailImage) {
+        return ItemResponseDto.builder()
                 .id(item.getId())
                 .name(item.getName())
                 .price(item.getPrice())

@@ -11,9 +11,10 @@ import org.hibernate.validator.constraints.Length;
 import shop.tryit.domain.item.entity.Category;
 import shop.tryit.domain.item.entity.Image;
 
+/* 상품 상세 및 수정 폼 조회 시 전달 */
 @Data
 @NoArgsConstructor(access = PROTECTED)
-public class ItemDto {
+public class ItemResponseDto {
 
     @NotNull
     private Long id;
@@ -36,7 +37,7 @@ public class ItemDto {
     private Image detailImage;
 
     @Builder
-    private ItemDto(Long id, String name, Integer price, Integer stockQuantity, Category category, Image mainImage, Image detailImage) {
+    private ItemResponseDto(Long id, String name, Integer price, Integer stockQuantity, Category category, Image mainImage, Image detailImage) {
         this.id = id;
         this.name = name;
         this.price = price;
