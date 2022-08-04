@@ -86,8 +86,9 @@ public class QuestionController {
     }
 
     @GetMapping("/{questionId}/update")
-    public String updateForm(@PathVariable Long questionId,
-                             @ModelAttribute QuestionFormDto questionFormDto) {
+    public String updateForm(@PathVariable Long questionId, Model model) {
+        model.addAttribute("questionFormDto", qnAFacade.toDto(questionId));
+
         return "qna/update";
     }
 
