@@ -15,9 +15,9 @@ import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
 import shop.tryit.domain.order.OrderDetailRepository;
 import shop.tryit.domain.order.OrderRepository;
-import shop.tryit.domain.order.OrderStatus;
 import shop.tryit.domain.order.entity.Order;
 import shop.tryit.domain.order.entity.OrderDetail;
+import shop.tryit.domain.order.entity.OrderStatus;
 import shop.tryit.repository.item.ItemJpaRepository;
 
 @Transactional

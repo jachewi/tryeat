@@ -4,7 +4,7 @@ import com.querydsl.core.annotations.QueryProjection;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Getter;
-import shop.tryit.domain.order.OrderStatus;
+import shop.tryit.domain.order.entity.OrderStatus;
 
 @Getter
 public class OrderSearchDto {
