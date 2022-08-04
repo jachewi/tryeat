@@ -69,15 +69,15 @@ public class ItemController {
         Category[] categories = Category.values();
 
         PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 12); // 한 페이지에 12개씩(4*3)
-        Page<ItemSearchDto> items = itemFacade.findItems(itemSearchCondition, pageRequest);
-        Pages<ItemSearchDto> pages = Pages.of(items, 4); // 페이지 버튼 4개씩
+        Page<ItemSearchDto> itemSearchDtos = itemFacade.findItems(itemSearchCondition, pageRequest);
+        Pages<ItemSearchDto> pages = Pages.of(itemSearchDtos, 4); // 페이지 버튼 4개씩
 
         model.addAttribute("categories", categories);
-        model.addAttribute("items", items);
+        model.addAttribute("itemSearchDtos", itemSearchDtos);
         model.addAttribute("pages", pages.getPages());
 
         log.info("상품 검색 조건 = 이름:{}, 카테고리:{}", itemSearchCondition.getName(), itemSearchCondition.getCategory());
-        log.info("상품 개수 = {}", items.getContent().size());
+        log.info("상품 개수 = {}", itemSearchDtos.getContent().size());
 
         return "/items/list";
     }

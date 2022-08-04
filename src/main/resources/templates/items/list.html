@@ -42,18 +42,18 @@
     <hr>
 
     <div class="item-list">
-      <div th:each="item : ${items}">
-        <a th:href="@{/items/{id}(id=${item.id})}">
+      <div th:each="itemSearchDto : ${itemSearchDtos}">
+        <a th:href="@{/items/{id}(id=${itemSearchDto.id})}">
           <div class="thumbnail">
-            <img th:src="|/files/${item.mainImage.getStoreFileName()}|"/>
+            <img th:src="|/files/${itemSearchDto.mainImage.getStoreFileName()}|"/>
           </div>
 
           <div class="info">
             <div class="item-name">
-              <p th:text="${item.name}"></p>
+              <p th:text="${itemSearchDto.name}"></p>
             </div>
             <div class="item-price">
-              <p><span th:text="${item.price}"></span>원</p>
+              <p><span th:text="${itemSearchDto.price}"></span>원</p>
             </div>
           </div>
         </a>
