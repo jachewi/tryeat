@@ -87,15 +87,15 @@ public class ItemController {
         Category[] categories = Category.values();
         model.addAttribute("categories", categories);
 
-        ItemDto itemDto = itemFacade.findItem(id);
-        model.addAttribute("item", itemDto);
+        ItemResponseDto itemResponseDto = itemFacade.findItem(id);
+        model.addAttribute("item", itemResponseDto);
 
         return "/items/update";
     }
 
     @PostMapping("/{id}/update")
     public String update(@PathVariable long id,
-                         @Valid @ModelAttribute("item") ItemFormDto form,
+                         @Valid @ModelAttribute("item") ItemRequestDto itemRequestDto,
                          BindingResult bindingResult,
                          Model model) throws IOException {
         // 검증 실패시 다시 입력 폼으로
@@ -106,7 +106,7 @@ public class ItemController {
             return "/items/update";
         }
 
-        itemFacade.update(id, form);
+        itemFacade.update(id, itemRequestDto);
 
         return "redirect:/items";
     }
