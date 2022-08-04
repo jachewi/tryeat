@@ -70,6 +70,7 @@
                     .open();
             }
 
+
 </script>
 
 <!-- ======= Edit Section ======= -->
@@ -79,7 +80,7 @@
       <h3 class="text-center mb-5">회원 정보 수정</h3>
       <form
           class="join_form"
-          th:action="@{/members/edit}"
+          th:action="@{/members/update}"
           th:object="${memberForm}"
           method="post">
 
