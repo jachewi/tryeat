@@ -119,8 +119,8 @@ public class ImageService {
     /**
      * 이미지 삭제
      */
-    public void deleteImage(Long id) throws IOException {
-        Item item = itemService.findItem(id);
+    public void deleteImage(Long itemId) throws IOException {
+        Item item = itemService.findItem(itemId);
 
         for (Image image : item.getImages()) {
             imageStore.deleteImageFile(image.getStoreFileName());
