@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import shop.tryit.domain.common.Pages;
-import shop.tryit.domain.item.entity.Category;
-import shop.tryit.domain.item.dto.ItemSearchCondition;
 import shop.tryit.domain.item.dto.ItemDto;
 import shop.tryit.domain.item.dto.ItemFormDto;
+import shop.tryit.domain.item.dto.ItemSearchCondition;
 import shop.tryit.domain.item.dto.ItemSearchDto;
-import shop.tryit.domain.item.service.ItemPacade;
+import shop.tryit.domain.item.entity.Category;
+import shop.tryit.domain.item.service.ItemFacade;
 
 @Slf4j
 @Controller
@@ -29,7 +29,7 @@ import shop.tryit.domain.item.service.ItemPacade;
 @RequestMapping("/items")
 public class ItemController {
 
-    private final ItemPacade itemPacade;
+    private final ItemFacade itemFacade;
 
     @GetMapping("/new")
     public String newItemForm(Model model) {
@@ -57,7 +57,7 @@ public class ItemController {
             return "/items/register";
         }
 
-        itemPacade.register(form);
+        itemFacade.register(form);
 
         return "redirect:/items";
     }
@@ -69,7 +69,7 @@ public class ItemController {
         Category[] categories = Category.values();
 
         PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 12); // 한 페이지에 12개씩(4*3)
-        Page<ItemSearchDto> items = itemPacade.findItems(itemSearchCondition, pageRequest);
+        Page<ItemSearchDto> items = itemFacade.findItems(itemSearchCondition, pageRequest);
         Pages<ItemSearchDto> pages = Pages.of(items, 4); // 페이지 버튼 4개씩
 
         model.addAttribute("categories", categories);
@@ -87,7 +87,7 @@ public class ItemController {
         Category[] categories = Category.values();
         model.addAttribute("categories", categories);
 
-        ItemDto itemDto = itemPacade.findItem(id);
+        ItemDto itemDto = itemFacade.findItem(id);
         model.addAttribute("item", itemDto);
 
         return "/items/update";
@@ -106,14 +106,14 @@ public class ItemController {
             return "/items/update";
         }
 
-        itemPacade.update(id, form);
+        itemFacade.update(id, form);
 
         return "redirect:/items";
     }
 
     @GetMapping("/{id}")
     public String detail(@PathVariable long id, Model model) {
-        ItemDto itemDto = itemPacade.findItem(id);
+        ItemDto itemDto = itemFacade.findItem(id);
         model.addAttribute("item", itemDto);
 
         return "/items/detail";
@@ -121,7 +121,7 @@ public class ItemController {
 
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable long id) throws IOException {
-        itemPacade.delete(id);
+        itemFacade.delete(id);
         return "redirect:/items";
     }
 

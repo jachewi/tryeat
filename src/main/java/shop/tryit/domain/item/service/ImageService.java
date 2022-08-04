@@ -9,7 +9,6 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.item.dto.ItemFormDto;
 import shop.tryit.domain.item.entity.Image;
 import shop.tryit.domain.item.entity.Item;
@@ -17,7 +16,6 @@ import shop.tryit.domain.item.entity.Item;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class ImageService {
 
     private final ImageStore imageStore;
@@ -35,36 +33,6 @@ public class ImageService {
      */
     public Image uploadDetailImage(ItemFormDto form) throws IOException {
         return imageStore.storeImageFile(form.getDetailImage(), DETAIL);
-    }
-
-    /**
-     * 메인 이미지 조회
-     */
-    public Image getMainImage(Long id) {
-        Item item = itemService.findOne(id); // 같은 트랜잭션 안에서 진행하기 위함
-
-        Image mainImage = null;
-
-        for (Image image : item.getImages())
-            if (image.getType()==MAIN)
-                mainImage = image;
-
-        return mainImage;
-    }
-
-    /**
-     * 상세 이미지 조회
-     */
-    public Image getDetailImage(Long id) {
-        Item item = itemService.findOne(id); // 같은 트랜잭션 안에서 진행하기 위함
-
-        Image detailImage = null;
-
-        for (Image image : item.getImages())
-            if (image.getType()==DETAIL)
-                detailImage = image;
-
-        return detailImage;
     }
 
     /**
@@ -89,27 +57,12 @@ public class ImageService {
     }
 
     /**
-     * 이미지 정보 추가
-     */
-    @Transactional
-    public Item addImage(Item item, ItemFormDto form) throws IOException {
-        Image mainImage = uploadMainImage(form);
-        Image detailImage = uploadDetailImage(form);
-
-        item.addImage(mainImage);
-        item.addImage(detailImage);
-
-        return item;
-    }
-
-    /**
      * 메인 이미지 수정
      */
-    @Transactional
-    public Image updateMainImage(long id, ItemFormDto form) throws IOException {
+    public Image updateMainImage(Item findItem, ItemFormDto form) throws IOException {
         log.info("======== 메인 이미지 수정 시작 ========");
 
-        Image findMainImage = getMainImage(id); // 기존 메인 이미지를 찾아옴
+        Image findMainImage = findItem.getMainImage(); // 기존 메인 이미지를 찾아옴
 
         log.info("old 메인이미지 = {} , {}", findMainImage.getOriginFileName(), findMainImage.getStoreFileName());
 
@@ -134,11 +87,10 @@ public class ImageService {
     /**
      * 상세 이미지 수정
      */
-    @Transactional
-    public Image updateDetailImage(long id, ItemFormDto form) throws IOException {
+    public Image updateDetailImage(Item item, ItemFormDto form) throws IOException {
         log.info("======== 상세 이미지 수정 시작 ========");
 
-        Image findDetailImage = getDetailImage(id); // 기존 상세 이미지를 찾아옴
+        Image findDetailImage = item.getDetailImage(); // 기존 상세 이미지를 찾아옴
 
         log.info("old 상세이미지 = {} , {}", findDetailImage.getOriginFileName(), findDetailImage.getStoreFileName());
 
@@ -163,8 +115,8 @@ public class ImageService {
     /**
      * 이미지 삭제
      */
-    public void deleteImage(Long id) throws IOException {
-        Item item = itemService.findOne(id);
+    public void deleteImage(Long itemId) throws IOException {
+        Item item = itemService.findItem(itemId);
 
         for (Image image : item.getImages()) {
             imageStore.deleteImageFile(image.getStoreFileName());

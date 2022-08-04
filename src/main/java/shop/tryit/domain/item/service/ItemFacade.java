@@ -7,16 +7,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
-import shop.tryit.domain.item.dto.ItemSearchCondition;
+import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.item.dto.ItemDto;
 import shop.tryit.domain.item.dto.ItemFormDto;
+import shop.tryit.domain.item.dto.ItemSearchCondition;
 import shop.tryit.domain.item.dto.ItemSearchDto;
 import shop.tryit.domain.item.entity.Image;
 import shop.tryit.domain.item.entity.Item;
 
 @Component
 @RequiredArgsConstructor
-public class ItemPacade {
+@Transactional(readOnly = true)
+public class ItemFacade {
 
     private final ItemService itemService;
     private final ImageService imageService;
@@ -24,8 +26,14 @@ public class ItemPacade {
     /**
      * 상품 등록
      */
+    @Transactional
     public Long register(ItemFormDto itemFormDto) throws IOException {
-        Item item = imageService.addImage(toEntity(itemFormDto), itemFormDto);
+        Image mainImage = imageService.uploadMainImage(itemFormDto); // 서버에 이미지 저장
+        Image detailImage = imageService.uploadDetailImage(itemFormDto); // 서버에 이미지 저장
+
+        Item item = toEntity(itemFormDto);
+        item.addImage(mainImage, detailImage);
+
         return itemService.register(item);
     }
 
@@ -40,19 +48,21 @@ public class ItemPacade {
      * 특정 상품 조회
      */
     public ItemDto findItem(Long itemId) {
-        Item item = itemService.findOne(itemId);
-        return toDto(item, imageService.getMainImage(itemId), imageService.getDetailImage(itemId));
+        Item item = itemService.findItem(itemId);
+        return toDto(item, item.getMainImage(), item.getDetailImage());
     }
 
     /**
      * 상품 수정
      */
+    @Transactional
     public Long update(Long itemId, ItemFormDto itemFormDto) throws IOException {
+        Item findItem = itemService.findItem(itemId);
         Item newItem = toEntity(itemFormDto);
 
-        itemService.update(itemId, newItem);
-        imageService.updateMainImage(itemId, itemFormDto);
-        imageService.updateDetailImage(itemId, itemFormDto);
+        itemService.update(findItem, newItem);
+        imageService.updateMainImage(findItem, itemFormDto);
+        imageService.updateDetailImage(findItem, itemFormDto);
 
         return itemId;
     }
@@ -60,6 +70,7 @@ public class ItemPacade {
     /**
      * 상품 삭제
      */
+    @Transactional
     public void delete(Long itemId) throws IOException {
         imageService.deleteImage(itemId); // 상품 이미지 서버에서 삭제
         itemService.delete(itemId);

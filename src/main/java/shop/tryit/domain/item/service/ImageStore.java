@@ -8,8 +8,8 @@ import java.nio.file.Paths;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import shop.tryit.domain.item.entity.ImageType;
 import shop.tryit.domain.item.entity.Image;
+import shop.tryit.domain.item.entity.ImageType;
 
 @Component
 public class ImageStore {
@@ -47,9 +47,7 @@ public class ImageStore {
      * 이미지 파일 삭제
      */
     public void deleteImageFile(String storeFileName) throws IOException {
-        // TODO : 서버에 삭제할 이미지가 없는 경우 예외 처리 필요
-        File file = new File(getFullPath(storeFileName));
-        file.delete();
+        Files.delete(Path.of(getFullPath(storeFileName)));
     }
 
     /**

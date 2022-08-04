@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.item.entity.Image;
 import shop.tryit.domain.item.entity.Item;
-import shop.tryit.domain.item.service.ImageService;
 import shop.tryit.domain.item.service.ItemService;
 import shop.tryit.domain.member.entity.Member;
 import shop.tryit.domain.member.service.MemberService;
@@ -27,7 +26,6 @@ public class PaymentFacade {
 
     private final PaymentService paymentService;
     private final ItemService itemService;
-    private final ImageService imageService;
     private final MemberService memberService;
 
     /**
@@ -38,12 +36,11 @@ public class PaymentFacade {
 
         List<Item> itemList = paymentRequestDtoList.stream()
                 .map(paymentRequestDto -> paymentRequestDto.getItemId())
-                .map(itemService::findOne)
+                .map(itemService::findItem)
                 .collect(Collectors.toList());
 
         List<Image> mainImages = itemList.stream()
-                .map(item -> item.getId())
-                .map(imageService::getMainImage)
+                .map(Item::getMainImage)
                 .collect(Collectors.toList());
 
         return toProductDtoList(itemList, mainImages, paymentRequestDtoList);
@@ -71,7 +68,7 @@ public class PaymentFacade {
     public Boolean checkItemStock(List<PaymentRequestDto> paymentRequestDtoList) {
         List<Item> itemList = paymentRequestDtoList.stream()
                 .map(paymentRequestDto -> paymentRequestDto.getItemId())
-                .map(itemService::findOne)
+                .map(itemService::findItem)
                 .collect(Collectors.toList());
         for (int i = 0; i < itemList.size(); i++) {
             if (Boolean.FALSE.equals(itemList.get(i).checkStock(paymentRequestDtoList.get(i).getQuantity()))) {

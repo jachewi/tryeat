@@ -6,6 +6,7 @@ import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
+import static shop.tryit.domain.item.entity.ImageType.DETAIL;
 import static shop.tryit.domain.item.entity.ImageType.MAIN;
 
 import java.util.ArrayList;
@@ -50,38 +51,43 @@ public class Item extends BaseTimeEntity {
         this.category = category;
     }
 
+    public Image getMainImage() {
+        return images.stream()
+                .filter(image -> image.getType()==MAIN)
+                .findFirst()
+                .orElseThrow();
+    }
+
+    public Image getDetailImage() {
+        return images.stream()
+                .filter(image -> image.getType()==DETAIL)
+                .findFirst()
+                .orElseThrow();
+    }
+
+    /**
+     * 비즈니스 로직
+     */
     public void update(String name, int price, int stockQuantity, Category category) {
-        changeName(name);
-        changePrice(price);
-        changeStockQuantity(stockQuantity);
-        changeCategory(category);
-    }
-
-    private void changeName(String name) {
         this.name = name;
-    }
-
-    private void changePrice(int price) {
         this.price = price;
-    }
-
-    private void changeStockQuantity(int stockQuantity) {
         this.stockQuantity = stockQuantity;
-    }
-
-    private void changeCategory(Category category) {
         this.category = category;
     }
 
-    public void addImage(Image image) {
-        image.setItem(this);
-        images.add(image);
+    public void addImage(Image mainImage, Image detailImage) {
+        mainImage.setItem(this);
+        detailImage.setItem(this);
+        images.add(mainImage);
+        images.add(detailImage);
     }
 
+    // 주문 취소가 일어났을 경우 재고 추가를 위한 로직
     public void addStock(int quantity) {
         this.stockQuantity += quantity;
     }
 
+    // 주문이 일어났을 경우 재고 감소를 위한 로직
     public void removeStock(int quantity) {
         int restStock = this.stockQuantity - quantity;
         if (restStock < 0) {
@@ -93,13 +99,6 @@ public class Item extends BaseTimeEntity {
     // 상품 재고와 장바구니 수량 비교를 위한 로직
     public boolean checkStock(int quantity) {
         return stockQuantity >= quantity;
-    }
-
-    public Image getMainImage() {
-        return images.stream()
-                .filter(image -> image.getType()==MAIN)
-                .findFirst()
-                .orElseThrow();
     }
 
 }

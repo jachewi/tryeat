@@ -14,7 +14,6 @@ import shop.tryit.domain.cart.entity.Cart;
 import shop.tryit.domain.cart.entity.CartItem;
 import shop.tryit.domain.item.entity.Image;
 import shop.tryit.domain.item.entity.Item;
-import shop.tryit.domain.item.service.ImageService;
 import shop.tryit.domain.item.service.ItemService;
 
 @Component
@@ -25,7 +24,6 @@ public class CartFacade {
     private final CartItemService cartItemService;
     private final CartService cartService;
     private final ItemService itemService;
-    private final ImageService imageService;
 
     /**
      * 장바구니 상품 추가
@@ -33,7 +31,7 @@ public class CartFacade {
     @Transactional
     public Long addCartItem(CartItemDto cartItemDto, User user) {
         Cart cart = cartService.findCart(user.getUsername());
-        Item item = itemService.findOne(cartItemDto.getItemId());
+        Item item = itemService.findItem(cartItemDto.getItemId());
 
         CartItem cartItem = toEntity(cartItemDto, item, cart);
 
@@ -48,8 +46,8 @@ public class CartFacade {
         List<CartItem> cartItems = cartItemService.findCartItemList(cart);
 
         List<Image> mainImages = cartItems.stream()
-                .map(CartItem::getItemId) // CartItem -> Long
-                .map(imageService::getMainImage)// Long -> Image
+                .map(CartItem::getItem) // CartItem -> Item
+                .map(Item::getMainImage)// Item -> Image
                 .collect(toList());
 
         return toDto(cartItems, mainImages);
@@ -59,7 +57,7 @@ public class CartFacade {
      * 장바구니 상품 수량과 상품 재고 비교
      */
     public Boolean checkItemStock(CartItemDto cartItemDto) {
-        Item item = itemService.findOne(cartItemDto.getItemId());
+        Item item = itemService.findItem(cartItemDto.getItemId());
         return item.checkStock(cartItemDto.getQuantity());
     }
 
@@ -67,7 +65,7 @@ public class CartFacade {
      * 장바구니에 담을 상품 재고 조회
      */
     public int getItemStock(CartItemDto cartItemDto) {
-        Item item = itemService.findOne(cartItemDto.getItemId());
+        Item item = itemService.findItem(cartItemDto.getItemId());
         return item.getStockQuantity();
     }
 
