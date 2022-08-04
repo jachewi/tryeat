@@ -17,7 +17,7 @@ public class MemberFacade {
      * 회원 가입
      */
     public Long register(MemberFormDto memberForm) {
-        MemberRole role = MemberRole.ROLE_USER;
+        MemberRole role = MemberRole.USER;
         Address address = toAddress(memberForm);
         Member member = toEntity(memberForm, address, role);
         return memberService.saveMember(member);

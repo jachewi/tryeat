@@ -39,7 +39,7 @@ public class InitDB {
                 .password(passwordEncoder.encode("Test123@"))
                 .address(address)
                 .phoneNumber("01011112222")
-                .role(MemberRole.ROLE_USER)
+                .role(MemberRole.USER)
                 .build());
     }
 
@@ -57,7 +57,7 @@ public class InitDB {
                 .password(passwordEncoder.encode("Admin123@"))
                 .address(address)
                 .phoneNumber("01012346578")
-                .role(MemberRole.ROLE_ADMIN)
+                .role(MemberRole.ADMIN)
                 .build());
     }
 

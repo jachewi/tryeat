@@ -2,7 +2,7 @@ package shop.tryit.web.qna;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static shop.tryit.domain.member.entity.MemberRole.ROLE_ADMIN;
+import static shop.tryit.domain.member.entity.MemberRole.ADMIN;
 
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -118,7 +118,7 @@ public class QuestionController {
         String userEmail = user.getUsername();
         Member member = memberService.findMember(userEmail);
 
-        if (member.getRole()==ROLE_ADMIN) {
+        if (member.getRole()==ADMIN) {
             return String.format("forward:/qna/%d/authority", questionId);
         }
 
