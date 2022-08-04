@@ -66,25 +66,9 @@ public class Item extends BaseTimeEntity {
     }
 
     public void update(String name, int price, int stockQuantity, Category category) {
-        changeName(name);
-        changePrice(price);
-        changeStockQuantity(stockQuantity);
-        changeCategory(category);
-    }
-
-    private void changeName(String name) {
         this.name = name;
-    }
-
-    private void changePrice(int price) {
         this.price = price;
-    }
-
-    private void changeStockQuantity(int stockQuantity) {
         this.stockQuantity = stockQuantity;
-    }
-
-    private void changeCategory(Category category) {
         this.category = category;
     }
 
