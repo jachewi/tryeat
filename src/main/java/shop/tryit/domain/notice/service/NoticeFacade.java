@@ -21,6 +21,7 @@ public class NoticeFacade {
     private final NoticeService noticeService;
     private final MemberService memberService;
 
+    @Transactional
     public Long register(User user, NoticeSaveFormDto noticeSaveFormDto) {
         String userEmail = user.getUsername();
         Member member = memberService.findMember(userEmail);
@@ -40,6 +41,7 @@ public class NoticeFacade {
         return toUpdateForm(notice, memberEmail);
     }
 
+    @Transactional
     public void update(User user, Long noticeId, NoticeUpdateFormDto noticeUpdateFormDto) {
         String userEmail = user.getUsername();
         Member member = memberService.findMember(userEmail);
@@ -53,6 +55,7 @@ public class NoticeFacade {
                         toSearchForm(notice, noticeService.findMemberEmailById(notice.getId())));
     }
 
+    @Transactional
     public void delete(Long noticeId) {
         noticeService.delete(noticeId);
     }
