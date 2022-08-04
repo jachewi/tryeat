@@ -1,4 +1,4 @@
-package shop.tryit.domain.item;
+package shop.tryit.repository.item;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -18,7 +18,6 @@ import shop.tryit.domain.order.entity.OrderDetail;
 import shop.tryit.domain.order.entity.OrderStatus;
 import shop.tryit.domain.order.repository.OrderDetailRepository;
 import shop.tryit.domain.order.repository.OrderRepository;
-import shop.tryit.repository.item.ItemJpaRepository;
 
 @Transactional
 @SpringBootTest
