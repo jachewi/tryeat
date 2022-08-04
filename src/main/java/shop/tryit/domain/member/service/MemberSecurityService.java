@@ -34,9 +34,9 @@ public class MemberSecurityService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         if ("admin@tryit.shop".equals(email)) {
-            authorities.add(new SimpleGrantedAuthority(MemberRole.ROLE_ADMIN.getValue()));
+            authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
         } else {
-            authorities.add(new SimpleGrantedAuthority(MemberRole.ROLE_USER.getValue()));
+            authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getValue()));
         }
 
         return new User(member.getEmail(), member.getPassword(), authorities);

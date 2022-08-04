@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import shop.tryit.domain.member.entity.MemberRole;
 import shop.tryit.domain.member.service.MemberSecurityService;
 
 @EnableWebSecurity
@@ -32,13 +33,12 @@ public class WebSecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests() //요청에 의한 보안 검사 시작
-                .antMatchers("/**", "/css/**", "/img/**",
-                        "/js/**", "/vendor/**",
-                        "/members/**", "/items/**",
-                        "/questions/**", "/answers/**").permitAll()
-//                .antMatchers("/ items/v1/register",
-//                        "/ items/v1/{id}", "/items/v1/delete")
-//                .hasRole(MemberRole.USER.name())
+                .antMatchers("/", "/css/**", "/img/**", "/js/**", "/vendor/**",
+                        "/members/**", "/items", "/items/{id}", "/qna/**", "/answers/**",
+                        "/notices", "/notices/{noticeId}").permitAll()
+                .antMatchers("/members/edit", "/qna/{questionId}", "/carts/**",
+                        "/orders/**", "/payment/**").hasRole(MemberRole.USER.name())
+                .antMatchers("/**").hasRole(MemberRole.ADMIN.name())
                 .anyRequest().authenticated() //어떤 요청에도 보안 검사를 실생
                 .and()
                 .formLogin()

@@ -1,6 +1,6 @@
 package shop.tryit.domain.qna.service;
 
-import static shop.tryit.domain.member.entity.MemberRole.ROLE_ADMIN;
+import static shop.tryit.domain.member.entity.MemberRole.ADMIN;
 
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
@@ -83,7 +83,7 @@ public class QnAFacade {
         Member member = memberService.findMember(userEmail);
         Question question = questionService.findOne(questionId);
 
-        return member.getRole()==ROLE_ADMIN || Objects.equals(userEmail, question.getEmail());
+        return member.getRole()==ADMIN || Objects.equals(userEmail, question.getEmail());
     }
 
     @Transactional
@@ -104,7 +104,7 @@ public class QnAFacade {
         String email = user.getUsername();
         Member member = memberService.findMember(email);
         Answer answer = answerService.findById(answerId);
-        return Objects.equals(email, answer.getMemberEmail()) || member.getRole()==ROLE_ADMIN;
+        return Objects.equals(email, answer.getMemberEmail()) || member.getRole()==ADMIN;
     }
 
     public QuestionFormDto toDto(Long questionId) {
