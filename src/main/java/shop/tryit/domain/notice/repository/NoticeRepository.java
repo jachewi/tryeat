@@ -1,4 +1,4 @@
-package shop.tryit.domain.notice;
+package shop.tryit.domain.notice.repository;
 
 import java.util.Optional;
 import org.springframework.data.domain.Page;
