@@ -17,8 +17,8 @@
                sec:authorize="isAuthenticated()" th:href="@{/members/logout}">Logout</a></li>
         <li class="dropdown"><a href="#" sec:authorize="isAuthenticated()"><span>MyPage</span><i class="bi bi-chevron-down"></i></a>
           <ul>
-            <li><a class="nav-link scrollto" href="/members/edit"
-                   sec:authorize="isAuthenticated()" th:href="@{/members/edit}">Modify</a></li>
+            <li><a class="nav-link scrollto" href="/members/update"
+                   sec:authorize="isAuthenticated()" th:href="@{/members/update}">Modify</a></li>
             <li><a class="nav-link scrollto" href="/members/edit"
                    sec:authorize="isAuthenticated()" th:href="@{/carts}">Cart</a></li>
             <li><a class="nav-link scrollto" href="/members/edit"
