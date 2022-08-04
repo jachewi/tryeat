@@ -113,8 +113,8 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public String detail(@PathVariable long id, Model model) {
-        ItemDto itemDto = itemFacade.findItem(id);
-        model.addAttribute("item", itemDto);
+        ItemResponseDto itemResponseDto = itemFacade.findItem(id);
+        model.addAttribute("itemResponseDto", itemResponseDto);
 
         return "/items/detail";
     }
