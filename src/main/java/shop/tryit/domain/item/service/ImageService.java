@@ -9,7 +9,6 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.item.dto.ItemFormDto;
 import shop.tryit.domain.item.entity.Image;
 import shop.tryit.domain.item.entity.Item;
@@ -17,7 +16,6 @@ import shop.tryit.domain.item.entity.Item;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class ImageService {
 
     private final ImageStore imageStore;
@@ -61,7 +59,6 @@ public class ImageService {
     /**
      * 메인 이미지 수정
      */
-    @Transactional
     public Image updateMainImage(Item findItem, ItemFormDto form) throws IOException {
         log.info("======== 메인 이미지 수정 시작 ========");
 
@@ -90,7 +87,6 @@ public class ImageService {
     /**
      * 상세 이미지 수정
      */
-    @Transactional
     public Image updateDetailImage(Item item, ItemFormDto form) throws IOException {
         log.info("======== 상세 이미지 수정 시작 ========");
 

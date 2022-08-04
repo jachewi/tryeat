@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.item.dto.ItemSearchCondition;
 import shop.tryit.domain.item.dto.ItemSearchDto;
 import shop.tryit.domain.item.entity.Item;
@@ -13,7 +12,6 @@ import shop.tryit.domain.item.repository.ItemRepository;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class ItemService {
 
     private final ItemRepository itemRepository;
@@ -21,7 +19,6 @@ public class ItemService {
     /**
      * 상품 등록
      */
-    @Transactional
     public Long register(Item item) {
         return itemRepository.save(item);
     }
@@ -29,7 +26,6 @@ public class ItemService {
     /**
      * 상품 수정
      */
-    @Transactional
     public Long update(Item findItem, Item newItem) {
         findItem.update(newItem.getName(), newItem.getPrice(), newItem.getStockQuantity(), newItem.getCategory());
         return findItem.getId();
@@ -53,7 +49,6 @@ public class ItemService {
     /**
      * 상품 삭제
      */
-    @Transactional
     public void delete(Long itemId) {
         Item item = findItem(itemId);
         itemRepository.delete(item);

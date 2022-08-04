@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.item.dto.ItemDto;
 import shop.tryit.domain.item.dto.ItemFormDto;
 import shop.tryit.domain.item.dto.ItemSearchCondition;
@@ -16,6 +17,7 @@ import shop.tryit.domain.item.entity.Item;
 
 @Component
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ItemFacade {
 
     private final ItemService itemService;
@@ -24,6 +26,7 @@ public class ItemFacade {
     /**
      * 상품 등록
      */
+    @Transactional
     public Long register(ItemFormDto itemFormDto) throws IOException {
         Image mainImage = imageService.uploadMainImage(itemFormDto); // 서버에 이미지 저장
         Image detailImage = imageService.uploadDetailImage(itemFormDto); // 서버에 이미지 저장
@@ -52,6 +55,7 @@ public class ItemFacade {
     /**
      * 상품 수정
      */
+    @Transactional
     public Long update(Long itemId, ItemFormDto itemFormDto) throws IOException {
         Item findItem = itemService.findItem(itemId);
         Item newItem = toEntity(itemFormDto);
@@ -66,6 +70,7 @@ public class ItemFacade {
     /**
      * 상품 삭제
      */
+    @Transactional
     public void delete(Long itemId) throws IOException {
         imageService.deleteImage(itemId); // 상품 이미지 서버에서 삭제
         itemService.delete(itemId);
