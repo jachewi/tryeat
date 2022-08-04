@@ -1,4 +1,4 @@
-package shop.tryit.domain.order;
+package shop.tryit.domain.order.repository;
 
 import java.util.Optional;
 import org.springframework.data.domain.Page;

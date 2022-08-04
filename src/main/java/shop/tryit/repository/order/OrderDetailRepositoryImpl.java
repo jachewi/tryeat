@@ -5,10 +5,10 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-import shop.tryit.domain.order.OrderDetailRepository;
 import shop.tryit.domain.order.dto.OrderDetailSearchDto;
 import shop.tryit.domain.order.entity.Order;
 import shop.tryit.domain.order.entity.OrderDetail;
+import shop.tryit.domain.order.repository.OrderDetailRepository;
 
 @Slf4j
 @Repository

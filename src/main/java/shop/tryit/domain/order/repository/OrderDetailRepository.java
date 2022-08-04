@@ -1,4 +1,4 @@
-package shop.tryit.domain.order;
+package shop.tryit.domain.order.repository;
 
 import java.util.List;
 import java.util.Optional;
