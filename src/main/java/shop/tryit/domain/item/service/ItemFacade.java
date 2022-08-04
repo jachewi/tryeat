@@ -7,16 +7,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
-import shop.tryit.domain.item.dto.ItemSearchCondition;
 import shop.tryit.domain.item.dto.ItemDto;
 import shop.tryit.domain.item.dto.ItemFormDto;
+import shop.tryit.domain.item.dto.ItemSearchCondition;
 import shop.tryit.domain.item.dto.ItemSearchDto;
 import shop.tryit.domain.item.entity.Image;
 import shop.tryit.domain.item.entity.Item;
 
 @Component
 @RequiredArgsConstructor
-public class ItemPacade {
+public class ItemFacade {
 
     private final ItemService itemService;
     private final ImageService imageService;
