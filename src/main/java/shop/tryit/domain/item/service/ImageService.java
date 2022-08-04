@@ -1,7 +1,7 @@
 package shop.tryit.domain.item.service;
 
-import static shop.tryit.domain.item.ImageType.DETAIL;
-import static shop.tryit.domain.item.ImageType.MAIN;
+import static shop.tryit.domain.item.entity.ImageType.DETAIL;
+import static shop.tryit.domain.item.entity.ImageType.MAIN;
 
 import java.io.IOException;
 import java.util.ArrayList;

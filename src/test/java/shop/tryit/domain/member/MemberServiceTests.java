@@ -3,12 +3,14 @@ package shop.tryit.domain.member;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import javax.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.domain.member.entity.Member;
+import shop.tryit.domain.member.service.MemberService;
 import shop.tryit.repository.member.MemberJpaRepository;
-import javax.persistence.EntityManager;
 
 @Transactional
 @SpringBootTest

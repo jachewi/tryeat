@@ -8,8 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.cart.entity.Cart;
 import shop.tryit.domain.cart.service.CartService;
-import shop.tryit.domain.member.Member;
-import shop.tryit.domain.member.MemberRepository;
+import shop.tryit.domain.member.entity.Member;
+import shop.tryit.domain.member.repository.MemberRepository;
 import shop.tryit.repository.cart.CartJpaRepository;
 
 @Transactional

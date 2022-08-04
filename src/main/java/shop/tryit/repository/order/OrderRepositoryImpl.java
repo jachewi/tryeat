@@ -6,10 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import shop.tryit.domain.member.Member;
-import shop.tryit.domain.order.OrderRepository;
+import shop.tryit.domain.member.entity.Member;
 import shop.tryit.domain.order.dto.OrderSearchDto;
 import shop.tryit.domain.order.entity.Order;
+import shop.tryit.domain.order.repository.OrderRepository;
 
 @Slf4j
 @Repository

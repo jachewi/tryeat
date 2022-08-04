@@ -1,11 +1,14 @@
 package shop.tryit.domain.member;
 
+import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import shop.tryit.domain.common.Address;
-import javax.annotation.PostConstruct;
+import shop.tryit.domain.member.entity.Address;
+import shop.tryit.domain.member.entity.Member;
+import shop.tryit.domain.member.entity.MemberRole;
+import shop.tryit.domain.member.repository.MemberRepository;
 
 @Slf4j
 @Component
@@ -20,7 +23,6 @@ public class InitDB {
         log.info("initialize DB");
         initTestAdmin();
         initTestUser();
-
     }
 
     private void initTestUser() {
@@ -39,7 +41,6 @@ public class InitDB {
                 .phoneNumber("01011112222")
                 .role(MemberRole.ROLE_USER)
                 .build());
-
     }
 
     private void initTestAdmin() {

@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.domain.item.dto.ItemSearchCondition;
 import shop.tryit.domain.item.dto.ItemSearchDto;
 import shop.tryit.domain.item.entity.Item;
 import shop.tryit.domain.item.repository.ItemRepository;

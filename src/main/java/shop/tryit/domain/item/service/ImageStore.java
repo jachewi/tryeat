@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import shop.tryit.domain.item.ImageType;
+import shop.tryit.domain.item.entity.ImageType;
 import shop.tryit.domain.item.entity.Image;
 
 @Component

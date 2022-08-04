@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import shop.tryit.domain.member.Member;
+import shop.tryit.domain.member.entity.Member;
 
 @SpringBootTest
 @Transactional

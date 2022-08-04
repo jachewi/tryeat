@@ -7,8 +7,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import shop.tryit.domain.notice.NoticeRepository;
 import shop.tryit.domain.notice.entity.Notice;
+import shop.tryit.domain.notice.repository.NoticeRepository;
 
 @Service
 @Transactional(readOnly = true)
