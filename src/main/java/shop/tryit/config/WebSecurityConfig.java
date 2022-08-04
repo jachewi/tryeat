@@ -1,4 +1,4 @@
-package shop.tryit;
+package shop.tryit.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -22,7 +22,7 @@ import shop.tryit.domain.member.MemberSecurityService;
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnDefaultWebSecurity
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-public class WebSecurityConfig{
+public class WebSecurityConfig {
 
     private final MemberSecurityService memberSecurityService;
 
