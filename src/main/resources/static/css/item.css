@@ -14,16 +14,17 @@
   margin-bottom: 30px;
 }
 
+.item .form-content {
+  min-width: 350px;
+  max-width: 940px;
+  margin: auto;
+}
 
 /*--------------------------------------------------------------
 # Item Register
 --------------------------------------------------------------*/
 .register-btn {
   margin-top: 20px;
-}
-
-.register-margin{
-  margin: 20px 200px;
 }
 
 /*--------------------------------------------------------------
