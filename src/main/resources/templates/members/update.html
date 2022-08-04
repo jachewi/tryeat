@@ -70,6 +70,7 @@
                     .open();
             }
 
+
 </script>
 
 <!-- ======= Edit Section ======= -->
@@ -79,10 +80,9 @@
       <h3 class="text-center mb-5">회원 정보 수정</h3>
       <form
           class="join_form"
-          th:action="@{/members/edit}"
+          th:action="@{/members/update}"
           th:object="${memberForm}"
           method="post">
-
         <table>
           <colgroup>
             <col width="30%"/>
@@ -104,7 +104,6 @@
               <input type="text" th:field="*{name}" th:text="${name}">
               <div class="red_txt" th:errors="*{name}"></div>
             </td>
-
           </tr>
           <tr>
             <th>
@@ -122,7 +121,6 @@
               <div class="red_txt" th:errors="*{password2}"></div>
             </td>
           </tr>
-
           <tr>
             <th>
               <span>주소</span></th>
@@ -153,7 +151,6 @@
                   placeholder="상세주소">
             </td>
           </tr>
-
           <tr>
             <th>
               <span>휴대폰 번호</span></th>
@@ -164,23 +161,17 @@
         <div class="exform_txt">
           <span>표시는 필수적으로 입력해주셔야 수정이 가능합니다.</span>
         </div>
-
         <div class="btn_wrap">
           <br>
           <button class="btn btn-dark" type="submit">
             <h5>회원 수정</h5>
           </button>
         </div>
-      </form>
-      <!-- join_form E -->
-    </div>
-    <!-- form_txtInput E -->
-  </div>
-  <!--content E-->
-</section>
-<!-- End Hero -->
+      </form> <!-- join_form E -->
+    </div> <!-- form_txtInput E -->
+  </div> <!--content E-->
+</section> <!-- End Hero -->
 
-<main id="main"></main>
 
 <!-- ======= Footer ======= -->
 <footer th:replace="fragments/footer :: footer" id="footer"></footer>
