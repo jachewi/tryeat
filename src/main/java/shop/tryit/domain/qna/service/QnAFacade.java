@@ -74,6 +74,19 @@ public class QnAFacade {
     }
 
     @Transactional
+    public void deleteQuestion(Long questionId) {
+        questionService.delete(questionId);
+    }
+
+    public boolean checkDeleteQuestion(Long questionId, User user) {
+        String userEmail = user.getUsername();
+        Member member = memberService.findMember(userEmail);
+        Question question = questionService.findOne(questionId);
+
+        return member.getRole()==ROLE_ADMIN || Objects.equals(userEmail, question.getEmail());
+    }
+
+    @Transactional
     public void update(Long questionId, QuestionFormDto questionFormDto, User user) {
         String userEmail = user.getUsername();
         Member member = memberService.findMember(userEmail);
