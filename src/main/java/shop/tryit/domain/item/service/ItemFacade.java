@@ -8,8 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import shop.tryit.domain.item.dto.ItemDto;
-import shop.tryit.domain.item.dto.ItemFormDto;
+import shop.tryit.domain.item.dto.ItemRequestDto;
+import shop.tryit.domain.item.dto.ItemResponseDto;
 import shop.tryit.domain.item.dto.ItemSearchCondition;
 import shop.tryit.domain.item.dto.ItemSearchDto;
 import shop.tryit.domain.item.entity.Image;
@@ -27,11 +27,11 @@ public class ItemFacade {
      * 상품 등록
      */
     @Transactional
-    public Long register(ItemFormDto itemFormDto) throws IOException {
-        Image mainImage = imageService.uploadMainImage(itemFormDto); // 서버에 이미지 저장
-        Image detailImage = imageService.uploadDetailImage(itemFormDto); // 서버에 이미지 저장
+    public Long register(ItemRequestDto itemRequestDto) throws IOException {
+        Image mainImage = imageService.uploadMainImage(itemRequestDto); // 서버에 이미지 저장
+        Image detailImage = imageService.uploadDetailImage(itemRequestDto); // 서버에 이미지 저장
 
-        Item item = toEntity(itemFormDto);
+        Item item = toEntity(itemRequestDto);
         item.addImage(mainImage, detailImage);
 
         return itemService.register(item);
@@ -47,7 +47,7 @@ public class ItemFacade {
     /**
      * 특정 상품 조회
      */
-    public ItemDto findItem(Long itemId) {
+    public ItemResponseDto findItem(Long itemId) {
         Item item = itemService.findItem(itemId);
         return toDto(item, item.getMainImage(), item.getDetailImage());
     }
@@ -56,13 +56,13 @@ public class ItemFacade {
      * 상품 수정
      */
     @Transactional
-    public Long update(Long itemId, ItemFormDto itemFormDto) throws IOException {
+    public Long update(Long itemId, ItemRequestDto itemRequestDto) throws IOException {
         Item findItem = itemService.findItem(itemId);
-        Item newItem = toEntity(itemFormDto);
+        Item newItem = toEntity(itemRequestDto);
 
         itemService.update(findItem, newItem);
-        imageService.updateMainImage(findItem, itemFormDto);
-        imageService.updateDetailImage(findItem, itemFormDto);
+        imageService.updateMainImage(findItem, itemRequestDto);
+        imageService.updateDetailImage(findItem, itemRequestDto);
 
         return itemId;
     }
@@ -76,7 +76,7 @@ public class ItemFacade {
         itemService.delete(itemId);
     }
 
-    public Item toEntity(ItemFormDto form) {
+    public Item toEntity(ItemRequestDto form) {
         return Item.builder()
                 .name(form.getName())
                 .price(form.getPrice())
@@ -85,8 +85,8 @@ public class ItemFacade {
                 .build();
     }
 
-    public ItemDto toDto(Item item, Image mainImage, Image detailImage) {
-        return ItemDto.builder()
+    public ItemResponseDto toDto(Item item, Image mainImage, Image detailImage) {
+        return ItemResponseDto.builder()
                 .id(item.getId())
                 .name(item.getName())
                 .price(item.getPrice())

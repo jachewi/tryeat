@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import shop.tryit.domain.common.Pages;
-import shop.tryit.domain.item.dto.ItemDto;
-import shop.tryit.domain.item.dto.ItemFormDto;
+import shop.tryit.domain.item.dto.ItemRequestDto;
+import shop.tryit.domain.item.dto.ItemResponseDto;
 import shop.tryit.domain.item.dto.ItemSearchCondition;
 import shop.tryit.domain.item.dto.ItemSearchDto;
 import shop.tryit.domain.item.entity.Category;
@@ -35,16 +35,16 @@ public class ItemController {
     public String newItemForm(Model model) {
         Category[] categories = Category.values();
 
-        model.addAttribute("item", ItemFormDto.builder().build());
+        model.addAttribute("itemRequestDto", ItemRequestDto.builder().build());
         model.addAttribute("categories", categories);
 
         return "/items/register";
     }
 
     @PostMapping("/new")
-    public String newItem(@Valid @ModelAttribute("item") ItemFormDto form, BindingResult bindingResult, Model model) throws IOException {
+    public String newItem(@Valid @ModelAttribute ItemRequestDto itemRequestDto, BindingResult bindingResult, Model model) throws IOException {
         // 이미지 검증 실패시
-        if (form.getMainImage().isEmpty() || form.getDetailImage().isEmpty()) {
+        if (itemRequestDto.getMainImage().isEmpty() || itemRequestDto.getDetailImage().isEmpty()) {
             bindingResult.rejectValue("mainImage", "ImageError", "메인이미지와 상세이미지는 필수값입니다.");
             bindingResult.rejectValue("detailImage", "ImageError", "메인이미지와 상세이미지는 필수값입니다.");
         }
@@ -57,7 +57,7 @@ public class ItemController {
             return "/items/register";
         }
 
-        itemFacade.register(form);
+        itemFacade.register(itemRequestDto);
 
         return "redirect:/items";
     }
@@ -69,15 +69,15 @@ public class ItemController {
         Category[] categories = Category.values();
 
         PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 12); // 한 페이지에 12개씩(4*3)
-        Page<ItemSearchDto> items = itemFacade.findItems(itemSearchCondition, pageRequest);
-        Pages<ItemSearchDto> pages = Pages.of(items, 4); // 페이지 버튼 4개씩
+        Page<ItemSearchDto> itemSearchDtos = itemFacade.findItems(itemSearchCondition, pageRequest);
+        Pages<ItemSearchDto> pages = Pages.of(itemSearchDtos, 4); // 페이지 버튼 4개씩
 
         model.addAttribute("categories", categories);
-        model.addAttribute("items", items);
+        model.addAttribute("itemSearchDtos", itemSearchDtos);
         model.addAttribute("pages", pages.getPages());
 
         log.info("상품 검색 조건 = 이름:{}, 카테고리:{}", itemSearchCondition.getName(), itemSearchCondition.getCategory());
-        log.info("상품 개수 = {}", items.getContent().size());
+        log.info("상품 개수 = {}", itemSearchDtos.getContent().size());
 
         return "/items/list";
     }
@@ -87,15 +87,15 @@ public class ItemController {
         Category[] categories = Category.values();
         model.addAttribute("categories", categories);
 
-        ItemDto itemDto = itemFacade.findItem(id);
-        model.addAttribute("item", itemDto);
+        ItemResponseDto itemResponseDto = itemFacade.findItem(id);
+        model.addAttribute("item", itemResponseDto);
 
         return "/items/update";
     }
 
     @PostMapping("/{id}/update")
     public String update(@PathVariable long id,
-                         @Valid @ModelAttribute("item") ItemFormDto form,
+                         @Valid @ModelAttribute("item") ItemRequestDto itemRequestDto,
                          BindingResult bindingResult,
                          Model model) throws IOException {
         // 검증 실패시 다시 입력 폼으로
@@ -106,15 +106,15 @@ public class ItemController {
             return "/items/update";
         }
 
-        itemFacade.update(id, form);
+        itemFacade.update(id, itemRequestDto);
 
         return "redirect:/items";
     }
 
     @GetMapping("/{id}")
     public String detail(@PathVariable long id, Model model) {
-        ItemDto itemDto = itemFacade.findItem(id);
-        model.addAttribute("item", itemDto);
+        ItemResponseDto itemResponseDto = itemFacade.findItem(id);
+        model.addAttribute("itemResponseDto", itemResponseDto);
 
         return "/items/detail";
     }
