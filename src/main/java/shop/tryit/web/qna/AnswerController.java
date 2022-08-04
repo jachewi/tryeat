@@ -29,18 +29,18 @@ public class AnswerController {
                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.info("bindingResult={}", bindingResult);
-            return String.format("redirect:/questions/%s", questionId);
+            return String.format("redirect:/qna/%s", questionId);
         }
 
         qnAFacade.answerRegister(user, questionId, answerFormDto);
-        return String.format("redirect:/questions/%s", questionId);
+        return String.format("redirect:/qna/%s", questionId);
     }
 
     @PostMapping("/delete/{answerId}")
     public String delete(@PathVariable Long answerId) {
         qnAFacade.delete(answerId);
         Long questionId = qnAFacade.findQuestionIdByAnswerId(answerId);
-        return String.format("redirect:/questions/%s", questionId);
+        return String.format("redirect:/qna/%s", questionId);
     }
 
 }

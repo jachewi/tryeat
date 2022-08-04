@@ -10,7 +10,7 @@
   <div class="container">
     <div>
       <div>
-        <button type="button" th:onclick="|location.href='@{/questions/new}'|">글 작성하기</button>
+        <button type="button" th:onclick="|location.href='@{/qna/new}'|">글 작성하기</button>
       </div>
 
       <div>
@@ -37,7 +37,7 @@
         <tr th:each="question, loop : ${questions}" th:object="${question}">
           <td th:text="${questions.getTotalElements - (questions.number * questions.size) - loop.index}"></td>
           <td>
-            <a th:href="@{/questions/{id} (id=*{questionId})}" th:text="*{title}"></a>
+            <a th:href="@{/qna/{id} (id=*{questionId})}" th:text="*{title}"></a>
           </td>
           <td th:text="*{numberOfAnswer}"></td>
           <td th:text="*{email}"></td>
@@ -52,7 +52,7 @@
 
           <li th:each="i : ${pages}">
             <a class="page-link" href="#"
-               th:href="@{/questions(page=${i - 1}, condition=${questionSearchCondition.condition})}"
+               th:href="@{/qna(page=${i - 1}, condition=${questionSearchCondition.condition})}"
                th:text="${i}"></a>
           </li>
 

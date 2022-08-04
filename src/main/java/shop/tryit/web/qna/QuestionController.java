@@ -28,14 +28,14 @@ import shop.tryit.domain.qna.service.QnAFacade;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/questions")
+@RequestMapping("/qna")
 public class QuestionController {
 
     private final QnAFacade qnAFacade;
 
     @GetMapping("/new")
     public String newQuestionForm(@ModelAttribute QuestionSaveFormDto questionSaveFormDto) {
-        return "questions/register";
+        return "qna/register";
     }
 
     @PostMapping("/new")
@@ -44,10 +44,10 @@ public class QuestionController {
                               @AuthenticationPrincipal User user) {
         if (bindingResult.hasErrors()) {
             log.info("bindingResult={}", bindingResult);
-            return "questions/register";
+            return "qna/register";
         }
         qnAFacade.questionRegister(questionSaveFormDto, user);
-        return "redirect:/questions";
+        return "redirect:/qna";
     }
 
     @GetMapping
@@ -59,7 +59,7 @@ public class QuestionController {
 
         model.addAttribute("questions", questions);
         model.addAttribute("pages", pages.getPages());
-        return "questions/list";
+        return "qna/list";
     }
 
     @PostMapping("/{questionId}/authority")
@@ -75,13 +75,13 @@ public class QuestionController {
         model.addAttribute("answers", answers);
         model.addAttribute("pages", pages.getPages());
 
-        return "questions/detail-view";
+        return "qna/detail-view";
     }
 
     @GetMapping("/{questionId}/update")
     public String updateForm(@PathVariable Long questionId,
                              @ModelAttribute QuestionFormDto questionFormDto) {
-        return "questions/update";
+        return "qna/update";
     }
 
     @PostMapping("/{questionId}/update")
@@ -89,13 +89,13 @@ public class QuestionController {
                          @Valid @ModelAttribute QuestionFormDto questionFormDto,
                          @AuthenticationPrincipal User user) {
         qnAFacade.update(questionId, questionFormDto, user);
-        return String.format("redirect:/questions/%s", questionId);
+        return String.format("redirect:/qna/%s", questionId);
     }
 
     @GetMapping("/{questionId}")
     public String passwordCheckForm(
             @ModelAttribute QuestionCheckPasswordFormDto questionCheckPasswordFormDto) {
-        return "questions/check-password";
+        return "qna/check-password";
     }
 
     @PostMapping("/{questionId}")
@@ -105,13 +105,13 @@ public class QuestionController {
             @PathVariable Long questionId) {
         if (bindingResult.hasErrors()) {
             log.info("bindingResult={}", bindingResult);
-            return "questions/check-password";
+            return "qna/check-password";
         }
 
         if (qnAFacade.checkPassword(questionId, questionCheckPasswordFormDto)) {
-            return String.format("forward:/questions/%d/authority", questionId);
+            return String.format("forward:/qna/%d/authority", questionId);
         }
-        return "questions/check-password";
+        return "qna/check-password";
     }
 
 }

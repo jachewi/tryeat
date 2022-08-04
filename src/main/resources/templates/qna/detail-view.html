@@ -24,7 +24,7 @@
     </form>
 
     <div th:object="${questionFormDto}">
-      <button type="submit" th:onclick="|location.href='@{/questions/{questionId}/update (questionId=*{questionId})}'|">
+      <button type="submit" th:onclick="|location.href='@{/qna/{questionId}/update (questionId=*{questionId})}'|">
         게시판 글 수정하기
       </button>
     </div>
@@ -34,7 +34,7 @@
     <hr>
 
     <div>
-      <button th:onclick="|location.href='@{/questions}'|">목록으로</button>
+      <button th:onclick="|location.href='@{/qna}'|">목록으로</button>
     </div>
 
 
@@ -67,7 +67,7 @@
 
         <li th:each="i : ${pages}">
           <a class="page-link" href="#"
-             th:href="@{/questions/{questionId}(page=${i-1}, questionId=${questionFormDto.questionId})}"
+             th:href="@{/qna/{questionId}(page=${i-1}, questionId=${questionFormDto.questionId})}"
              th:text="${i}"></a>
         </li>
 
