@@ -39,28 +39,25 @@
       </div>
     </div>
 
-    <div class="item-list">
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>이미지</th>
-          <th>상품명</th>
-          <th>가격</th>
-        </tr>
-        </thead>
+    <hr>
 
-        <tbody>
-        <tr th:each="item : ${items}">
-          <td>
-            <a th:href="@{/items/{id}(id=${item.id})}">
-              <img th:src="|/files/${item.mainImage.getStoreFileName()}|" width="200" height="200"/>
-            </a>
-          </td>
-          <td th:text="${item.name}"></td>
-          <td th:text="${item.price}"></td>
-          </a></tr>
-        </tbody>
-      </table>
+    <div class="item-list">
+      <div th:each="item : ${items}">
+        <a th:href="@{/items/{id}(id=${item.id})}">
+          <div class="thumbnail">
+            <img th:src="|/files/${item.mainImage.getStoreFileName()}|"/>
+          </div>
+
+          <div class="info">
+            <div class="item-name">
+              <p th:text="${item.name}"></p>
+            </div>
+            <div class="item-price">
+              <p><span th:text="${item.price}"></span>원</p>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
 
     <div class="page">
