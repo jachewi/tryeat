@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import shop.tryit.domain.member.Member;
+import shop.tryit.domain.member.entity.Member;
 import shop.tryit.domain.order.dto.OrderSearchDto;
 import shop.tryit.domain.order.entity.Order;
 import shop.tryit.domain.order.entity.OrderDetail;

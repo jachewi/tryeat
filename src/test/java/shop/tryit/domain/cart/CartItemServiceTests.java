@@ -14,8 +14,8 @@ import shop.tryit.domain.cart.repository.CartRepository;
 import shop.tryit.domain.cart.service.CartItemService;
 import shop.tryit.domain.item.entity.Item;
 import shop.tryit.domain.item.repository.ItemRepository;
-import shop.tryit.domain.member.Member;
-import shop.tryit.domain.member.MemberRepository;
+import shop.tryit.domain.member.entity.Member;
+import shop.tryit.domain.member.repository.MemberRepository;
 import shop.tryit.repository.cart.CartItemJpaRepository;
 
 @Transactional

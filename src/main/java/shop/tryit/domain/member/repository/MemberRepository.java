@@ -1,6 +1,7 @@
-package shop.tryit.domain.member;
+package shop.tryit.domain.member.repository;
 
 import java.util.Optional;
+import shop.tryit.domain.member.entity.Member;
 
 public interface MemberRepository {
 

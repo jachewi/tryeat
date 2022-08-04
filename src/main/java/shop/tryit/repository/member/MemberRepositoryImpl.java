@@ -1,11 +1,11 @@
 package shop.tryit.repository.member;
 
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-import shop.tryit.domain.member.Member;
-import shop.tryit.domain.member.MemberRepository;
-import java.util.Optional;
+import shop.tryit.domain.member.entity.Member;
+import shop.tryit.domain.member.repository.MemberRepository;
 
 @Slf4j
 @Repository
@@ -19,7 +19,6 @@ public class MemberRepositoryImpl implements MemberRepository {
         log.info("save: member={}", member);
         return jpaRepository.save(member).getId();
     }
-
 
     @Override
     public boolean existsByEmail(String email) {

@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import shop.tryit.domain.common.BaseTimeEntity;
-import shop.tryit.domain.member.Member;
+import shop.tryit.domain.member.entity.Member;
 import shop.tryit.domain.question.entity.Question;
 
 @Entity

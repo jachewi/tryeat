@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.cart.entity.Cart;
 import shop.tryit.domain.cart.repository.CartRepository;
-import shop.tryit.domain.member.Member;
-import shop.tryit.domain.member.MemberRepository;
+import shop.tryit.domain.member.entity.Member;
+import shop.tryit.domain.member.repository.MemberRepository;
 
 @Service
 @RequiredArgsConstructor

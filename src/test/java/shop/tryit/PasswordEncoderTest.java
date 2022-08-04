@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import shop.tryit.domain.member.MemberService;
+import shop.tryit.domain.member.service.MemberService;
 
 @SpringBootTest
 public class PasswordEncoderTest {
@@ -30,7 +30,8 @@ public class PasswordEncoderTest {
         //then
         assertAll(
                 () -> assertNotEquals(rawPassword, encodedPassword),
-                () -> assertTrue(passwordEncoder.matches(rawPassword,encodedPassword))
+                () -> assertTrue(passwordEncoder.matches(rawPassword, encodedPassword))
         );
     }
+
 }

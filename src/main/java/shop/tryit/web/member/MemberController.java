@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import shop.tryit.domain.member.MemberFacade;
 import shop.tryit.domain.member.dto.MemberFormDto;
+import shop.tryit.domain.member.service.MemberFacade;
 
 @Slf4j
 @Controller

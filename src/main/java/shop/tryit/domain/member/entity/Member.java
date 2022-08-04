@@ -1,4 +1,4 @@
-package shop.tryit.domain.member;
+package shop.tryit.domain.member.entity;
 
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import shop.tryit.domain.common.Address;
 import shop.tryit.domain.order.entity.Order;
 
 @Entity

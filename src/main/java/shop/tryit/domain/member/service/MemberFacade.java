@@ -1,10 +1,12 @@
-package shop.tryit.domain.member;
+package shop.tryit.domain.member.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-import shop.tryit.domain.common.Address;
 import shop.tryit.domain.member.dto.MemberFormDto;
+import shop.tryit.domain.member.entity.Address;
+import shop.tryit.domain.member.entity.Member;
+import shop.tryit.domain.member.entity.MemberRole;
 
 @Component
 @RequiredArgsConstructor

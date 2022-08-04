@@ -1,4 +1,4 @@
-package shop.tryit.domain.common;
+package shop.tryit.domain.member.entity;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -23,4 +23,5 @@ public class Address {
         this.jibeon_address = jibeon_address;
         this.detail_address = detail_address;
     }
+
 }

@@ -2,7 +2,7 @@ package shop.tryit.repository.question;
 
 import static java.util.stream.Collectors.toMap;
 import static shop.tryit.domain.answer.entity.QAnswer.answer;
-import static shop.tryit.domain.member.QMember.member;
+import static shop.tryit.domain.member.entity.QMember.member;
 import static shop.tryit.domain.question.entity.QQuestion.question;
 
 import com.querydsl.core.Tuple;

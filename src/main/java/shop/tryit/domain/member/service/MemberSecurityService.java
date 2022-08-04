@@ -1,4 +1,4 @@
-package shop.tryit.domain.member;
+package shop.tryit.domain.member.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import shop.tryit.domain.member.entity.Member;
+import shop.tryit.domain.member.entity.MemberRole;
+import shop.tryit.domain.member.repository.MemberRepository;
 
 @Service
 @RequiredArgsConstructor

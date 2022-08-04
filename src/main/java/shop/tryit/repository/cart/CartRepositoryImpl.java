@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import shop.tryit.domain.cart.entity.Cart;
 import shop.tryit.domain.cart.repository.CartRepository;
-import shop.tryit.domain.member.Member;
+import shop.tryit.domain.member.entity.Member;
 
 @Repository
 @RequiredArgsConstructor

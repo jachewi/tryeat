@@ -1,4 +1,4 @@
-package shop.tryit.domain.member;
+package shop.tryit.domain.member.entity;
 
 import lombok.Getter;
 
