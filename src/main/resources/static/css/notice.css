@@ -1,0 +1,32 @@
+.notice .title {
+  width: 50%;
+}
+
+.notice th, .notice .element {
+  text-align: center;
+}
+
+.notice .btn {
+  float: right;
+  margin-bottom: 30px;
+}
+
+.notice .form {
+  margin: auto;
+  width: 940px;
+}
+
+.notice textarea {
+  width: 100%;
+  height: 250px;
+  margin-bottom: 20px;
+}
+
+.notice .detail-btn {
+  display: flex;
+  justify-content: end;
+}
+
+.notice .detail-btn .btn {
+  margin-left: 10px;
+}
