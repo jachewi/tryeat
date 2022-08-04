@@ -1,5 +1,8 @@
 package shop.tryit.domain.qna.service;
 
+import static shop.tryit.domain.member.entity.MemberRole.ROLE_ADMIN;
+
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -78,6 +81,19 @@ public class QnAFacade {
         questionService.update(questionId, newQuestion);
     }
 
+    @Transactional
+    public void updateAnswer(Long answerId, AnswerFormDto answerFormDto) {
+        Answer answer = answerService.findById(answerId);
+        answer.update(answerFormDto.getContent());
+    }
+
+    public boolean checkUpdate(User user, Long answerId) {
+        String email = user.getUsername();
+        Member member = memberService.findMember(email);
+        Answer answer = answerService.findById(answerId);
+        return Objects.equals(email, answer.getMemberEmail()) || member.getRole()==ROLE_ADMIN;
+    }
+
     public QuestionFormDto toDto(Long questionId) {
         Question question = questionService.findOne(questionId);
         return new QuestionFormDto(question.getId(), question.getTitle(), question.getContent());
@@ -85,6 +101,11 @@ public class QnAFacade {
 
     public AnswerFormDto toForm(Answer answer) {
         return new AnswerFormDto(answer.getId(), answer.getContent(), answer.getCreateDate());
+    }
+
+    public AnswerFormDto toForm(Long answerId) {
+        Answer answer = answerService.findById(answerId);
+        return toForm(answer);
     }
 
     private Question toEntity(QuestionSaveFormDto form, Member member) {
