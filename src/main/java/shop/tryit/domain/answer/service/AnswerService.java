@@ -6,8 +6,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
-import shop.tryit.domain.answer.Answer;
-import shop.tryit.domain.answer.AnswerRepository;
+import shop.tryit.domain.answer.entity.Answer;
+import shop.tryit.domain.answer.repository.AnswerRepository;
 import shop.tryit.domain.question.entity.Question;
 import shop.tryit.domain.question.service.QuestionService;
 

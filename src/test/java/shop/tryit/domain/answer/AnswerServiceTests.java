@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.domain.answer.entity.Answer;
 import shop.tryit.domain.answer.service.AnswerService;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberRepository;
