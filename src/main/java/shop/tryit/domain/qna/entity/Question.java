@@ -52,6 +52,10 @@ public class Question extends BaseTimeEntity {
         this.password = password;
     }
 
+    public String getEmail() {
+        return member.getEmail();
+    }
+
     private void changeTitle(String title) {
         this.title = title;
     }

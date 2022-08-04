@@ -50,5 +50,9 @@ public class Answer extends BaseTimeEntity {
         return question.getId();
     }
 
+    public String getMemberEmail() {
+        return member.getEmail();
+    }
+    
 }
 

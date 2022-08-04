@@ -100,6 +100,16 @@ public class QuestionController {
         return String.format("redirect:/qna/%s", questionId);
     }
 
+    @PostMapping("/{questionId}/delete")
+    public String delete(@PathVariable Long questionId,
+                         @ModelAttribute QuestionFormDto questionFormDto,
+                         @AuthenticationPrincipal User user) {
+        if (qnAFacade.checkDeleteQuestion(questionId, user)) {
+            qnAFacade.deleteQuestion(questionId);
+        }
+        return "redirect:/qna";
+    }
+
     @GetMapping("/{questionId}")
     public String passwordCheckForm(
             @ModelAttribute QuestionCheckPasswordFormDto questionCheckPasswordFormDto,

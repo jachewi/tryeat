@@ -27,6 +27,12 @@
       <button type="submit" th:onclick="|location.href='@{/qna/{questionId}/update (questionId=*{questionId})}'|">
         게시판 글 수정하기
       </button>
+
+      <form th:action="@{/qna/{questionId}/delete (questionId=${questionFormDto.questionId})}" method="post">
+        <button type="submit">게시판 글 삭제하기</button>
+      </form>
+
+
     </div>
 
     <br>
@@ -57,6 +63,12 @@
       <form th:action="@{|/answers/delete/${answer.id}|}" method="post">
         <button type="submit">댓글 삭제하기</button>
       </form>
+
+      <form th:action="@{|/answers/${answer.id}/update|}" method="get">
+        <button type="submit">댓글 수정하기</button>
+      </form>
+
+
     </div>
 
     <!--답변 반복 끝-->
