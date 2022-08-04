@@ -11,9 +11,10 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 import shop.tryit.domain.item.entity.Category;
 
+/* 상품 등록, 수정 요청 시 전달 받음 */
 @Data
 @NoArgsConstructor(access = PROTECTED)
-public class ItemFormDto {
+public class ItemRequestDto {
 
     @NotBlank(message = "이름을 입력해주세요.")
     @Length(min = 0, max = 10, message = "이름은 최대 10글자입니다.")
@@ -33,7 +34,7 @@ public class ItemFormDto {
     private MultipartFile detailImage;
 
     @Builder
-    private ItemFormDto(String name, Integer price, Integer stockQuantity, Category category, MultipartFile mainImage, MultipartFile detailImage) {
+    private ItemRequestDto(String name, Integer price, Integer stockQuantity, Category category, MultipartFile mainImage, MultipartFile detailImage) {
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;
