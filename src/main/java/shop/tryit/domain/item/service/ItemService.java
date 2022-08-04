@@ -30,8 +30,7 @@ public class ItemService {
      * 상품 수정
      */
     @Transactional
-    public Long update(Long itemId, Item newItem) {
-        Item findItem = findItem(itemId);
+    public Long update(Item findItem, Item newItem) {
         findItem.update(newItem.getName(), newItem.getPrice(), newItem.getStockQuantity(), newItem.getCategory());
         return findItem.getId();
     }

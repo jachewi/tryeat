@@ -53,11 +53,12 @@ public class ItemFacade {
      * 상품 수정
      */
     public Long update(Long itemId, ItemFormDto itemFormDto) throws IOException {
+        Item findItem = itemService.findItem(itemId);
         Item newItem = toEntity(itemFormDto);
 
-        itemService.update(itemId, newItem);
-        imageService.updateMainImage(itemId, itemFormDto);
-        imageService.updateDetailImage(itemId, itemFormDto);
+        itemService.update(findItem, newItem);
+        imageService.updateMainImage(findItem, itemFormDto);
+        imageService.updateDetailImage(findItem, itemFormDto);
 
         return itemId;
     }

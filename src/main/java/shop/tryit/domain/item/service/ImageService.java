@@ -62,10 +62,10 @@ public class ImageService {
      * 메인 이미지 수정
      */
     @Transactional
-    public Image updateMainImage(long id, ItemFormDto form) throws IOException {
+    public Image updateMainImage(Item findItem, ItemFormDto form) throws IOException {
         log.info("======== 메인 이미지 수정 시작 ========");
 
-        Image findMainImage = getMainImage(id); // 기존 메인 이미지를 찾아옴
+        Image findMainImage = findItem.getMainImage(); // 기존 메인 이미지를 찾아옴
 
         log.info("old 메인이미지 = {} , {}", findMainImage.getOriginFileName(), findMainImage.getStoreFileName());
 
@@ -91,10 +91,10 @@ public class ImageService {
      * 상세 이미지 수정
      */
     @Transactional
-    public Image updateDetailImage(long id, ItemFormDto form) throws IOException {
+    public Image updateDetailImage(Item item, ItemFormDto form) throws IOException {
         log.info("======== 상세 이미지 수정 시작 ========");
 
-        Image findDetailImage = getDetailImage(id); // 기존 상세 이미지를 찾아옴
+        Image findDetailImage = item.getDetailImage(); // 기존 상세 이미지를 찾아옴
 
         log.info("old 상세이미지 = {} , {}", findDetailImage.getOriginFileName(), findDetailImage.getStoreFileName());
 
