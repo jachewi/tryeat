@@ -33,12 +33,12 @@ public class WebSecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests() //요청에 의한 보안 검사 시작
+                .antMatchers("/**").hasRole(MemberRole.ADMIN.name())
                 .antMatchers("/", "/css/**", "/img/**", "/js/**", "/vendor/**",
                         "/members/**", "/items", "/items/{id}", "/qna/**", "/answers/**",
                         "/notices", "/notices/{noticeId}").permitAll()
                 .antMatchers("/members/edit", "/qna/{questionId}", "/carts/**",
                         "/orders/**", "/payment/**").hasRole(MemberRole.USER.name())
-                .antMatchers("/**").hasRole(MemberRole.ADMIN.name())
                 .anyRequest().authenticated() //어떤 요청에도 보안 검사를 실생
                 .and()
                 .formLogin()
