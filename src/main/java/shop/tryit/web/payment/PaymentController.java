@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import shop.tryit.domain.payment.PaymentFacade;
 import shop.tryit.domain.payment.dto.PaymentRequestDto;
 import shop.tryit.domain.payment.dto.PaymentRequestListDto;
 import shop.tryit.domain.payment.dto.PaymentSaveDto;
+import shop.tryit.domain.payment.service.PaymentFacade;
 
 @Slf4j
 @Controller

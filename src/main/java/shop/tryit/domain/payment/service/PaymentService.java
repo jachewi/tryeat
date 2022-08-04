@@ -1,8 +1,10 @@
-package shop.tryit.domain.payment;
+package shop.tryit.domain.payment.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.domain.payment.entity.Payment;
+import shop.tryit.domain.payment.repository.PaymentRepository;
 
 @Service
 @Transactional(readOnly = true)

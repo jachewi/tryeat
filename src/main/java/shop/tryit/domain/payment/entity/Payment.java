@@ -1,4 +1,4 @@
-package shop.tryit.domain.payment;
+package shop.tryit.domain.payment.entity;
 
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;

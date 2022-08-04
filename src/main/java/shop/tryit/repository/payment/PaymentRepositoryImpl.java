@@ -4,8 +4,8 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-import shop.tryit.domain.payment.Payment;
-import shop.tryit.domain.payment.PaymentRepository;
+import shop.tryit.domain.payment.entity.Payment;
+import shop.tryit.domain.payment.repository.PaymentRepository;
 
 @Slf4j
 @Repository

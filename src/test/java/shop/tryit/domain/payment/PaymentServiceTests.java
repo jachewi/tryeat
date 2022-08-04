@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import shop.tryit.domain.payment.entity.Payment;
+import shop.tryit.domain.payment.service.PaymentService;
 import shop.tryit.repository.payment.PaymentJpaRepository;
 
 @SpringBootTest

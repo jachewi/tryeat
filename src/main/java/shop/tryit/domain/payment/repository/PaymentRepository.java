@@ -1,6 +1,7 @@
-package shop.tryit.domain.payment;
+package shop.tryit.domain.payment.repository;
 
 import java.util.Optional;
+import shop.tryit.domain.payment.entity.Payment;
 
 public interface PaymentRepository {
 

@@ -1,4 +1,4 @@
-package shop.tryit.domain.payment;
+package shop.tryit.domain.payment.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,7 @@ import shop.tryit.domain.member.service.MemberService;
 import shop.tryit.domain.payment.dto.PaymentRequestDto;
 import shop.tryit.domain.payment.dto.PaymentResponseDto;
 import shop.tryit.domain.payment.dto.PaymentSaveDto;
+import shop.tryit.domain.payment.entity.Payment;
 
 @Slf4j
 @Component
