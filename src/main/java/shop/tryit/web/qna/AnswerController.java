@@ -38,8 +38,8 @@ public class AnswerController {
 
     @PostMapping("/delete/{answerId}")
     public String delete(@PathVariable Long answerId) {
-        qnAFacade.delete(answerId);
         Long questionId = qnAFacade.findQuestionIdByAnswerId(answerId);
+        qnAFacade.delete(answerId);
         return String.format("redirect:/qna/%s", questionId);
     }
 

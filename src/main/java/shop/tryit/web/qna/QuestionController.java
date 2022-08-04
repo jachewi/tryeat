@@ -1,5 +1,9 @@
 package shop.tryit.web.qna;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static shop.tryit.domain.member.entity.MemberRole.ROLE_ADMIN;
+
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +21,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import shop.tryit.domain.common.Pages;
+import shop.tryit.domain.member.entity.Member;
+import shop.tryit.domain.member.service.MemberService;
 import shop.tryit.domain.qna.dto.AnswerFormDto;
 import shop.tryit.domain.qna.dto.QuestionCheckPasswordFormDto;
 import shop.tryit.domain.qna.dto.QuestionFormDto;
@@ -32,6 +38,7 @@ import shop.tryit.domain.qna.service.QnAFacade;
 public class QuestionController {
 
     private final QnAFacade qnAFacade;
+    private final MemberService memberService;
 
     @GetMapping("/new")
     public String newQuestionForm(@ModelAttribute QuestionSaveFormDto questionSaveFormDto) {
@@ -62,7 +69,7 @@ public class QuestionController {
         return "qna/list";
     }
 
-    @PostMapping("/{questionId}/authority")
+    @RequestMapping(value = "/{questionId}/authority", method = {GET, POST})
     public String findOne(@PathVariable Long questionId,
                           Model model,
                           @RequestParam(defaultValue = "0") int page,
@@ -79,8 +86,9 @@ public class QuestionController {
     }
 
     @GetMapping("/{questionId}/update")
-    public String updateForm(@PathVariable Long questionId,
-                             @ModelAttribute QuestionFormDto questionFormDto) {
+    public String updateForm(@PathVariable Long questionId, Model model) {
+        model.addAttribute("questionFormDto", qnAFacade.toDto(questionId));
+
         return "qna/update";
     }
 
@@ -94,7 +102,16 @@ public class QuestionController {
 
     @GetMapping("/{questionId}")
     public String passwordCheckForm(
-            @ModelAttribute QuestionCheckPasswordFormDto questionCheckPasswordFormDto) {
+            @ModelAttribute QuestionCheckPasswordFormDto questionCheckPasswordFormDto,
+            @PathVariable Long questionId,
+            @AuthenticationPrincipal User user) {
+        String userEmail = user.getUsername();
+        Member member = memberService.findMember(userEmail);
+
+        if (member.getRole()==ROLE_ADMIN) {
+            return String.format("forward:/qna/%d/authority", questionId);
+        }
+
         return "qna/check-password";
     }
 
@@ -111,6 +128,7 @@ public class QuestionController {
         if (qnAFacade.checkPassword(questionId, questionCheckPasswordFormDto)) {
             return String.format("forward:/qna/%d/authority", questionId);
         }
+
         return "qna/check-password";
     }
 
