@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import shop.tryit.domain.common.Pages;
-import shop.tryit.domain.item.dto.ItemDto;
-import shop.tryit.domain.item.dto.ItemFormDto;
+import shop.tryit.domain.item.dto.ItemRequestDto;
+import shop.tryit.domain.item.dto.ItemResponseDto;
 import shop.tryit.domain.item.dto.ItemSearchCondition;
 import shop.tryit.domain.item.dto.ItemSearchDto;
 import shop.tryit.domain.item.entity.Category;
@@ -35,16 +35,16 @@ public class ItemController {
     public String newItemForm(Model model) {
         Category[] categories = Category.values();
 
-        model.addAttribute("item", ItemFormDto.builder().build());
+        model.addAttribute("itemRequestDto", ItemRequestDto.builder().build());
         model.addAttribute("categories", categories);
 
         return "/items/register";
     }
 
     @PostMapping("/new")
-    public String newItem(@Valid @ModelAttribute("item") ItemFormDto form, BindingResult bindingResult, Model model) throws IOException {
+    public String newItem(@Valid @ModelAttribute ItemRequestDto itemRequestDto, BindingResult bindingResult, Model model) throws IOException {
         // 이미지 검증 실패시
-        if (form.getMainImage().isEmpty() || form.getDetailImage().isEmpty()) {
+        if (itemRequestDto.getMainImage().isEmpty() || itemRequestDto.getDetailImage().isEmpty()) {
             bindingResult.rejectValue("mainImage", "ImageError", "메인이미지와 상세이미지는 필수값입니다.");
             bindingResult.rejectValue("detailImage", "ImageError", "메인이미지와 상세이미지는 필수값입니다.");
         }
@@ -57,7 +57,7 @@ public class ItemController {
             return "/items/register";
         }
 
-        itemFacade.register(form);
+        itemFacade.register(itemRequestDto);
 
         return "redirect:/items";
     }
