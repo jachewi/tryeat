@@ -65,14 +65,14 @@ public class MemberController {
      * 회원 프로필
      */
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/edit")
+    @GetMapping("/update")
     public String editMemberForm(@AuthenticationPrincipal User user, Model model) {
         log.info("회원 수정 폼으로 이동");
         model.addAttribute("memberForm", memberFacade.updateForm(user));
-        return "/members/edit";
+        return "/members/update";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/update")
     public String editMember(@Valid @ModelAttribute("memberForm") MemberFormDto memberForm,
                              BindingResult bindingResult) {
         log.info("회원 수정으로 이동");
@@ -83,12 +83,12 @@ public class MemberController {
 
         if (bindingResult.hasErrors()) {
             log.info("member controller post");
-            return "/members/edit";
+            return "/members/update";
         }
 
         memberFacade.update(memberForm);
 
-        return "/members/edit";
+        return "/members/update";
     }
 
 }
