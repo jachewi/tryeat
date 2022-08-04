@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.order.dto.OrderSearchDto;
+import shop.tryit.domain.order.entity.Order;
 
 public interface OrderRepository {
 

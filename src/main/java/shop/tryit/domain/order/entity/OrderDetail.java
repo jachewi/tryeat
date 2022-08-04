@@ -1,4 +1,4 @@
-package shop.tryit.domain.order;
+package shop.tryit.domain.order.entity;
 
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;

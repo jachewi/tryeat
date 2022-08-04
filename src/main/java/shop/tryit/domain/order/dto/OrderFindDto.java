@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import shop.tryit.domain.item.entity.Image;
-import shop.tryit.domain.order.OrderStatus;
+import shop.tryit.domain.order.entity.OrderStatus;
 
 @Getter
 public class OrderFindDto {

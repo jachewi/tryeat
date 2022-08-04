@@ -2,8 +2,8 @@ package shop.tryit.repository.order;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import shop.tryit.domain.order.Order;
-import shop.tryit.domain.order.OrderDetail;
+import shop.tryit.domain.order.entity.Order;
+import shop.tryit.domain.order.entity.OrderDetail;
 
 public interface OrderDetailJpaRepository extends JpaRepository<OrderDetail, Long>, OrderDetailCustom {
 

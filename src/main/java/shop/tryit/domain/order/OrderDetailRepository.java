@@ -3,6 +3,8 @@ package shop.tryit.domain.order;
 import java.util.List;
 import java.util.Optional;
 import shop.tryit.domain.order.dto.OrderDetailSearchDto;
+import shop.tryit.domain.order.entity.Order;
+import shop.tryit.domain.order.entity.OrderDetail;
 
 public interface OrderDetailRepository {
 

@@ -15,13 +15,13 @@ import shop.tryit.domain.item.entity.Item;
 import shop.tryit.domain.item.service.ItemService;
 import shop.tryit.domain.member.Member;
 import shop.tryit.domain.member.MemberService;
-import shop.tryit.domain.order.Order;
-import shop.tryit.domain.order.OrderDetail;
-import shop.tryit.domain.order.OrderStatus;
 import shop.tryit.domain.order.dto.OrderDetailDto;
 import shop.tryit.domain.order.dto.OrderFindDto;
 import shop.tryit.domain.order.dto.OrderFindDto.OrderDetailFindDto;
 import shop.tryit.domain.order.dto.OrderSearchDto;
+import shop.tryit.domain.order.entity.Order;
+import shop.tryit.domain.order.entity.OrderDetail;
+import shop.tryit.domain.order.entity.OrderStatus;
 
 @Component
 @RequiredArgsConstructor

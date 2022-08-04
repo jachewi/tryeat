@@ -1,4 +1,4 @@
-package shop.tryit.domain.order;
+package shop.tryit.domain.order.entity;
 
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
@@ -38,8 +38,8 @@ public class Order extends BaseTimeEntity {
     @Column(unique = true)
     private String number;
 
-    @Enumerated(STRING) //enum 이름을 db에 저장
-    private OrderStatus status;  //주문 상태[ORDER, CANCEL]
+    @Enumerated(STRING) // enum 이름을 db에 저장
+    private OrderStatus status;  // 주문 상태[ORDER, CANCEL]
 
     private Order(Member member, String orderNum, OrderStatus status) {
         this.member = member;
@@ -53,8 +53,8 @@ public class Order extends BaseTimeEntity {
         String subNum = "";
         for (int i = 1; i <= 6; i++) {
             subNum += (int) (Math.random() * 10);
-        } //6자리의 랜덤 번호 생성
-        String orderNum = dateTime.getNano() + "_" + subNum; //주문번호 생성(나노세컨드_랜덤번호) ex) 180343000_789123
+        } // 6자리의 랜덤 번호 생성
+        String orderNum = dateTime.getNano() + "_" + subNum; // 주문번호 생성(나노세컨드_랜덤번호) ex) 180343000_789123
 
         return new Order(member, orderNum, status);
     }

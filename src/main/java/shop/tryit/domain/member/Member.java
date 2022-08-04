@@ -18,7 +18,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import shop.tryit.domain.common.Address;
-import shop.tryit.domain.order.Order;
+import shop.tryit.domain.order.entity.Order;
 
 @Entity
 @Getter

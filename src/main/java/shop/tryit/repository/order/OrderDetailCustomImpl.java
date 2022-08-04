@@ -8,9 +8,9 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import shop.tryit.domain.item.dto.ItemSearchDto;
 import shop.tryit.domain.item.repository.ItemRepository;
-import shop.tryit.domain.order.Order;
 import shop.tryit.domain.order.dto.OrderDetailSearchDto;
 import shop.tryit.domain.order.dto.QOrderDetailSearchDto;
+import shop.tryit.domain.order.entity.Order;
 
 @RequiredArgsConstructor
 public class OrderDetailCustomImpl implements OrderDetailCustom {

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import shop.tryit.domain.order.OrderStatus;
+import shop.tryit.domain.order.entity.OrderStatus;
 
 @Data
 @NoArgsConstructor
