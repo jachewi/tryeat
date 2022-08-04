@@ -4,8 +4,6 @@ import static shop.tryit.domain.item.entity.ImageType.DETAIL;
 import static shop.tryit.domain.item.entity.ImageType.MAIN;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -33,27 +31,6 @@ public class ImageService {
      */
     public Image uploadDetailImage(ItemRequestDto form) throws IOException {
         return imageStore.storeImageFile(form.getDetailImage(), DETAIL);
-    }
-
-    /**
-     * 메인 이미지 목록 조회
-     */
-    public List<Image> findMainImages() {
-        List<Item> items = itemService.findItems(); // 같은 트랜잭션 안에서 진행하기 위함
-
-        List<Image> mainImages = new ArrayList<>(); // 메인 이미지 파일만 담는 리스트
-
-        for (Item item : items) {
-            List<Image> images = item.getImages();
-
-            for (Image image : images) {
-                if (image.getType()==MAIN) {
-                    mainImages.add(image);
-                }
-            }
-        }
-
-        return mainImages;
     }
 
     /**
