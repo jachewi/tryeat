@@ -57,6 +57,12 @@
       <form th:action="@{|/answers/delete/${answer.id}|}" method="post">
         <button type="submit">댓글 삭제하기</button>
       </form>
+
+      <form th:action="@{|/answers/${answer.id}/update|}" method="get">
+        <button type="submit">댓글 수정하기</button>
+      </form>
+
+
     </div>
 
     <!--답변 반복 끝-->
