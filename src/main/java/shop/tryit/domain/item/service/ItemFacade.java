@@ -40,7 +40,7 @@ public class ItemFacade {
      * 특정 상품 조회
      */
     public ItemDto findItem(Long itemId) {
-        Item item = itemService.findOne(itemId);
+        Item item = itemService.findItem(itemId);
         return toDto(item, imageService.getMainImage(itemId), imageService.getDetailImage(itemId));
     }
 

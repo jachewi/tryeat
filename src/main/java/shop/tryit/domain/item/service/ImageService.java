@@ -41,7 +41,7 @@ public class ImageService {
      * 메인 이미지 조회
      */
     public Image getMainImage(Long id) {
-        Item item = itemService.findOne(id); // 같은 트랜잭션 안에서 진행하기 위함
+        Item item = itemService.findItem(id); // 같은 트랜잭션 안에서 진행하기 위함
 
         Image mainImage = null;
 
@@ -56,7 +56,7 @@ public class ImageService {
      * 상세 이미지 조회
      */
     public Image getDetailImage(Long id) {
-        Item item = itemService.findOne(id); // 같은 트랜잭션 안에서 진행하기 위함
+        Item item = itemService.findItem(id); // 같은 트랜잭션 안에서 진행하기 위함
 
         Image detailImage = null;
 
@@ -164,7 +164,7 @@ public class ImageService {
      * 이미지 삭제
      */
     public void deleteImage(Long id) throws IOException {
-        Item item = itemService.findOne(id);
+        Item item = itemService.findItem(id);
 
         for (Image image : item.getImages()) {
             imageStore.deleteImageFile(image.getStoreFileName());

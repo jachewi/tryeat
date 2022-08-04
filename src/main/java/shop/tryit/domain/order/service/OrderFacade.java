@@ -72,7 +72,7 @@ public class OrderFacade {
 
     private OrderDetail toEntity(OrderDetailDto orderDetailDto, Order order) {
         Long itemId = orderDetailDto.getItemId();
-        Item item = itemService.findOne(itemId);
+        Item item = itemService.findItem(itemId);
 
         return OrderDetail.of(item, order, orderDetailDto.getOrderQuantity());
     }

@@ -33,7 +33,7 @@ public class CartFacade {
     @Transactional
     public Long addCartItem(CartItemDto cartItemDto, User user) {
         Cart cart = cartService.findCart(user.getUsername());
-        Item item = itemService.findOne(cartItemDto.getItemId());
+        Item item = itemService.findItem(cartItemDto.getItemId());
 
         CartItem cartItem = toEntity(cartItemDto, item, cart);
 
@@ -59,7 +59,7 @@ public class CartFacade {
      * 장바구니 상품 수량과 상품 재고 비교
      */
     public Boolean checkItemStock(CartItemDto cartItemDto) {
-        Item item = itemService.findOne(cartItemDto.getItemId());
+        Item item = itemService.findItem(cartItemDto.getItemId());
         return item.checkStock(cartItemDto.getQuantity());
     }
 
@@ -67,7 +67,7 @@ public class CartFacade {
      * 장바구니에 담을 상품 재고 조회
      */
     public int getItemStock(CartItemDto cartItemDto) {
-        Item item = itemService.findOne(cartItemDto.getItemId());
+        Item item = itemService.findItem(cartItemDto.getItemId());
         return item.getStockQuantity();
     }
 

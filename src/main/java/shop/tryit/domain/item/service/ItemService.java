@@ -31,7 +31,7 @@ public class ItemService {
      */
     @Transactional
     public Long update(Long itemId, Item newItem) {
-        Item findItem = findOne(itemId);
+        Item findItem = findItem(itemId);
         findItem.update(newItem.getName(), newItem.getPrice(), newItem.getStockQuantity(), newItem.getCategory());
         return findItem.getId();
     }
@@ -46,7 +46,7 @@ public class ItemService {
     /**
      * 특정 상품 조회
      */
-    public Item findOne(Long itemId) {
+    public Item findItem(Long itemId) {
         return itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalStateException("해당 상품을 찾을 수 없습니다."));
     }
@@ -56,7 +56,7 @@ public class ItemService {
      */
     @Transactional
     public void delete(Long itemId) {
-        Item item = findOne(itemId);
+        Item item = findItem(itemId);
         itemRepository.delete(item);
     }
 

@@ -38,7 +38,7 @@ public class PaymentFacade {
 
         List<Item> itemList = paymentRequestDtoList.stream()
                 .map(paymentRequestDto -> paymentRequestDto.getItemId())
-                .map(itemService::findOne)
+                .map(itemService::findItem)
                 .collect(Collectors.toList());
 
         List<Image> mainImages = itemList.stream()
@@ -71,7 +71,7 @@ public class PaymentFacade {
     public Boolean checkItemStock(List<PaymentRequestDto> paymentRequestDtoList) {
         List<Item> itemList = paymentRequestDtoList.stream()
                 .map(paymentRequestDto -> paymentRequestDto.getItemId())
-                .map(itemService::findOne)
+                .map(itemService::findItem)
                 .collect(Collectors.toList());
         for (int i = 0; i < itemList.size(); i++) {
             if (Boolean.FALSE.equals(itemList.get(i).checkStock(paymentRequestDtoList.get(i).getQuantity()))) {
