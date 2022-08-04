@@ -36,8 +36,7 @@ public class WebSecurityConfig {
                 .antMatchers("/", "/css/**", "/img/**", "/js/**", "/vendor/**",
                         "/members/**", "/items", "/items/{id}", "/qna/**", "/answers/**",
                         "/notices", "/notices/{noticeId}").permitAll()
-                .antMatchers("/members/edit", "/qna/{questionId}", "/carts",
-                        "/carts/{cartItemId}/update", "/carts/{cartItemId}/delete",
+                .antMatchers("/members/edit", "/qna/{questionId}", "/carts/**",
                         "/orders/**", "/payment/**").hasRole(MemberRole.USER.name())
                 .antMatchers("/**").hasRole(MemberRole.ADMIN.name())
                 .anyRequest().authenticated() //어떤 요청에도 보안 검사를 실생
