@@ -26,6 +26,17 @@
   border: 1px solid #000;
 }
 
+.admin-btn {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 30px;
+  margin-left: 5px;
+}
+
+.admin-btn .btn {
+  margin-left: 5px;
+}
+
 /*--------------------------------------------------------------
 # Error Style
 --------------------------------------------------------------*/

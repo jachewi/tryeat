@@ -10,7 +10,7 @@
 <!-- ======= Section ======= -->
 <section class="common item">
   <div class="container">
-    <div class="item-btn admin-btn" sec:authorize="hasRole('ROLE_ADMIN')">
+    <div class="admin-btn" sec:authorize="hasRole('ROLE_ADMIN')">
       <a th:href="@{/items/new}" class="btn btn-dark" role="button">상품 등록</a>
     </div>
 
