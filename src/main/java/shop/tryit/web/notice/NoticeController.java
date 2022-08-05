@@ -65,12 +65,12 @@ public class NoticeController {
 
     @PostMapping("/{noticeId}/update")
     public String update(@PathVariable Long noticeId,
-                         @ModelAttribute NoticeUpdateFormDto noticeUpdateFormDto,
+                         @Valid @ModelAttribute NoticeUpdateFormDto noticeUpdateFormDto,
                          BindingResult bindingResult,
                          @AuthenticationPrincipal User user) {
         if (bindingResult.hasErrors()) {
             log.info("bindingResult = '{}'", bindingResult);
-            return "notices/register";
+            return "notices/update";
         }
 
         noticeFacade.update(user, noticeId, noticeUpdateFormDto);
