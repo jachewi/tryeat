@@ -1,15 +1,6 @@
 /*--------------------------------------------------------------
 # Cart
 --------------------------------------------------------------*/
-.cart .btn-custom {
-  border: 1px solid #e5e5e5;
-  background-color: rgba(240, 255, 255, 0);
-}
-
-.cart .btn-custom:hover {
-  border: 1px solid #000;
-}
-
 .cart-list input {
   width: 50px;
   border: 1px solid #e5e5e5;

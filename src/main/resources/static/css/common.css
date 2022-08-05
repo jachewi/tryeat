@@ -12,3 +12,15 @@
 .pagination {
   justify-content: center;
 }
+
+/*--------------------------------------------------------------
+# Button Style
+--------------------------------------------------------------*/
+.btn-custom {
+  border: 1px solid #e5e5e5;
+  background-color: rgba(240, 255, 255, 0);
+}
+
+.btn-custom:hover {
+  border: 1px solid #000;
+}

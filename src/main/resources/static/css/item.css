@@ -14,16 +14,40 @@
   margin-bottom: 30px;
 }
 
+.item .form-content {
+  min-width: 350px;
+  max-width: 940px;
+  margin: auto;
+}
+
+.item table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px 12px;
+}
+
+.item table input {
+  border: 1px solid #ececec;
+  color: #4c4c4c;
+  border-radius: 0%;
+}
+
+.item table select {
+  border: 1px solid #ececec;
+  color: #4c4c4c;
+  border-radius: 0%;
+}
+
+.item .field-error {
+  text-align: end;
+  margin-top: -15px;
+}
 
 /*--------------------------------------------------------------
 # Item Register
 --------------------------------------------------------------*/
 .register-btn {
   margin-top: 20px;
-}
-
-.register-margin{
-  margin: 20px 200px;
 }
 
 /*--------------------------------------------------------------
@@ -103,13 +127,12 @@
 }
 
 .item-detail .item-img .main-img {
-  width: 400px;
-  height: 400px;
-  /* width: 100%; */
+  /* width: 400px; */
+  /* height: 100%; */
 }
 
 .item-detail .item-info {
-  padding-top: 30px;
+  padding-top: 50px;
   /* box-shadow: 0px 0 30px rgba(54, 65, 70, 0.08); */
 }
 
@@ -136,7 +159,7 @@
 
 .item-detail tr > th {
   font-weight: normal;
-  width: 102px;
+  width: 85px;
 }
 
 .item-detail .order-info .quantity {
@@ -144,12 +167,12 @@
 }
 
 .item-detail .order-info .quantity label {
-  width: 100px;
+  width: 80px;
 }
 
 .item-detail .order-info .quantity input {
   /*border: none;*/
-  width: 50px;
+  width: 60px;
   text-align: center;
 }
 
@@ -169,5 +192,5 @@
 
 .item-detail .order-info .order-click button {
   width: 100px;
-  margin-left: 15px;
+  margin-left: 5px;
 }
