@@ -86,9 +86,14 @@ public class QuestionController {
     }
 
     @GetMapping("/{questionId}/update")
-    public String updateForm(@PathVariable Long questionId, Model model) {
-        model.addAttribute("questionFormDto", qnAFacade.toDto(questionId));
+    public String updateForm(@PathVariable Long questionId,
+                             Model model,
+                             @AuthenticationPrincipal User user) {
+        if (!qnAFacade.checkDeleteQuestion(questionId, user)) {
+            return String.format("redirect:/qna/%s", questionId);
+        }
 
+        model.addAttribute("questionFormDto", qnAFacade.toDto(questionId));
         return "qna/update";
     }
 
