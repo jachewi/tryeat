@@ -89,9 +89,10 @@ public class OrderFacade {
                 .orderDateTime(order.getCreateDate())
                 .orderStatus(order.getStatus())
                 .zipcode(order.zipCode())
-                .jibeonAddress(order.jibeonAddress())
                 .streetAddress(order.streetAddress())
                 .detailAddress(order.detailAddress())
+                .memberName(order.memberName())
+                .memberPhoneNumber(order.memberPhoneNumber())
                 .orderDetailFindDtos(orderDetailFindDtos)
                 .build();
     }
@@ -102,6 +103,7 @@ public class OrderFacade {
                 .itemName(orderDetail.itemName())
                 .orderQuantity(orderDetail.getQuantity())
                 .itemMainImage(orderDetail.mainImage())
+                .price(orderDetail.itemPrice())
                 .build();
     }
 
