@@ -9,25 +9,6 @@
 # Font
 --------------------------------------------------------------*/
 @font-face {
-  font-family: "BEunhye";
-  src: url("font/나눔손글씨 배은혜체.ttf") format("truetype");
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: "MSStudent";
-  src: url("font/나눔손글씨 중학생.ttf") format("truetype");
-  font-weight: normal;
-}
-
-@font-face {
-    font-family: 'GangwonEduSaeeum_OTFMediumA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduSaeeum_OTFMediumA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'LeeSeoyun';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff') format('woff');
     font-weight: normal;
