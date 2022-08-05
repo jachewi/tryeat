@@ -6,18 +6,20 @@
 <body>
 <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"/>
 
-<section id="hero">
+<section class="common qna">
   <div class="container">
     <div>
       <div>
-        <button type="button" th:onclick="|location.href='@{/qna/new}'|">글 작성하기</button>
+        <button class="btn btn-outline-dark" type="button" th:onclick="|location.href='@{/qna/new}'|">글 작성하기</button>
       </div>
+
+      <br>
 
       <div>
         <form th:action method="get" th:object="${questionSearchCondition}">
           <label th:for="name"> 검색</label>
           <input type="text" th:field="*{condition}" class="form-control">
-          <button type="submit" class="btn btn-primary">검색</button>
+          <button type="submit" class="btn btn-dark">검색</button>
         </form>
 
       </div>
@@ -26,7 +28,7 @@
         <thead>
         <tr>
           <th>번호</th>
-          <th>제목</th>
+          <th class="title">제목</th>
           <th>답변 수</th>
           <th>글쓴이</th>
           <th>작성일자</th>
@@ -35,13 +37,13 @@
 
         <tbody>
         <tr th:each="question, loop : ${questions}" th:object="${question}">
-          <td th:text="${questions.getTotalElements - (questions.number * questions.size) - loop.index}"></td>
+          <td class="element" th:text="${questions.getTotalElements - (questions.number * questions.size) - loop.index}"></td>
           <td>
             <a th:href="@{/qna/{id} (id=*{questionId})}" th:text="*{title}"></a>
           </td>
-          <td th:text="*{numberOfAnswer}"></td>
-          <td th:text="*{email}"></td>
-          <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+          <td class="element" th:text="*{numberOfAnswer}"></td>
+          <td class="element" th:text="*{email}"></td>
+          <td class="element" th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
       </table>

@@ -6,7 +6,7 @@
 <body>
 <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"/>
 
-<section id="hero">
+<section class="common qna">
   <div class="container">
     <form th:action th:object="${answerFormDto}" method="post">
 
@@ -20,7 +20,7 @@
         <div th:errors="*{content}"></div>
       </div>
 
-      <button type="submit" class="btn btn-primary">수정하기</button>
+      <button type="submit" class="btn btn-outline-dark">수정하기</button>
 
     </form>
   </div> <!-- /container -->
