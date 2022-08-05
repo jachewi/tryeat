@@ -6,20 +6,20 @@
 <body>
 <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"/>
 
-<section id="hero">
+<section class="common notice">
   <div class="container">
     <div>
 
       <!--운영자만 보일 수 있게-->
       <div class="item-btn admin-btn" sec:authorize="hasRole('ROLE_ADMIN')">
-        <button type="button" th:onclick="|location.href='@{/notices/new}'|">글 작성하기</button>
+        <button class="btn-dark btn" type="button" th:onclick="|location.href='@{/notices/new}'|">글 작성하기</button>
       </div>
 
       <table class="table table-sm">
         <thead>
         <tr>
           <th>번호</th>
-          <th>제목</th>
+          <th class="title">제목</th>
           <th>글쓴이</th>
           <th>작성일자</th>
         </tr>
@@ -27,12 +27,12 @@
 
         <tbody>
         <tr th:each="notice, loop : ${notices}" th:object="${notice}">
-          <td th:text="${notices.getTotalElements - (notices.number * notices.size) - loop.index}"></td>
+          <td class="element" th:text="${notices.getTotalElements - (notices.number * notices.size) - loop.index}"></td>
           <td>
             <a th:href="@{/notices/{id} (id=*{id})}" th:text="*{title}"></a>
           </td>
-          <td th:text="*{memberEmail}"></td>
-          <td th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+          <td class="element" th:text="*{memberEmail}"></td>
+          <td class="element" th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
       </table>
