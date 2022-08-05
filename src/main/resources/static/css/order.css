@@ -8,33 +8,39 @@
   margin-right: 30px;
 }
 
-.order .oder-detail {
-  display: flex;
-}
-
-.order .main {
-  display: flex;
-}
-
-.order .main .element {
-  margin-right: 50px;
-}
-
-.order .order-item div {
-  margin-bottom: 5px;
-  font-size: 20px;
-}
-
-.order .order-list th, .order .order-list td {
+/* Order List */
+.order .order-list th,
+.order .order-list td {
   text-align: center;
 }
 
-.order .title {
-  text-align: center;
+/* Order Detail */
+.order .order-detail {
+  display: flex;
+  align-items: center;
 }
 
-.order .order-address tr th {
-  padding-left: 15px;
+.order hr {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.order .order-info,
+.order .delivery-info,
+.order .pay-info {
+  margin-bottom: 100px;
+}
+
+.order .order-number-date {
+  font-weight: bold;
+}
+
+.order .order-info input {
+  width: 300px;
+}
+
+.order .order-info .flex-item {
+  flex: 1;
 }
 
 /*--------------------------------------------------------------
