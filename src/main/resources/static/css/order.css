@@ -61,3 +61,21 @@
   margin-left: 10px;
   font-weight: bold;
 }
+
+.pay-item-info .table>:not(:first-child) {
+  border-top: 1px solid #e5e5e5;
+}
+
+.pay-item-info .table thead {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.pay-item-info .table tbody {
+  vertical-align: middle;
+  border-bottom: #e5e5e5;
+}
+
+.pay-item-info,
+.delivery-info {
+  margin-bottom: 100px;
+}
