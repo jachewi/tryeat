@@ -1,3 +1,6 @@
+/*--------------------------------------------------------------
+# Order
+--------------------------------------------------------------*/
 .order img {
   width: 200px;
   height: 200px;
@@ -32,4 +35,23 @@
 
 .order .order-address tr th {
   padding-left: 15px;
+}
+
+/*--------------------------------------------------------------
+# Payment
+--------------------------------------------------------------*/
+.payment .payment-bnt {
+  float: right;
+  border: none;
+  background: white;
+}
+
+.payment .total-info {
+  text-align: right;
+  padding-right: 40px;
+}
+
+.payment .total-info span {
+  margin-left: 10px;
+  font-weight: bold;
 }
