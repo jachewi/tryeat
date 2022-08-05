@@ -250,7 +250,7 @@ a:hover {
 * Mobile Navigation 
 */
 .mobile-nav-toggle {
-  color: #364146;
+  color: #333333;
   font-size: 28px;
   cursor: pointer;
   display: none;
@@ -313,7 +313,7 @@ a:hover {
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover > a {
-  color: #009cea;
+  color: #fe7721;
 }
 
 .navbar-mobile .getstarted,
@@ -348,7 +348,7 @@ a:hover {
 .navbar-mobile .dropdown ul a:hover,
 .navbar-mobile .dropdown ul .active:hover,
 .navbar-mobile .dropdown ul li:hover > a {
-  color: #009cea;
+  color: #fe7721;
 }
 
 .navbar-mobile .dropdown > .dropdown-active {
