@@ -59,7 +59,6 @@ public class OrderController {
 
     @GetMapping("/{orderId}")
     public String findOne(@PathVariable Long orderId, Model model) {
-
         log.info("order='{}'", orderFacade.findOne(orderId));
         model.addAttribute("order", orderFacade.findOne(orderId));
         return "orders/detail";
