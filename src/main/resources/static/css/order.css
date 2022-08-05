@@ -1,0 +1,35 @@
+.order img {
+  width: 200px;
+  height: 200px;
+  object-fit: fill;
+  margin-right: 30px;
+}
+
+.order .oder-detail {
+  display: flex;
+}
+
+.order .main {
+  display: flex;
+}
+
+.order .main .element {
+  margin-right: 50px;
+}
+
+.order .order-item div {
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.order .order-list th, .order .order-list td {
+  text-align: center;
+}
+
+.order .title {
+  text-align: center;
+}
+
+.order .order-address tr th {
+  padding-left: 15px;
+}

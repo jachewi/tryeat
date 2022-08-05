@@ -8,24 +8,62 @@
 <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></div>
 
 <!-- ======= Section ======= -->
-<section class="common item item-detail">
+<section class="common order">
   <div class="container">
     <div class="row gy-4">
-
-      <div th:text="${order.orderStatus}"></div>
-      <div th:text="${order.orderNumber}"></div>
-
-
-      <div th:each="detail : ${order.orderDetailFindDtos}" th:object="${detail}">
-        <div>
-          <img th:src="|/files/*{itemMainImage.getStoreFileName()}|" class="main-img">
-          <div th:text="*{ItemName}"></div>
-          <div th:text="*{orderQuantity}"></div>
-        </div>
+      <h2 class="title">주문 상세 정보</h2>
+      <div class="main">
+        <div class="element" th:text="|${order.orderNumber}  &nbsp &nbsp / &nbsp &nbsp  ${#temporals.format(order.orderDateTime, 'yyyy-MM-dd HH:mm')}|"></div>
       </div>
-
-    </div>
-  </div> <!-- /container -->
+      <br><hr><br>
+      <div th:each="detail : ${order.orderDetailFindDtos}" th:object="${detail}">
+        <div class="oder-detail">
+          <img th:src="|/files/*{itemMainImage.getStoreFileName()}|" class="main-img">
+          <div class="order-item">
+            <br>
+            <div class="order-item-name" th:text="|상품 이름  &nbsp &nbsp: &nbsp &nbsp *{ItemName}|"></div>
+            <div th:text="|상품 가격 &nbsp &nbsp   : &nbsp &nbsp   ${#numbers.formatInteger(detail.totalPrice(), 3 , 'COMMA')}원|"></div>
+            <div th:text="|구매 수량  &nbsp &nbsp  : &nbsp &nbsp   *{orderQuantity}개|"></div>
+            <div th:text="|상품 총 가격 &nbsp &nbsp  : &nbsp &nbsp   ${#numbers.formatInteger(detail.totalPrice(), 3 , 'COMMA')}원|"></div>
+            <br>
+          </div>
+        </div>
+        <br><br><br>
+      </div>
+      <!-- 배송지 정보란 -->
+      <h2>배송지 정보</h2>
+      <hr>
+      <table class="order-address">
+        <tbody>
+        <tr>
+          <th>받는 사람</th>
+          <td><input type="hidden" id="memberName" th:text="${order.memberName}"/></td>
+        </tr>
+        <tr>
+          <th>연락처</th>
+          <td><input type="hidden" id="memberPhone" th:text="${order.memberPhoneNumber}"/></td>
+        </tr>
+        <tr>
+          <th>주소</th>
+          <td>
+            <input type="hidden" th:text="${order.zipcode}" placeholder="우편번호" readonly>
+            <input type="hidden" th:text="${order.streetAddress}" placeholder="도로명주소" readonly>
+            <span id="guide" style="color:#999;display:none"></span>
+            <input type="hidden" th:text="${order.detailAddress}" placeholder="상세주소">
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div>
+        <br><br><br>
+        <h2>결제 정보</h2>
+        <hr>
+        <div th:text="|총 주문 금액 : ${#numbers.formatInteger(order.orderTotalPrice, 3 , 'COMMA')}원|"></div>
+        <div>결제 방법 : 카카오페이</div>
+      </div>
+      <br>
+    </div> <!-- /container -->
+    <br><br>
 </section>
 
 <!-- ======= Footer ======= -->

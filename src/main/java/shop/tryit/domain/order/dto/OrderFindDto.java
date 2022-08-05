@@ -16,8 +16,9 @@ public class OrderFindDto {
     private OrderStatus orderStatus;
     private Long zipcode;
     private String streetAddress;
-    private String jibeonAddress;
     private String detailAddress;
+    private String memberName;
+    private String memberPhoneNumber;
     private List<OrderDetailFindDto> orderDetailFindDtos;
 
     @Builder
@@ -26,8 +27,9 @@ public class OrderFindDto {
                         LocalDateTime orderDateTime,
                         OrderStatus orderStatus,
                         Long zipcode, String streetAddress,
-                        String jibeonAddress,
                         String detailAddress,
+                        String memberName,
+                        String memberPhoneNumber,
                         List<OrderDetailFindDto> orderDetailFindDtos) {
         this.orderId = orderId;
         this.orderNumber = orderNumber;
@@ -35,9 +37,17 @@ public class OrderFindDto {
         this.orderStatus = orderStatus;
         this.zipcode = zipcode;
         this.streetAddress = streetAddress;
-        this.jibeonAddress = jibeonAddress;
         this.detailAddress = detailAddress;
+        this.memberName = memberName;
+        this.memberPhoneNumber = memberPhoneNumber;
         this.orderDetailFindDtos = orderDetailFindDtos;
+    }
+
+    public Integer getOrderTotalPrice() {
+        return orderDetailFindDtos.stream()
+                .map(OrderDetailFindDto::totalPrice)
+                .reduce((price1, price2) -> price1 + price2)
+                .orElse(0);
     }
 
     @Getter
@@ -47,13 +57,19 @@ public class OrderFindDto {
         private String ItemName;
         private int orderQuantity;
         private Image itemMainImage;
+        private int price;
 
         @Builder
-        public OrderDetailFindDto(Long itemId, String itemName, int orderQuantity, Image itemMainImage) {
+        public OrderDetailFindDto(Long itemId, String itemName, int orderQuantity, Image itemMainImage, int price) {
             this.itemId = itemId;
-            ItemName = itemName;
+            this.ItemName = itemName;
             this.orderQuantity = orderQuantity;
             this.itemMainImage = itemMainImage;
+            this.price = price;
+        }
+
+        public int totalPrice() {
+            return price * orderQuantity;
         }
 
     }

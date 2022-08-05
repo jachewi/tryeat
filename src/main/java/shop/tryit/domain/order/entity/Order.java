@@ -91,12 +91,16 @@ public class Order extends BaseTimeEntity {
         return member.addressStreet();
     }
 
-    public String jibeonAddress() {
-        return member.addressJibeon();
+    public String detailAddress() {
+        return member.addressDetail();
     }
 
-    public String detailAddress() {
-        return member.addressJibeon();
+    public String memberName() {
+        return member.getName();
+    }
+
+    public String memberPhoneNumber() {
+        return member.getPhoneNumber();
     }
 
 }

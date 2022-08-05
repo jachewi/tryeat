@@ -54,6 +54,10 @@ public class OrderDetail {
         return item.getName();
     }
 
+    public int itemPrice() {
+        return item.getPrice();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this==o) {
