@@ -5,12 +5,12 @@
 <!-- ======= Header ======= -->
 <header th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></header>
 
-<!-- ======= Hero Section ======= -->
+<!-- ======= Login Section ======= -->
 <section class="common">
   <div layout:fragment="content" class="container my-3">
     <div class="form-margin">
       <form class="form-login" th:action="@{/members/login}" method="post">
-        <h3 class="text-center mb-5">Login</h3>
+        <h3 class="text-center mb-5">로그인</h3>
         <div th:if="${param.error}">
           <div class="alert alert-danger">
             사용자ID 또는 비밀번호를 확인해 주세요.
@@ -28,13 +28,10 @@
       </form>
     </div>
   </div>
-</section> <!-- End Hero -->
-
-<main id="main"></main>
+</section> <!-- End Login -->
 
 <!-- ======= Footer ======= -->
 <footer th:replace="fragments/footer :: footer" id="footer"></footer>
 
 </body>
-
 </html>
