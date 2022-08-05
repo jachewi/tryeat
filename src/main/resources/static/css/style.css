@@ -451,12 +451,18 @@ a:hover {
 /*--------------------------------------------------------------
 # Payment General
 --------------------------------------------------------------*/
-.payment-total-info {
+.payment .payment-bnt {
+  float: right;
+  border: none;
+  background: white;
+}
+
+.payment .payment-total-info {
   text-align: right;
   padding-right: 40px;
 }
 
-.payment-total-info span {
+.payment .payment-total-info span {
   margin-left: 10px;
   font-weight: bold;
 }
