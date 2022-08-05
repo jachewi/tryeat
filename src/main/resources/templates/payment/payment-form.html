@@ -6,7 +6,7 @@
 <header th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></header>
 
 <!-- ======= Payment Section ======= -->
-<section class="common">
+<section class="common payment">
   <div class="container">
 
     <!-- 결제할 상품란 -->
@@ -70,7 +70,7 @@
       </table>
       <br><br><br>
 
-      <button id="check_module" type="button" style="float: right">
+      <button id="check_module" type="button" class="payment-bnt">
         <img src="../img/payment_icon_yellow_small.png"/>
       </button>
     </form>
@@ -164,6 +164,7 @@
         alert(msg);
       });
     });
+
 
 
 </script>
