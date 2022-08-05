@@ -8,8 +8,9 @@
 
 <section class="common notice">
   <div class="container">
-    <form th:action th:object="${noticeViewFormDto}">
+    <h3 class="text-center mb-5">공지사항</h3>
 
+    <form th:action th:object="${noticeViewFormDto}">
       <div>
         <input type="hidden" th:field="*{id}">
       </div>
@@ -33,25 +34,18 @@
         <textarea th:field="*{content}" cols="150" rows="10" readonly></textarea>
         <div th:errors="*{content}"></div>
       </div>
-
     </form>
 
-    <div class="detail-btn">
+    <div class="notice-btn detail-btn">
       <button class="btn btn-outline-dark" th:onclick="|location.href='@{/notices/{noticeId}/update (noticeId=${noticeViewFormDto.id})}'|">수정하기</button>
-
       <form th:action="@{/notices/{noticeId}/delete (noticeId=${noticeViewFormDto.id})}" method="post">
         <button class="btn btn-outline-dark" type="submit">삭제하기</button>
       </form>
-
       <button class="btn btn-outline-dark" th:onclick="|location.href='@{/notices}'|">목록으로</button>
-
     </div>
-
-
   </div> <!-- /container -->
 </section> <!-- End Hero -->
+
 <div th:replace="fragments/footer :: footer"/>
-
 </body>
-
 </html>

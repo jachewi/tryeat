@@ -6,10 +6,11 @@
 <body>
 <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"/>
 
-<section class="common">
-  <div class="container notice">
-    <form th:action th:object="${noticeUpdateFormDto}" method="post">
+<section class="common notice">
+  <div class="container">
+    <h3 class="text-center mb-5">공지사항</h3>
 
+    <form th:action th:object="${noticeUpdateFormDto}" method="post">
       <div>
         <input type="hidden" th:field="*{id}">
       </div>
@@ -17,7 +18,7 @@
       <div class="form-group">
         <label th:for="title">제목</label>
         <input type="text" th:field="*{title}" class="form-control">
-        <div th:errors="*{title}"></div>
+        <div class="field-error" th:errors="*{title}"></div>
       </div>
 
       <br>
@@ -25,7 +26,7 @@
       <div class="form-group">
         <label th:for="memberEmail">작성자</label>
         <input type="text" th:field="*{memberEmail}" class="form-control" disabled>
-        <div th:errors="*{memberEmail}"></div>
+        <div class="field-error" th:errors="*{memberEmail}"></div>
       </div>
 
       <br>
@@ -33,15 +34,15 @@
       <div class="form-group">
         <label th:for="content">내용</label>
         <textarea th:field="*{content}" cols="150" rows="10"></textarea>
-        <div th:errors="*{content}"></div>
+        <div class="field-error" th:errors="*{content}"></div>
       </div>
-
-      <button class="btn btn-outline-dark" type="submit">수정하기</button>
-
+      <div class="notice-btn">
+        <button class="btn btn-outline-dark" type="submit">수정하기</button>
+      </div>
     </form>
   </div> <!-- /container -->
 </section> <!-- End Hero -->
+
 <div th:replace="fragments/footer :: footer"/>
 </body>
-
 </html>
