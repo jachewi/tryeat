@@ -6,7 +6,7 @@
 <body>
 <div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"/>
 
-<section id="hero">
+<section class="common qna">
   <div class="container">
     <form th:action th:object="${questionFormDto}">
 
@@ -14,6 +14,8 @@
         <label th:for="title">제목</label>
         <input type="text" th:field="*{title}" class="form-control" readonly>
       </div>
+
+      <br>
 
       <div class="form-group">
         <label th:for="content">내용</label>
@@ -23,51 +25,45 @@
 
     </form>
 
-    <div th:object="${questionFormDto}">
-      <button type="submit" th:onclick="|location.href='@{/qna/{questionId}/update (questionId=*{questionId})}'|">
+    <div th:object="${questionFormDto}" class="detail-btn">
+      <button class="btn btn-outline-dark" type="submit" th:onclick="|location.href='@{/qna/{questionId}/update (questionId=*{questionId})}'|">
         게시판 글 수정하기
       </button>
 
       <form th:action="@{/qna/{questionId}/delete (questionId=${questionFormDto.questionId})}" method="post">
-        <button type="submit">게시판 글 삭제하기</button>
+        <button class="btn btn-outline-dark" type="submit">게시판 글 삭제하기</button>
       </form>
 
+      <div>
+        <button class="btn btn-outline-dark" th:onclick="|location.href='@{/qna}'|">목록으로</button>
+      </div>
 
     </div>
-
     <br>
-
+    <br>
     <hr>
-
-    <div>
-      <button th:onclick="|location.href='@{/qna}'|">목록으로</button>
-    </div>
-
-
-    <br>
 
     <!-- 댓글 달기 -->
     <form th:action="@{|/answers/new/${questionFormDto.questionId}|}" method="post" class="my-3"
           th:object="${answerFormDto}">
       <textarea th:field="*{content}" cols="150" rows="10"></textarea>
-      <button type="submit">댓글 등록하기</button>
+      <button class="btn btn-outline-dark" type="submit">댓글 등록하기</button>
     </form>
     <!--댓글 달기 끝-->
 
     <br>
 
     <!-- 답변 반복 시작-->
-    <div th:each="answer : ${answers}" clss="answer">
+    <div th:each="answer : ${answers}" class="answer">
       <div th:text="${answer.content}"></div>
       <div th:text="${#temporals.format(answer.createdDateTime, 'yyyy-MM-dd HH:mm')}"></div>
       <form th:action="@{|/answers/delete/${answer.id}|}" method="post">
-        <button type="submit">댓글 삭제하기</button>
+        <button class="btn btn-outline-dark right" type="submit">댓글 삭제하기</button>
       </form>
 
       <form th:action="@{|/answers/${answer.id}/update|}" method="get">
-        <button type="submit">댓글 수정하기</button>
+        <button class="btn btn-outline-dark right" type="submit">댓글 수정하기</button>
       </form>
-
 
     </div>
 
@@ -89,7 +85,7 @@
 
 
   </div> <!-- /container -->
-</section> <!-- End Hero -->
+</section>
 <div th:replace="fragments/footer :: footer"/>
 
 </body>

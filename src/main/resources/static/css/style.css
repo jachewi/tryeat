@@ -451,12 +451,19 @@ a:hover {
 /*--------------------------------------------------------------
 # Payment General
 --------------------------------------------------------------*/
-.payment-total-info {
+/* 추후 order.css에 추가된 후 삭제될 예정*/
+.payment .payment-bnt {
+  float: right;
+  border: none;
+  background: white;
+}
+
+.payment .total-info {
   text-align: right;
   padding-right: 40px;
 }
 
-.payment-total-info span {
+.payment .total-info span {
   margin-left: 10px;
   font-weight: bold;
 }
