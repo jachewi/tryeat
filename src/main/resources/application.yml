@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/tryit
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://tryeat-db.cgqd8n6rxvm9.ap-northeast-2.rds.amazonaws.com:3306/tryeat_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: tryeatAdmin
+    password: rlaDOSrla+969798
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   output:
     ansi:
