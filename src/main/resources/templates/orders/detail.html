@@ -15,9 +15,7 @@
       <div class="main">
         <div class="element" th:text="|${order.orderNumber}  &nbsp &nbsp / &nbsp &nbsp  ${#temporals.format(order.orderDateTime, 'yyyy-MM-dd HH:mm')}|"></div>
       </div>
-      <br>
-      <hr>
-      <br>
+      <br><hr><br>
       <div th:each="detail : ${order.orderDetailFindDtos}" th:object="${detail}">
         <div class="oder-detail">
           <img th:src="|/files/*{itemMainImage.getStoreFileName()}|" class="main-img">
@@ -30,9 +28,7 @@
             <br>
           </div>
         </div>
-        <br>
-        <br>
-        <br>
+        <br><br><br>
       </div>
       <!-- 배송지 정보란 -->
       <h2>배송지 정보</h2>
@@ -59,9 +55,7 @@
         </tbody>
       </table>
       <div>
-        <br>
-        <br>
-        <br>
+        <br><br><br>
         <h2>결제 정보</h2>
         <hr>
         <div th:text="|총 주문 금액 : ${#numbers.formatInteger(order.orderTotalPrice, 3 , 'COMMA')}원|"></div>
@@ -69,8 +63,7 @@
       </div>
       <br>
     </div> <!-- /container -->
-    <br>
-    <br>
+    <br><br>
 </section>
 
 <!-- ======= Footer ======= -->
