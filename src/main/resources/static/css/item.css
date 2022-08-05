@@ -20,6 +20,29 @@
   margin: auto;
 }
 
+.item table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px 12px;
+}
+
+.item table input {
+  border: 1px solid #ececec;
+  color: #4c4c4c;
+  border-radius: 0%;
+}
+
+.item table select {
+  border: 1px solid #ececec;
+  color: #4c4c4c;
+  border-radius: 0%;
+}
+
+.item .field-error {
+  text-align: end;
+  margin-top: -15px;
+}
+
 /*--------------------------------------------------------------
 # Item Register
 --------------------------------------------------------------*/
