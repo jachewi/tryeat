@@ -5,7 +5,7 @@
 <!-- ======= Header ======= -->
 <header th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></header>
 
-<!-- ======= Hero Section ======= -->
+<!-- ======= Payment Section ======= -->
 <section class="common">
   <div class="container">
 
@@ -75,13 +75,12 @@
       </button>
     </form>
   </div> <!-- End container -->
-</section> <!-- End Hero -->
+</section> <!-- End Payment -->
 
 <!-- ======= Footer ======= -->
 <footer th:replace="fragments/footer :: footer" id="footer"></footer>
 
 <!-- ======= Js ======= -->
-<!--Todo: 맨 마지막에 console.log() 삭제하기-->
 <script th:inline="javascript">
     
       //총 구매가격
@@ -92,7 +91,6 @@
       })
 
       $("#paymentTotalPrice").text(paymentTotalPrice.toLocaleString());
-      console.log("총 구매가격: " + paymentTotalPrice);
   
     /** ======= ImPort API ======= **/
     $("#check_module").click(function () {
@@ -101,7 +99,6 @@
 
       //총 주문 상품
       var paymentTotalItem = $("tr[name=paymentItem]").length -1;
-      console.log("총 주문 상품 개수: " + paymentTotalItem);
 
       //주문명
       if(paymentTotalItem == 0) {
@@ -109,9 +106,6 @@
       } else{
         var paymentName = '츄라잇: ' + $("#name").val() + ' 외 ' + paymentTotalItem
       }
-      
-      console.log("주문명: " + paymentName);
-      console.log("총 구매가격: " + paymentTotalPrice);
 
       IMP.request_pay({ //param
         pg: 'kakaopay',
@@ -148,7 +142,6 @@
                     });
 
                     var param = JSON.stringify(dataList);
-                    console.log(param);
 
                     $.ajax({
                           type: "POST",
@@ -157,7 +150,6 @@
                           data: param,
                           statusCode: {
                               201: function(args){
-                                //Todo: 추후 '/orders'(주문 목록)(으)로 변경 예정
                                 location.href='/orders';
                               }
                           }
@@ -172,9 +164,6 @@
         alert(msg);
       });
     });
-
-
-
 
 
 </script>
