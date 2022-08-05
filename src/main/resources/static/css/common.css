@@ -12,6 +12,7 @@
 --------------------------------------------------------------*/
 .pagination {
   justify-content: center;
+  margin-top: 80px;
 }
 
 /*--------------------------------------------------------------
@@ -43,5 +44,25 @@
 .field-error {
   border-color: #dc3545;
   color: #dc3545;
+  font-size: 14px;
+}
+
+/*--------------------------------------------------------------
+# Search Input Style
+--------------------------------------------------------------*/
+.search-input {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-input input {
+  width: 250px;
+  padding-left: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  height: 30px;
+}
+
+.search-input input::placeholder {
   font-size: 14px;
 }
