@@ -39,16 +39,16 @@
 --------------------------------------------------------------*/
 body {
   font-family: 'LeeSeoyun', 'Open Sans', sans-serif;
-  color: #444444;
+  color: #333333;
 }
 
 a {
-  color: #009cea;
+  color: #333333;
   text-decoration: none;
 }
 
 a:hover {
-  color: #1eb4ff;
+  color: #fe7721;
   text-decoration: none;
 }
 
@@ -68,7 +68,7 @@ a:hover {
   right: 15px;
   bottom: 15px;
   z-index: 996;
-  background: #009cea;
+  background: #fe7721;
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -82,7 +82,7 @@ a:hover {
 }
 
 .back-to-top:hover {
-  background: #14b1ff;
+  background: #fe7721;
   color: #fff;
 }
 
@@ -125,7 +125,7 @@ a:hover {
 
 #header .logo h1 a,
 #header .logo h1 a:hover {
-  color: #576971;
+  color: #333333;
   text-decoration: none;
 }
 
@@ -189,7 +189,7 @@ a:hover {
   justify-content: space-between;
   padding: 10px 0 10px 30px;
   font-size: 15px;
-  color: #7b909a;
+  color: #333333;
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -205,7 +205,7 @@ a:hover {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover > a {
-  color: #009cea;
+  color: #fe7721;
 }
 
 .navbar .dropdown ul {
@@ -230,7 +230,7 @@ a:hover {
 .navbar .dropdown ul a {
   padding: 10px 20px;
   font-size: 14px;
-  color: #003651;
+  color: #333333;
 }
 
 .navbar .dropdown ul a i {
@@ -240,7 +240,7 @@ a:hover {
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
 .navbar .dropdown ul li:hover > a {
-  color: #009cea;
+  color: #fe7721;
 }
 
 .navbar .dropdown:hover > ul {
@@ -758,7 +758,7 @@ section {
 #footer {
   background: #f7f8f9;
   padding: 0 0 30px 0;
-  color: #364146;
+  color: #333333;
   font-size: 14px;
 }
 
@@ -785,14 +785,14 @@ section {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  color: #576971;
+  color: #757575;
 }
 
 #footer .footer-top .social-links a {
   font-size: 18px;
   display: inline-block;
   background: #e9ecee;
-  color: #8a9ca5;
+  color: #757575;
   line-height: 1;
   padding: 8px 0;
   margin-right: 4px;
@@ -812,7 +812,7 @@ section {
 #footer .footer-top h4 {
   font-size: 16px;
   font-weight: 600;
-  color: #364146;
+  color: #333333;
   position: relative;
   padding-bottom: 12px;
 }
@@ -829,7 +829,7 @@ section {
 
 #footer .footer-top .footer-links ul i {
   padding-right: 2px;
-  color: #009cea;
+  color: #fe7721;
   font-size: 18px;
   line-height: 1;
   margin-left: -5px;
@@ -846,14 +846,14 @@ section {
 }
 
 #footer .footer-top .footer-links ul a {
-  color: #576971;
+  color: #757575;
   transition: 0.3s;
   display: inline-block;
   line-height: 1;
 }
 
 #footer .footer-top .footer-links ul a:hover {
-  color: #009cea;
+  color: #fe7721;
 }
 
 #footer .footer-top .footer-newsletter form {
