@@ -39,7 +39,7 @@ public class NoticeService {
 
     public Page<Notice> searchNotices(int page) {
         Sort sort = Sort.by(Direction.DESC, "createDate");
-        PageRequest pageRequest = PageRequest.of(page, 10, sort);
+        PageRequest pageRequest = PageRequest.of(page, 5, sort);
         return noticeRepository.searchNotices(pageRequest);
     }
 
