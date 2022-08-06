@@ -18,17 +18,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
-import shop.tryit.domain.item.entity.Category;
-import shop.tryit.domain.item.entity.ImageType;
 import shop.tryit.domain.item.dto.ItemSearchCondition;
 import shop.tryit.domain.item.dto.ItemSearchDto;
 import shop.tryit.domain.item.dto.QItemSearchDto;
+import shop.tryit.domain.item.entity.Category;
 import shop.tryit.domain.item.entity.Image;
+import shop.tryit.domain.item.entity.ImageType;
+import shop.tryit.domain.item.service.S3Service;
 
 @Repository
 @RequiredArgsConstructor
 public class ItemCustomImpl implements ItemCustom {
 
+    private final S3Service s3Service;
     private final JPAQueryFactory queryFactory;
 
     @Override
@@ -49,7 +51,8 @@ public class ItemCustomImpl implements ItemCustom {
                 .fetchOne();
 
         Image itemMainImage = findMainImageById(itemId);
-        itemSearchDto.injectMainImage(itemMainImage);
+        String mainImageUrl = s3Service.getMainImageUrl(itemMainImage.getStoreFileName());
+        itemSearchDto.injectMainImage(mainImageUrl);
 
         return itemSearchDto;
     }
@@ -73,7 +76,7 @@ public class ItemCustomImpl implements ItemCustom {
                 .collect(toMap(ItemSearchDto::getId, Function.identity()));
 
         searchMainImage(map.keySet())
-                .forEach(image -> map.get(image.getItemId()).injectMainImage(image));
+                .forEach(image -> map.get(image.getItemId()).injectMainImage(s3Service.getMainImageUrl(image.getStoreFileName())));
     }
 
     /**
