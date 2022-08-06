@@ -22,14 +22,15 @@ public class ItemFacade {
 
     private final ItemService itemService;
     private final ImageService imageService;
+    private final S3Service s3Service;
 
     /**
      * 상품 등록
      */
     @Transactional
-    public Long register(ItemRequestDto itemRequestDto) throws IOException {
-        Image mainImage = imageService.uploadMainImage(itemRequestDto); // 서버에 이미지 저장
-        Image detailImage = imageService.uploadDetailImage(itemRequestDto); // 서버에 이미지 저장
+    public Long register(ItemRequestDto itemRequestDto) {
+        Image mainImage = imageService.uploadMainImage(itemRequestDto);
+        Image detailImage = imageService.uploadDetailImage(itemRequestDto);
 
         Item item = toEntity(itemRequestDto);
         item.addImage(mainImage, detailImage);
@@ -49,7 +50,10 @@ public class ItemFacade {
      */
     public ItemResponseDto findItem(Long itemId) {
         Item item = itemService.findItem(itemId);
-        return toDto(item, item.getMainImage(), item.getDetailImage());
+        String mainImageUrl = s3Service.getMainImageUrl(item.getMainImage().getStoreFileName());
+        String detailImageUrl = s3Service.getDetailImageUrl(item.getDetailImage().getStoreFileName());
+
+        return toDto(item, mainImageUrl, detailImageUrl);
     }
 
     /**

@@ -20,17 +20,17 @@ public class ImageService {
     private final ItemService itemService;
 
     /**
-     * 메인 이미지 업로드
+     * 메인 이미지 s3 저장 및 엔티티 생성
      */
-    public Image uploadMainImage(ItemRequestDto form) throws IOException {
-        return imageStore.storeImageFile(form.getMainImage(), MAIN);
+    public Image uploadMainImage(ItemRequestDto form) {
+        return imageStore.uploadImageFile(form.getMainImage(), MAIN);
     }
 
     /**
-     * 상세 이미지 업로드
+     * 상세 이미지 s3 저장 및 엔티티 생성
      */
-    public Image uploadDetailImage(ItemRequestDto form) throws IOException {
-        return imageStore.storeImageFile(form.getDetailImage(), DETAIL);
+    public Image uploadDetailImage(ItemRequestDto form) {
+        return imageStore.uploadImageFile(form.getDetailImage(), DETAIL);
     }
 
     /**
