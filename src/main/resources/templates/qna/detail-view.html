@@ -44,6 +44,7 @@
       <form th:action="@{|/answers/new/${questionFormDto.questionId}|}" method="post"
             th:object="${answerFormDto}" sec:authorize="hasRole('ROLE_ADMIN')">
         <textarea th:field="*{content}" cols="150" rows="10"></textarea>
+        <div class="answer-error" th:errors="*{content}"></div>
         <div class="detail-btn">
           <button class="btn btn-outline-dark" type="submit">답변 등록하기</button>
         </div>

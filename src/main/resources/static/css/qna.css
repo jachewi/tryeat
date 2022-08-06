@@ -72,3 +72,7 @@
 .answer-list .btn {
   margin-bottom: 0px;
 }
+
+.answer-error {
+  color: #ff0000
+}
