@@ -78,7 +78,7 @@ public class QnAFacade {
         questionService.delete(questionId);
     }
 
-    public boolean checkDeleteQuestion(Long questionId, User user) {
+    public boolean isAuthorized(Long questionId, User user) {
         String userEmail = user.getUsername();
         Member member = memberService.findMember(userEmail);
         Question question = questionService.findOne(questionId);

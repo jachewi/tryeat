@@ -73,7 +73,8 @@ public class QuestionController {
     public String findOne(@PathVariable Long questionId,
                           Model model,
                           @RequestParam(defaultValue = "0") int page,
-                          @ModelAttribute AnswerFormDto answerFormDto) {
+                          @ModelAttribute AnswerFormDto answerFormDto,
+                          @AuthenticationPrincipal User user) {
         Page<AnswerFormDto> answers = qnAFacade.findAnswersByQuestionId(questionId, page);
         Pages<AnswerFormDto> pages = Pages.of(answers, 4);
 
@@ -81,7 +82,7 @@ public class QuestionController {
         model.addAttribute("questionFormDto", questionFormDto);
         model.addAttribute("answers", answers);
         model.addAttribute("pages", pages.getPages());
-
+        model.addAttribute("checkRole", qnAFacade.isAuthorized(questionId, user));
         return "qna/detail-view";
     }
 
@@ -89,11 +90,12 @@ public class QuestionController {
     public String updateForm(@PathVariable Long questionId,
                              Model model,
                              @AuthenticationPrincipal User user) {
-        if (!qnAFacade.checkDeleteQuestion(questionId, user)) {
+        if (!qnAFacade.isAuthorized(questionId, user)) {
             return String.format("redirect:/qna/%s", questionId);
         }
 
         model.addAttribute("questionFormDto", qnAFacade.toDto(questionId));
+        model.addAttribute("checkRole", qnAFacade.isAuthorized(questionId, user));
         return "qna/update";
     }
 
@@ -109,7 +111,7 @@ public class QuestionController {
     public String delete(@PathVariable Long questionId,
                          @ModelAttribute QuestionFormDto questionFormDto,
                          @AuthenticationPrincipal User user) {
-        if (qnAFacade.checkDeleteQuestion(questionId, user)) {
+        if (qnAFacade.isAuthorized(questionId, user)) {
             qnAFacade.deleteQuestion(questionId);
         }
         return "redirect:/qna";
