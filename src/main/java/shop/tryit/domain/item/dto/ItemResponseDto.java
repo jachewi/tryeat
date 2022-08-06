@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import shop.tryit.domain.item.entity.Category;
-import shop.tryit.domain.item.entity.Image;
 
 /* 상품 상세 및 수정 폼 조회 시 전달 */
 @Data
@@ -32,19 +31,19 @@ public class ItemResponseDto {
     @NotNull(message = "카테고리를 선택해주세요.")
     private Category category;
 
-    private Image mainImage;
+    private String mainImageUrl;
 
-    private Image detailImage;
+    private String detailImageUrl;
 
     @Builder
-    private ItemResponseDto(Long id, String name, Integer price, Integer stockQuantity, Category category, Image mainImage, Image detailImage) {
+    private ItemResponseDto(Long id, String name, Integer price, Integer stockQuantity, Category category, String mainImageUrl, String detailImageUrl) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.category = category;
-        this.mainImage = mainImage;
-        this.detailImage = detailImage;
+        this.mainImageUrl = mainImageUrl;
+        this.detailImageUrl = detailImageUrl;
     }
 
 }

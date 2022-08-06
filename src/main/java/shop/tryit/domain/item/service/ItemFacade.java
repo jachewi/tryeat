@@ -89,15 +89,15 @@ public class ItemFacade {
                 .build();
     }
 
-    public ItemResponseDto toDto(Item item, Image mainImage, Image detailImage) {
+    public ItemResponseDto toDto(Item item, String mainImageUrl, String detailImageUrl) {
         return ItemResponseDto.builder()
                 .id(item.getId())
                 .name(item.getName())
                 .price(item.getPrice())
                 .stockQuantity(item.getStockQuantity())
                 .category(item.getCategory())
-                .mainImage(mainImage)
-                .detailImage(detailImage)
+                .mainImageUrl(mainImageUrl)
+                .detailImageUrl(detailImageUrl)
                 .build();
     }
 
