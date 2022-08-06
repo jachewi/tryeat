@@ -1,8 +1,6 @@
 package shop.tryit.domain.item.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -99,23 +97,6 @@ public class ItemFacade {
                 .mainImageUrl(mainImageUrl)
                 .detailImageUrl(detailImageUrl)
                 .build();
-    }
-
-    public List<ItemSearchDto> toDto(List<Item> items, List<Image> mainImages) {
-        List<ItemSearchDto> itemSearchDtos = new ArrayList<>();
-
-        for (int i = 0; i < items.size(); i++) {
-            ItemSearchDto dto = ItemSearchDto.builder()
-                    .id(items.get(i).getId())
-                    .name(items.get(i).getName())
-                    .price(items.get(i).getPrice())
-                    .mainImage(mainImages.get(i))
-                    .build();
-
-            itemSearchDtos.add(dto);
-        }
-
-        return itemSearchDtos;
     }
 
 }
