@@ -28,10 +28,12 @@ public class AnswerController {
     public String register(@PathVariable Long questionId,
                            @AuthenticationPrincipal User user,
                            @Valid @ModelAttribute AnswerFormDto answerFormDto,
-                           BindingResult bindingResult) {
+                           BindingResult bindingResult,
+                           Model model) {
         if (bindingResult.hasErrors()) {
             log.info("bindingResult={}", bindingResult);
-            return String.format("redirect:/qna/%s", questionId);
+            model.addAttribute("questionFormDto", qnAFacade.toDto(questionId));
+            return "/qna/detail-view";
         }
 
         qnAFacade.answerRegister(user, questionId, answerFormDto);

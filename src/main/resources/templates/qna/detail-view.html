@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/header :: header"/>
 
@@ -42,8 +42,9 @@
     <div class="answer">
       <!-- 답변 달기 -->
       <form th:action="@{|/answers/new/${questionFormDto.questionId}|}" method="post"
-            th:object="${answerFormDto}">
+            th:object="${answerFormDto}" sec:authorize="hasRole('ROLE_ADMIN')">
         <textarea th:field="*{content}" cols="150" rows="10"></textarea>
+        <div class="answer-error" th:errors="*{content}"></div>
         <div class="detail-btn">
           <button class="btn btn-outline-dark" type="submit">답변 등록하기</button>
         </div>
@@ -58,10 +59,14 @@
           </div>
           <div class="detail-btn">
             <form th:action="@{|/answers/delete/${answer.id}|}" method="post">
-              <button class="btn btn-custom btn-sm" type="submit">삭제</button>
+              <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <button class="btn btn-custom btn-sm" type="submit">삭제</button>
+              </div>
             </form>
             <form th:action="@{|/answers/${answer.id}/update|}" method="get">
-              <button class="btn btn-custom btn-sm" type="submit">수정</button>
+              <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <button class="btn btn-custom btn-sm" type="submit">수정</button>
+              </div>
             </form>
           </div>
         </div>
