@@ -41,6 +41,7 @@ public class CartFacade {
     /**
      * 장바구니 상품 조회
      */
+    @Transactional
     public List<CartListDto> findCartItems(User user) {
         Cart cart = cartService.findCart(user.getUsername());
         List<CartItem> cartItems = cartItemService.findCartItemList(cart);
