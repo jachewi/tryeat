@@ -26,7 +26,7 @@
         </div>
       </form>
 
-      <div th:object="${questionFormDto}" class="detail-btn">
+      <div th:if="${checkRole}" th:object="${questionFormDto}" class="detail-btn">
         <button class="btn btn-outline-dark" type="submit" th:onclick="|location.href='@{/qna/{questionId}/update (questionId=*{questionId})}'|">
           글 수정하기
         </button>
