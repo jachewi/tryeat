@@ -1,22 +1,15 @@
 /*--------------------------------------------------------------
 # Register Section
 --------------------------------------------------------------*/
-.red_txt {
-  color: #ee7272;
-}
-
 .btn_wrap {
-  text-align: center;
-  margin: 40px 0 30px;
-}
-
-.btn_wrap button {
-  border: 1px solid #e5e5e5;
+  text-align: end;
+  margin: 30px 0 30px;
 }
 
 .form_txtInput {
-  padding: 30px;
-  margin: 0px 120px
+  min-width: 350px;
+  max-width: 940px;
+  margin: auto;
 }
 
 .form_txtInput .checkbox_wrap {
@@ -193,15 +186,9 @@
 /*--------------------------------------------------------------
 # Login General
 --------------------------------------------------------------*/
-.form-margin {
-  margin: 150px 0 200px 0;
-}
-
 .form-login {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
+  max-width: 300px;
+  margin: 100px auto 100px auto;
 }
 
 .login-btn {

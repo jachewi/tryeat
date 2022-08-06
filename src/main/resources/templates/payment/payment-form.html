@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header"></head>
+
 <body>
 <!-- ======= Header ======= -->
 <header th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></header>
@@ -8,67 +9,82 @@
 <!-- ======= Payment Section ======= -->
 <section class="common payment">
   <div class="container">
-
-    <!-- 결제할 상품란 -->
-    <h2>주문 / 결제</h2>
-    <hr>
+    <h3 class="text-center mb-5">주문 / 결제</h3>
     <form>
-      <table class="table">
-        <thead>
-        <tr align="center">
-          <th colspan="2">상품 정보</th>
-          <th>수량</th>
-          <th>총 가격</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="payment : ${payments}" align="center" name="paymentItem">
-          <td>
-            <img width="100px" height="100px" th:src="|/files/${payment.mainImage.getStoreFileName()}|" src="../img/portfolio-details-1.jpg"/>
-          </td>
-          <input type="hidden" id="itemId" name="itemId" th:value="${payment.itemId}"> <!-- Todo: th:id="'문자열'+${payment.itemId}" 형식으로 활용하기 -->
-          <td><input type="hidden" id="name" th:text="${payment.itemName}" th:value="${payment.itemName}"/></td>
-          <td><input type="hidden" id="quantity" name="quantity" th:text="${payment.quantity}" th:value="${payment.quantity}"/></td>
-          <td><input type="hidden" id="itemTotalPrice" th:text="${payment.totalPrice}" th:value="${payment.totalPrice}"/></td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-          <td colspan="10 " class="total-info" name="paymentTotalPrice">
-            결제 금액: <span id="paymentTotalPrice"></span>원
-          </td>
-        </tr>
-        </tfoot>
-      </table>
-
-      <br><br><br>
+      <!-- 결제할 상품란 -->
+      <div class="pay-item-info">
+        <table class="table">
+          <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+          </colgroup>
+          <thead>
+          <tr class="text-center">
+            <th>이미지</th>
+            <th>상품정보</th>
+            <th>수량</th>
+            <th>총 가격</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="text-center" th:each="payment : ${payments}" name="paymentItem">
+            <td>
+              <img width="100px" height="100px" th:src="|/files/${payment.mainImage.getStoreFileName()}|"/>
+            </td>
+            <input type="hidden" id="itemId" name="itemId" th:value="${payment.itemId}">
+            <td>
+              <input type="hidden" id="name" th:text="${payment.itemName}" th:value="${payment.itemName}"/>
+            </td>
+            <td>
+              <input type="hidden" id="quantity" name="quantity" th:text="${payment.quantity}" th:value="${payment.quantity}"/>개
+            </td>
+            <td>
+              <input type="hidden" id="itemTotalPrice" th:text="${payment.totalPrice}" th:value="${payment.totalPrice}"/>원
+            </td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <td colspan="10 " class="total-info" name="paymentTotalPrice">
+              결제 금액: <span id="paymentTotalPrice"></span>원
+            </td>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
 
       <!-- 배송지 정보란 -->
-      <h2>배송지 정보</h2>
-      <hr>
-      <table width="100%">
-        <tbody>
-        <tr>
-          <th>받는 사람</th>
-          <td><input type="hidden" id="memberName" th:text="${member.memberName}" th:value="${member.memberName}"/></td>
-        </tr>
-        <tr>
-          <th>연락처</th>
-          <td><input type="hidden" id="memberPhone" th:text="${member.memberPhone}" th:value="${member.memberPhone}"/></td>
-        </tr>
-        <tr>
-          <th>주소</th>
-          <td>
-            <input type="hidden" id="zipcode" th:text="${member.zipcode}" placeholder="우편번호" readonly>
-            <input type="hidden" id="street_address" th:text="${member.street_address}" placeholder="도로명주소" readonly>
-            <input type="hidden" id="jibeon_address" th:text="${member.jibeon_address}" placeholder="지번주소" readonly>
-            <span id="guide" style="color:#999;display:none"></span>
-            <input type="hidden" id="detail_address" th:text="${member.detail_address}" placeholder="상세주소">
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <br><br><br>
+      <div class="delivery-info">
+        <h3>배송지 정보</h3>
+        <hr>
+        <table>
+          <colgroup>
+            <col width="15%">
+          </colgroup>
+          <tbody>
+          <tr>
+            <th>받는 사람</th>
+            <td><input type="hidden" id="memberName" th:text="${member.memberName}" th:value="${member.memberName}"/></td>
+          </tr>
+          <tr>
+            <th>연락처</th>
+            <td><input type="hidden" id="memberPhone" th:text="${member.memberPhone}" th:value="${member.memberPhone}"/></td>
+          </tr>
+          <tr>
+            <th>주소</th>
+            <td>
+              <input type="hidden" id="zipcode" th:text="${member.zipcode}" placeholder="우편번호" readonly>
+              <input type="hidden" id="street_address" th:text="${member.street_address}" placeholder="도로명주소" readonly>
+              <input type="hidden" id="jibeon_address" th:text="${member.jibeon_address}" placeholder="지번주소" readonly>
+              <span id="guide" style="color:#999;display:none"></span>
+              <input type="hidden" id="detail_address" th:text="${member.detail_address}" placeholder="상세주소">
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
 
       <button id="check_module" type="button" class="payment-bnt">
         <img src="../img/payment_icon_yellow_small.png"/>
@@ -164,6 +180,12 @@
         alert(msg);
       });
     });
+
+
+
+
+
+
 
 
 

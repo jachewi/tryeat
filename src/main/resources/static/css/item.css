@@ -10,10 +10,6 @@
   margin-left: 5px;
 }
 
-.item .admin-btn {
-  margin-bottom: 30px;
-}
-
 .item .form-content {
   min-width: 350px;
   max-width: 940px;
@@ -47,14 +43,14 @@
 # Item Register
 --------------------------------------------------------------*/
 .register-btn {
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 /*--------------------------------------------------------------
 # Item Update
 --------------------------------------------------------------*/
 .update-btn {
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 /*--------------------------------------------------------------

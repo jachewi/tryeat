@@ -69,7 +69,6 @@
                     })
                     .open();
             }
-
 </script>
 
 <!-- ======= Join Section ======= -->
@@ -89,58 +88,52 @@
           </colgroup>
           <tbody>
           <tr>
-            <th>
-              <span>아이디</span></th>
+            <th><span>아이디</span></th>
             <td>
               <input type="email" th:field="*{email}" placeholder="ex) abcdef1234@gmail.com">
-              <div class="red_txt" th:errors="*{email}"></div>
+              <div class="field-error" th:errors="*{email}"></div>
             </td>
           </tr>
           <tr>
-            <th>
-              <span>이름</span></th>
+            <th><span>이름</span></th>
             <td>
               <input type="text" th:field="*{name}" placeholder="">
-              <div class="red_txt" th:errors="*{name}"></div>
+              <div class="field-error" th:errors="*{name}"></div>
             </td>
           </tr>
           <tr>
-            <th>
-              <span>비밀번호</span></th>
+            <th><span>비밀번호</span></th>
             <td>
               <input type="password" th:field="*{password1}" placeholder="비밀번호를 입력해주세요.">
-              <div class="red_txt" th:errors="*{password1}"></div>
+              <div class="field-error" th:errors="*{password1}"></div>
             </td>
           </tr>
           <tr>
-            <th>
-              <span>비밀번호 확인</span></th>
+            <th><span>비밀번호 확인</span></th>
             <td>
               <input type="password" th:field="*{password2}" placeholder="비밀번호를 확인하세요">
-              <div class="red_txt" th:errors="*{password2}"></div>
+              <div class="field-error" th:errors="*{password2}"></div>
             </td>
           </tr>
           <tr>
-            <th>
-              <span>주소</span></th>
+            <th><span>주소</span></th>
             <td>
               <input type="text" th:field="*{zipcode}" id="zipcode" placeholder="우편번호" readonly>
-              <div class="red_txt" th:errors="*{zipcode}"></div>
+              <div class="field-error" th:errors="*{zipcode}"></div>
               <input type="button" onclick='execDaumPostcode()' value="우편번호 찾기"><br>
               <input type="text" th:field="*{street_address}" id="street_address" placeholder="도로명주소" readonly>
-              <div class="red_txt" th:errors="*{street_address}"></div>
+              <div class="field-error" th:errors="*{street_address}"></div>
               <input type="text" th:field="*{jibeon_address}" id="jibeon_address" placeholder="지번주소" readonly>
-              <div class="red_txt" th:errors="*{jibeon_address}"></div>
+              <div class="field-error" th:errors="*{jibeon_address}"></div>
               <span id="guide" style="color:#999;display:none"></span>
               <input type="text" th:field="*{detail_address}" id="detail_address" placeholder="상세주소">
             </td>
           </tr>
           <tr>
-            <th>
-              <span>휴대폰 번호</span></th>
+            <th><span>휴대폰 번호</span></th>
             <td>
               <input type="text" th:field="*{phone}" placeholder="ex) 01012341234">
-              <div class="red_txt" th:errors="*{phone}"></div>
+              <div class="field-error" th:errors="*{phone}"></div>
             </td>
           </tr>
           </tbody>
@@ -149,10 +142,7 @@
           <span>표시는 필수적으로 입력해주셔야 가입이 가능합니다.</span>
         </div>
         <div class="btn_wrap">
-          <br>
-          <button class="btn btn-dark" type="submit">
-            <h5>가입하기</h5>
-          </button>
+          <button class="btn btn-dark" type="submit">가입하기</button>
         </div>
       </form> <!-- join_form E -->
     </div> <!-- form_txtInput E -->
@@ -161,6 +151,5 @@
 
 <!-- ======= Footer ======= -->
 <footer th:replace="fragments/footer :: footer" id="footer"></footer>
-
 </body>
 </html>

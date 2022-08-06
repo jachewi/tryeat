@@ -9,25 +9,6 @@
 # Font
 --------------------------------------------------------------*/
 @font-face {
-  font-family: "BEunhye";
-  src: url("font/나눔손글씨 배은혜체.ttf") format("truetype");
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: "MSStudent";
-  src: url("font/나눔손글씨 중학생.ttf") format("truetype");
-  font-weight: normal;
-}
-
-@font-face {
-    font-family: 'GangwonEduSaeeum_OTFMediumA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduSaeeum_OTFMediumA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'LeeSeoyun';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff') format('woff');
     font-weight: normal;
@@ -39,23 +20,17 @@
 --------------------------------------------------------------*/
 body {
   font-family: 'LeeSeoyun', 'Open Sans', sans-serif;
-  color: #444444;
+  color: #333333;
 }
 
 a {
-  color: #009cea;
+  color: #333333;
   text-decoration: none;
 }
 
 a:hover {
-  color: #1eb4ff;
+  color: #fe7721;
   text-decoration: none;
-}
-
-.field-error {
-  border-color: #dc3545;
-  color: #dc3545;
-  font-size: 14px;
 }
 
 /*--------------------------------------------------------------
@@ -68,7 +43,7 @@ a:hover {
   right: 15px;
   bottom: 15px;
   z-index: 996;
-  background: #009cea;
+  background: #fe7721;
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -82,7 +57,7 @@ a:hover {
 }
 
 .back-to-top:hover {
-  background: #14b1ff;
+  background: #fe7721;
   color: #fff;
 }
 
@@ -125,7 +100,7 @@ a:hover {
 
 #header .logo h1 a,
 #header .logo h1 a:hover {
-  color: #576971;
+  color: #333333;
   text-decoration: none;
 }
 
@@ -133,31 +108,6 @@ a:hover {
   padding: 0;
   margin: 0;
   max-height: 40px;
-}
-
-/*--------------------------------------------------------------
-# Header Social Links
---------------------------------------------------------------*/
-.header-social-links {
-  margin: 0 0 0 30px;
-}
-
-@media (max-width: 768px) {
-  .header-social-links {
-    margin: 0 15px 0 0;
-  }
-}
-
-.header-social-links a {
-  color: #7b909a;
-  display: inline-block;
-  line-height: 0px;
-  transition: 0.3s;
-  padding-left: 10px;
-}
-
-.header-social-links a:hover {
-  color: #009cea;
 }
 
 /*--------------------------------------------------------------
@@ -189,7 +139,7 @@ a:hover {
   justify-content: space-between;
   padding: 10px 0 10px 30px;
   font-size: 15px;
-  color: #7b909a;
+  color: #333333;
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -205,7 +155,7 @@ a:hover {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover > a {
-  color: #009cea;
+  color: #fe7721;
 }
 
 .navbar .dropdown ul {
@@ -230,7 +180,7 @@ a:hover {
 .navbar .dropdown ul a {
   padding: 10px 20px;
   font-size: 14px;
-  color: #003651;
+  color: #333333;
 }
 
 .navbar .dropdown ul a i {
@@ -240,7 +190,7 @@ a:hover {
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
 .navbar .dropdown ul li:hover > a {
-  color: #009cea;
+  color: #fe7721;
 }
 
 .navbar .dropdown:hover > ul {
@@ -275,7 +225,7 @@ a:hover {
 * Mobile Navigation 
 */
 .mobile-nav-toggle {
-  color: #364146;
+  color: #333333;
   font-size: 28px;
   cursor: pointer;
   display: none;
@@ -338,7 +288,7 @@ a:hover {
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover > a {
-  color: #009cea;
+  color: #fe7721;
 }
 
 .navbar-mobile .getstarted,
@@ -373,7 +323,7 @@ a:hover {
 .navbar-mobile .dropdown ul a:hover,
 .navbar-mobile .dropdown ul .active:hover,
 .navbar-mobile .dropdown ul li:hover > a {
-  color: #009cea;
+  color: #fe7721;
 }
 
 .navbar-mobile .dropdown > .dropdown-active {
@@ -381,375 +331,11 @@ a:hover {
 }
 
 /*--------------------------------------------------------------
-# Hero Section
+# Section General
 --------------------------------------------------------------*/
-#hero {
-  width: 100%;
-  /* background-image: url("");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: right top; */
-  margin-top: 70px;
-  padding: 60px 0;
-}
-
-#hero h1 {
-  margin: 0 0 20px 0;
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 56px;
-  color: #364146;
-}
-
-#hero h2 {
-  color: #576971;
-  margin-bottom: 30px;
-  font-size: 24px;
-}
-
-#hero .btn-get-started {
-  font-weight: 600;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  display: inline-block;
-  padding: 12px 28px;
-  border-radius: 3px;
-  transition: 0.5s;
-  color: #fff;
-  background: #009cea;
-}
-
-#hero .btn-get-started:hover {
-  background: #008bd1;
-}
-
-#hero .hero-img {
-  text-align: center;
-}
-
-#hero .hero-img img {
-  width: 100%;
-}
-
-@media (min-width: 1024px) {
-  #hero {
-    background-attachment: fixed;
-  }
-}
-
-@media (max-width: 992px) {
-  #hero h1 {
-    font-size: 32px;
-    line-height: 40px;
-  }
-  #hero h2 {
-    font-size: 20px;
-  }
-}
-
-/*--------------------------------------------------------------
-# Payment General
---------------------------------------------------------------*/
-/* 추후 order.css에 추가된 후 삭제될 예정*/
-.payment .payment-bnt {
-  float: right;
-  border: none;
-  background: white;
-}
-
-.payment .total-info {
-  text-align: right;
-  padding-right: 40px;
-}
-
-.payment .total-info span {
-  margin-left: 10px;
-  font-weight: bold;
-}
-
-/*--------------------------------------------------------------
-# Sections General
---------------------------------------------------------------*/
+/* 삭제 시 모바일 버전에서 네비게이션 토글 안나옴 */
 section {
-  /* padding: 60px 0; */
   overflow: hidden;
-}
-
-.section-bg {
-  background-color: #f7f8f9;
-}
-
-.section-title {
-  text-align: center;
-  padding-bottom: 30px;
-}
-
-.section-title h2 {
-  font-size: 32px;
-  font-weight: 400;
-  margin-bottom: 20px;
-  padding-bottom: 0;
-  color: #627680;
-}
-
-.section-title p {
-  margin-bottom: 0;
-}
-
-/*--------------------------------------------------------------
-# Portfolio
---------------------------------------------------------------*/
-.portfolio .portfolio-item {
-  margin-bottom: 30px;
-}
-
-.portfolio #portfolio-flters {
-  padding: 0;
-  margin: 0 auto 25px auto;
-  list-style: none;
-  text-align: center;
-}
-
-.portfolio #portfolio-flters li {
-  cursor: pointer;
-  display: inline-block;
-  padding: 10px;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1;
-  text-transform: uppercase;
-  color: #444444;
-  margin-bottom: 5px;
-  transition: all 0.3s ease-in-out;
-}
-
-.portfolio #portfolio-flters li:hover,
-.portfolio #portfolio-flters li.filter-active {
-  color: #009cea;
-}
-
-.portfolio #portfolio-flters li:last-child {
-  margin-right: 0;
-}
-
-.portfolio .portfolio-wrap {
-  transition: 0.3s;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.portfolio .portfolio-wrap::before {
-  content: "";
-  background: rgba(255, 255, 255, 0.7);
-  position: absolute;
-  left: 30px;
-  right: 30px;
-  top: 30px;
-  bottom: 30px;
-  transition: all ease-in-out 0.3s;
-  z-index: 2;
-  opacity: 0;
-}
-
-.portfolio .portfolio-wrap .portfolio-info {
-  opacity: 0;
-  position: absolute;
-  top: 10%;
-  left: 0;
-  right: 0;
-  text-align: center;
-  z-index: 3;
-  transition: all ease-in-out 0.3s;
-}
-
-.portolio .portfolio-wrap .portfolio-info h4 {
-  font-size: 20px;
-  color: #364146;
-  font-weight: 600;
-}
-
-.portfolio .portfolio-wrap .portfolio-info p {
-  color: #364146;
-  font-size: 14px;
-  text-transform: uppercase;
-}
-
-.portfolio .portfolio-wrap .portfolio-links {
-  opacity: 0;
-  left: 0;
-  right: 0;
-  bottom: 10%;
-  text-align: center;
-  z-index: 3;
-  position: absolute;
-  transition: all ease-in-out 0.3s;
-}
-
-.portfolio .portfolio-wrap .portfolio-links a {
-  color: #009cea;
-  margin: 0 2px;
-  font-size: 24px;
-  display: inline-block;
-  transition: 0.3s;
-  background: #eaf8ff;
-  border-radius: 50px;
-  line-height: 0;
-  padding: 6px;
-}
-
-.portfolio .portfolio-wrap .portfolio-links a:hover {
-  color: #fff;
-  background: #009cea;
-}
-
-.portfolio .portfolio-wrap:hover::before {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 1;
-}
-
-.portfolio .portfolio-wrap:hover .portfolio-info {
-  opacity: 1;
-  top: calc(50% - 48px);
-}
-
-.portfolio .portfolio-wrap:hover .portfolio-links {
-  opacity: 1;
-  bottom: calc(50% - 50px);
-}
-
-/*--------------------------------------------------------------
-# Portfolio Details
---------------------------------------------------------------*/
-.portfolio-details {
-  padding-top: 40px;
-}
-
-.portfolio-details .portfolio-details-slider img {
-  width: 100%;
-}
-
-.portfolio-details .portfolio-details-slider .swiper-pagination {
-  margin-top: 20px;
-  position: relative;
-}
-
-.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet {
-  width: 12px;
-  height: 12px;
-  background-color: #fff;
-  opacity: 1;
-  border: 1px solid #009cea;
-}
-
-.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #009cea;
-}
-
-.portfolio-details .portfolio-info {
-  padding: 30px;
-  box-shadow: 0px 0 30px rgba(54, 65, 70, 0.08);
-}
-
-.portfolio-details .portfolio-info h3 {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
-}
-
-.portfolio-details .portfolio-info ul {
-  list-style: none;
-  padding: 0;
-  font-size: 15px;
-}
-
-.portfolio-details .portfolio-info ul li + li {
-  margin-top: 10px;
-}
-
-.portfolio-details .portfolio-description {
-  padding-top: 30px;
-}
-
-.portfolio-details .portfolio-description h2 {
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.portfolio-details .portfolio-description p {
-  padding: 0;
-}
-
-
-/*--------------------------------------------------------------
-# Frequently Asked Questions
---------------------------------------------------------------*/
-.faq {
-  padding: 60px 0;
-}
-
-.faq .faq-list {
-  padding: 0;
-  list-style: none;
-}
-
-.faq .faq-list li {
-  border-bottom: 1px solid #e3e7e9;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-}
-
-.faq .faq-list .question {
-  display: block;
-  position: relative;
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 400;
-  padding-left: 25px;
-  cursor: pointer;
-  color: #007ab7;
-  transition: 0.3s;
-}
-
-.faq .faq-list i {
-  font-size: 16px;
-  position: absolute;
-  left: 0;
-  top: -2px;
-}
-
-.faq .faq-list p {
-  margin-bottom: 0;
-  padding: 10px 0 0 25px;
-}
-
-.faq .faq-list .icon-show {
-  display: none;
-}
-
-.faq .faq-list .collapsed {
-  color: black;
-}
-
-.faq .faq-list .collapsed:hover {
-  color: #009cea;
-}
-
-.faq .faq-list .collapsed .icon-show {
-  display: inline-block;
-  transition: 0.6s;
-}
-
-.faq .faq-list .collapsed .icon-close {
-  display: none;
-  transition: 0.6s;
 }
 
 /*--------------------------------------------------------------
@@ -757,142 +343,48 @@ section {
 --------------------------------------------------------------*/
 #footer {
   background: #f7f8f9;
-  padding: 0 0 30px 0;
-  color: #364146;
+  color: #333333;
   font-size: 14px;
 }
 
 #footer .footer-top {
   background: #fff;
-  padding: 60px 0 30px 0;
-  border-top: 2px solid #e9ecee;
-  border-bottom: 2px solid #e9ecee;
+  padding: 30px 0 20px 0;
+}
+
+#footer .footer-top .row{
+  display: flex;
+  justify-content: space-between;
 }
 
 #footer .footer-top .footer-info {
-  margin-bottom: 30px;
-}
-
-#footer .footer-top .footer-info h3 {
-  font-size: 24px;
-  margin: 0 0 20px 0;
-  padding: 2px 0 2px 0;
-  line-height: 1;
-  font-weight: 700;
+  margin-bottom: 25px;
 }
 
 #footer .footer-top .footer-info p {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  color: #576971;
-}
-
-#footer .footer-top .social-links a {
-  font-size: 18px;
-  display: inline-block;
-  background: #e9ecee;
-  color: #8a9ca5;
-  line-height: 1;
-  padding: 8px 0;
-  margin-right: 4px;
-  border-radius: 50%;
-  text-align: center;
-  width: 36px;
-  height: 36px;
-  transition: 0.3s;
-}
-
-#footer .footer-top .social-links a:hover {
-  background: #009cea;
-  color: #fff;
-  text-decoration: none;
+  color: #757575;
 }
 
 #footer .footer-top h4 {
   font-size: 16px;
   font-weight: 600;
-  color: #364146;
+  color: #333333;
   position: relative;
   padding-bottom: 12px;
 }
 
-#footer .footer-top .footer-links {
-  margin-bottom: 30px;
-}
-
-#footer .footer-top .footer-links ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#footer .footer-top .footer-links ul i {
-  padding-right: 2px;
-  color: #009cea;
-  font-size: 18px;
-  line-height: 1;
-  margin-left: -5px;
-}
-
-#footer .footer-top .footer-links ul li {
-  padding: 10px 0;
-  display: flex;
-  align-items: center;
-}
-
-#footer .footer-top .footer-links ul li:first-child {
-  padding-top: 0;
-}
-
-#footer .footer-top .footer-links ul a {
-  color: #576971;
-  transition: 0.3s;
-  display: inline-block;
-  line-height: 1;
-}
-
-#footer .footer-top .footer-links ul a:hover {
-  color: #009cea;
-}
-
-#footer .footer-top .footer-newsletter form {
-  margin-top: 30px;
-  background: #fff;
-  padding: 6px 10px;
-  position: relative;
-  border-radius: 4px;
-  border: 1px solid #e3e7e9;
-}
-
-#footer .footer-top .footer-newsletter form input[type="email"] {
-  border: 0;
-  padding: 4px;
-  width: calc(100% - 110px);
-}
-
-#footer .footer-top .footer-newsletter form input[type="submit"] {
-  position: absolute;
-  top: -1px;
-  right: -2px;
-  bottom: -1px;
-  border: 0;
-  background: none;
-  font-size: 16px;
-  padding: 0 20px;
-  background: #009cea;
-  color: #fff;
-  transition: 0.3s;
-  border-radius: 0 4px 4px 0;
-}
-
-#footer .footer-top .footer-newsletter form input[type="submit"]:hover {
-  background: #007ab7;
+#footer .footer-bottom {
+  border-top: 1px solid #e9ecee;
+  border-bottom: 1px solid #e9ecee;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 #footer .copyright {
   text-align: center;
-  padding-top: 30px;
 }
 
 #footer .credits {
