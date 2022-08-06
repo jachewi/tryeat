@@ -33,12 +33,19 @@ public class WebSecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests() //요청에 의한 보안 검사 시작
-                .antMatchers("/", "/css/**", "/img/**", "/js/**", "/vendor/**",
-                        "/members/**", "/items", "/items/{id}", "/qna/**", "/answers/**",
-                        "/notices", "/notices/{noticeId}").permitAll()
-                .antMatchers("/members/edit", "/qna/{questionId}", "/carts/**",
-                        "/orders/**", "/payment/**").hasRole(MemberRole.USER.name())
-                .antMatchers("/items/**", "/carts/**", "/orders/**", "/payment/**").hasRole(MemberRole.ADMIN.name())
+                .antMatchers("/", "/css/**", "/img/**", "/js/**", "/vendor/**", "/files/**",
+                        "/members/new", "/members/login", "/members/logout", "/members/vendor/**",
+                        "/items", "/items/{id}", "/qna", "/notices", "/notices/{noticeId}").permitAll()
+                .antMatchers("/members/update", "/carts", "/carts/{cartItemId}/update", "/carts/{cartItemId}/delete",
+                        "/qna/new", "/qna/{questionId}", "/qna/{questionId}/update", "/qna/{questionId}/delete",
+                        "/orders", "/orders/new", "/orders/{orderId}", "/payment", "/payment/kakao").hasRole(MemberRole.USER.name())
+                .antMatchers("/items/new", "/items/{id}/update", "/items/{id}/delete",
+                        "/carts", "/carts/{cartItemId}/update", "/carts/{cartItemId}/delete",
+                        "/qna/new", "/qna/{questionId}", "/qna/{questionId}/update", "/qna/{questionId}/delete",
+                        "/answers", "/answers/new/{questionId}", "/answers/{answerId}/update", "/answers/delete/{answerId}",
+                        "/orders", "/orders/new", "/orders/{orderId}", "/payment", "/payment/kakao",
+                        "/notices/new", "/notices/{noticeId}/update", "/notices/{noticeId}/delete").hasRole(MemberRole.ADMIN.name())
+
                 .anyRequest().authenticated() //어떤 요청에도 보안 검사를 실생
                 .and()
                 .formLogin()
