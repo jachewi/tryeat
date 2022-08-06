@@ -62,7 +62,7 @@ public class QuestionController {
                                  @ModelAttribute QuestionSearchCondition questionSearchCondition,
                                  Pageable pageable) {
         Page<QuestionSearchDto> questions = qnAFacade.searchQuestion(pageable, questionSearchCondition);
-        Pages<QuestionSearchDto> pages = Pages.of(questions, 4);
+        Pages<QuestionSearchDto> pages = Pages.of(questions, 5);
 
         model.addAttribute("questions", questions);
         model.addAttribute("pages", pages.getPages());
