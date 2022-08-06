@@ -39,7 +39,7 @@ public class AnswerService {
     public Page<Answer> findAnswersByQuestionId(Long questionId, int pageNumber) {
         Question question = questionService.findOne(questionId);
         Sort sortBy = Sort.by(Direction.DESC, "createDate");
-        PageRequest pageRequest = PageRequest.of(pageNumber, 3, sortBy);
+        PageRequest pageRequest = PageRequest.of(pageNumber, 5, sortBy);
         return answerRepository.findSearchByQuestion(question, pageRequest);
     }
 
