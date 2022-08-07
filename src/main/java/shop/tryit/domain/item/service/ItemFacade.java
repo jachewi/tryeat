@@ -1,8 +1,6 @@
 package shop.tryit.domain.item.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,14 +20,15 @@ public class ItemFacade {
 
     private final ItemService itemService;
     private final ImageService imageService;
+    private final S3Service s3Service;
 
     /**
      * 상품 등록
      */
     @Transactional
-    public Long register(ItemRequestDto itemRequestDto) throws IOException {
-        Image mainImage = imageService.uploadMainImage(itemRequestDto); // 서버에 이미지 저장
-        Image detailImage = imageService.uploadDetailImage(itemRequestDto); // 서버에 이미지 저장
+    public Long register(ItemRequestDto itemRequestDto) {
+        Image mainImage = imageService.uploadMainImage(itemRequestDto);
+        Image detailImage = imageService.uploadDetailImage(itemRequestDto);
 
         Item item = toEntity(itemRequestDto);
         item.addImage(mainImage, detailImage);
@@ -49,7 +48,10 @@ public class ItemFacade {
      */
     public ItemResponseDto findItem(Long itemId) {
         Item item = itemService.findItem(itemId);
-        return toDto(item, item.getMainImage(), item.getDetailImage());
+        String mainImageUrl = s3Service.getMainImageUrl(item.getMainImage().getStoreFileName());
+        String detailImageUrl = s3Service.getDetailImageUrl(item.getDetailImage().getStoreFileName());
+
+        return toDto(item, mainImageUrl, detailImageUrl);
     }
 
     /**
@@ -85,33 +87,16 @@ public class ItemFacade {
                 .build();
     }
 
-    public ItemResponseDto toDto(Item item, Image mainImage, Image detailImage) {
+    public ItemResponseDto toDto(Item item, String mainImageUrl, String detailImageUrl) {
         return ItemResponseDto.builder()
                 .id(item.getId())
                 .name(item.getName())
                 .price(item.getPrice())
                 .stockQuantity(item.getStockQuantity())
                 .category(item.getCategory())
-                .mainImage(mainImage)
-                .detailImage(detailImage)
+                .mainImageUrl(mainImageUrl)
+                .detailImageUrl(detailImageUrl)
                 .build();
-    }
-
-    public List<ItemSearchDto> toDto(List<Item> items, List<Image> mainImages) {
-        List<ItemSearchDto> itemSearchDtos = new ArrayList<>();
-
-        for (int i = 0; i < items.size(); i++) {
-            ItemSearchDto dto = ItemSearchDto.builder()
-                    .id(items.get(i).getId())
-                    .name(items.get(i).getName())
-                    .price(items.get(i).getPrice())
-                    .mainImage(mainImages.get(i))
-                    .build();
-
-            itemSearchDtos.add(dto);
-        }
-
-        return itemSearchDtos;
     }
 
 }

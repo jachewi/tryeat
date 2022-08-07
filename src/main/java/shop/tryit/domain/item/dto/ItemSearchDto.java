@@ -6,7 +6,6 @@ import com.querydsl.core.annotations.QueryProjection;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import shop.tryit.domain.item.entity.Image;
 
 @Data
 @NoArgsConstructor(access = PROTECTED)
@@ -18,14 +17,14 @@ public class ItemSearchDto {
 
     private Integer price;
 
-    private Image mainImage;
+    private String mainImageUrl;
 
     @Builder
-    private ItemSearchDto(Long id, String name, Integer price, Image mainImage) {
+    private ItemSearchDto(Long id, String name, Integer price, String mainImageUrl) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.mainImage = mainImage;
+        this.mainImageUrl = mainImageUrl;
     }
 
     @QueryProjection
@@ -35,8 +34,8 @@ public class ItemSearchDto {
         this.price = price;
     }
 
-    public void injectMainImage(Image mainImage) {
-        this.mainImage = mainImage;
+    public void injectMainImage(String mainImageUrl) {
+        this.mainImageUrl = mainImageUrl;
     }
 
 }

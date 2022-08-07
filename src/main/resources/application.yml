@@ -15,4 +15,21 @@ spring:
 
 logging:
   level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: ERROR
     org.hibernate.SQL: debug
+
+cloud:
+  aws:
+    s3:
+      bucket: tryeat.bucket
+    credentials:
+      access-key: AKIAQVELX6TOS4S4XFJX
+      secret-key: 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
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
