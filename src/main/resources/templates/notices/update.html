@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/header :: header"/>
 
@@ -36,7 +36,7 @@
         <textarea th:field="*{content}" cols="150" rows="10"></textarea>
         <div class="field-error" th:errors="*{content}"></div>
       </div>
-      <div class="notice-btn">
+      <div class="notice-btn" sec:authorize="hasRole('ROLE_ADMIN')">
         <button class="btn btn-outline-dark" type="submit">수정하기</button>
       </div>
     </form>
