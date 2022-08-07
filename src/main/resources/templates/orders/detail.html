@@ -19,7 +19,7 @@
         <hr>
         <div th:each="detail : ${order.orderDetailFindDtos}" th:object="${detail}">
           <div class="order-detail">
-            <img th:src="|/files/*{itemMainImage.getStoreFileName()}|" class="main-img">
+            <img th:src="@{*{itemMainImageUrl}}" class="main-img">
             <div class="flex-item">
               <table>
                 <colgroup>

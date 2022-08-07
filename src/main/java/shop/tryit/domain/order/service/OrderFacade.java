@@ -13,6 +13,7 @@ import shop.tryit.domain.cart.service.CartItemService;
 import shop.tryit.domain.cart.service.CartService;
 import shop.tryit.domain.item.entity.Item;
 import shop.tryit.domain.item.service.ItemService;
+import shop.tryit.domain.item.service.S3Service;
 import shop.tryit.domain.member.entity.Member;
 import shop.tryit.domain.member.service.MemberService;
 import shop.tryit.domain.order.dto.OrderDetailDto;
@@ -34,6 +35,7 @@ public class OrderFacade {
     private final ItemService itemService;
     private final CartItemService cartItemService;
     private final CartService cartService;
+    private final S3Service s3Service;
 
     public Page<OrderSearchDto> searchOrders(int page, User user) {
         Member member = memberService.findMember(user.getUsername());
@@ -102,7 +104,7 @@ public class OrderFacade {
                 .itemId(orderDetail.getId())
                 .itemName(orderDetail.itemName())
                 .orderQuantity(orderDetail.getQuantity())
-                .itemMainImage(orderDetail.mainImage())
+                .itemMainImageUrl(s3Service.getMainImageUrl(orderDetail.mainImage().getStoreFileName()))
                 .price(orderDetail.itemPrice())
                 .build();
     }
