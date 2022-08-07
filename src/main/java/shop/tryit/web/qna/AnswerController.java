@@ -3,6 +3,7 @@ package shop.tryit.web.qna;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import shop.tryit.domain.common.Pages;
 import shop.tryit.domain.qna.dto.AnswerFormDto;
 import shop.tryit.domain.qna.service.QnAFacade;
 
@@ -27,12 +30,19 @@ public class AnswerController {
     @PostMapping("/new/{questionId}")
     public String register(@PathVariable Long questionId,
                            @AuthenticationPrincipal User user,
+                           @RequestParam(defaultValue = "0") int page,
                            @Valid @ModelAttribute AnswerFormDto answerFormDto,
                            BindingResult bindingResult,
                            Model model) {
         if (bindingResult.hasErrors()) {
             log.info("bindingResult={}", bindingResult);
+            Page<AnswerFormDto> answers = qnAFacade.findAnswersByQuestionId(questionId, page);
+            Pages<AnswerFormDto> pages = Pages.of(answers, 4);
+
             model.addAttribute("questionFormDto", qnAFacade.toDto(questionId));
+            model.addAttribute("answers", answers);
+            model.addAttribute("pages", pages.getPages());
+            model.addAttribute("checkRole", qnAFacade.isAuthorized(questionId, user));
             return "/qna/detail-view";
         }
 
