@@ -15,6 +15,7 @@ import shop.tryit.domain.cart.entity.CartItem;
 import shop.tryit.domain.item.entity.Image;
 import shop.tryit.domain.item.entity.Item;
 import shop.tryit.domain.item.service.ItemService;
+import shop.tryit.domain.item.service.S3Service;
 
 @Component
 @RequiredArgsConstructor
@@ -24,6 +25,7 @@ public class CartFacade {
     private final CartItemService cartItemService;
     private final CartService cartService;
     private final ItemService itemService;
+    private final S3Service s3Service;
 
     /**
      * 장바구니 상품 추가
@@ -101,7 +103,7 @@ public class CartFacade {
                 .itemName(cartItem.getItemName())
                 .itemPrice(cartItem.getItemPrice())
                 .quantity(cartItem.getQuantity())
-                .mainImage(mainImage)
+                .mainImageUrl(s3Service.getMainImageUrl(mainImage.getStoreFileName()))
                 .itemStock(cartItem.getItemStock())
                 .build();
     }

@@ -3,7 +3,6 @@ package shop.tryit.domain.cart.dto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import shop.tryit.domain.item.entity.Image;
 
 /* 장바구니 조회 시 전달 */
 @Data
@@ -20,18 +19,18 @@ public class CartListDto {
 
     private int quantity; // 수량
 
-    private Image mainImage; // 상품 메인이미지
+    private String mainImageUrl; // 상품 메인이미지
 
     private int itemStock; // 상품 재고
 
     @Builder
-    private CartListDto(Long cartItemId, Long itemId, String itemName, int itemPrice, int quantity, Image mainImage, int itemStock) {
+    private CartListDto(Long cartItemId, Long itemId, String itemName, int itemPrice, int quantity, String mainImageUrl, int itemStock) {
         this.cartItemId = cartItemId;
         this.itemId = itemId;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.quantity = quantity;
-        this.mainImage = mainImage;
+        this.mainImageUrl = mainImageUrl;
         this.itemStock = itemStock;
     }
 
