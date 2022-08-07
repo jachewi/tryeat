@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
-import shop.tryit.domain.item.entity.Image;
 import shop.tryit.domain.order.entity.OrderStatus;
 
 @Getter
@@ -56,15 +55,15 @@ public class OrderFindDto {
         private Long itemId;
         private String ItemName;
         private int orderQuantity;
-        private Image itemMainImage;
+        private String itemMainImageUrl;
         private int price;
 
         @Builder
-        public OrderDetailFindDto(Long itemId, String itemName, int orderQuantity, Image itemMainImage, int price) {
+        public OrderDetailFindDto(Long itemId, String itemName, int orderQuantity, String itemMainImageUrl, int price) {
             this.itemId = itemId;
             this.ItemName = itemName;
             this.orderQuantity = orderQuantity;
-            this.itemMainImage = itemMainImage;
+            this.itemMainImageUrl = itemMainImageUrl;
             this.price = price;
         }
 

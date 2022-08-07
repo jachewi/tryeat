@@ -48,7 +48,8 @@
           </td>
           <td>
             <a th:href="@{/items/{id}(id=${cartListDto.itemId})}">
-              <img th:src="|/files/${cartListDto.mainImage.getStoreFileName()}|" width="100" height="100"/>
+              <!--              <img th:src="|/files/${cartListDto.mainImage.getStoreFileName()}|" width="100" height="100"/>-->
+              <img th:src="@{${cartListDto.mainImageUrl}}" width="100" height="100"/>
             </a>
           </td>
           <td>
@@ -73,8 +74,8 @@
             </span>원
           </td>
           <td>
-            <button type="button" class="btn btn-custom btn-sm" 
-                    onclick="deleteCartItem(this)" 
+            <button type="button" class="btn btn-custom btn-sm"
+                    onclick="deleteCartItem(this)"
                     th:value="${cartListDto.cartItemId}">
               삭제
             </button>
@@ -242,6 +243,8 @@
       }
     });
   };
+
+
 </script>
 </body>
 

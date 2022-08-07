@@ -2,7 +2,6 @@ package shop.tryit.domain.payment.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import shop.tryit.domain.item.entity.Image;
 
 @Data
 public class PaymentResponseDto {
@@ -14,7 +13,7 @@ public class PaymentResponseDto {
     private int totalPrice;
 
     //상품 메인이미지
-    private Image mainImage;
+    private String mainImageUrl;
 
     //회원 정보
     private String memberName;
@@ -28,13 +27,13 @@ public class PaymentResponseDto {
 
     @Builder
     private PaymentResponseDto(Long itemId, String itemName, int quantity,
-                               int totalPrice, Image mainImage, String memberName, String memberPhone,
+                               int totalPrice, String mainImageUrl, String memberName, String memberPhone,
                                Long zipcode, String street_address, String jibeon_address, String detail_address) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
-        this.mainImage = mainImage;
+        this.mainImageUrl = mainImageUrl;
         this.memberName = memberName;
         this.memberPhone = memberPhone;
         this.zipcode = zipcode;
