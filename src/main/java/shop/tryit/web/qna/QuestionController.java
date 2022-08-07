@@ -134,7 +134,7 @@ public class QuestionController {
 
     @PostMapping("/{questionId}")
     public String passwordCheck(
-            @ModelAttribute QuestionCheckPasswordFormDto questionCheckPasswordFormDto,
+            @Valid @ModelAttribute QuestionCheckPasswordFormDto questionCheckPasswordFormDto,
             BindingResult bindingResult,
             @PathVariable Long questionId) {
         if (bindingResult.hasErrors()) {
