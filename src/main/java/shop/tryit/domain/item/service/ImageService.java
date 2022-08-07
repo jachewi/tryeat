@@ -38,22 +38,18 @@ public class ImageService {
     public Image updateMainImage(Item findItem, ItemRequestDto form) {
         Image findMainImage = findItem.getMainImage(); // 기존 메인 이미지를 찾아옴
 
-        log.info("old 메인이미지 = {} , {}", findMainImage.getOriginFileName(), findMainImage.getStoreFileName());
+        log.info("기존 메인이미지 = {} , {}", findMainImage.getOriginFileName(), findMainImage.getStoreFileName());
 
-        // 새로 넘어온 이미지가 없을 경우 수정 사항 x
+        // 새로 넘어온 이미지가 있을 경우 기존에 있던 이미지 삭제 후 업로드
         if (!form.getMainImage().isEmpty()) {
             imageStore.deleteS3(findMainImage.getStoreFileName()); // 기존 메인 이미지 삭제
             Image newMainImage = uploadMainImage(form); // 새로운 메인 이미지 서버에 저장
             findMainImage.update(newMainImage); // 메인 이미지 정보 업데이트
 
-            log.info("new 메인이미지 = {}, {}", newMainImage.getOriginFileName(), newMainImage.getStoreFileName());
-            log.info("======== 메인 이미지 수정 종료 ========");
-
+            log.info("변경 메인이미지 = {}, {}", newMainImage.getOriginFileName(), newMainImage.getStoreFileName());
             return newMainImage;
         } else {
             log.info("변경 없음");
-            log.info("======== 메인 이미지 수정 종료 ========");
-
             return findMainImage;
         }
     }
@@ -65,7 +61,7 @@ public class ImageService {
 
         Image findDetailImage = item.getDetailImage(); // 기존 상세 이미지를 찾아옴
 
-        log.info("old 상세이미지 = {} , {}", findDetailImage.getOriginFileName(), findDetailImage.getStoreFileName());
+        log.info("기존 상세이미지 = {} , {}", findDetailImage.getOriginFileName(), findDetailImage.getStoreFileName());
 
         // 새로 넘어온 이미지가 있을 경우 기존에 있던 이미지 삭제 후 업로드
         if (!form.getDetailImage().isEmpty()) {
@@ -74,13 +70,9 @@ public class ImageService {
             findDetailImage.update(newDetailImage); // 상세 이미지 정보 업데이트
 
             log.info("new 상세이미지 = {}, {}", newDetailImage.getOriginFileName(), newDetailImage.getStoreFileName());
-            log.info("======== 상세 이미지 수정 종료 ========");
-
             return newDetailImage;
         } else {
             log.info("변경 없음");
-            log.info("======== 상세 이미지 수정 종료 ========");
-
             return findDetailImage;
         }
     }
