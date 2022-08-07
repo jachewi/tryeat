@@ -31,9 +31,9 @@ public class ItemResponseDto {
     @NotNull(message = "카테고리를 선택해주세요.")
     private Category category;
 
-    private String mainImageUrl;
+    private String mainImage; // 메인 이미지 s3 url
 
-    private String detailImageUrl;
+    private String detailImage; // 상세 이미지 s3 url
 
     @Builder
     private ItemResponseDto(Long id, String name, Integer price, Integer stockQuantity, Category category, String mainImageUrl, String detailImageUrl) {
@@ -42,8 +42,8 @@ public class ItemResponseDto {
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.category = category;
-        this.mainImageUrl = mainImageUrl;
-        this.detailImageUrl = detailImageUrl;
+        this.mainImage = mainImageUrl;
+        this.detailImage = detailImageUrl;
     }
 
 }
