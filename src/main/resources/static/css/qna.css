@@ -73,6 +73,14 @@
   margin-bottom: 0px;
 }
 
-.answer-error {
-  color: #ff0000
+/*--------------------------------------------------------------
+# Q&A check-password
+--------------------------------------------------------------*/
+ .qna-password div {
+  max-width: 400px;
+  margin: auto;
+  margin-top: 150px;
+}
+.qna-password button {
+  margin-top: 20px;
 }
