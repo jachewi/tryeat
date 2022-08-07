@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/header :: header"/>
 
 <body>
@@ -23,7 +22,7 @@
           <textarea th:field="*{content}"></textarea>
           <div class="field-error" th:errors="*{content}"></div>
         </div>
-        <div class="notice-btn">
+        <div class="notice-btn" sec:authorize="hasRole('ROLE_ADMIN')">
           <button type="submit" class="btn btn-dark">등록</button>
         </div>
       </div>
