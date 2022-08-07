@@ -1,11 +1,11 @@
 package shop.tryit.domain.item.service;
 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
@@ -75,10 +75,20 @@ public class ImageStore {
     }
 
     /**
-     * 이미지 파일 삭제
+     * aws S3에 저장된 이미지 파일 삭제
      */
-    public void deleteImageFile(String storeFileName) throws IOException {
-        Files.delete(Path.of(getFullPath(storeFileName)));
+    public void deleteS3(String storeFileName) {
+        try {
+            amazonS3Client.deleteObject(bucket, storeFileName);
+        } catch (AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process
+            // it, so it returned an error response.
+            e.printStackTrace();
+        } catch (SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
+        }
     }
 
     /**

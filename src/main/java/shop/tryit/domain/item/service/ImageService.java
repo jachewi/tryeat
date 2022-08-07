@@ -92,11 +92,11 @@ public class ImageService {
     /**
      * 이미지 삭제
      */
-    public void deleteImage(Long itemId) throws IOException {
+    public void deleteImage(Long itemId) {
         Item item = itemService.findItem(itemId);
 
         for (Image image : item.getImages()) {
-            imageStore.deleteImageFile(image.getStoreFileName());
+            imageStore.deleteS3(image.getStoreFileName());
         }
     }
 
