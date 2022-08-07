@@ -31,7 +31,7 @@
           <tbody>
           <tr class="text-center" th:each="payment : ${payments}" name="paymentItem">
             <td>
-              <img width="100px" height="100px" th:src="|/files/${payment.mainImage.getStoreFileName()}|"/>
+              <img width="100px" height="100px" th:src="@{${payment.mainImageUrl}}">
             </td>
             <input type="hidden" id="itemId" name="itemId" th:value="${payment.itemId}">
             <td>
@@ -98,7 +98,7 @@
 
 <!-- ======= Js ======= -->
 <script th:inline="javascript">
-    
+
       //총 구매가격
       var paymentTotalPrice = 0; // 총 가격 (결제 예정 금액)
       $("tr[name=paymentItem]").each(function(index, element) {
@@ -107,7 +107,7 @@
       })
 
       $("#paymentTotalPrice").text(paymentTotalPrice.toLocaleString());
-  
+
     /** ======= ImPort API ======= **/
     $("#check_module").click(function () {
       var IMP = window.IMP; // 생략가능
@@ -180,14 +180,6 @@
         alert(msg);
       });
     });
-
-
-
-
-
-
-
-
 
 
 </script>

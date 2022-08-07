@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import shop.tryit.domain.item.entity.Image;
 import shop.tryit.domain.item.entity.Item;
 import shop.tryit.domain.item.service.ItemService;
+import shop.tryit.domain.item.service.S3Service;
 import shop.tryit.domain.member.entity.Member;
 import shop.tryit.domain.member.service.MemberService;
 import shop.tryit.domain.payment.dto.PaymentRequestDto;
@@ -27,6 +28,7 @@ public class PaymentFacade {
     private final PaymentService paymentService;
     private final ItemService itemService;
     private final MemberService memberService;
+    private final S3Service s3Service;
 
     /**
      * 결제 폼
@@ -89,7 +91,7 @@ public class PaymentFacade {
         for (int i = 0; i < paymentRequestDtoList.size(); i++) {
             PaymentResponseDto productDto = PaymentResponseDto.builder()
                     .itemId(itemList.get(i).getId())
-                    .mainImage(mainImages.get(i))
+                    .mainImageUrl(s3Service.getMainImageUrl(mainImages.get(i).getStoreFileName()))
                     .itemName(itemList.get(i).getName())
                     .quantity(paymentRequestDtoList.get(i).getQuantity())
                     .totalPrice(itemList.get(i).getPrice() * paymentRequestDtoList.get(i).getQuantity())
