@@ -1,6 +1,5 @@
 package shop.tryit.domain.item.service;
 
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -58,7 +57,7 @@ public class ItemFacade {
      * 상품 수정
      */
     @Transactional
-    public Long update(Long itemId, ItemRequestDto itemRequestDto) throws IOException {
+    public Long update(Long itemId, ItemRequestDto itemRequestDto) {
         Item findItem = itemService.findItem(itemId);
         Item newItem = toEntity(itemRequestDto);
 
