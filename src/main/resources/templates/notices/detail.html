@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/header :: header"/>
 
@@ -37,9 +37,9 @@
     </form>
 
     <div class="notice-btn detail-btn">
-      <button class="btn btn-outline-dark" th:onclick="|location.href='@{/notices/{noticeId}/update (noticeId=${noticeViewFormDto.id})}'|">수정하기</button>
+      <button class="btn btn-outline-dark" sec:authorize="hasRole('ROLE_ADMIN')" th:onclick="|location.href='@{/notices/{noticeId}/update (noticeId=${noticeViewFormDto.id})}'|">수정하기</button>
       <form th:action="@{/notices/{noticeId}/delete (noticeId=${noticeViewFormDto.id})}" method="post">
-        <button class="btn btn-outline-dark" type="submit">삭제하기</button>
+        <button class="btn btn-outline-dark" sec:authorize="hasRole('ROLE_ADMIN')" type="submit">삭제하기</button>
       </form>
       <button class="btn btn-outline-dark" th:onclick="|location.href='@{/notices}'|">목록으로</button>
     </div>
