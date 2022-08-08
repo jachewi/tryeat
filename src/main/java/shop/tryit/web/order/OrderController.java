@@ -39,7 +39,7 @@ public class OrderController {
 
         URI location = UriComponentsBuilder.newInstance()
                 .scheme("http")
-                .path("localhost:8080/orders/{id}")
+                .path("tryeat.shop/orders/{id}")
                 .buildAndExpand(orderId)
                 .toUri();
 
@@ -54,7 +54,8 @@ public class OrderController {
         model.addAttribute("orders", orders);
         model.addAttribute("pages", pages.getPages());
 
-        return "/orders/list";
+        return "orders/list";
+
     }
 
     @GetMapping("/{orderId}")

@@ -36,9 +36,10 @@ public class CartController {
      * 장바구니에 상품 담기
      */
     @PostMapping
-    public @ResponseBody ResponseEntity<String> addCartItem(@Valid @ModelAttribute CartItemDto cartItemDto,
-                                                            BindingResult bindingResult,
-                                                            @AuthenticationPrincipal User user) {
+    public @ResponseBody
+    ResponseEntity<String> addCartItem(@Valid @ModelAttribute CartItemDto cartItemDto,
+                                       BindingResult bindingResult,
+                                       @AuthenticationPrincipal User user) {
         log.info("장바구니에 담을 상품의 id = {}", cartItemDto.getItemId());
         log.info("장바구니에 담을 상품의 수량 = {}", cartItemDto.getQuantity());
 
@@ -75,16 +76,18 @@ public class CartController {
 
         model.addAttribute("cartListDtos", cartListDtos);
 
-        return "/carts/list";
+        return "carts/list";
     }
 
     /**
      * 장바구니에 담긴 상품 수량 변경
      */
     @PostMapping("/{cartItemId}/update")
-    public @ResponseBody ResponseEntity<String> update(@Valid @ModelAttribute CartItemDto cartItemDto,
-                                                       BindingResult bindingResult,
-                                                       @PathVariable Long cartItemId) {
+    public @ResponseBody
+    ResponseEntity<String> update(@Valid @ModelAttribute CartItemDto cartItemDto,
+                                  BindingResult bindingResult,
+                                  @PathVariable Long cartItemId) {
+
         // 상품 재고 검증
         if (Boolean.FALSE.equals(cartFacade.checkItemStock(cartItemDto))) {
             bindingResult.rejectValue("quantity", "StockError",
@@ -110,7 +113,9 @@ public class CartController {
      * 장바구니에 담긴 상품 삭제
      */
     @PostMapping("/{cartItemId}/delete")
-    public @ResponseBody ResponseEntity<String> delete(@PathVariable Long cartItemId) {
+    public @ResponseBody
+    ResponseEntity<String> delete(@PathVariable Long cartItemId) {
+
         cartFacade.deleteCartItem(cartItemId);
         return ResponseEntity.ok("cartItem delete success");
     }
