@@ -43,7 +43,7 @@ public class AnswerController {
             model.addAttribute("answers", answers);
             model.addAttribute("pages", pages.getPages());
             model.addAttribute("checkRole", qnAFacade.isAuthorized(questionId, user));
-            return "/qna/detail-view";
+            return "qna/detail-view";
         }
 
         qnAFacade.answerRegister(user, questionId, answerFormDto);
@@ -65,7 +65,7 @@ public class AnswerController {
             model.addAttribute("answerFormDto", qnAFacade.toForm(answerId));
         }
 
-        return "/qna/answer-update";
+        return "qna/answer-update";
     }
 
     @PostMapping("/{answerId}/update")
@@ -75,7 +75,7 @@ public class AnswerController {
                          BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "/qna/answer-update";
+            return "qna/answer-update";
         }
 
         Long questionId = qnAFacade.findQuestionIdByAnswerId(answerId);

@@ -30,7 +30,7 @@ public class MemberController {
     @GetMapping("/new")
     public String newMemberForm(@ModelAttribute("memberForm") MemberFormDto memberForm) {
         log.info("member controller");
-        return "/members/register";
+        return "members/register";
     }
 
     @PostMapping("/new")
@@ -44,7 +44,7 @@ public class MemberController {
 
         if (bindingResult.hasErrors()) {
             log.info("member controller post");
-            return "/members/register";
+            return "members/register";
         }
 
         memberFacade.register(memberForm);
@@ -58,7 +58,7 @@ public class MemberController {
     @GetMapping("/login")
     public String login_form() {
         log.info("member login controller");
-        return "/members/login-form";
+        return "members/login-form";
     }
 
     /**
@@ -69,7 +69,7 @@ public class MemberController {
     public String editMemberForm(@AuthenticationPrincipal User user, Model model) {
         log.info("회원 수정 폼으로 이동");
         model.addAttribute("memberForm", memberFacade.updateForm(user));
-        return "/members/update";
+        return "members/update";
     }
 
     @PostMapping("/update")
@@ -83,12 +83,12 @@ public class MemberController {
 
         if (bindingResult.hasErrors()) {
             log.info("member controller post");
-            return "/members/update";
+            return "members/update";
         }
 
         memberFacade.update(memberForm);
 
-        return "/members/update";
+        return "members/update";
     }
 
 }
