@@ -39,7 +39,7 @@ public class OrderController {
 
         URI location = UriComponentsBuilder.newInstance()
                 .scheme("http")
-                .path("localhost:8080/orders/{id}")
+                .path("tryeat.shop/orders/{id}")
                 .buildAndExpand(orderId)
                 .toUri();
 
