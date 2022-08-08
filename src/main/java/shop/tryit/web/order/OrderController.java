@@ -55,6 +55,7 @@ public class OrderController {
         model.addAttribute("pages", pages.getPages());
 
         return "orders/list";
+
     }
 
     @GetMapping("/{orderId}")

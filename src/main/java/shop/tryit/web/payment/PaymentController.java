@@ -51,6 +51,7 @@ public class PaymentController {
         model.addAttribute("member", paymentFacade.paymentForm(user));
 
         return "payment/payment-form";
+
     }
 
     @PostMapping("/kakao")

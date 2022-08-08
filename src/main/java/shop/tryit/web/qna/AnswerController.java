@@ -43,7 +43,9 @@ public class AnswerController {
             model.addAttribute("answers", answers);
             model.addAttribute("pages", pages.getPages());
             model.addAttribute("checkRole", qnAFacade.isAuthorized(questionId, user));
+
             return "qna/detail-view";
+
         }
 
         qnAFacade.answerRegister(user, questionId, answerFormDto);
@@ -66,6 +68,7 @@ public class AnswerController {
         }
 
         return "qna/answer-update";
+
     }
 
     @PostMapping("/{answerId}/update")

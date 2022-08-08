@@ -39,6 +39,7 @@ public class ItemController {
         model.addAttribute("categories", categories);
 
         return "items/register";
+
     }
 
     @PostMapping("/new")
@@ -54,7 +55,9 @@ public class ItemController {
             log.info("bindingResult = {}", bindingResult);
             Category[] categories = Category.values();
             model.addAttribute("categories", categories);
+            
             return "items/register";
+
         }
 
         itemFacade.register(itemRequestDto);
@@ -80,6 +83,7 @@ public class ItemController {
         log.info("상품 개수 = {}", itemSearchDtos.getContent().size());
 
         return "items/list";
+
     }
 
     @GetMapping("/{id}/update")
@@ -91,6 +95,7 @@ public class ItemController {
         model.addAttribute("item", itemResponseDto);
 
         return "items/update";
+
     }
 
     @PostMapping("/{id}/update")
@@ -103,7 +108,9 @@ public class ItemController {
             log.info("bindingResult = {}", bindingResult);
             Category[] categories = Category.values();
             model.addAttribute("categories", categories);
+            
             return "items/update";
+
         }
 
         itemFacade.update(id, itemRequestDto);
@@ -117,6 +124,7 @@ public class ItemController {
         model.addAttribute("itemResponseDto", itemResponseDto);
 
         return "items/detail";
+
     }
 
     @PostMapping("/{id}/delete")

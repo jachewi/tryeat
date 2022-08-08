@@ -87,6 +87,7 @@ public class CartController {
     ResponseEntity<String> update(@Valid @ModelAttribute CartItemDto cartItemDto,
                                   BindingResult bindingResult,
                                   @PathVariable Long cartItemId) {
+
         // 상품 재고 검증
         if (Boolean.FALSE.equals(cartFacade.checkItemStock(cartItemDto))) {
             bindingResult.rejectValue("quantity", "StockError",
@@ -114,6 +115,7 @@ public class CartController {
     @PostMapping("/{cartItemId}/delete")
     public @ResponseBody
     ResponseEntity<String> delete(@PathVariable Long cartItemId) {
+
         cartFacade.deleteCartItem(cartItemId);
         return ResponseEntity.ok("cartItem delete success");
     }
