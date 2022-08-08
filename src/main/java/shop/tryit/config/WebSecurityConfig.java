@@ -35,7 +35,7 @@ public class WebSecurityConfig {
                 .authorizeRequests() //요청에 의한 보안 검사 시작
                 .antMatchers("/", "/css/**", "/img/**", "/js/**", "/vendor/**", "/files/**",
                         "/members/new", "/members/login", "/members/logout", "/members/vendor/**",
-                        "/items", "/items/{id}", "/qna", "/notices", "/notices/{noticeId}").permitAll()
+                        "/items", "/items/{id}", "/items/vendor/**", "/qna", "/notices", "/notices/{noticeId}").permitAll()
                 .antMatchers("/members/update", "/carts", "/carts/{cartItemId}/update", "/carts/{cartItemId}/delete",
                         "/qna/new", "/qna/{questionId}", "/qna/{questionId}/update", "/qna/{questionId}/delete",
                         "/orders", "/orders/new", "/orders/{orderId}", "/payment", "/payment/kakao").authenticated()
