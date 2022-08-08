@@ -40,7 +40,7 @@ public class QnAFacade {
     }
 
     public Page<QuestionSearchDto> searchQuestion(Pageable pageable, QuestionSearchCondition questionSearchCondition) {
-        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 2);
+        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), 5);
         return questionService.searchList(questionSearchCondition, pageRequest);
     }
 
