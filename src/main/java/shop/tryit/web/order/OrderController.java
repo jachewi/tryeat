@@ -54,7 +54,7 @@ public class OrderController {
         model.addAttribute("orders", orders);
         model.addAttribute("pages", pages.getPages());
 
-        return "/orders/list";
+        return "orders/list";
     }
 
     @GetMapping("/{orderId}")
