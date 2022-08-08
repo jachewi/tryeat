@@ -1,0 +1,38 @@
+/*--------------------------------------------------------------
+# Cart
+--------------------------------------------------------------*/
+.cart-list input {
+  width: 50px;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  padding-left: 8px;
+  font-size: 15px;
+}
+
+.cart-list .table>:not(:first-child) {
+  border-top: 1px solid #e5e5e5;
+}
+
+.cart-list .table thead {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.cart-list .table tbody {
+  vertical-align: middle;
+  border-bottom: #e5e5e5;
+}
+
+.cart-total-info {
+  text-align: right;
+  padding-right: 40px;
+}
+
+.cart-total-info span {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.cart-btn {
+  margin-top: 100px;
+  margin-bottom: 30px;
+}

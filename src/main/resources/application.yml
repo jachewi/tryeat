@@ -1,0 +1,18 @@
+spring:
+  output:
+    ansi:
+      enabled: always
+  jpa:
+    open-in-view: false
+    hibernate:
+      format_sql: true
+  profiles:
+    include: security
+
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: ERROR
+    org.hibernate.SQL: debug

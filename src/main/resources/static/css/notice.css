@@ -1,0 +1,32 @@
+.notice .title {
+  width: 50%;
+}
+
+.notice th, .notice .element {
+  text-align: center;
+}
+
+.notice .notice-btn {
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+}
+
+.notice .detail-btn .btn {
+  margin-left: 5px;
+}
+
+.notice .form {
+  margin: auto;
+  width: 940px;
+}
+
+.notice textarea {
+  width: 100%;
+  height: 250px;
+  padding: 10px;
+}
+
+.notice .pagination {
+  margin-top: 100px;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<!-- ======= Header ======= -->
+<header th:fragment="body-header" id="header" class="fixed-top d-flex align-items-center">
+  <div class="container d-flex align-items-center">
+    <div class="logo me-auto">
+      <h1><a href="/" th:href="@{/}">Try Eat</a></h1>
+    </div>
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto active" th:href="@{/}">Home</a></li>
+        <li><a class="nav-link scrollto" th:href="@{/items}">shop</a></li>
+        <li class="dropdown"><a href="#"><span>board</span><i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a class="nav-link scrollto" th:href="@{/notices}">Notice</a></li>
+            <li><a class="nav-link scrollto" th:href="@{/qna}">QnA</a></li>
+          </ul>
+        </li>
+        <li><a class="nav-link scrollto" th:href="@{/members/new}" sec:authorize="isAnonymous()">Join</a></li>
+        <li><a class="nav-link scrollto" th:href="@{/members/login}" sec:authorize="isAnonymous()">Login</a></li>
+        <li class="dropdown"><a href="#" sec:authorize="isAuthenticated()"><span>MyPage</span><i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a class="nav-link scrollto" th:href="@{/members/update}" sec:authorize="isAuthenticated()">Modify</a></li>
+            <li><a class="nav-link scrollto" th:href="@{/carts}" sec:authorize="isAuthenticated()">Cart</a></li>
+            <li><a class="nav-link scrollto" th:href="@{/orders}" sec:authorize="isAuthenticated()">Order List</a></li>
+          </ul>
+        </li>
+        <li><a class="nav-link scrollto" th:href="@{/members/logout}" sec:authorize="isAuthenticated()">Logout</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+  </div>
+</header>
+<!-- End Header -->
+

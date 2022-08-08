@@ -1,0 +1,196 @@
+/*--------------------------------------------------------------
+# Register Section
+--------------------------------------------------------------*/
+.btn_wrap {
+  text-align: end;
+  margin: 30px 0 30px;
+}
+
+.form_txtInput {
+  min-width: 350px;
+  max-width: 940px;
+  margin: auto;
+}
+
+.form_txtInput .checkbox_wrap {
+  position: relative;
+  padding: 5px;
+  text-align: right;
+}
+
+.join_form {
+  width: 100%;
+  max-width: 945px;
+}
+
+.join_form table {
+  border-spacing: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100%;
+}
+
+.join_form table input {
+  border: 1px solid #ececec;
+  font-size: 14px;
+  color: #4c4c4c;
+  height: 35px;
+  padding: 10px;
+  width: 100%;
+  float: left;
+}
+
+.join_form table input.send_number {
+  width: 383px;
+}
+
+.join_form table th span {
+  color: #404040;
+  font-size: 14px;
+  display: inline-block;
+  position: relative;
+  padding: 0 10px 0 0;
+  text-indent: 20px;
+}
+
+.join_form table th {
+  text-align: left;
+}
+
+.join_form table td {
+  padding: 6px 0;
+  position: relative;
+}
+
+.join_form table th span:after {
+  content: "*";
+  font-size: 13px;
+  color: #f95427;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.join_form.idpwFind table th span:after {
+  content: none;
+}
+
+.exform_txt {
+  padding: 12px 0 19px;
+  text-align: right;
+  color: #9a9a9a;
+  font-size: 13px;
+  border-bottom: 1px solid #ececec;
+}
+
+.exform_txt span {
+  display: inline-block;
+  position: relative;
+  padding-left: 10px;
+}
+
+.exform_txt span:after {
+  content: "*";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #f95427;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.explan_txt {
+  margin: 3px 0 0 22px;
+}
+
+.explan_txt li {
+  color: #b2b2b2;
+  font-size: 13px;
+  line-height: 17px;
+}
+
+@media (max-width: 1023px) {
+  .wrap {
+    margin: 30px auto;
+  }
+  .wrap,
+  .wrap.wd668.line {
+    max-width: 80vw;
+  }
+  .wrap.wd668 {
+    width: 90vw;
+  }
+  .join_form {
+    max-width: 90vw;
+  }
+  .join_form table th span {
+    text-indent: 0;
+    font-size: 13px;
+  }
+  .join_form table {
+    width: 100%;
+  }
+  .join_form table input {
+    border: 1px solid #ececec;
+    font-size: 14px;
+    color: #4c4c4c;
+    height: 37px;
+    padding: 10px;
+    width: 100%;
+  }
+  .join_form table input.email {
+    width: 30%;
+    display: inline-block;
+  }
+  .join_form table input.email2 {
+    width: 60%;
+  }
+  .join_form.idpwFind table input {
+    width: 100%;
+  }
+  .join_form.idpwFind table tr.email input {
+    float: left;
+  }
+  .join_form table input.send_number {
+    width: 53%;
+  }
+  .exTxt {
+    margin: 0 0 25px;
+  }
+  .wrap .sub_tit_txt,
+  .wrap.wd668.line .sub_tit_txt {
+    margin: 0 0 10px;
+  }
+  .btn_wrap a,
+  .btn_wrap a.wide {
+    width: auto;
+    margin: 0;
+  }
+  .btn_wrap {
+    overflow: hidden;
+  }
+
+  .join_form table td a.btn_confirm {
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 12px;
+    margin: 5px 0 0;
+  }
+  .join_form table input.send_number + a {
+    margin: 0 0 0 5px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Login General
+--------------------------------------------------------------*/
+.form-login {
+  max-width: 300px;
+  margin: 100px auto 100px auto;
+}
+
+.login-btn {
+  margin: 30px 118px;
+}

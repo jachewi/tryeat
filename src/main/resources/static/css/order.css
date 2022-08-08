@@ -1,0 +1,81 @@
+/*--------------------------------------------------------------
+# Order
+--------------------------------------------------------------*/
+.order img {
+  width: 200px;
+  height: 200px;
+  object-fit: fill;
+  margin-right: 30px;
+}
+
+/* Order List */
+.order .order-list th,
+.order .order-list td {
+  text-align: center;
+}
+
+/* Order Detail */
+.order .order-detail {
+  display: flex;
+  align-items: center;
+}
+
+.order hr {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.order .order-info,
+.order .delivery-info,
+.order .pay-info {
+  margin-bottom: 100px;
+}
+
+.order .order-number-date {
+  font-weight: bold;
+}
+
+.order .order-info input {
+  width: 300px;
+}
+
+.order .order-info .flex-item {
+  flex: 1;
+}
+
+/*--------------------------------------------------------------
+# Payment
+--------------------------------------------------------------*/
+.payment .payment-bnt {
+  float: right;
+  border: none;
+  background: white;
+}
+
+.payment .total-info {
+  text-align: right;
+  padding-right: 40px;
+}
+
+.payment .total-info span {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.pay-item-info .table>:not(:first-child) {
+  border-top: 1px solid #e5e5e5;
+}
+
+.pay-item-info .table thead {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.pay-item-info .table tbody {
+  vertical-align: middle;
+  border-bottom: #e5e5e5;
+}
+
+.pay-item-info,
+.delivery-info {
+  margin-bottom: 100px;
+}

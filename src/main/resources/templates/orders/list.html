@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header"/>
+
+<body>
+<!-- ======= Header ======= -->
+<div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"/>
+
+<!-- ======= OrderList Section ======= -->
+<section class="common order">
+  <div class="container order-list">
+    <h3 class="text-center mb-5">주문 내역</h3>
+
+    <div>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>주문 번호</th>
+          <th>주문 날짜</th>
+          <th>주문 상태</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="order: ${orders}" th:object="${order}">
+          <td>
+            <a th:href="@{/orders/{id} (id=*{orderId})}" th:text="*{orderNumber}"></a>
+          </td>
+          <td th:text="|${#temporals.format(order.createDate, 'yyyy-MM-dd HH:mm')}|"></td>
+          <td th:text="*{orderStatus}"></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <!-- 페이징 처리 -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li th:each="i : ${pages}">
+            <a class="page-link" href="#"
+               th:href="@{/orders(page=${i - 1})}"
+               th:text="${i}"></a>
+          </li>
+        </ul>
+      </nav>
+      <!-- 페이징 처리 끝 -->
+
+    </div>
+  </div> <!-- /container -->
+</section>
+
+<!-- ======= Footer ======= -->
+<div th:replace="fragments/footer :: footer"/>
+</body>
+
+</html>

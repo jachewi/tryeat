@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+<!-- ======= Header ======= -->
+<header th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></header>
+
+<!-- ======= Home Section ======= -->
+<section class="common">
+  <div class="container">
+    <div data-aos="fade-left">
+      <img src="img/tryit-main-img.png" class="img-fluid">
+    </div>
+  </div>
+</section> <!-- Home Hero -->
+
+<!-- ======= Footer ======= -->
+<footer th:replace="fragments/footer :: footer" id="footer"></footer>
+</body>
+
+</html>

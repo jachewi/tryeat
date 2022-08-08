@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+<!-- ======= Header ======= -->
+<div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></div>
+
+<!-- ======= Section ======= -->
+<section class="common item item-detail">
+  <div class="container">
+    <div class="admin-btn" sec:authorize="hasRole('ROLE_ADMIN')">
+      <!-- 관리자에게만 보이는 버튼 -->
+      <a th:href="@{/items/{id}/update (id=${itemResponseDto.id})}" class="btn btn-outline-dark" role="button">상품 수정</a>
+      <form th:action="@{/items/{id}/delete (id=${itemResponseDto.id})}" method="post">
+        <button type="submit" class="btn btn-outline-danger">상품 삭제</button>
+      </form>
+    </div>
+
+    <div class="row gy-4">
+      <div class="item-img col-lg-7">
+        <img th:src="@{${itemResponseDto.mainImage}}" class="main-img">
+      </div>
+      <div class="item-info col-lg-5">
+        <h2 th:text="${itemResponseDto.name}">상품 이름</h2>
+        <hr/>
+        <table>
+          <th>price</th>
+          <td>
+            <span th:text="${itemResponseDto.price}">상품 가격</span>원
+          </td>
+        </table>
+
+        <div class="order-info">
+          <input type="hidden" id="itemId" th:value="${itemResponseDto.id}">
+          <div class="quantity">
+            <label for="quantity">수량</label>
+            <input type="number" id="quantity" min="1" value="1">
+          </div>
+          <hr/>
+          <div class="order-click">
+            <button type="button" id="addCartItem" class="btn btn-custom" value="장바구니 담기">Add Cart</button>
+            <button type="button" id="order-btn" class="btn btn-custom">Buy Now</button>
+          </div>
+        </div>
+
+        <!-- 주문 form -->
+        <form th:action="@{/payment}" method="get" class="order-form">
+          <input type="hidden" name="payments[0].itemId" th:value="${itemResponseDto.id}">
+          <input type="hidden" name="payments[0].quantity" value="">
+        </form>
+      </div>
+    </div>
+  </div> <!-- /container -->
+</section>
+
+<!-- ======= Footer ======= -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- ======= Js ======= -->
+<script th:inline="javascript">
+  /* 장바구니 담기 */
+  $('#addCartItem').click(function() {
+    var url = "/carts";
+    var data = {
+      itemId : $('#itemId').val(),
+      quantity : $('#quantity').val()
+    };
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: data,
+      success: function(result) {
+        alert("장바구니에 상품을 추가했습니다.🛒");
+      },
+      error: function(jqXHR) {
+        alert(jqXHR.responseText);
+      }
+    });
+  });
+
+  /* 바로 주문하기 */
+  $("#order-btn").click(function() {
+    let quantity = $("#quantity").val();
+
+    $(".order-form").find('input[name="payments[0].quantity"]').val(quantity);
+    $(".order-form").submit();
+  });
+</script>
+</body>
+
+</html>

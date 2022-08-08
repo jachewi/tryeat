@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+<!-- ======= Header ======= -->
+<div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></div>
+
+<!-- ======= Section ======= -->
+<section class="common item">
+  <div class="container">
+    <div class="admin-btn" sec:authorize="hasRole('ROLE_ADMIN')">
+      <a th:href="@{/items/new}" class="btn btn-dark" role="button">상품 등록</a>
+    </div>
+
+    <div class="item-search">
+      <div class="item-category-search">
+        <form th:action method="get" th:object="${itemSearchCondition}">
+          <input type="radio"
+                 th:field="*{category}"
+                 th:each="category : ${categories}"
+                 th:value="${category}"
+                 th:text="${category}">
+          <button type="submit" class="btn btn-light">선택</button>
+          <!--<button type="submit"
+                  class="btn btn-light"
+                  th:each="category : ${categories}"
+                  th:value="${itemSearchCondition.category}"
+                  th:text="${category}">카테고리
+          </button>-->
+        </form>
+      </div>
+
+      <div class="item-name-search search-input">
+        <form th:action method="get" th:object="${itemSearchCondition}">
+          <input type="text" th:field="*{name}" placeholder="🔍 상품 이름으로 검색하세요.">
+        </form>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="item-list">
+      <div th:each="itemSearchDto : ${itemSearchDtos}">
+        <a th:href="@{/items/{id}(id=${itemSearchDto.id})}">
+          <div class="thumbnail">
+            <img th:src="@{${itemSearchDto.mainImageUrl}}"/>
+          </div>
+
+          <div class="info">
+            <div class="item-name">
+              <p th:text="${itemSearchDto.name}"></p>
+            </div>
+            <div class="item-price">
+              <p><span th:text="${itemSearchDto.price}"></span>원</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="page">
+      <ul class="pagination">
+        <li th:each="page : ${pages}">
+          <a class="page-link"
+             th:href="@{/items(page=${page - 1}, name=${itemSearchCondition.name}, category=${itemSearchCondition.category})}"
+             th:text="${page}">
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div> <!-- /container -->
+</section>
+
+<!-- ======= Footer ======= -->
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+
+</html>

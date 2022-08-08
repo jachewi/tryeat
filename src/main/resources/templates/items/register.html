@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+<!-- ======= Header ======= -->
+<div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></div>
+
+<!-- ======= Section ======= -->
+<section class="common item">
+  <div class="container">
+    <div class="form-content">
+      <form th:action th:object="${itemRequestDto}" method="post" enctype="multipart/form-data">
+        <table>
+          <colgroup>
+            <col width="15%">
+            <col width="auto">
+          </colgroup>
+
+          <tbody>
+          <tr>
+            <th>카테고리</th>
+            <td>
+              <select class="form-select" th:field="*{category}">
+                <option value="">== 카테고리 선택 ==</option>
+                <option th:each="category : ${categories}"
+                        th:value="${category}"
+                        th:text="${category}">CAT
+                </option>
+              </select>
+            </td>
+          </tr>
+          <tr class="error">
+            <th></th>
+            <td>
+              <div class="field-error" th:errors="*{category}">카테고리 오류</div>
+            </td>
+          </tr>
+          <tr>
+            <th>상품명</th>
+            <td>
+              <input type="text" th:field="*{name}" class="form-control" placeholder="이름을 입력하세요">
+            </td>
+          </tr>
+          <tr class="error">
+            <th></th>
+            <td>
+              <div class="field-error" th:errors="*{name}">상품명 오류</div>
+            </td>
+          </tr>
+          <tr>
+            <th>가격</th>
+            <td>
+              <input type="text" th:field="*{price}" class="form-control" placeholder="가격을 입력하세요">
+            </td>
+          </tr>
+          <tr class="error">
+            <th></th>
+            <td>
+              <div class="field-error" th:errors="*{price}">가격 오류</div>
+            </td>
+          </tr>
+          <tr>
+            <th>재고</th>
+            <td>
+              <input type="text" th:field="*{stockQuantity}" class="form-control" placeholder="재고를 입력하세요">
+            </td>
+          </tr>
+          <tr class="error">
+            <th></th>
+            <td>
+              <div class="field-error" th:errors="*{stockQuantity}">재고 오류</div>
+            </td>
+          </tr>
+          <tr>
+            <th>메인이미지</th>
+            <td>
+              <input type="file" th:field="*{mainImage}" class="form-control">
+            </td>
+          </tr>
+          <tr class="error">
+            <th></th>
+            <td>
+              <div class="field-error" th:errors="*{mainImage}">이미지 오류</div>
+            </td>
+          </tr>
+          <tr>
+            <th>상세이미지</th>
+            <td>
+              <input type="file" th:field="*{detailImage}" class="form-control">
+            </td>
+          </tr>
+          <tr class="error">
+            <th></th>
+            <td>
+              <div class="field-error" th:errors="*{mainImage}">이미지 오류</div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="item-btn register-btn">
+          <button type="submit" class="btn btn-dark">등록</button>
+        </div>
+      </form>
+    </div>
+  </div> <!-- /container -->
+</section>
+
+<!-- ======= Footer ======= -->
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+
+</html>

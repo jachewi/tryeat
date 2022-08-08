@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+<!-- ======= Header ======= -->
+<div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></div>
+
+<!-- ======= Section ======= -->
+<section class="common order">
+  <div class="container">
+    <div class="row gy-4">
+      <h3 class="text-center mb-5">주문 상세</h3>
+
+      <!-- 주문 정보란 -->
+      <div class="order-info">
+        <div class="order-number-date" th:text="|no_${order.orderNumber} &nbsp / &nbsp ${#temporals.format(order.orderDateTime, 'yyyy-MM-dd HH:mm')}|"></div>
+        <hr>
+        <div th:each="detail : ${order.orderDetailFindDtos}" th:object="${detail}">
+          <div class="order-detail">
+            <img th:src="@{*{itemMainImageUrl}}" class="main-img">
+            <div class="flex-item">
+              <table>
+                <colgroup>
+                  <col width="60%">
+                </colgroup>
+                <tbody>
+                <tr>
+                  <th>상품 이름</th>
+                  <td>
+                    <input type="hidden" th:text="*{ItemName}">
+                  </td>
+                </tr>
+                <tr>
+                  <th>상품 가격</th>
+                  <td>
+                    <input type="hidden" th:text="|${#numbers.formatInteger(detail.totalPrice(), 3, 'COMMA')}원|"/>
+                  </td>
+                </tr>
+                <tr>
+                  <th>구매 수량</th>
+                  <td>
+                    <input type="hidden" th:text="|*{orderQuantity}개|">
+                  </td>
+                </tr>
+                <tr>
+                  <th>총 가격</th>
+                  <td>
+                    <input type="hidden" th:text="|${#numbers.formatInteger(detail.totalPrice(), 3, 'COMMA')}원|">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 배송지 정보란 -->
+      <div class="delivery-info">
+        <h3>배송지 정보</h3>
+        <hr>
+        <table>
+          <colgroup>
+            <col width="20%">
+          </colgroup>
+          <tbody>
+          <tr>
+            <th>받는 사람</th>
+            <td><input type="hidden" th:text="${order.memberName}"/></td>
+          </tr>
+          <tr>
+            <th>연락처</th>
+            <td><input type="hidden" th:text="${order.memberPhoneNumber}"/></td>
+          </tr>
+          <tr>
+            <th>주소</th>
+            <td>
+              <input type="hidden" th:text="${order.zipcode}" placeholder="우편번호" readonly>
+              <input type="hidden" th:text="${order.streetAddress}" placeholder="도로명주소" readonly>
+              <span id="guide" style="color:#999;display:none"></span>
+              <input type="hidden" th:text="${order.detailAddress}" placeholder="상세주소">
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 결제 정보란 -->
+      <div class="pay-info">
+        <h3>결제 정보</h3>
+        <hr>
+        <table>
+          <colgroup>
+            <col width="60%">
+          </colgroup>
+          <tbody>
+          <tr>
+            <th>총 결제 금액</th>
+            <td><input type="hidden" th:text="|${#numbers.formatInteger(order.orderTotalPrice, 3 , 'COMMA')}원|"/></td>
+          </tr>
+          <tr>
+            <th>결제 방법</th>
+            <td>카카오페이</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> <!-- /container -->
+  </div>
+</section>
+
+<!-- ======= Footer ======= -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+<head th:replace="fragments/header :: header"></head>
+<body>
+<!-- ======= Header ======= -->
+<header th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"></header>
+
+<!-- ======= Login Section ======= -->
+<section class="common">
+  <div layout:fragment="content" class="container">
+    <div class="form-login">
+      <form th:action="@{/members/login}" method="post">
+        <h3 class="text-center mb-5">로그인</h3>
+        <div th:if="${param.error}">
+          <div class="alert alert-danger">
+            사용자ID 또는 비밀번호를 확인해 주세요.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label">사용자ID</label>
+          <input type="text" name="username" id="username" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">비밀번호</label>
+          <input type="password" name="password" id="password" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-dark login-btn">로그인</button>
+      </form>
+    </div>
+  </div>
+</section> <!-- End Login -->
+
+<!-- ======= Footer ======= -->
+<footer th:replace="fragments/footer :: footer" id="footer"></footer>
+</body>
+</html>

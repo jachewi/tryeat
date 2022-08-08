@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header"/>
+
+<body>
+<div th:replace="fragments/body-header :: body-header" id="header" class="fixed-top d-flex align-items-center"/>
+
+<section class="common qna">
+  <div class="container">
+    <h3 class="text-center mb-5">Q&A</h3>
+
+    <button class="btn btn-dark" type="button" th:onclick="|location.href='@{/qna/new}'|">글 작성하기</button>
+
+    <div class="search-input">
+      <form th:action method="get" th:object="${questionSearchCondition}">
+        <input type="text" th:field="*{condition}" placeholder="🔍 제목이나 작성자 이름으로 검색하세요.">
+      </form>
+    </div>
+
+    <table class="table table-sm">
+      <thead>
+      <tr>
+        <th>번호</th>
+        <th class="title">제목</th>
+        <th>답변 수</th>
+        <th>작성자</th>
+        <th>작성일자</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr th:each="question, loop : ${questions}" th:object="${question}">
+        <td class="element" th:text="${questions.getTotalElements - (questions.number * questions.size) - loop.index}"></td>
+        <td>
+          <a th:href="@{/qna/{id} (id=*{questionId})}" th:text="*{title}"></a>
+        </td>
+        <td class="element" th:text="*{numberOfAnswer}"></td>
+        <td class="element" th:text="*{email}"></td>
+        <td class="element" th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!-- 답변 페이징 처리 -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li th:each="i : ${pages}">
+          <a class="page-link" href="#"
+             th:href="@{/qna(page=${i - 1}, condition=${questionSearchCondition.condition})}"
+             th:text="${i}"></a>
+        </li>
+      </ul>
+    </nav>
+    <!-- 답변 페이징 처리 끝 -->
+  </div>
+</section>
+
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

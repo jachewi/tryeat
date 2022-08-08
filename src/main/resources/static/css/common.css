@@ -1,0 +1,68 @@
+/*--------------------------------------------------------------
+# Common Section
+--------------------------------------------------------------*/
+.common {
+  margin-top: 70px;
+  padding: 70px 0;
+  min-height: 625px;
+}
+
+/*--------------------------------------------------------------
+# Page
+--------------------------------------------------------------*/
+.pagination {
+  justify-content: center;
+  margin-top: 80px;
+}
+
+/*--------------------------------------------------------------
+# Button Style
+--------------------------------------------------------------*/
+.btn-custom {
+  border: 1px solid #e5e5e5;
+  background-color: rgba(240, 255, 255, 0);
+}
+
+.btn-custom:hover {
+  border: 1px solid #000;
+}
+
+.admin-btn {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 30px;
+  margin-left: 5px;
+}
+
+.admin-btn .btn {
+  margin-left: 5px;
+}
+
+/*--------------------------------------------------------------
+# Error Style
+--------------------------------------------------------------*/
+.field-error {
+  border-color: #dc3545;
+  color: #dc3545;
+  font-size: 14px;
+}
+
+/*--------------------------------------------------------------
+# Search Input Style
+--------------------------------------------------------------*/
+.search-input {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-input input {
+  width: 250px;
+  padding-left: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  height: 30px;
+}
+
+.search-input input::placeholder {
+  font-size: 14px;
+}
