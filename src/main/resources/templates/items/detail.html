@@ -72,8 +72,13 @@
       type: "POST",
       url: url,
       data: data,
-      success: function(result) {
-        alert("장바구니에 상품을 추가했습니다.🛒");
+      statusCode: {
+        200: function(result) {
+          alert("로그인이 필요합니다.");
+        },
+        201: function(result) {
+          alert("장바구니에 상품을 추가했습니다.🛒");
+        }
       },
       error: function(jqXHR) {
         alert(jqXHR.responseText);
@@ -88,6 +93,8 @@
     $(".order-form").find('input[name="payments[0].quantity"]').val(quantity);
     $(".order-form").submit();
   });
+
+
 </script>
 </body>
 
